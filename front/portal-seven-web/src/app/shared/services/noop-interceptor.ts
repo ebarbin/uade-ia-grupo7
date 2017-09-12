@@ -1,0 +1,17 @@
+import {Injectable} from '@angular/core';
+import {HttpEvent, HttpInterceptor, HttpHandler, HttpRequest} from '@angular/common/http';
+import {Observable} from 'rxjs/Observable';
+import { BlockUI, NgBlockUI } from 'ng-block-ui';
+
+@Injectable()
+export class NoopInterceptor implements HttpInterceptor {
+
+  @BlockUI() blockUI: NgBlockUI;
+
+  intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+    this.blockUI.start('Cargando...');
+    return next.handle(req).finally(()=>{
+      this.blockUI.stop();
+    });
+  }
+}
