@@ -1,0 +1,9 @@
+
+IntegracionDeAplicaciones/java/workspace/RemoteSystemsTempFiles/\.project
+node_modules/
+dist/
+.project
+.settings
+.classpath
+.recommenders
+
