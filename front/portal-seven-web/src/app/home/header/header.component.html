@@ -1,7 +1,8 @@
 <nav class="navbar navbar-default">
   <div class="container-fluid">
     <div class="navbar-header">
-      <a routerLink="/" class="navbar-brand">Portal de Turismo</a>
+      <a routerLink="/" class="navbar-brand">
+        <i class="fa fa-globe" aria-hidden="true"></i> Portal Web G7</a>
     </div>
 
     <div class="collapse navbar-collapse">
@@ -13,7 +14,8 @@
 
         <li class="dropdown" app-dropdown>
           <a style="cursor: pointer;" class="dropdown-toggle" role="button">
-            {{authService.user.firtName + " " +authService.user.sureName}} <span class="caret"></span>
+              
+            {{authService.user.firtName + " " +authService.user.sureName}} <i class="fa fa-user" aria-hidden="true"></i>
           </a>
           <ul class="dropdown-menu">
             <li><a style="cursor: pointer;" (click)="logout()">Cerrar Sesion</a></li>
