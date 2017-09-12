@@ -11,10 +11,11 @@ import { SearchPackageComponent } from './home/search-package/search-package.com
 const appRoutes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full'},
   { path: 'home', component: HomeComponent, 
-  children:[
-    {path: 'hotel', component: SearchHotelComponent},
-    {path: 'package', component: SearchPackageComponent}
-  ]},
+    canActivate: [AuthGuard],
+    children:[
+      {path: 'hotel', component: SearchHotelComponent, canActivate: [AuthGuard]},
+      {path: 'package', component: SearchPackageComponent, canActivate: [AuthGuard]}
+    ]},
   { path: 'signin', component: SigninComponent }
 ];
 
