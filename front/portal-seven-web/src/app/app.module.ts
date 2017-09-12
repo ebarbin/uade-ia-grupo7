@@ -2,8 +2,10 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AuthGuard } from './auth/auth-guard.service';
+import { AuthService } from './auth/auth.service';
 
 import { AppComponent } from './app.component';
 import { SigninComponent } from './auth/signin/signin.component';
@@ -26,9 +28,10 @@ import { DropdownDirective } from './shared/dropdown.directive';
   imports: [
     BrowserModule,
     FormsModule,
+    HttpClientModule,
     AppRoutingModule
   ],
-  providers: [AuthGuard],
+  providers: [AuthGuard, AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,4 +1,4 @@
-package ar.edu.uade.ia.g7.conf;
+package ar.edu.uade.ia.conf;
 
 import javax.ws.rs.ApplicationPath;
 import javax.ws.rs.core.Application;
