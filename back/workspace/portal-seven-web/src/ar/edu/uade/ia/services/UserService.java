@@ -19,21 +19,17 @@ public class UserService {
 
 	@EJB
 	private UserManagerRemote userManagerRemote;
-	
+
 	@POST
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response login(UserDTO userDTO) {
 		try {
-			if (this.userManagerRemote.login(userDTO)) {
-				return Response.ok(new PortalResponse()).build();
-			} else {
-				return Response.ok(new PortalResponse("Usuario/Contraseña inválidos.")).build();
-			}
+			return Response.ok(new PortalResponse(this.userManagerRemote.login(userDTO))).build();
 		} catch (Exception e) {
 			return Response.status(Response.Status.BAD_REQUEST).entity(new PortalResponse(e.getMessage())).build();
 		}
 	}
-	
+
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response get() {

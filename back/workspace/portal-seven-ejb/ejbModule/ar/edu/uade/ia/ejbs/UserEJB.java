@@ -3,6 +3,7 @@ package ar.edu.uade.ia.ejbs;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
@@ -17,17 +18,21 @@ public class UserEJB {
 
 	@PersistenceContext(unitName = "mu")
 	protected EntityManager em;
-	
-    /**
-     * Default constructor. 
-     */
-    public UserEJB() {}
-    
-    public boolean login(User user) throws Exception {
-    	Query query = this.em.createQuery("FROM User WHERE username = :username AND password = :password");
-    	query.setParameter("username", user.getUsername());
-    	query.setParameter("password", user.getPassword());
-    	return query.getResultList().size() > 0;
-    }
+
+	/**
+	 * Default constructor.
+	 */
+	public UserEJB() {
+	}
+
+	public User login(User user) throws Exception {
+		try {
+			Query query = this.em.createQuery("FROM User WHERE userName = :userName");
+			query.setParameter("userName", user.getUserName());
+			return (User) query.getSingleResult();
+		} catch (NoResultException nre) {
+			throw new Exception("Usuario inexistente.");
+		}
+	}
 
 }

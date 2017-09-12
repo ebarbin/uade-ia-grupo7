@@ -12,7 +12,9 @@
       <ul class="nav navbar-nav navbar-right">
 
         <li class="dropdown" app-dropdown>
-          <a style="cursor: pointer;" class="dropdown-toggle" role="button">Cuenta<span class="caret"></span></a>
+          <a style="cursor: pointer;" class="dropdown-toggle" role="button">
+            {{authService.user.firtName + " " +authService.user.sureName}} <span class="caret"></span>
+          </a>
           <ul class="dropdown-menu">
             <li><a style="cursor: pointer;" (click)="logout()">Cerrar Sesion</a></li>
           </ul>

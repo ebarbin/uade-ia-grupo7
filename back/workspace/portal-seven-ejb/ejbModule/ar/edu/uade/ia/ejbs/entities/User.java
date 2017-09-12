@@ -12,10 +12,12 @@ public class User {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	private Integer id;
 	
-	private String username;
+	private String userName;
 	
-	private String password;
-
+	private String firtName;
+	
+	private String sureName;
+	
 	public Integer getId() {
 		return id;
 	}
@@ -24,19 +26,27 @@ public class User {
 		this.id = id;
 	}
 
-	public String getUsername() {
-		return username;
+	public String getUserName() {
+		return userName;
 	}
 
-	public void setUsername(String username) {
-		this.username = username;
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
 
-	public String getPassword() {
-		return password;
+	public String getFirtName() {
+		return firtName;
 	}
 
-	public void setPassword(String password) {
-		this.password = password;
+	public void setFirtName(String firtName) {
+		this.firtName = firtName;
+	}
+
+	public String getSureName() {
+		return sureName;
+	}
+
+	public void setSureName(String sureName) {
+		this.sureName = sureName;
 	}
 }

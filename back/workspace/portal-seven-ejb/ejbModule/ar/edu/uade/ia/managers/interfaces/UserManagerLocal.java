@@ -7,5 +7,5 @@ import ar.edu.uade.ia.commons.dtos.UserDTO;
 @Local
 public interface UserManagerLocal {
 	
-	boolean login(UserDTO userDTO) throws Exception;
+	UserDTO login(UserDTO userDTO) throws Exception;
 }

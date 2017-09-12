@@ -7,7 +7,6 @@ import javax.ejb.Stateless;
 import org.dozer.DozerBeanMapperBuilder;
 import org.dozer.Mapper;
 
-import ar.edu.uade.ia.commons.ListMapperDecorator;
 import ar.edu.uade.ia.commons.dtos.UserDTO;
 import ar.edu.uade.ia.ejbs.UserEJB;
 import ar.edu.uade.ia.ejbs.entities.User;
@@ -23,20 +22,22 @@ public class UserManager implements UserManagerRemote, UserManagerLocal {
 
 	private Mapper mapper = DozerBeanMapperBuilder.buildDefault();
 
-	private ListMapperDecorator listMapper = new ListMapperDecorator(mapper);
-	
+	// private ListMapperDecorator listMapper = new ListMapperDecorator(mapper);
+
 	@EJB
 	private UserEJB userEJB;
-	
-    /**
-     * Default constructor. 
-     */
-    public UserManager() {}
+
+	/**
+	 * Default constructor.
+	 */
+	public UserManager() {
+	}
 
 	@Override
-	public boolean login(UserDTO userDTO) throws Exception {
+	public UserDTO login(UserDTO userDTO) throws Exception {
 		User user = this.mapper.map(userDTO, User.class);
-		return this.userEJB.login(user);
+		user = this.userEJB.login(user);
+		return this.mapper.map(user, UserDTO.class);
 	}
 
 }
