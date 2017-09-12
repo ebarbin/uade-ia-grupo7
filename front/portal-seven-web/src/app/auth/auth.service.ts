@@ -26,7 +26,7 @@ export class AuthService {
     })
     .toPromise().then((response:PortalResponse)=>{
         if (response.success){
-            this.toastr.success('Operación finalizada con éxito');
+            //this.toastr.success('Operación finalizada con éxito');
             this.user = <User>response.data;
             this.router.navigate(['home']);
         }
