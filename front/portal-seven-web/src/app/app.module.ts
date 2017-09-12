@@ -6,6 +6,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AngularFontAwesomeModule } from 'angular-font-awesome/angular-font-awesome';
+import { BlockUIModule } from 'ng-block-ui';
 
 import { AuthGuard } from './auth/auth-guard.service';
 import { AuthService } from './auth/auth.service';
@@ -35,6 +36,7 @@ import { DropdownDirective } from './shared/dropdown.directive';
     AppRoutingModule,
     BrowserAnimationsModule,
     AngularFontAwesomeModule,
+    BlockUIModule,
     ToastrModule.forRoot({
       positionClass: 'toast-top-center',
       preventDuplicates: true,

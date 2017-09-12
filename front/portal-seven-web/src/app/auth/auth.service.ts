@@ -2,6 +2,7 @@ import { Router } from '@angular/router';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { ToastrService } from 'ngx-toastr';
+import { BlockUI, NgBlockUI } from 'ng-block-ui';
 
 import 'rxjs/Rx';
 
@@ -11,6 +12,7 @@ import { PortalResponse } from '../shared/models/portal-response.model';
 @Injectable()
 export class AuthService {
 
+  @BlockUI() blockUI: NgBlockUI;
   public user: User;
   
   constructor(
@@ -19,20 +21,25 @@ export class AuthService {
     private toastr: ToastrService) {}
 
   signin(userName: string) {
+    
+    this.blockUI.start('Cargando...');
+
     return this.httpClient.post('portal-seven-web/api/rest/user', 
-    {userName:userName})
-    .map((response:PortalResponse)=>{
-        return response;
-    })
-    .toPromise().then((response:PortalResponse)=>{
-        if (response.success){
+      {userName:userName})
+      .map((response:PortalResponse)=>{
+          return response;
+      })
+      .toPromise().then((response:PortalResponse)=>{
+          this.blockUI.stop();
+          if (response.success){
             //this.toastr.success('Operación finalizada con éxito');
             this.user = <User>response.data;
             this.router.navigate(['home']);
-        }
-    }).catch((res:HttpErrorResponse) => {
-        this.toastr.error(res.error.errorMessage);
-    });
+          }
+      }).catch((res:HttpErrorResponse) => {
+          this.blockUI.stop();
+          this.toastr.error(res.error.errorMessage);
+      });
   }
 
   logout() {
