@@ -27,7 +27,7 @@ export class AuthService {
       .toPromise().then((response:PortalResponse)=>{
           if (response.success){
             this.user = <User>response.data;
-            this.router.navigate(['home']);
+            this.router.navigate(['home/hotel']);
           }
       }).catch((res:HttpErrorResponse) => {
           if (res.error){

@@ -4,7 +4,7 @@ import {Observable} from 'rxjs/Observable';
 import { BlockUI, NgBlockUI } from 'ng-block-ui';
 
 @Injectable()
-export class NoopInterceptor implements HttpInterceptor {
+export class MyHttpInterceptor implements HttpInterceptor {
 
   @BlockUI() blockUI: NgBlockUI;
 
