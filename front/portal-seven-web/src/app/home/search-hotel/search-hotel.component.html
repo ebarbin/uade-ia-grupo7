@@ -1,11 +1,39 @@
 <div class="container">
-    <div class="row">
-        <div class="col-md-12">
-            <h2>Busqueda de Hoteles</h2>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-12">
-        </div>
-    </div>
+  <div class="row">
+      <div class="col-md-12">
+          <h2>Busqueda de Hoteles</h2>
+      </div>
+  </div>
+  <hr>
+  <div class="row">
+    <form (ngSubmit)="onSubmit(f)" #hotelSearchForm="ngForm">
+      <div class="col-md-12">
+        <md-form-field>
+          <input type="text" placeholder="Nombre de Hotel" name="hotel" ngModel 
+           mdInput [mdAutocomplete]="auto">
+          <md-autocomplete #auto="mdAutocomplete">
+            <md-option *ngFor="let option of filteredOptions | async" [value]="option">
+              {{ option }}
+            </md-option>
+          </md-autocomplete>
+        </md-form-field>
+        <md-form-field>
+          <input name="fromDate" [(ngModel)]="fromDate"
+          [mdDatepicker]="fromPicker" placeholder="Fecha Desde" mdInput>
+          <md-datepicker-toggle mdSuffix [for]="fromPicker"></md-datepicker-toggle>
+          <md-datepicker #fromPicker></md-datepicker>
+        </md-form-field>
+        <md-form-field>
+          <input name="toDate" [(ngModel)]="toDate"
+          [mdDatepicker]="toPicker" placeholder="Fecha Hasta" mdInput>
+          <md-datepicker-toggle mdSuffix [for]="toPicker"></md-datepicker-toggle>
+          <md-datepicker #toPicker></md-datepicker>
+        </md-form-field>
+      </div>
+      <div class="col-md-12">
+        <button type="submit" class="btn btn-success">Buscar</button>
+        <button type="reset" class="btn btn-danger">Limpiar</button>
+      </div>
+    </form>
+  </div>
 </div>

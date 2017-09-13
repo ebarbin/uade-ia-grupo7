@@ -41,13 +41,6 @@ export class AuthService {
   logout() {
     this.user = null;
     this.router.navigate(['signin']);
-    /*  
-    return this.httpClient.post('portal-seven-web/api/rest/user/logout', this.token)
-    .map((response:PortalResponse)=>{
-        if (response.success){
-            this.token = <string>response.data;
-        }
-    }).toPromise();*/
   }
 
   isAuthenticated() {

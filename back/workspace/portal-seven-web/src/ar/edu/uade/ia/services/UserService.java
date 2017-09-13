@@ -18,23 +18,13 @@ import ar.edu.uade.ia.services.response.PortalResponse;
 public class UserService {
 
 	@EJB
-	private UserManagerRemote userManagerRemote;
+	private UserManagerRemote userManager;
 
 	@POST
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response login(UserDTO userDTO) {
 		try {
-			return Response.ok(new PortalResponse(this.userManagerRemote.login(userDTO))).build();
-		} catch (Exception e) {
-			return Response.status(Response.Status.BAD_REQUEST).entity(new PortalResponse(e.getMessage())).build();
-		}
-	}
-
-	@GET
-	@Produces(MediaType.APPLICATION_JSON)
-	public Response get() {
-		try {
-			return Response.ok(new PortalResponse()).build();
+			return Response.ok(new PortalResponse(this.userManager.login(userDTO))).build();
 		} catch (Exception e) {
 			return Response.status(Response.Status.BAD_REQUEST).entity(new PortalResponse(e.getMessage())).build();
 		}
