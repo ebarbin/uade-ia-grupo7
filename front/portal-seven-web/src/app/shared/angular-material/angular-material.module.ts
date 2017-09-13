@@ -2,7 +2,8 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { MdButtonModule, MdCheckboxModule, MdDatepickerModule, 
-  MdNativeDateModule, MdInputModule, MdListModule, MdAutocompleteModule } from '@angular/material';
+  MdNativeDateModule, MdInputModule, MdListModule, MdAutocompleteModule,
+  MdSelectModule, MdCardModule, MdChipsModule } from '@angular/material';
 
 @NgModule({
   imports: [
@@ -12,7 +13,10 @@ import { MdButtonModule, MdCheckboxModule, MdDatepickerModule,
     MdDatepickerModule,
     MdNativeDateModule,
     MdListModule,
-    MdInputModule
+    MdInputModule,
+    MdSelectModule,
+    MdCardModule,
+    MdChipsModule
   ],
   exports: [
     MdButtonModule,
@@ -21,7 +25,10 @@ import { MdButtonModule, MdCheckboxModule, MdDatepickerModule,
     MdNativeDateModule,
     MdListModule,
     MdInputModule,
-    MdAutocompleteModule
+    MdAutocompleteModule,
+    MdSelectModule,
+    MdCardModule,
+    MdChipsModule
   ],
   declarations: []
 })

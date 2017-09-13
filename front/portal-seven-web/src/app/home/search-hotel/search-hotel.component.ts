@@ -16,6 +16,24 @@ export class SearchHotelComponent implements OnInit {
 
   constructor() { }
 
+  roomsQuantity = [
+    {value: '1', viewValue: 'Una'},
+    {value: '2', viewValue: 'Dos'},
+    {value: '3', viewValue: 'Tres'},
+    {value: '4', viewValue: 'Cuatro'},
+    {value: '5', viewValue: 'Cinco'},
+    {value: '6', viewValue: 'Seis'}
+  ];
+
+  peoplePerRoom = [
+    {value: '1', viewValue: 'Una'},
+    {value: '2', viewValue: 'Dos'},
+    {value: '3', viewValue: 'Tres'},
+    {value: '4', viewValue: 'Cuatro'},
+    {value: '5', viewValue: 'Cinco'},
+    {value: '6', viewValue: 'Seis'}
+  ];
+
   options = [
     'One',
     'Two',
@@ -38,6 +56,6 @@ export class SearchHotelComponent implements OnInit {
  }
 
   onSubmit(form:NgForm){
-    console.log(form);
+    console.log(form.value);
   }
 }
