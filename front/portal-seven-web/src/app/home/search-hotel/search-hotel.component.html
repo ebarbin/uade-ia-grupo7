@@ -50,7 +50,7 @@
       </div>
     </md-card-content>
     <md-card-actions align="end">
-      <button md-raised-button type="submit" color="primary">Buscar</button>
+      <button md-raised-button type="submit" color="primary" [disabled]="!hotelSearchForm.valid">Buscar</button>
       <button md-raised-button type="reset" color="warn">Limpiar</button>
     </md-card-actions>
   </md-card>
