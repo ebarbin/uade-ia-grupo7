@@ -23,26 +23,24 @@ export class SearchHotelComponent implements OnInit {
     'One',
     'Two',
     'Three',
-    ''
   ];
 
   filteredOptions: Observable<string[]>;
 
+  filterStates(val: string) {
+    if (val) {
+      const filterValue = val.toLowerCase();
+      return this.options.filter(hotel => hotel.toLowerCase().startsWith(filterValue));
+    }
+    return this.options;
+  }
+
   ngOnInit() {
+    
     for(let i = 1; i <= 10;i++) {
       this.quantityOptions.push({value: i, viewValue: i});
      }
-
-    this.hotelSearchForm.valueChanges.subscribe(data=>{
-      data.hotel = data.hotel ? this.filter(data.hotel) : this.options.slice();      
-  });  /*this.hotelSearchForm.valueChanges.map(data =>{ console.log(data); return data;}).startWith(null)
-    .map(val => val ? this.filter(val) : this.options.slice());*/
   }
-
-  filter(val: string): string[] {
-    return this.options.filter(option =>
-      option.toLowerCase().indexOf(val.toLowerCase()) === 0);
- }
 
   onSubmit(form:NgForm){
     console.log(form.value);

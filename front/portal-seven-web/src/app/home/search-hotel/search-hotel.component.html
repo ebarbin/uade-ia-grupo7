@@ -8,17 +8,20 @@
     <md-card-content>
       <div class="row">
         <div class="col-md-12">
-          <md-form-field>
-            <input type="text" placeholder="Nombre de Hotel" name="hotel" ngModel 
-            mdInput [mdAutocomplete]="auto">
-            <md-autocomplete #auto="mdAutocomplete">
-              <md-option *ngFor="let option of filteredOptions | async" [value]="option">
-                {{ option }}
-              </md-option>
-            </md-autocomplete>
-          </md-form-field>
+          <md-input-container>
+            <input mdInput placeholder="Nombre de Hotel" 
+              [mdAutocomplete]="tdAuto" 
+              name="hotel" 
+                #state="ngModel" [(ngModel)]="hotel"
+              (ngModelChange)="hotels = filterStates(hotel)">
+          </md-input-container>
+          <md-autocomplete #tdAuto="mdAutocomplete">
+            <md-option *ngFor="let h of hotels" [value]="h">
+              <span>{{ h }}</span>
+            </md-option>
+          </md-autocomplete>
           <md-select placeholder="Cantidad de Habitaciones" 
-          [(ngModel)]="selectedRoomQuantity" 
+            [(ngModel)]="selectedRoomQuantity" 
             name="roomQuantity">
             <md-option *ngFor="let rq of quantityOptions" [value]="rq.value">
               {{ rq.viewValue }}
