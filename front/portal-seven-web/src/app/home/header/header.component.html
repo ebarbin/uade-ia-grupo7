@@ -14,8 +14,9 @@
 
         <li class="dropdown" app-dropdown>
           <a style="cursor: pointer;" class="dropdown-toggle" role="button">
-              
-            {{authService.user.firtName + " " +authService.user.sureName}} <i class="fa fa-user" aria-hidden="true"></i>
+            {{authService.user.firtName + " " +authService.user.sureName}} 
+            <img class="img-circle" height="30" width="30" 
+            [src]="authService.user.image | imageGetter">
           </a>
           <ul class="dropdown-menu">
             <li><a style="cursor: pointer;" (click)="logout()">Cerrar Sesion</a></li>

@@ -14,6 +14,8 @@ public class UserDTO implements Serializable {
 	
 	private String sureName;
 	
+	private ImageDTO image;
+	
 	public Integer getId() {
 		return id;
 	}
@@ -44,5 +46,13 @@ public class UserDTO implements Serializable {
 
 	public void setSureName(String sureName) {
 		this.sureName = sureName;
+	}
+
+	public ImageDTO getImage() {
+		return image;
+	}
+
+	public void setImage(ImageDTO image) {
+		this.image = image;
 	}
 }

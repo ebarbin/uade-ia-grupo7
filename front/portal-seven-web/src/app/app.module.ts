@@ -26,6 +26,7 @@ import { SearchHotelComponent } from './home/search-hotel/search-hotel.component
 import { SearchPackageComponent } from './home/search-package/search-package.component';
 import { DropdownDirective } from './shared/directives/dropdown.directive';
 import { MapComponent } from './shared/components/map/map.component';
+import { ImageGetterPipe } from './shared/pipes/image-getter.pipe';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { MapComponent } from './shared/components/map/map.component';
     SearchHotelComponent,
     SearchPackageComponent,
     DropdownDirective,
-    MapComponent
+    MapComponent,
+    ImageGetterPipe
   ],
   imports: [
     BrowserModule,

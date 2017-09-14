@@ -25,10 +25,10 @@ public class UserEJB {
 	public UserEJB() {
 	}
 
-	public User login(User user) throws Exception {
+	public User login(String userName) throws Exception {
 		try {
 			Query query = this.em.createQuery("FROM User WHERE userName = :userName");
-			query.setParameter("userName", user.getUserName());
+			query.setParameter("userName", userName);
 			return (User) query.getSingleResult();
 		} catch (NoResultException nre) {
 			throw new Exception("Usuario inexistente.");

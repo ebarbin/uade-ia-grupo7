@@ -4,6 +4,7 @@ import { Observable } from 'rxjs/Observable';
 
 import 'rxjs/add/operator/startWith';
 import 'rxjs/add/operator/map';
+import { AuthService } from '../../auth/auth.service';
 
 @Component({
   selector: 'app-search-hotel',
@@ -14,25 +15,9 @@ export class SearchHotelComponent implements OnInit {
 
   @ViewChild('hotelSearchForm') hotelSearchForm: NgForm;
 
-  constructor() { }
+  constructor(private authService:AuthService) { }
 
-  roomsQuantity = [
-    {value: '1', viewValue: 'Una'},
-    {value: '2', viewValue: 'Dos'},
-    {value: '3', viewValue: 'Tres'},
-    {value: '4', viewValue: 'Cuatro'},
-    {value: '5', viewValue: 'Cinco'},
-    {value: '6', viewValue: 'Seis'}
-  ];
-
-  peoplePerRoom = [
-    {value: '1', viewValue: 'Una'},
-    {value: '2', viewValue: 'Dos'},
-    {value: '3', viewValue: 'Tres'},
-    {value: '4', viewValue: 'Cuatro'},
-    {value: '5', viewValue: 'Cinco'},
-    {value: '6', viewValue: 'Seis'}
-  ];
+  quantityOptions:any[] = [];
 
   options = [
     'One',
@@ -44,6 +29,10 @@ export class SearchHotelComponent implements OnInit {
   filteredOptions: Observable<string[]>;
 
   ngOnInit() {
+    for(let i = 1; i <= 10;i++) {
+      this.quantityOptions.push({value: i, viewValue: i});
+     }
+
     this.hotelSearchForm.valueChanges.subscribe(data=>{
       data.hotel = data.hotel ? this.filter(data.hotel) : this.options.slice();      
   });  /*this.hotelSearchForm.valueChanges.map(data =>{ console.log(data); return data;}).startWith(null)

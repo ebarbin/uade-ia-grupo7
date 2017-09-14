@@ -20,14 +20,14 @@
           <md-select placeholder="Cantidad de Habitaciones" 
           [(ngModel)]="selectedRoomQuantity" 
             name="roomQuantity">
-            <md-option *ngFor="let rq of roomsQuantity" [value]="rq.value">
+            <md-option *ngFor="let rq of quantityOptions" [value]="rq.value">
               {{ rq.viewValue }}
             </md-option>
           </md-select>
           <md-select placeholder="Personas por habitación"
             [(ngModel)]="selectedPeoplePerRoom" 
             name="peoplePerRoom">
-              <md-option *ngFor="let pr of peoplePerRoom" [value]="pr.value">
+              <md-option *ngFor="let pr of quantityOptions" [value]="pr.value">
                 {{ pr.viewValue }}
               </md-option>
           </md-select>

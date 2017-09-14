@@ -7,5 +7,5 @@ import ar.edu.uade.ia.commons.dtos.UserDTO;
 @Remote
 public interface UserManagerRemote {
 
-	UserDTO login(UserDTO userDTO) throws Exception;
+	UserDTO login(String userName) throws Exception;
 }

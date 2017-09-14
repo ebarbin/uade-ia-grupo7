@@ -19,8 +19,7 @@ export class AuthService {
     private toastr: ToastrService) {}
 
   signin(userName: string) {
-    return this.httpClient.post('portal-seven-web/api/rest/user', 
-      {userName:userName})
+    return this.httpClient.get('portal-seven-web/api/rest/user/' + userName)
       .map((response:PortalResponse)=>{
           return response;
       })
