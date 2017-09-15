@@ -1,33 +1,32 @@
 <div class="example-container mat-elevation-z8">  
   <md-table #table [dataSource]="dataSource">
-    <!-- Position Column -->
-    <ng-container mdColumnDef="position">
-        <md-header-cell *mdHeaderCellDef> Hotel </md-header-cell>
+
+    <ng-container mdColumnDef="id">
+        <md-header-cell *mdHeaderCellDef> ID </md-header-cell>
         <md-cell *mdCellDef="let element"> 
-            {{element.name}} 
+            {{element.id}} 
             <img class="img-circle" height="30" width="30" 
             [src]="'portal-seven-web/api/rest/image/1'">
         </md-cell>
       </ng-container>
   
-      <!-- Name Column -->
       <ng-container mdColumnDef="name">
-        <md-header-cell *mdHeaderCellDef> Name </md-header-cell>
-        <md-cell *mdCellDef="let element" (click)="openDialog(element)"> {{element.name}} </md-cell>
+        <md-header-cell *mdHeaderCellDef> NAME </md-header-cell>
+        <md-cell *mdCellDef="let element"> {{element.name}} </md-cell>
       </ng-container>
   
-      <!-- Weight Column -->
-      <ng-container mdColumnDef="weight">
-        <md-header-cell *mdHeaderCellDef> Weight </md-header-cell>
-        <md-cell *mdCellDef="let element"> {{element.weight}} </md-cell>
+      <ng-container mdColumnDef="image">
+        <md-header-cell *mdHeaderCellDef> IMAGE </md-header-cell>
+        <md-cell *mdCellDef="let element"> {{element.image}} </md-cell>
       </ng-container>
   
-      <!-- Color Column -->
-      <ng-container mdColumnDef="symbol">
-        <md-header-cell *mdHeaderCellDef> Symbol </md-header-cell>
-        <md-cell *mdCellDef="let element"> {{element.symbol}} </md-cell>
+      <ng-container mdColumnDef="action">
+        <md-header-cell *mdHeaderCellDef> Acciones </md-header-cell>
+        <md-cell *mdCellDef="let element"> 
+          <button (click)="onDetail(element)" md-raised-button type="button" color="accent">Detalle</button>
+        </md-cell>
       </ng-container>
-  
+      
       <md-header-row *mdHeaderRowDef="displayedColumns"></md-header-row>
       <md-row *mdRowDef="let row; columns: displayedColumns;"></md-row>
   </md-table>

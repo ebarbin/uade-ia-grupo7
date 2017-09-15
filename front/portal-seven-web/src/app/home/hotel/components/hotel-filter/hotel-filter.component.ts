@@ -1,8 +1,6 @@
-import { Component, OnInit, ViewChild, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { AuthService } from '../../../../auth/services/auth.service';
 import { Observable } from 'rxjs/Observable';
-import { ResultSearchHotelDS } from '../../models/results-search-hotel-ds';
 
 import { SearchHotel } from '../../models/search-hotel.model';
 
@@ -13,19 +11,14 @@ import { SearchHotel } from '../../models/search-hotel.model';
 })
 export class HotelFilterComponent implements OnInit {
 
-  @ViewChild('hotelSearchForm') hotelSearchForm: NgForm;
-
   @Output() search: EventEmitter<SearchHotel> = new EventEmitter();
+  @Output() reset: EventEmitter<null> = new EventEmitter();
 
-  constructor(private authService:AuthService) { }
+  constructor() { }
 
   quantityOptions:any[] = [];
   
-    options = [
-      'One',
-      'Two',
-      'Three',
-    ];
+    options = ['One','Two','Three'];
   
     filteredOptions: Observable<string[]>;
   
@@ -38,14 +31,16 @@ export class HotelFilterComponent implements OnInit {
     }
   
     ngOnInit() {
-  
       for(let i = 1; i <= 10;i++) {
         this.quantityOptions.push({value: i, viewValue: i});
        }
     }
     
+    onReset() {
+      this.reset.next();
+    }
+
     onSubmit(form:NgForm){
-      console.log(form);
       this.search.next(form.value);
     }
 }

@@ -1,23 +1,32 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+
+import { Subscription } from 'rxjs/Subscription'
 
 import { MdDialog } from '@angular/material';
 
-import { ResultSearchHotelDS } from '../../models/results-search-hotel-ds';
 import { HotelDetailComponent } from '../hotel-detail/hotel-detail.component';
+import { Hotel } from '../../models/hotel.model';
+import { CustomDatasource } from '../../../../shared/models/custom-datasouce';
+import { HotelService } from '../../services/hotel.service';
 
 @Component({
   selector: 'app-hotel-result',
   templateUrl: './hotel-result.component.html',
   styleUrls: ['./hotel-result.component.css']
 })
-export class HotelResultComponent implements OnInit {
+export class HotelResultComponent implements OnInit, OnDestroy {
 
-  dataSource = new ResultSearchHotelDS();
-  displayedColumns = ['position', 'name', 'weight', 'symbol'];
+  dataSource: CustomDatasource;
 
-  constructor(public dialog: MdDialog) { }
+  resultsSubs: Subscription;
 
-  openDialog(element){
+  displayedColumns = ['id', 'name', 'image', 'action'];
+
+  constructor(
+    private hotelService: HotelService, 
+    private dialog: MdDialog) { }
+
+  onDetail(element){
     const dialogRef = this.dialog.open(HotelDetailComponent, {
       height: '600px',
       width: '900px',
@@ -29,11 +38,14 @@ export class HotelResultComponent implements OnInit {
     });
   }
 
-  ngOnInit() {
+  ngOnDestroy(){
+    this.resultsSubs.unsubscribe();
   }
-
-  test(element){
-    console.log(element);
+  
+  ngOnInit() {
+    this.resultsSubs = this.hotelService.hotelResults.subscribe((hotels:Hotel[])=>{
+      this.dataSource = new CustomDatasource(hotels);
+    });
   }
 
 }
