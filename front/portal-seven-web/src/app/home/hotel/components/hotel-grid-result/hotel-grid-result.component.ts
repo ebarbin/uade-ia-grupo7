@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy,Input  } from '@angular/core';
 
 import { Subscription } from 'rxjs/Subscription'
 
@@ -10,17 +10,17 @@ import { CustomDatasource } from '../../../../shared/models/custom-datasouce';
 import { HotelService } from '../../services/hotel.service';
 
 @Component({
-  selector: 'app-hotel-result',
-  templateUrl: './hotel-result.component.html',
-  styleUrls: ['./hotel-result.component.css']
+  selector: 'app-hotel-grid-result',
+  templateUrl: './hotel-grid-result.component.html',
+  styleUrls: ['./hotel-grid-result.component.css']
 })
-export class HotelResultComponent implements OnInit, OnDestroy {
+export class HotelGridResultComponent implements OnInit, OnDestroy {
 
   dataSource: CustomDatasource;
 
-  resultsSubs: Subscription;
+  //resultsSubs: Subscription;
 
-  displayedColumns = ['id', 'name', 'image', 'action'];
+  displayedColumns = ['id', 'name', 'image', 'other', 'action'];
 
   constructor(
     private hotelService: HotelService, 
@@ -38,14 +38,12 @@ export class HotelResultComponent implements OnInit, OnDestroy {
     });
   }
 
-  ngOnDestroy(){
-    this.resultsSubs.unsubscribe();
-  }
+  ngOnDestroy(){}
+  
+  @Input()hotels:Hotel[];
   
   ngOnInit() {
-    this.resultsSubs = this.hotelService.hotelResults.subscribe((hotels:Hotel[])=>{
-      this.dataSource = new CustomDatasource(hotels);
-    });
+    this.dataSource = new CustomDatasource(this.hotels);
   }
 
 }

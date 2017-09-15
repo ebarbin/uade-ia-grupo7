@@ -9,31 +9,14 @@ import { MdButtonModule, MdCheckboxModule, MdDatepickerModule,
 @NgModule({
   imports: [
     CommonModule,
-    MdButtonModule,
-    MdCheckboxModule,
-    MdDatepickerModule,
-    MdNativeDateModule,
-    MdListModule,
-    MdInputModule,
-    MdSelectModule,
-    MdCardModule,
-    MdChipsModule,
-    MdTableModule,
-    MdDialogModule
+    MdButtonModule, MdCheckboxModule, MdDatepickerModule, MdNativeDateModule,
+    MdListModule, MdInputModule, MdSelectModule, MdCardModule,
+    MdChipsModule, MdTableModule, MdDialogModule
   ],
   exports: [
-    MdButtonModule,
-    MdCheckboxModule,
-    MdDatepickerModule,
-    MdNativeDateModule,
-    MdListModule,
-    MdInputModule,
-    MdAutocompleteModule,
-    MdSelectModule,
-    MdCardModule,
-    MdChipsModule,
-    MdTableModule,
-    MdDialogModule
+    MdButtonModule, MdCheckboxModule, MdDatepickerModule, MdNativeDateModule,
+    MdListModule, MdInputModule, MdAutocompleteModule, MdSelectModule,
+    MdCardModule, MdChipsModule, MdTableModule, MdDialogModule
   ],
   declarations: []
 })

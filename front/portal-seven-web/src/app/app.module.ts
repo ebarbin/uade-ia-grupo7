@@ -28,8 +28,9 @@ import { DropdownDirective } from './shared/directives/dropdown.directive';
 import { MapComponent } from './shared/components/map/map.component';
 import { ImageGetterPipe } from './shared/pipes/image-getter.pipe';
 import { HotelFilterComponent } from './home/hotel/components/hotel-filter/hotel-filter.component';
-import { HotelResultComponent } from './home/hotel/components/hotel-result/hotel-result.component';
+import { HotelGridResultComponent } from './home/hotel/components/hotel-grid-result/hotel-grid-result.component';
 import { HotelDetailComponent } from './home/hotel/components/hotel-detail/hotel-detail.component';
+import { HotelCardResultComponent } from './home/hotel/components/hotel-card-result/hotel-card-result.component';
 
 @NgModule({
   declarations: [
@@ -43,8 +44,9 @@ import { HotelDetailComponent } from './home/hotel/components/hotel-detail/hotel
     MapComponent,
     ImageGetterPipe,
     HotelFilterComponent,
-    HotelResultComponent,
-    HotelDetailComponent
+    HotelGridResultComponent,
+    HotelDetailComponent,
+    HotelCardResultComponent
   ],
   imports: [
     BrowserModule,

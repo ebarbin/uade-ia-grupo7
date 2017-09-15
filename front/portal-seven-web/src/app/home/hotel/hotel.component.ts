@@ -17,31 +17,36 @@ import { Hotel } from './models/hotel.model';
 })
 export class HotelComponent implements OnInit {
 
-  empty:boolean = true;
-
   constructor(
     private hotelService:HotelService) { }
 
   ngOnInit() {}
 
-  onReset(){
-    this.empty = true;
-    this.hotelService.hotelResults.next([]);
+  view:string = 'grid';
+
+  onChangeView(){
+    if(this.view == 'grid'){
+      this.view = 'card';
+    } else {
+      this.view = 'grid';
+    }
   }
 
+  onReset(){
+    this.results = [];
+  }
+
+  results:Hotel[] = [];
   onSearch(searchHotel: SearchHotel){
     //BUSCAR LOS HOTELES/OFERTAS??
     console.log(searchHotel);
 
-    var results = [
+    this.results = [
       new Hotel(1, 'Hotel 1', null),
       new Hotel(2, 'Hotel 2', null),
       new Hotel(3, 'Hotel 3', null),
       new Hotel(4, 'Hotel 4', null)
     ];
-    
-    this.empty = false;
-    this.hotelService.hotelResults.next(results);
   }
   
 }

@@ -1,3 +1,14 @@
 <app-hotel-filter (search)="onSearch($event)" (reset)="onReset($event)"></app-hotel-filter>
-<hr>
-<app-hotel-result></app-hotel-result>
+<br>
+<div class="button-row">
+  <button md-mini-fab color="primary" (click)="onChangeView('grid')" 
+    [disabled]="view == 'grid'">
+    <i class="fa fa-table" aria-hidden="true"></i>
+  </button>
+  <button md-mini-fab color="accent" (click)="onChangeView('card')"
+  [disabled]="view == 'card'">
+    <i class="fa fa-address-card-o" aria-hidden="true"></i>
+  </button>
+</div>
+<br>
+<app-hotel-grid-result [hotels]="results" *ngIf="view == 'grid' && results.length > 0"></app-hotel-grid-result>
