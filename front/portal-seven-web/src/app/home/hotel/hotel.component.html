@@ -11,4 +11,7 @@
   </button>
 </div>
 <br>
-<app-hotel-grid-result [hotels]="results" *ngIf="view == 'grid' && results.length > 0"></app-hotel-grid-result>
+<div *ngIf="results.length > 0">
+    <app-hotel-grid-result [hotels]="results" *ngIf="view == 'grid'"></app-hotel-grid-result>
+    <app-hotel-card-result [hotels]="results" *ngIf="view == 'card'"></app-hotel-card-result>
+</div>

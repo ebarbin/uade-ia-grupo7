@@ -45,7 +45,10 @@ export class HotelComponent implements OnInit {
       new Hotel(1, 'Hotel 1', null),
       new Hotel(2, 'Hotel 2', null),
       new Hotel(3, 'Hotel 3', null),
-      new Hotel(4, 'Hotel 4', null)
+      new Hotel(4, 'Hotel 4', null),
+      new Hotel(5, 'Hotel 5', null),
+      new Hotel(6, 'Hotel 6', null),
+      new Hotel(7, 'Hotel 7', null)
     ];
   }
   

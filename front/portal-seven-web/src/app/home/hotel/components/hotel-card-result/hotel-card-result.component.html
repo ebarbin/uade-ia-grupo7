@@ -1,3 +1,18 @@
-<p>
-  hotel-card-result works!
-</p>
+<md-card class="card col-md-3" *ngFor="let hotel of hotels">
+    <md-card-header>
+
+        <img md-card-avatar [src]="hotel.image | imageGetter">
+
+      <md-card-title>{{hotel.name}}</md-card-title>
+      <md-card-subtitle>mostrar mas info</md-card-subtitle>
+    </md-card-header>
+    
+    <md-card-content>
+      <p>
+        mas info detalle, bla bla bla
+      </p>
+    </md-card-content>
+    <md-card-actions align="end">
+        <button (click)="onDetail(hotel)" md-raised-button type="button" color="accent">Detalle</button>
+    </md-card-actions>
+  </md-card>
