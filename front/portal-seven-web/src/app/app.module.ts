@@ -19,7 +19,7 @@ import { HotelService } from './home/hotel/services/hotel.service';
 import { MyHttpInterceptor } from './shared/services/my-http-interceptor';
 
 import { AppComponent } from './app.component';
-import { SigninComponent } from './auth/signin/signin.component';
+import { SigninComponent } from './auth/components/signin/signin.component';
 import { HomeComponent } from './home/home.component';
 import { HeaderComponent } from './home/header/header.component';
 import { HotelComponent } from './home/hotel/hotel.component';
