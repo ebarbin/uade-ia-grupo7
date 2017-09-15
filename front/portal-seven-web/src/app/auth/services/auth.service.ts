@@ -5,8 +5,8 @@ import { ToastrService } from 'ngx-toastr';
 
 import 'rxjs/Rx';
 
-import { User } from '../shared/models/user.model';
-import { PortalResponse } from '../shared/models/portal-response.model';
+import { User } from '../../shared/models/user.model';
+import { PortalResponse } from '../../shared/models/portal-response.model';
 
 @Injectable()
 export class AuthService {

@@ -12,9 +12,9 @@ import { AngularMaterialModule } from './shared/angular-material/angular-materia
 
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 
-import { AuthGuard } from './auth/auth-guard.service';
-import { AuthService } from './auth/auth.service';
-import { SearchHotelService } from './home/search-hotel/search-hotel.service';
+import { AuthGuard } from './auth/services/auth-guard.service';
+import { AuthService } from './auth/services/auth.service';
+import { HotelService } from './home/hotel/services/hotel.service';
 
 import { MyHttpInterceptor } from './shared/services/my-http-interceptor';
 
@@ -22,11 +22,14 @@ import { AppComponent } from './app.component';
 import { SigninComponent } from './auth/signin/signin.component';
 import { HomeComponent } from './home/home.component';
 import { HeaderComponent } from './home/header/header.component';
-import { SearchHotelComponent } from './home/search-hotel/search-hotel.component';
-import { SearchPackageComponent } from './home/search-package/search-package.component';
+import { HotelComponent } from './home/hotel/hotel.component';
+import { PackageComponent } from './home/package/package.component';
 import { DropdownDirective } from './shared/directives/dropdown.directive';
 import { MapComponent } from './shared/components/map/map.component';
 import { ImageGetterPipe } from './shared/pipes/image-getter.pipe';
+import { HotelFilterComponent } from './home/hotel/components/hotel-filter/hotel-filter.component';
+import { HotelResultComponent } from './home/hotel/components/hotel-result/hotel-result.component';
+import { HotelDetailComponent } from './home/hotel/components/hotel-detail/hotel-detail.component';
 
 @NgModule({
   declarations: [
@@ -34,11 +37,14 @@ import { ImageGetterPipe } from './shared/pipes/image-getter.pipe';
     SigninComponent,
     HomeComponent,
     HeaderComponent,
-    SearchHotelComponent,
-    SearchPackageComponent,
+    HotelComponent,
+    PackageComponent,
     DropdownDirective,
     MapComponent,
-    ImageGetterPipe
+    ImageGetterPipe,
+    HotelFilterComponent,
+    HotelResultComponent,
+    HotelDetailComponent
   ],
   imports: [
     BrowserModule,
@@ -60,9 +66,12 @@ import { ImageGetterPipe } from './shared/pipes/image-getter.pipe';
   providers: [
     AuthGuard, 
     AuthService,
-    SearchHotelService,
+    HotelService,
     {provide: LOCALE_ID, useValue: 'es-AR'},
     { provide: HTTP_INTERCEPTORS, useClass: MyHttpInterceptor, multi: true }
+  ],
+  entryComponents:[
+    HotelDetailComponent
   ],
   bootstrap: [AppComponent]
 })

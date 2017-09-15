@@ -4,10 +4,10 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { ToastrService } from 'ngx-toastr';
 
 import 'rxjs/Rx';
-import { SearchHotel } from './search-hotel.model';
+import { SearchHotel } from '../models/search-hotel.model';
 
 @Injectable()
-export class SearchHotelService {
+export class HotelService {
 
   public searcHotel:SearchHotel;
 
