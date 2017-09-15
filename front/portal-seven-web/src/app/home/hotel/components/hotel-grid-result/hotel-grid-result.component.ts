@@ -26,11 +26,11 @@ export class HotelGridResultComponent implements OnInit, OnDestroy {
     private hotelService: HotelService, 
     private dialog: MdDialog) { }
 
-  onDetail(element){
+  onDetail(hotel){
     const dialogRef = this.dialog.open(HotelDetailComponent, {
       height: '600px',
       width: '900px',
-      data: element
+      data: hotel
     });
 
     dialogRef.afterClosed().subscribe(result => {

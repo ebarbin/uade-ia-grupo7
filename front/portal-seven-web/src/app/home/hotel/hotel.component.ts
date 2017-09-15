@@ -24,12 +24,8 @@ export class HotelComponent implements OnInit {
 
   view:string = 'grid';
 
-  onChangeView(){
-    if(this.view == 'grid'){
-      this.view = 'card';
-    } else {
-      this.view = 'grid';
-    }
+  onChangeView(view){
+    this.view = view;
   }
 
   onReset(){
