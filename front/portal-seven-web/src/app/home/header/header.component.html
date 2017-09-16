@@ -11,14 +11,15 @@
         <li routerLinkActive="active"><a routerLink="package">Paquetes</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-
         <li class="dropdown" app-dropdown>
           <a style="cursor: pointer;" class="dropdown-toggle" role="button">
-            {{authService.user.firtName + " " +authService.user.sureName}} 
+            {{user.firstName + " " +user.sureName}} 
             <img class="img-circle" height="30" width="30" 
-            [src]="authService.user.image | imageGetter">
+            [src]="user.image | imageGetter">
           </a>
           <ul class="dropdown-menu">
+              <li routerLinkActive="active"><a style="cursor: pointer;" 
+                routerLink="user-profile">Perfil de Usuario</a></li>
             <li><a style="cursor: pointer;" (click)="logout()">Cerrar Sesion</a></li>
           </ul>
         </li>

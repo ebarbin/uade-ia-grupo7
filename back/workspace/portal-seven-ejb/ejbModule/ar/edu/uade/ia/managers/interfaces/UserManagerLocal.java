@@ -8,4 +8,6 @@ import ar.edu.uade.ia.commons.dtos.UserDTO;
 public interface UserManagerLocal {
 	
 	UserDTO login(String userName) throws Exception;
+	
+	UserDTO update (Integer id, UserDTO userDTO) throws Exception;
 }

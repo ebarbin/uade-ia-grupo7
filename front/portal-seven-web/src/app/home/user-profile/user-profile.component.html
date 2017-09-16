@@ -1,0 +1,35 @@
+<div class="col-md-8 col-md-offset-2">
+  <form (ngSubmit)="onSubmit(form)" #form="ngForm">
+    <input type="hidden" name="id" [(ngModel)]="user.id"/>
+    <md-card>
+      <md-card-header>
+        <md-card-title>Perfil de Usuario</md-card-title>
+      </md-card-header>
+      <md-card-content>
+        <div class="row">
+          <div class="col-md-12">
+              <md-form-field>
+                  <input mdInput placeholder="Nombre de Usuario" readonly name="userName" 
+                  [(ngModel)]="user.userName" required>
+              </md-form-field>
+          </div>
+          <div class="col-md-12">
+              <md-form-field>
+                  <input mdInput type="email" placeholder="Email" name="email" [(ngModel)]="user.email" email required>
+              </md-form-field>
+              <md-form-field>
+                  <input mdInput placeholder="Nombre" name="firstName" [(ngModel)]="user.firstName" required>
+              </md-form-field>
+              <md-form-field>
+                  <input mdInput placeholder="Apellido" name="sureName" [(ngModel)]="user.sureName" required>
+              </md-form-field>
+          </div>
+        </div>
+      </md-card-content>
+      <md-card-actions align="center">
+        <button md-raised-button type="submit" color="success" [disabled]="!form.valid || !form.dirty">Actualizar</button>
+        <button md-raised-button type="reset" color="warn" (click)="onCancel()">Cancelar</button>
+      </md-card-actions>
+    </md-card>
+  </form>
+</div>

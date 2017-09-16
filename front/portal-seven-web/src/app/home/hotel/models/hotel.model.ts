@@ -1,4 +1,4 @@
-import { Image } from '../../../shared/models/image.model';
+import { Image } from '../../../home/user-profile/models/image.model';
 
 export class Hotel {
 

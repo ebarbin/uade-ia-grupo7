@@ -12,6 +12,7 @@ import { AngularMaterialModule } from './shared/angular-material/angular-materia
 
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 
+import { UserService } from './home/user-profile/services/user.service';
 import { AuthGuard } from './auth/services/auth-guard.service';
 import { AuthService } from './auth/services/auth.service';
 import { HotelService } from './home/hotel/services/hotel.service';
@@ -31,6 +32,7 @@ import { HotelFilterComponent } from './home/hotel/components/hotel-filter/hotel
 import { HotelGridResultComponent } from './home/hotel/components/hotel-grid-result/hotel-grid-result.component';
 import { HotelDetailComponent } from './home/hotel/components/hotel-detail/hotel-detail.component';
 import { HotelCardResultComponent } from './home/hotel/components/hotel-card-result/hotel-card-result.component';
+import { UserProfileComponent } from './home/user-profile/user-profile.component';
 
 @NgModule({
   declarations: [
@@ -38,15 +40,16 @@ import { HotelCardResultComponent } from './home/hotel/components/hotel-card-res
     SigninComponent,
     HomeComponent,
     HeaderComponent,
-    HotelComponent,
     PackageComponent,
     DropdownDirective,
     MapComponent,
     ImageGetterPipe,
+    HotelComponent,
     HotelFilterComponent,
-    HotelGridResultComponent,
     HotelDetailComponent,
-    HotelCardResultComponent
+    HotelGridResultComponent,
+    HotelCardResultComponent,
+    UserProfileComponent
   ],
   imports: [
     BrowserModule,
@@ -68,6 +71,7 @@ import { HotelCardResultComponent } from './home/hotel/components/hotel-card-res
   providers: [
     AuthGuard, 
     AuthService,
+    UserService,
     HotelService,
     {provide: LOCALE_ID, useValue: 'es-AR'},
     { provide: HTTP_INTERCEPTORS, useClass: MyHttpInterceptor, multi: true }

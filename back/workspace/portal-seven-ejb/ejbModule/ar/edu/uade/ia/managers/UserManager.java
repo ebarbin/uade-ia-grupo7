@@ -35,11 +35,18 @@ public class UserManager implements UserManagerRemote, UserManagerLocal {
 
 	@Override
 	public UserDTO login(String userName) throws Exception {
-		//User user = this.mapper.map(userDTO, User.class);
 		User user = this.userEJB.login(userName);
 		UserDTO userDTO = this.mapper.map(user, UserDTO.class);
 		if (userDTO.getImage()!= null) userDTO.getImage().setData(null);
 		return userDTO;
+	}
+
+	@Override
+	public UserDTO update(Integer id, UserDTO userDTO) throws Exception {
+		userDTO.setId(id);
+		User user = this.mapper.map(userDTO, User.class);
+		user = this.userEJB.update(user);
+		return this.mapper.map(user, UserDTO.class);
 	}
 
 }

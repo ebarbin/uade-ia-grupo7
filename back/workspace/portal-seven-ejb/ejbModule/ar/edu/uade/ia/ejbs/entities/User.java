@@ -2,7 +2,6 @@ package ar.edu.uade.ia.ejbs.entities;
 
 import java.io.Serializable;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -20,12 +19,14 @@ public class User implements Serializable {
 	
 	private String userName;
 	
-	private String firtName;
+	private String firstName;
 	
 	private String sureName;
 	
-	@OneToOne(cascade = CascadeType.ALL)
+	@OneToOne()
     private Image image;
+	
+	private String email;
 	
 	public Integer getId() {
 		return id;
@@ -43,12 +44,12 @@ public class User implements Serializable {
 		this.userName = userName;
 	}
 
-	public String getFirtName() {
-		return firtName;
+	public String getFirstName() {
+		return firstName;
 	}
 
-	public void setFirtName(String firtName) {
-		this.firtName = firtName;
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
 	}
 
 	public String getSureName() {
@@ -65,5 +66,13 @@ public class User implements Serializable {
 
 	public void setImage(Image image) {
 		this.image = image;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
 }

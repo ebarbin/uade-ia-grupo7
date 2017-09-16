@@ -3,8 +3,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { ToastrService } from 'ngx-toastr';
 
-//import { Subject } from 'rxjs/Subject';
 import 'rxjs/Rx';
+
 import { SearchHotel } from '../models/search-hotel.model';
 import { Hotel } from '../models/hotel.model';
 

@@ -10,11 +10,13 @@ public class UserDTO implements Serializable {
 	
 	private String userName;
 	
-	private String firtName;
+	private String firstName;
 	
 	private String sureName;
 	
 	private ImageDTO image;
+	
+	private String email;
 	
 	public Integer getId() {
 		return id;
@@ -32,12 +34,12 @@ public class UserDTO implements Serializable {
 		this.userName = userName;
 	}
 
-	public String getFirtName() {
-		return firtName;
+	public String getFirstName() {
+		return firstName;
 	}
 
-	public void setFirtName(String firtName) {
-		this.firtName = firtName;
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
 	}
 
 	public String getSureName() {
@@ -54,5 +56,13 @@ public class UserDTO implements Serializable {
 
 	public void setImage(ImageDTO image) {
 		this.image = image;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
 }

@@ -1,5 +1,5 @@
 <app-hotel-filter (search)="onSearch($event)" (reset)="onReset($event)"></app-hotel-filter>
-<div class="change-view-toggle">
+<div class="change-view-toggle" *ngIf="results.length > 0">
   <md-button-toggle-group>
     <md-button-toggle md-mini-fab color="primary" value="left" 
       (click)="onChangeView('grid')" [checked]="view == 'grid'">

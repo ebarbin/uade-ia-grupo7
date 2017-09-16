@@ -4,3 +4,18 @@
 .mat-select-trigger{
     font-size: 14px;
 }
+
+.mat-fab.mat-success, .mat-mini-fab.mat-success, .mat-raised-button.mat-success {
+    background-color: #1FAA21;
+}
+.mat-fab.mat-success, .mat-mini-fab.mat-success, .mat-raised-button.mat-success {
+    color: #fff;
+}
+
+.mat-fab.mat-primary, .mat-mini-fab.mat-primary, .mat-raised-button.mat-primary {
+    background-color: #2C65BA;
+}
+
+.mat-fab.mat-primary, .mat-mini-fab.mat-primary, .mat-raised-button.mat-primary {
+    color: #fff;
+}
