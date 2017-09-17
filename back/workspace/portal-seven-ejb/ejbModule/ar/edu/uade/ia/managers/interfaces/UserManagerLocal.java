@@ -10,4 +10,6 @@ public interface UserManagerLocal {
 	UserDTO login(String userName) throws Exception;
 	
 	UserDTO update (Integer id, UserDTO userDTO) throws Exception;
+
+	UserDTO addImage(Integer userId, byte[] bytes) throws Exception;
 }

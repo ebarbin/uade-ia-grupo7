@@ -9,6 +9,7 @@ import org.dozer.Mapper;
 
 import ar.edu.uade.ia.commons.dtos.UserDTO;
 import ar.edu.uade.ia.ejbs.UserEJB;
+import ar.edu.uade.ia.ejbs.entities.Image;
 import ar.edu.uade.ia.ejbs.entities.User;
 import ar.edu.uade.ia.managers.interfaces.UserManagerLocal;
 import ar.edu.uade.ia.managers.interfaces.UserManagerRemote;
@@ -37,14 +38,29 @@ public class UserManager implements UserManagerRemote, UserManagerLocal {
 	public UserDTO login(String userName) throws Exception {
 		User user = this.userEJB.login(userName);
 		UserDTO userDTO = this.mapper.map(user, UserDTO.class);
-		if (userDTO.getImage()!= null) userDTO.getImage().setData(null);
+		if (userDTO.getImage() != null)
+			userDTO.getImage().setData(null);
 		return userDTO;
 	}
 
 	@Override
 	public UserDTO update(Integer id, UserDTO userDTO) throws Exception {
-		userDTO.setId(id);
-		User user = this.mapper.map(userDTO, User.class);
+		User user = this.userEJB.getById(id);
+		user.setEmail(userDTO.getEmail());
+		user.setFirstName(userDTO.getFirstName());
+		user.setSureName(userDTO.getSureName());
+		user = this.userEJB.update(user);
+		return this.mapper.map(user, UserDTO.class);
+	}
+
+	@Override
+	public UserDTO addImage(Integer userId, byte[] bytes) throws Exception {
+		User user = this.userEJB.getById(userId);
+
+		Image image = new Image();
+		image.setData(bytes);
+		user.setImage(image);
+
 		user = this.userEJB.update(user);
 		return this.mapper.map(user, UserDTO.class);
 	}

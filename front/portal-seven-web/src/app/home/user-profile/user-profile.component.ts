@@ -1,4 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
+import { MdDialog } from '@angular/material';
 
 import { Subscription } from 'rxjs/Subscription';
 
@@ -8,6 +9,8 @@ import { UserService } from './services/user.service';
 import { User } from './models/user.model';
 import { Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
+
+import { ChangeImageComponent } from './components/change-image/change-image.component';
 
 
 @Component({
@@ -22,6 +25,7 @@ export class UserProfileComponent implements OnInit, OnDestroy {
   user:User;
 
   constructor(
+    private dialog: MdDialog,
     private router: Router,
     private userService: UserService,
     private auth:AuthService) { }
@@ -41,10 +45,19 @@ export class UserProfileComponent implements OnInit, OnDestroy {
     this.router.navigate(['home']);
   }
 
+  onChangeProfileImage(){
+    const dialogRef = this.dialog.open(ChangeImageComponent, {
+      data: null
+    });
+  
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+    });
+  }
+
   onSubmit(form:NgForm){
     var user = form.value;
     user.image = this.auth.user.image;
     this.userService.update(form.value);
   }
-
 }

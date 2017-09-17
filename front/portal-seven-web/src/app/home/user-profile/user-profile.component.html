@@ -26,10 +26,14 @@
           </div>
         </div>
       </md-card-content>
-      <md-card-actions align="center">
-        <button md-raised-button type="submit" color="success" [disabled]="!form.valid || !form.dirty">Actualizar</button>
-        <button md-raised-button type="reset" color="warn" (click)="onCancel()">Cancelar</button>
+      <md-card-actions align="end">
+        <button md-raised-button type="submit" color="success" [disabled]="!form.valid">
+          Actualizar</button>
+        <button md-raised-button type="button" color="primary" (click)="onChangeProfileImage()">
+          Cambiar Imagen de Perfil</button>
       </md-card-actions>
     </md-card>
   </form>
 </div>
+
+<router-outlet></router-outlet>

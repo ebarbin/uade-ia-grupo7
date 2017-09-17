@@ -17,12 +17,13 @@ public class ImageEJB {
 
 	@PersistenceContext(unitName = "mu")
 	protected EntityManager em;
-	
-    /**
-     * Default constructor. 
-     */
-    public ImageEJB() {}
-    
+
+	/**
+	 * Default constructor.
+	 */
+	public ImageEJB() {
+	}
+
 	public Image getById(Integer id) throws Exception {
 		try {
 			Image image = this.em.find(Image.class, id);
@@ -34,6 +35,15 @@ public class ImageEJB {
 		} catch (NoResultException nre) {
 			throw new Exception("Imagen inexistente.");
 		}
+	}
+
+	public Image update(Image image) throws Exception {
+		return this.em.merge(image);
+	}
+
+	public Image create(Image image) {
+		this.em.persist(image);
+		return image;
 	}
 
 }

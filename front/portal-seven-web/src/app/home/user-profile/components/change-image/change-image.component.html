@@ -1,0 +1,10 @@
+<h2 md-dialog-title>Cambiar Imagen de Perfil</h2>
+<md-dialog-content>
+    <div class="form-inline">
+        <input type="file" id="uploadFile" accept="image/x-png,image/gif,image/jpeg" name="uploadFile"/>
+      </div>
+</md-dialog-content>
+<md-dialog-actions align="center">
+  <button md-raised-button type="button" color="primary" (click)="uploadImage()">Subir Imagen</button>
+  <button md-raised-button md-dialog-close color="warn">Cancel</button>
+</md-dialog-actions>

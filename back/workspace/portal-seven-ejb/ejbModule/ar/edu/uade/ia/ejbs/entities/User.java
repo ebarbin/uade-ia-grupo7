@@ -2,6 +2,7 @@ package ar.edu.uade.ia.ejbs.entities;
 
 import java.io.Serializable;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -16,18 +17,18 @@ public class User implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	private Integer id;
-	
+
 	private String userName;
-	
+
 	private String firstName;
-	
+
 	private String sureName;
-	
-	@OneToOne()
-    private Image image;
-	
+
+	@OneToOne(cascade = CascadeType.ALL)
+	private Image image;
+
 	private String email;
-	
+
 	public Integer getId() {
 		return id;
 	}

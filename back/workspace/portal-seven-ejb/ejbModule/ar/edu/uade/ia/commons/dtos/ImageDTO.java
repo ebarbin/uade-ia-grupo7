@@ -8,8 +8,6 @@ public class ImageDTO implements Serializable {
 
 	private Integer id;
 	
-	private String name;
-
 	private byte[] data;
 	
 	public Integer getId() {
@@ -18,14 +16,6 @@ public class ImageDTO implements Serializable {
 
 	public void setId(Integer id) {
 		this.id = id;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
 	}
 
 	public byte[] getData() {

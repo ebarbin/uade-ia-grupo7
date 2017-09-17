@@ -12,6 +12,7 @@ import { AngularMaterialModule } from './shared/angular-material/angular-materia
 
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 
+import { ImageService } from './home/user-profile/services/image.service';
 import { UserService } from './home/user-profile/services/user.service';
 import { AuthGuard } from './auth/services/auth-guard.service';
 import { AuthService } from './auth/services/auth.service';
@@ -33,6 +34,7 @@ import { HotelGridResultComponent } from './home/hotel/components/hotel-grid-res
 import { HotelDetailComponent } from './home/hotel/components/hotel-detail/hotel-detail.component';
 import { HotelCardResultComponent } from './home/hotel/components/hotel-card-result/hotel-card-result.component';
 import { UserProfileComponent } from './home/user-profile/user-profile.component';
+import { ChangeImageComponent } from './home/user-profile/components/change-image/change-image.component';
 
 @NgModule({
   declarations: [
@@ -49,7 +51,8 @@ import { UserProfileComponent } from './home/user-profile/user-profile.component
     HotelDetailComponent,
     HotelGridResultComponent,
     HotelCardResultComponent,
-    UserProfileComponent
+    UserProfileComponent,
+    ChangeImageComponent
   ],
   imports: [
     BrowserModule,
@@ -72,12 +75,13 @@ import { UserProfileComponent } from './home/user-profile/user-profile.component
     AuthGuard, 
     AuthService,
     UserService,
+    ImageService,
     HotelService,
     {provide: LOCALE_ID, useValue: 'es-AR'},
     { provide: HTTP_INTERCEPTORS, useClass: MyHttpInterceptor, multi: true }
   ],
   entryComponents:[
-    HotelDetailComponent
+    HotelDetailComponent, ChangeImageComponent
   ],
   bootstrap: [AppComponent]
 })

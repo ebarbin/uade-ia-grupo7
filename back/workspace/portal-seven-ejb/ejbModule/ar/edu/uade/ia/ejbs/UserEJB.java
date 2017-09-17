@@ -22,7 +22,8 @@ public class UserEJB {
 	/**
 	 * Default constructor.
 	 */
-	public UserEJB() {}
+	public UserEJB() {
+	}
 
 	public User login(String userName) throws Exception {
 		try {
@@ -36,6 +37,14 @@ public class UserEJB {
 
 	public User update(User user) throws Exception {
 		return this.em.merge(user);
+	}
+
+	public User getById(Integer id) throws Exception {
+		User user = this.em.find(User.class, id);
+		if (user == null) {
+			throw new Exception("Usuario inexistente.");
+		}
+		return user;
 	}
 
 }

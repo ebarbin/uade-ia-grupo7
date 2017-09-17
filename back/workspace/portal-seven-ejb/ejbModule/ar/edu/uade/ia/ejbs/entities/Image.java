@@ -14,8 +14,6 @@ public class Image {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	private Integer id;
 	
-	private String name;
-	
 	@Lob
     @Column(columnDefinition="mediumblob")
     private byte[] data;
@@ -26,14 +24,6 @@ public class Image {
 
 	public void setId(Integer id) {
 		this.id = id;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
 	}
 
 	public byte[] getData() {

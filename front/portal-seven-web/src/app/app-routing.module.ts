@@ -8,6 +8,7 @@ import { HomeComponent } from './home/home.component';
 import { HotelComponent } from './home/hotel/hotel.component';
 import { PackageComponent } from './home/package/package.component';
 import { UserProfileComponent } from './home/user-profile/user-profile.component';
+import { ChangeImageComponent } from './home/user-profile/components/change-image/change-image.component';
 
 const appRoutes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full'},
