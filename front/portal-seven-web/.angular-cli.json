@@ -6,7 +6,7 @@
   "apps": [
     {
       "root": "src",
-      "outDir": "dist",
+      "outDir": "../../back/workspace/portal-seven-web/WebContent",
       "assets": [
         "assets",
         "favicon.ico"
