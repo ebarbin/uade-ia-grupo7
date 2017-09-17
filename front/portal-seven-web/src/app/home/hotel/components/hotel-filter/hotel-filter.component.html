@@ -2,7 +2,7 @@
 <form (ngSubmit)="onSubmit(form)" #form="ngForm">
     <md-card>
       <md-card-header>
-        <md-card-title>Busqueda de Hoteles</md-card-title>
+        <md-card-title>BUSQUEDA DE HOTELES</md-card-title>
         <md-card-subtitle>Filtro de busqueda</md-card-subtitle>
       </md-card-header>
       <md-card-content>
@@ -10,25 +10,21 @@
           <div class="col-md-12">
             <md-input-container>
               <input mdInput placeholder="Nombre de Hotel" 
-                [mdAutocomplete]="tdAuto" 
-                name="hotel" 
-                  #state="ngModel" [(ngModel)]="hotel"
-                (ngModelChange)="hotels = filterStates(hotel)">
+                [mdAutocomplete]="tdAuto" #hotel name="hotel" ngModel
+                (ngModelChange)="filterStates(hotel.value)">
             </md-input-container>
             <md-autocomplete #tdAuto="mdAutocomplete">
               <md-option *ngFor="let h of hotels" [value]="h">
                 <span>{{ h }}</span>
               </md-option>
             </md-autocomplete>
-            <md-select placeholder="Cantidad de Habitaciones" 
-              [(ngModel)]="selectedRoomQuantity" 
+            <md-select placeholder="Cantidad de Habitaciones" ngModel
               name="roomQuantity">
               <md-option *ngFor="let rq of quantityOptions" [value]="rq.value">
                 {{ rq.viewValue }}
               </md-option>
             </md-select>
-            <md-select placeholder="Personas por habitación"
-              [(ngModel)]="selectedPeoplePerRoom" 
+            <md-select placeholder="Personas por habitación" ngModel 
               name="peoplePerRoom">
                 <md-option *ngFor="let pr of quantityOptions" [value]="pr.value">
                   {{ pr.viewValue }}

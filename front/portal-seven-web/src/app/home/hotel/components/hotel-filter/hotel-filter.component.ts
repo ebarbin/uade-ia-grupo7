@@ -3,6 +3,7 @@ import { NgForm } from '@angular/forms';
 import { Observable } from 'rxjs/Observable';
 
 import { SearchHotel } from '../../models/search-hotel.model';
+import { Hotel } from '../../models/hotel.model';
 
 @Component({
   selector: 'app-hotel-filter',
@@ -11,23 +12,28 @@ import { SearchHotel } from '../../models/search-hotel.model';
 })
 export class HotelFilterComponent implements OnInit {
 
-  @Output() search: EventEmitter<SearchHotel> = new EventEmitter();
-  @Output() reset: EventEmitter<null> = new EventEmitter();
+  @Output('search') search: EventEmitter<SearchHotel> = new EventEmitter();
+  @Output('reset') reset: EventEmitter<any> = new EventEmitter();
 
+  fromDate:Date = new Date();
+  toDate:Date = new Date();
+  
   constructor() { }
 
   quantityOptions:any[] = [];
   
-    options = ['One','Two','Three'];
+    hotels:any[];
+    
   
     filteredOptions: Observable<string[]>;
   
     filterStates(val: string) {
+      var options = ['One','Two','Three'];
       if (val) {
         const filterValue = val.toLowerCase();
-        return this.options.filter(hotel => hotel.toLowerCase().startsWith(filterValue));
+        this.hotels =options.filter(hotel => hotel.toLowerCase().startsWith(filterValue));
       }
-      return this.options;
+      this.hotels = options;
     }
   
     ngOnInit() {
@@ -37,7 +43,7 @@ export class HotelFilterComponent implements OnInit {
     }
     
     onReset() {
-      this.reset.next();
+      this.reset.next({});
     }
 
     onSubmit(form:NgForm){
