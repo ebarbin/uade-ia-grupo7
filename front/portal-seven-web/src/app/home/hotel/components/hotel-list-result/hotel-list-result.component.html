@@ -1,0 +1,24 @@
+<md-card class="card-row card col-md-12" *ngFor="let hotel of hotels">
+    <!-- <md-card-header>
+      <md-card-title>{{hotel.name}}</md-card-title>
+      <md-card-subtitle>mostrar mas info</md-card-subtitle>
+    </md-card-header> -->
+    <md-card-content>
+
+      <div class="col-md-2">
+        <img class="img-responsive" height="100" width="100" [src]="hotel.image | imageGetter">
+      </div>
+      <div class="col-md-10">
+          <b>{{hotel.name}}</b>
+      </div>
+      <div class="col-md-10">
+          {{hotel.name}}
+      </div>
+      <div class="col-md-10">
+          {{hotel.name}}
+      </div>
+    </md-card-content>
+    <md-card-actions align="end">
+        <button (click)="onDetail(hotel)" md-raised-button type="button" color="primary">Detalle</button>
+    </md-card-actions>
+  </md-card>

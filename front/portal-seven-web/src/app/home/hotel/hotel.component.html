@@ -3,15 +3,15 @@
   <md-button-toggle-group>
     <md-button-toggle md-mini-fab color="primary" value="left" 
       (click)="onChangeView('grid')" [checked]="view == 'grid'">
-        <i class="fa fa-table" aria-hidden="true"></i>
+        <i class="fa fa-th-list" aria-hidden="true"></i>
     </md-button-toggle>
     <md-button-toggle md-mini-fab color="accent" value="right"
       (click)="onChangeView('card')" [checked]="view == 'card'">
-        <i class="fa fa-address-card-o" aria-hidden="true"></i>
+        <i class="fa fa-th" aria-hidden="true"></i>
     </md-button-toggle>
   </md-button-toggle-group>
 </div>
 <div *ngIf="results.length > 0">
-    <app-hotel-grid-result [hotels]="results" *ngIf="view == 'grid'"></app-hotel-grid-result>
+    <app-hotel-list-result [hotels]="results" *ngIf="view == 'grid'"></app-hotel-list-result>
     <app-hotel-card-result [hotels]="results" *ngIf="view == 'card'"></app-hotel-card-result>
 </div>

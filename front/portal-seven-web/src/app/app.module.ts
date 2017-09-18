@@ -35,6 +35,7 @@ import { HotelDetailComponent } from './home/hotel/components/hotel-detail/hotel
 import { HotelCardResultComponent } from './home/hotel/components/hotel-card-result/hotel-card-result.component';
 import { UserProfileComponent } from './home/user-profile/user-profile.component';
 import { ChangeImageComponent } from './home/user-profile/components/change-image/change-image.component';
+import { HotelListResultComponent } from './home/hotel/components/hotel-list-result/hotel-list-result.component';
 
 @NgModule({
   declarations: [
@@ -52,7 +53,8 @@ import { ChangeImageComponent } from './home/user-profile/components/change-imag
     HotelGridResultComponent,
     HotelCardResultComponent,
     UserProfileComponent,
-    ChangeImageComponent
+    ChangeImageComponent,
+    HotelListResultComponent
   ],
   imports: [
     BrowserModule,
