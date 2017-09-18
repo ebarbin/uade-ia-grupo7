@@ -1,4 +1,5 @@
-<md-card class="card col-md-4" *ngFor="let hotel of hotels">
+<div class="card-result">
+  <md-card class="card-row card col-lg-3 col-md-4 col-sm-6 col-xs-12" *ngFor="let hotel of hotels">
     <md-card-header>
       <img md-card-avatar [src]="hotel.image | imageGetter">
       <md-card-title>{{hotel.name}}</md-card-title>
@@ -13,3 +14,4 @@
         <button (click)="onDetail(hotel)" md-raised-button type="button" color="primary">Detalle</button>
     </md-card-actions>
   </md-card>
+</div>
