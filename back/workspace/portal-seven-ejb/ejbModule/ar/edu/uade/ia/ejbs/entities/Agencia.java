@@ -1,6 +1,8 @@
 package ar.edu.uade.ia.ejbs.entities;
 
-public class Agencia {
+public class Agencia extends ObjetoPersistente {
+
+	private static final long serialVersionUID = 954537632748254118L;
 
 	private String nombre;
 	

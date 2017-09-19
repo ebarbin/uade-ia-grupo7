@@ -2,9 +2,9 @@ package ar.edu.uade.ia.ejbs.entities;
 
 import java.util.Date;
 
-public class OfertaHotel {
+public class OfertaHotel extends ObjetoPersistente {
 
-	private Integer id;
+	private static final long serialVersionUID = -5955498653697555495L;
 
 	private Hotel hotel;
 		
@@ -17,14 +17,6 @@ public class OfertaHotel {
 	private Habitacion habitacion;
 	
 	private String politicaCancelacion;
-
-	public Integer getId() {
-		return id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
-	}
 
 	public Date getDisponibleDesde() {
 		return disponibleDesde;

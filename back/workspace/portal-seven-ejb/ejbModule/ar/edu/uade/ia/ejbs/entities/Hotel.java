@@ -2,13 +2,11 @@ package ar.edu.uade.ia.ejbs.entities;
 
 import java.util.List;
 
-public class Hotel {
+public class Hotel extends ObjetoPersistente {
 
-	private Integer id;
-	
+	private static final long serialVersionUID = 564408788585026377L;
+
 	private String nombre;
-	
-	private String idOfertaHotelera;
 	
 	private Destino destino;
 	
@@ -24,28 +22,12 @@ public class Hotel {
 	
 	private List<String>mediosDepago;
 
-	public Integer getId() {
-		return id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
-	}
-
 	public String getNombre() {
 		return nombre;
 	}
 
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
-	}
-
-	public String getIdOfertaHotelera() {
-		return idOfertaHotelera;
-	}
-
-	public void setIdOfertaHotelera(String idOfertaHotelera) {
-		this.idOfertaHotelera = idOfertaHotelera;
 	}
 
 	public Destino getDestino() {

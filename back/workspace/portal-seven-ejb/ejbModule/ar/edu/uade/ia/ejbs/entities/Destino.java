@@ -1,20 +1,12 @@
 package ar.edu.uade.ia.ejbs.entities;
 
-public class Destino {
+public class Destino extends ObjetoPersistente {
 
-	private Integer id;
-	
+	private static final long serialVersionUID = 7201684177830379591L;
+
 	private String nombre;
 	
 	private Direccion direccion;
-
-	public Integer getId() {
-		return id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
-	}
 
 	public String getNombre() {
 		return nombre;

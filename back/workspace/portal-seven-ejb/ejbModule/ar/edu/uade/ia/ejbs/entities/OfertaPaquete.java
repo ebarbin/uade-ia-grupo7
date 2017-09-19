@@ -3,7 +3,9 @@ package ar.edu.uade.ia.ejbs.entities;
 import java.util.Date;
 import java.util.List;
 
-public class OfertaPaquete {
+public class OfertaPaquete extends ObjetoPersistente {
+
+	private static final long serialVersionUID = 6647993123948723384L;
 
 	private List<Foto>fotos;
 	

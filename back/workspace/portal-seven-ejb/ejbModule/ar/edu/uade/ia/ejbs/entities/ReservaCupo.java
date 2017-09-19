@@ -3,7 +3,9 @@ package ar.edu.uade.ia.ejbs.entities;
 import java.util.Date;
 import java.util.List;
 
-public class ReservaCupo {
+public class ReservaCupo extends ObjetoPersistente {
+
+	private static final long serialVersionUID = 4555465608403169617L;
 
 	private List<Cupo>cuposReservados;
 	

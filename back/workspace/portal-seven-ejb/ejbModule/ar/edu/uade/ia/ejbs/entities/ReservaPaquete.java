@@ -1,6 +1,8 @@
 package ar.edu.uade.ia.ejbs.entities;
 
-public class ReservaPaquete {
+public class ReservaPaquete extends ObjetoPersistente {
+
+	private static final long serialVersionUID = 1322663302447235060L;
 
 	private OfertaPaquete paqueteReservado;
 	

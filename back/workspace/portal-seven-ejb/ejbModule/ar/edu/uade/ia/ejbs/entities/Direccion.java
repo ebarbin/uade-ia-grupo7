@@ -1,7 +1,9 @@
 package ar.edu.uade.ia.ejbs.entities;
 
-public class Direccion {
+public class Direccion extends ObjetoPersistente{
 	
+	private static final long serialVersionUID = 1L;
+
 	private String calle;
 	
 	private String numero;

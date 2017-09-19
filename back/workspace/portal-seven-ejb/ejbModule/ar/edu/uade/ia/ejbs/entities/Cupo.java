@@ -2,23 +2,15 @@ package ar.edu.uade.ia.ejbs.entities;
 
 import java.util.Date;
 
-public class Cupo {
+public class Cupo extends ObjetoPersistente {
 
-	private Integer id;
-	
+	private static final long serialVersionUID = 7791774625364655871L;
+
 	private Date fecha;
 	
 	private OfertaHotel oferta;
 	
 	private Integer cupoDisponibles;
-
-	public Integer getId() {
-		return id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
-	}
 
 	public Date getFecha() {
 		return fecha;

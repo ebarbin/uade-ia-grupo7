@@ -1,18 +1,10 @@
 package ar.edu.uade.ia.ejbs.entities;
 
-public class Foto {
+public class Foto extends ObjetoPersistente {
 
-	private Integer id;
+	private static final long serialVersionUID = 6973416984676285472L;
 	
 	private byte[] data;
-
-	public Integer getId() {
-		return id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
-	}
 
 	public byte[] getData() {
 		return data;

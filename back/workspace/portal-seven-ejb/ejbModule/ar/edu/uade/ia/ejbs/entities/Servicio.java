@@ -1,6 +1,8 @@
 package ar.edu.uade.ia.ejbs.entities;
 
-public class Servicio {
+public class Servicio extends ObjetoPersistente {
+
+	private static final long serialVersionUID = -1978696476715748487L;
 
 	private String descripcion;
 	

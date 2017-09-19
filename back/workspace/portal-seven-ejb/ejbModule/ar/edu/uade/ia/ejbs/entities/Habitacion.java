@@ -2,10 +2,10 @@ package ar.edu.uade.ia.ejbs.entities;
 
 import java.util.List;
 
-public class Habitacion {
+public class Habitacion extends ObjetoPersistente {
 
-	private Integer id;
-	
+	private static final long serialVersionUID = 5243270004093839420L;
+
 	private List<Foto>fotos;
 	
 	private String descripcion;
@@ -15,14 +15,6 @@ public class Habitacion {
 	private Integer capacidadPersonas;
 	
 	private String tipo;
-
-	public Integer getId() {
-		return id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
-	}
 
 	public List<Foto> getFotos() {
 		return fotos;
