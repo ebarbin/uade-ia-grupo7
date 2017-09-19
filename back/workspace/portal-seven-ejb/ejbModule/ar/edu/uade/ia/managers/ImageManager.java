@@ -10,8 +10,8 @@ import org.dozer.Mapper;
 import ar.edu.uade.ia.commons.dtos.ImageDTO;
 import ar.edu.uade.ia.ejbs.ImageEJB;
 import ar.edu.uade.ia.ejbs.UserEJB;
-import ar.edu.uade.ia.ejbs.entities.Image;
-import ar.edu.uade.ia.ejbs.entities.User;
+import ar.edu.uade.ia.ejbs.entities.bussiness.Image;
+import ar.edu.uade.ia.ejbs.entities.bussiness.User;
 import ar.edu.uade.ia.managers.interfaces.ImageManagerLocal;
 import ar.edu.uade.ia.managers.interfaces.ImageManagerRemote;
 

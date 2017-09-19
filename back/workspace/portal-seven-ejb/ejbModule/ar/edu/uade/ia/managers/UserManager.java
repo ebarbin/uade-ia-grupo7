@@ -9,8 +9,8 @@ import org.dozer.Mapper;
 
 import ar.edu.uade.ia.commons.dtos.UserDTO;
 import ar.edu.uade.ia.ejbs.UserEJB;
-import ar.edu.uade.ia.ejbs.entities.Image;
-import ar.edu.uade.ia.ejbs.entities.User;
+import ar.edu.uade.ia.ejbs.entities.bussiness.Image;
+import ar.edu.uade.ia.ejbs.entities.bussiness.User;
 import ar.edu.uade.ia.managers.interfaces.UserManagerLocal;
 import ar.edu.uade.ia.managers.interfaces.UserManagerRemote;
 

@@ -1,11 +1,11 @@
-package ar.edu.uade.ia.ejbs.entities;
+package ar.edu.uade.ia.ejbs.entities.bussiness;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.OneToOne;
 
 @Entity
-public class User extends ObjetoPersistente {
+public class User extends PersistentObject {
 
 	private static final long serialVersionUID = -580923980124579922L;
 

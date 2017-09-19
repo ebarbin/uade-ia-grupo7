@@ -1,4 +1,4 @@
-package ar.edu.uade.ia.ejbs.entities;
+package ar.edu.uade.ia.ejbs.entities.bussiness;
 
 import java.io.Serializable;
 
@@ -8,7 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 
 @MappedSuperclass
-public abstract class ObjetoPersistente implements Serializable {
+public abstract class PersistentObject implements Serializable {
 
 	private static final long serialVersionUID = -4099173591578522024L;
 	

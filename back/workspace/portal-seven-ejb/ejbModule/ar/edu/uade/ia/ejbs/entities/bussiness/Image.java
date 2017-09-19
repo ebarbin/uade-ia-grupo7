@@ -1,4 +1,4 @@
-package ar.edu.uade.ia.ejbs.entities;
+package ar.edu.uade.ia.ejbs.entities.bussiness;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
