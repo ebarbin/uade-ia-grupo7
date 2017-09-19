@@ -38,7 +38,8 @@ export class AuthService implements OnInit {
           }
       }).catch((res:HttpErrorResponse) => {
           if (res.error){
-            this.toastr.error(res.error.errorMessage);
+            var jsonErr = JSON.parse(res.error);
+            this.toastr.error(jsonErr.errorMessage);
           } else {
             this.toastr.error(res.message);
           }

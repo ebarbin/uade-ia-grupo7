@@ -1,22 +1,13 @@
 package ar.edu.uade.ia.ejbs.entities;
 
-import java.io.Serializable;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.OneToOne;
 
 @Entity
-public class User implements Serializable {
+public class User extends ObjetoPersistente {
 
-	private static final long serialVersionUID = 4653734416571297009L;
-
-	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE)
-	private Integer id;
+	private static final long serialVersionUID = -580923980124579922L;
 
 	private String userName;
 
@@ -28,14 +19,6 @@ public class User implements Serializable {
 	private Image image;
 
 	private String email;
-
-	public Integer getId() {
-		return id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
-	}
 
 	public String getUserName() {
 		return userName;
