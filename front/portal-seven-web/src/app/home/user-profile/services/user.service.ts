@@ -22,14 +22,18 @@ export class UserService {
       return response;
     }).toPromise().then((response:PortalResponse) => {
       if (response.success) {
-        this.userChanged.next(<User>response.data)
+        this.userChanged.next(<User>response.data);
         this.toastr.success('Usuario actualizado exitosamente.');
       } else {
         this.toastr.error(response.errorMessage);
       }
     }).catch((res:HttpErrorResponse) => {
       if (res.error){
-        this.toastr.error(res.error.errorMessage);
+        if (typeof res.error != 'object') {
+          this.toastr.error(JSON.parse(res.error).errorMessage)
+        } else {
+          this.toastr.error(res.error.errorMessage)
+        }            
       } else {
         this.toastr.error(res.message);
       }

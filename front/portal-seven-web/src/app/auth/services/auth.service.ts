@@ -12,7 +12,7 @@ import { UserService } from '../../home/user-profile/services/user.service';
 @Injectable()
 export class AuthService implements OnInit {
 
-  user: User;
+  private user: User;
   
   constructor(
     private userService:UserService,
@@ -24,6 +24,14 @@ export class AuthService implements OnInit {
     this.userService.userChanged.subscribe((user:User)=>{
       this.user = user;
     })
+  }
+
+  public getUser(){
+    return this.user ? Object.assign({}, this.user) : null;
+  }
+
+  public setUser(user:User){
+    this.user = user;
   }
 
   signin(userName: string) {

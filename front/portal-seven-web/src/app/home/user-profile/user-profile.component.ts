@@ -31,9 +31,9 @@ export class UserProfileComponent implements OnInit, OnDestroy {
     private auth:AuthService) { }
 
   ngOnInit() {
-    this.user =  Object.assign({}, this.auth.user);
+    this.user =  Object.assign({}, this.auth.getUser());
     this.userSubs = this.userService.userChanged.subscribe((user:User)=>{
-      this.user = user;
+      this.user = Object.assign({}, user);
     })
   }
 
@@ -57,7 +57,7 @@ export class UserProfileComponent implements OnInit, OnDestroy {
 
   onSubmit(form:NgForm){
     var user = form.value;
-    user.image = this.auth.user.image;
+    user.image = this.auth.getUser().image;
     this.userService.update(form.value);
   }
 }
