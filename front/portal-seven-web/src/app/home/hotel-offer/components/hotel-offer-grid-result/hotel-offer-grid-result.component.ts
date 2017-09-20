@@ -4,17 +4,18 @@ import { Subscription } from 'rxjs/Subscription'
 
 import { MdDialog } from '@angular/material';
 
-import { HotelDetailComponent } from '../hotel-detail/hotel-detail.component';
+import { HotelOfferDetailComponent } from '../hotel-offer-detail/hotel-offer-detail.component';
+
 import { Hotel } from '../../models/hotel.model';
 import { CustomDatasource } from '../../../../shared/models/custom-datasouce';
 import { HotelService } from '../../services/hotel.service';
 
 @Component({
-  selector: 'app-hotel-grid-result',
-  templateUrl: './hotel-grid-result.component.html',
-  styleUrls: ['./hotel-grid-result.component.css']
+  selector: 'app-hotel-offer-grid-result',
+  templateUrl: './hotel-offer-grid-result.component.html',
+  styleUrls: ['./hotel-offer-grid-result.component.css']
 })
-export class HotelGridResultComponent implements OnInit, OnDestroy {
+export class HotelOfferGridResultComponent implements OnInit, OnDestroy {
 
   dataSource: CustomDatasource;
 
@@ -27,7 +28,7 @@ export class HotelGridResultComponent implements OnInit, OnDestroy {
     private dialog: MdDialog) { }
 
   onDetail(hotel){
-    const dialogRef = this.dialog.open(HotelDetailComponent, {
+    const dialogRef = this.dialog.open(HotelOfferDetailComponent, {
       height: '600px',
       width: '900px',
       data: hotel

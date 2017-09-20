@@ -4,14 +4,14 @@ import { MdDialog } from '@angular/material';
 
 import { Hotel } from '../../models/hotel.model';
 
-import { HotelDetailComponent } from '../hotel-detail/hotel-detail.component';
+import { HotelOfferDetailComponent } from '../hotel-offer-detail/hotel-offer-detail.component';
 
 @Component({
-  selector: 'app-hotel-list-result',
-  templateUrl: './hotel-list-result.component.html',
-  styleUrls: ['./hotel-list-result.component.css']
+  selector: 'app-hotel-offer-list-result',
+  templateUrl: './hotel-offer-list-result.component.html',
+  styleUrls: ['./hotel-offer-list-result.component.css']
 })
-export class HotelListResultComponent implements OnInit {
+export class HotelOfferListResultComponent implements OnInit {
 
   @Input()hotels:Hotel[];
 
@@ -21,7 +21,7 @@ export class HotelListResultComponent implements OnInit {
   }
 
   onDetail(hotel){
-    const dialogRef = this.dialog.open(HotelDetailComponent, {
+    const dialogRef = this.dialog.open(HotelOfferDetailComponent, {
       height: '600px',
       width: '900px',
       data: hotel

@@ -11,11 +11,11 @@ import { SearchHotel } from './models/search-hotel.model';
 import { Hotel } from './models/hotel.model';
 
 @Component({
-  selector: 'app-search-hotel',
-  templateUrl: './hotel.component.html',
-  styleUrls: ['./hotel.component.css']
+  selector: 'app-hotel-offer',
+  templateUrl: './hotel-offer.component.html',
+  styleUrls: ['./hotel-offer.component.css']
 })
-export class HotelComponent implements OnInit {
+export class HotelOfferComponent implements OnInit {
 
   constructor(
     private hotelService:HotelService) { }

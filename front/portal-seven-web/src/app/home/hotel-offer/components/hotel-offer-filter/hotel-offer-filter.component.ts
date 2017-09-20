@@ -6,11 +6,11 @@ import { SearchHotel } from '../../models/search-hotel.model';
 import { Hotel } from '../../models/hotel.model';
 
 @Component({
-  selector: 'app-hotel-filter',
-  templateUrl: './hotel-filter.component.html',
-  styleUrls: ['./hotel-filter.component.css']
+  selector: 'app-hotel-offer-filter',
+  templateUrl: './hotel-offer-filter.component.html',
+  styleUrls: ['./hotel-offer-filter.component.css']
 })
-export class HotelFilterComponent implements OnInit {
+export class HotelOfferFilterComponent implements OnInit {
 
   @Output('search') search: EventEmitter<SearchHotel> = new EventEmitter();
   @Output('reset') reset: EventEmitter<any> = new EventEmitter();

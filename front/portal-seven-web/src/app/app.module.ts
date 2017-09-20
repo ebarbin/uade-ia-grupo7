@@ -16,7 +16,7 @@ import { ImageService } from './home/user-profile/services/image.service';
 import { UserService } from './home/user-profile/services/user.service';
 import { AuthGuard } from './auth/services/auth-guard.service';
 import { AuthService } from './auth/services/auth.service';
-import { HotelService } from './home/hotel/services/hotel.service';
+import { HotelService } from './home/hotel-offer/services/hotel.service';
 
 import { MyHttpInterceptor } from './shared/services/my-http-interceptor';
 
@@ -24,18 +24,18 @@ import { AppComponent } from './app.component';
 import { SigninComponent } from './auth/components/signin/signin.component';
 import { HomeComponent } from './home/home.component';
 import { HeaderComponent } from './home/header/header.component';
-import { HotelComponent } from './home/hotel/hotel.component';
+import { HotelOfferComponent } from './home/hotel-offer/hotel-offer.component';
 import { PackageComponent } from './home/package/package.component';
 import { DropdownDirective } from './shared/directives/dropdown.directive';
 import { MapComponent } from './shared/components/map/map.component';
 import { ImageGetterPipe } from './shared/pipes/image-getter.pipe';
-import { HotelFilterComponent } from './home/hotel/components/hotel-filter/hotel-filter.component';
-import { HotelGridResultComponent } from './home/hotel/components/hotel-grid-result/hotel-grid-result.component';
-import { HotelDetailComponent } from './home/hotel/components/hotel-detail/hotel-detail.component';
-import { HotelCardResultComponent } from './home/hotel/components/hotel-card-result/hotel-card-result.component';
+import { HotelOfferFilterComponent } from './home/hotel-offer/components/hotel-offer-filter/hotel-offer-filter.component';
+import { HotelOfferGridResultComponent } from './home/hotel-offer/components/hotel-offer-grid-result/hotel-offer-grid-result.component';
+import { HotelOfferDetailComponent } from './home/hotel-offer/components/hotel-offer-detail/hotel-offer-detail.component';
+import { HotelOfferCardResultComponent } from './home/hotel-offer/components/hotel-offer-card-result/hotel-offer-card-result.component';
 import { UserProfileComponent } from './home/user-profile/user-profile.component';
 import { ChangeImageComponent } from './home/user-profile/components/change-image/change-image.component';
-import { HotelListResultComponent } from './home/hotel/components/hotel-list-result/hotel-list-result.component';
+import { HotelOfferListResultComponent } from './home/hotel-offer/components/hotel-offer-list-result/hotel-offer-list-result.component';
 
 @NgModule({
   declarations: [
@@ -47,14 +47,14 @@ import { HotelListResultComponent } from './home/hotel/components/hotel-list-res
     DropdownDirective,
     MapComponent,
     ImageGetterPipe,
-    HotelComponent,
-    HotelFilterComponent,
-    HotelDetailComponent,
-    HotelGridResultComponent,
-    HotelCardResultComponent,
+    HotelOfferComponent,
+    HotelOfferFilterComponent,
+    HotelOfferDetailComponent,
+    HotelOfferGridResultComponent,
+    HotelOfferCardResultComponent,
+    HotelOfferListResultComponent,
     UserProfileComponent,
-    ChangeImageComponent,
-    HotelListResultComponent
+    ChangeImageComponent
   ],
   imports: [
     BrowserModule,
@@ -83,7 +83,7 @@ import { HotelListResultComponent } from './home/hotel/components/hotel-list-res
     { provide: HTTP_INTERCEPTORS, useClass: MyHttpInterceptor, multi: true }
   ],
   entryComponents:[
-    HotelDetailComponent, ChangeImageComponent
+    HotelOfferDetailComponent, ChangeImageComponent
   ],
   bootstrap: [AppComponent]
 })

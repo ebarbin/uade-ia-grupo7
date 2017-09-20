@@ -34,7 +34,7 @@ export class AuthService implements OnInit {
       .toPromise().then((response:PortalResponse)=>{
           if (response.success){
             this.user = <User>response.data;
-            this.router.navigate(['home/hotel']);
+            this.router.navigate(['home/hotel-offer']);
           }
       }).catch((res:HttpErrorResponse) => {
           if (res.error){

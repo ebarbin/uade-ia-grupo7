@@ -1,4 +1,4 @@
-<app-hotel-filter (search)="onSearch($event)" (reset)="onReset($event)"></app-hotel-filter>
+<app-hotel-offer-filter (search)="onSearch($event)" (reset)="onReset($event)"></app-hotel-offer-filter>
 <div class="change-view-toggle" *ngIf="results.length > 0">
   <md-button-toggle-group>
     <md-button-toggle md-mini-fab color="primary" value="left" 
@@ -16,7 +16,7 @@
   </md-button-toggle-group>
 </div>
 <div *ngIf="results.length > 0">
-    <app-hotel-grid-result [hotels]="results" *ngIf="view == 'grid'"></app-hotel-grid-result>
-    <app-hotel-list-result [hotels]="results" *ngIf="view == 'list'"></app-hotel-list-result>
-    <app-hotel-card-result [hotels]="results" *ngIf="view == 'card'"></app-hotel-card-result>
+    <app-hotel-offer-grid-result [hotels]="results" *ngIf="view == 'grid'"></app-hotel-offer-grid-result>
+    <app-hotel-offer-list-result [hotels]="results" *ngIf="view == 'list'"></app-hotel-offer-list-result>
+    <app-hotel-offer-card-result [hotels]="results" *ngIf="view == 'card'"></app-hotel-offer-card-result>
 </div>
