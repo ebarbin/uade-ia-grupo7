@@ -1,31 +1,32 @@
 package ar.edu.uade.ia.ejbs.entities.bussiness;
 
-import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "package_offer")
 public class PackageOffer extends PersistentObject {
 
 	private static final long serialVersionUID = 6647993123948723384L;
 
-	private Timestamp from;
+	private Date start;
 	
-	private Timestamp to;
+	private Date end;
 	
 	private Float price;
 	
 	private String cancellationPolicy;
 	
 	@ManyToMany(fetch = FetchType.LAZY)
-	@JoinTable(name = "Package_Offer_Image", joinColumns = {
+	@JoinTable(name = "package_offer_image", joinColumns = {
 			@JoinColumn(name = "package_offer_id", nullable = false, updatable = false) }, inverseJoinColumns = {
 					@JoinColumn(name = "image_id", nullable = false, updatable = false) })
 	private List<Image> images;
@@ -33,18 +34,18 @@ public class PackageOffer extends PersistentObject {
 	private String description;
 
 	@ManyToMany(fetch = FetchType.LAZY)
-	@JoinTable(name = "Package_Offer_Service", joinColumns = {
+	@JoinTable(name = "package_offer_service", joinColumns = {
 			@JoinColumn(name = "package_offer_id", nullable = false, updatable = false) }, inverseJoinColumns = {
 					@JoinColumn(name = "service_id", nullable = false, updatable = false) })
 	private List<Service> services;
 
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne
 	private Destination destination;
 
 	private Integer availableQuota;
 
-	@ManyToMany(fetch = FetchType.LAZY)
-	@JoinTable(name = "Package_Offer_Payment_Method", joinColumns = {
+	@ManyToMany
+	@JoinTable(name = "package_offer_payment_method", joinColumns = {
 			@JoinColumn(name = "package_offer_id", nullable = false, updatable = false) }, inverseJoinColumns = {
 					@JoinColumn(name = "payment_method_id", nullable = false, updatable = false) })
 	private List<PaymentMethod> paymentMethods;
@@ -108,20 +109,20 @@ public class PackageOffer extends PersistentObject {
 		this.agency = agency;
 	}
 
-	public Timestamp getFrom() {
-		return from;
+	public Date getStart() {
+		return start;
 	}
 
-	public void setFrom(Timestamp from) {
-		this.from = from;
+	public void setStart(Date start) {
+		this.start = start;
 	}
 
-	public Timestamp getTo() {
-		return to;
+	public Date getEnd() {
+		return end;
 	}
 
-	public void setTo(Timestamp to) {
-		this.to = to;
+	public void setEnd(Date end) {
+		this.end = end;
 	}
 
 	public Float getPrice() {

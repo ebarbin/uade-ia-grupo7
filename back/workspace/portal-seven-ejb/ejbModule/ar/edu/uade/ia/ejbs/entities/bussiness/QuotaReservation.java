@@ -1,6 +1,7 @@
 package ar.edu.uade.ia.ejbs.entities.bussiness;
 
 import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -10,8 +11,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "quota_reservation")
 public class QuotaReservation extends PersistentObject {
 
 	private static final long serialVersionUID = 4555465608403169617L;
@@ -24,14 +27,14 @@ public class QuotaReservation extends PersistentObject {
 	private Float totalPrice;
 	
 	@ManyToMany(fetch = FetchType.LAZY)
-	@JoinTable(name = "Quota_Reservation_Quota", joinColumns = {
+	@JoinTable(name = "quota_reservation_quota", joinColumns = {
 			@JoinColumn(name = "quota_reservation_id", nullable = false, updatable = false) }, inverseJoinColumns = {
 					@JoinColumn(name = "quota_id", nullable = false, updatable = false) })
 	private List<Quota>quotas;
 	
-	private Timestamp reservationStart;
+	private Date start;
 	
-	private Timestamp reservationEnd;
+	private Date end;
 	
 	public List<Quota> getQuotas() {
 		return quotas;
@@ -65,19 +68,19 @@ public class QuotaReservation extends PersistentObject {
 		this.totalPrice = totalPrice;
 	}
 
-	public Timestamp getReservationStart() {
-		return reservationStart;
+	public Date getStart() {
+		return start;
 	}
 
-	public void setReservationStart(Timestamp reservationStart) {
-		this.reservationStart = reservationStart;
+	public void setStart(Date start) {
+		this.start = start;
 	}
 
-	public Timestamp getReservationEnd() {
-		return reservationEnd;
+	public Date getEnd() {
+		return end;
 	}
 
-	public void setReservationEnd(Timestamp reservationEnd) {
-		this.reservationEnd = reservationEnd;
+	public void setEnd(Date end) {
+		this.end = end;
 	}
 }

@@ -1,26 +1,28 @@
 package ar.edu.uade.ia.ejbs.entities.bussiness;
 
-import java.sql.Timestamp;
+import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "hotel_offer")
 public class HotelOffer extends PersistentObject {
 
 	private static final long serialVersionUID = -5955498653697555495L;
 
-	private Timestamp from;
-	
-	private Timestamp to;
-	
+	private Date start;
+
+	private Date end;
+
 	private Float price;
-	
+
 	private String cancellationPolicy;
-	
+
 	@ManyToOne
 	private Hotel hotel;
-		
+
 	@ManyToOne
 	private Room room;
 
@@ -40,20 +42,20 @@ public class HotelOffer extends PersistentObject {
 		this.room = room;
 	}
 
-	public Timestamp getFrom() {
-		return from;
+	public Date getStart() {
+		return start;
 	}
 
-	public void setFrom(Timestamp from) {
-		this.from = from;
+	public void setStart(Date start) {
+		this.start = start;
 	}
 
-	public Timestamp getTo() {
-		return to;
+	public Date getEnd() {
+		return end;
 	}
 
-	public void setTo(Timestamp to) {
-		this.to = to;
+	public void setEnd(Date end) {
+		this.end = end;
 	}
 
 	public Float getPrice() {

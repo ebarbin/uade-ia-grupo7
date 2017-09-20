@@ -26,19 +26,19 @@ public class Hotel extends PersistentObject {
 	private String descripcion;
 	
 	@ManyToMany(fetch = FetchType.LAZY)
-	@JoinTable(name = "Hotel_Image", joinColumns = {
+	@JoinTable(name = "hotel_image", joinColumns = {
 			@JoinColumn(name = "hotel_id", nullable = false, updatable = false) }, inverseJoinColumns = {
 					@JoinColumn(name = "image_id", nullable = false, updatable = false) })
 	private List<Image> images;
 	
 	@ManyToMany(fetch = FetchType.LAZY)
-	@JoinTable(name = "Hotel_Service", joinColumns = {
+	@JoinTable(name = "hotel_service", joinColumns = {
 			@JoinColumn(name = "hotel_id", nullable = false, updatable = false) }, inverseJoinColumns = {
 					@JoinColumn(name = "service_id", nullable = false, updatable = false) })
 	private List<Service>services;
 	
 	@ManyToMany(fetch = FetchType.LAZY)
-	@JoinTable(name = "Hotel_Room", joinColumns = {
+	@JoinTable(name = "hotel_room", joinColumns = {
 			@JoinColumn(name = "hotel_id", nullable = false, updatable = false) }, inverseJoinColumns = {
 					@JoinColumn(name = "room_id", nullable = false, updatable = false) })
 	private List<Room>rooms;
@@ -47,7 +47,7 @@ public class Hotel extends PersistentObject {
 	private Address address;
 	
 	@ManyToMany(fetch = FetchType.LAZY)
-	@JoinTable(name = "Hotel_Payment_Method", joinColumns = {
+	@JoinTable(name = "hotel_payment_method", joinColumns = {
 			@JoinColumn(name = "hotel_id", nullable = false, updatable = false) }, inverseJoinColumns = {
 					@JoinColumn(name = "payment_method_id", nullable = false, updatable = false) })
 	private List<PaymentMethod>paymentMethods;
