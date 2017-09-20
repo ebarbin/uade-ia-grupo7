@@ -2,7 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 
 import { MdDialog } from '@angular/material';
 
-import { Hotel } from '../../models/hotel.model';
+import { HotelOffer } from '../../models/hotel-offer.model';
 
 import { HotelOfferDetailComponent } from '../hotel-offer-detail/hotel-offer-detail.component';
 
@@ -13,18 +13,18 @@ import { HotelOfferDetailComponent } from '../hotel-offer-detail/hotel-offer-det
 })
 export class HotelOfferListResultComponent implements OnInit {
 
-  @Input()hotels:Hotel[];
+  @Input()hotelOffers:HotelOffer[];
 
   constructor(private dialog: MdDialog) { }
 
   ngOnInit() {
   }
 
-  onDetail(hotel){
+  onDetail(hotelOffer:HotelOffer){
     const dialogRef = this.dialog.open(HotelOfferDetailComponent, {
       height: '600px',
       width: '900px',
-      data: hotel
+      data: hotelOffer
     });
 
     dialogRef.afterClosed().subscribe(result => {

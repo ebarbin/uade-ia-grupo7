@@ -5,16 +5,16 @@ import { ToastrService } from 'ngx-toastr';
 
 import 'rxjs/Rx';
 
-import { SearchHotel } from '../models/search-hotel.model';
+import { HotelOfferRequest } from '../models/hotel-offer-request.model';
 import { Hotel } from '../models/hotel.model';
 
 @Injectable()
 export class HotelService {
 
-  public searcHotel:SearchHotel;
+  public hotelOfferRequest:HotelOfferRequest;
 
   reset(){
-      this.searcHotel = new SearchHotel();
+      this.hotelOfferRequest = new HotelOfferRequest();
   }
   constructor(
     private httpClient:HttpClient, 

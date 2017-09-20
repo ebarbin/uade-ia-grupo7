@@ -16,7 +16,7 @@
   </md-button-toggle-group>
 </div>
 <div *ngIf="results.length > 0">
-    <app-hotel-offer-grid-result [hotels]="results" *ngIf="view == 'grid'"></app-hotel-offer-grid-result>
-    <app-hotel-offer-list-result [hotels]="results" *ngIf="view == 'list'"></app-hotel-offer-list-result>
-    <app-hotel-offer-card-result [hotels]="results" *ngIf="view == 'card'"></app-hotel-offer-card-result>
+    <app-hotel-offer-grid-result [hotelOffers]="results" *ngIf="view == 'grid'"></app-hotel-offer-grid-result>
+    <app-hotel-offer-list-result [hotelOffers]="results" *ngIf="view == 'list'"></app-hotel-offer-list-result>
+    <app-hotel-offer-card-result [hotelOffers]="results" *ngIf="view == 'card'"></app-hotel-offer-card-result>
 </div>

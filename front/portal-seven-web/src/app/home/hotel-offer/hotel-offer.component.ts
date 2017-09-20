@@ -7,8 +7,8 @@ import 'rxjs/add/operator/map';
 
 import { HotelService } from './services/hotel.service';
 
-import { SearchHotel } from './models/search-hotel.model';
-import { Hotel } from './models/hotel.model';
+import { HotelOfferRequest } from './models/hotel-offer-request.model';
+import { HotelOffer } from './models/hotel-offer.model';
 
 @Component({
   selector: 'app-hotel-offer',
@@ -32,19 +32,19 @@ export class HotelOfferComponent implements OnInit {
     this.results = [];
   }
 
-  results:Hotel[] = [];
-  onSearch(searchHotel: SearchHotel){
+  results:HotelOffer[] = [];
+  onSearch(hotelOfferRequest: HotelOfferRequest){
     //BUSCAR LOS HOTELES/OFERTAS??
-    console.log(searchHotel);
+    console.log(hotelOfferRequest);
 
     this.results = [
-      new Hotel(1, 'Hotel 1', null),
-      new Hotel(2, 'Hotel 2', null),
-      new Hotel(3, 'Hotel 3', null),
-      new Hotel(4, 'Hotel 4', null),
-      new Hotel(5, 'Hotel 5', null),
-      new Hotel(6, 'Hotel 6', null),
-      new Hotel(7, 'Hotel 7', null)
+      new HotelOffer(1, 'Hotel 1', null),
+      new HotelOffer(2, 'Hotel 2', null),
+      new HotelOffer(3, 'Hotel 3', null),
+      new HotelOffer(4, 'Hotel 4', null),
+      new HotelOffer(5, 'Hotel 5', null),
+      new HotelOffer(6, 'Hotel 6', null),
+      new HotelOffer(7, 'Hotel 7', null)
     ];
   }
   

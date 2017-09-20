@@ -1,4 +1,4 @@
-export class SearchHotel {
+export class HotelOfferRequest {
     
     public toDate: Date = null;
     public fromDate:Date = null;

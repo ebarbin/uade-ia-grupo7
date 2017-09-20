@@ -2,8 +2,8 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Observable } from 'rxjs/Observable';
 
-import { SearchHotel } from '../../models/search-hotel.model';
-import { Hotel } from '../../models/hotel.model';
+import { HotelOfferRequest } from '../../models/hotel-offer-request.model';
+import { HotelOffer } from '../../models/hotel-offer.model';
 
 @Component({
   selector: 'app-hotel-offer-filter',
@@ -12,7 +12,7 @@ import { Hotel } from '../../models/hotel.model';
 })
 export class HotelOfferFilterComponent implements OnInit {
 
-  @Output('search') search: EventEmitter<SearchHotel> = new EventEmitter();
+  @Output('search') search: EventEmitter<HotelOfferRequest> = new EventEmitter();
   @Output('reset') reset: EventEmitter<any> = new EventEmitter();
 
   fromDate:Date = new Date();
