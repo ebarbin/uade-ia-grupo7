@@ -1,8 +1,7 @@
 package ar.edu.uade.ia.ejbs.entities.bussiness;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class User extends PersistentObject {
@@ -15,7 +14,7 @@ public class User extends PersistentObject {
 
 	private String sureName;
 
-	@OneToOne(cascade = CascadeType.ALL)
+	@ManyToOne
 	private Image image;
 
 	private String email;

@@ -1,6 +1,7 @@
 package ar.edu.uade.ia.ejbs.entities.bussiness;
 
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Destination extends PersistentObject {
@@ -9,6 +10,7 @@ public class Destination extends PersistentObject {
 
 	private String name;
 	
+	@ManyToOne
 	private Address address;
 
 	public String getName() {

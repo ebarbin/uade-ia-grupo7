@@ -1,7 +1,7 @@
 package ar.edu.uade.ia.ejbs.entities.bussiness;
 
 import javax.persistence.Entity;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Agency extends PersistentObject {
@@ -10,7 +10,7 @@ public class Agency extends PersistentObject {
 
 	private String name;
 	
-	@OneToOne
+	@ManyToOne
 	private Address address;
 	
 	private String email;
