@@ -9,6 +9,7 @@ import { HotelOfferComponent } from './home/hotel-offer/hotel-offer.component';
 import { PackageComponent } from './home/package/package.component';
 import { UserProfileComponent } from './home/user-profile/user-profile.component';
 import { ChangeImageComponent } from './home/user-profile/components/change-image/change-image.component';
+import { ConfigurationComponent } from './home/configuration/configuration.component';
 
 const appRoutes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full'},
@@ -16,7 +17,8 @@ const appRoutes: Routes = [
     canActivate: [AuthGuard], children:[
       {path: 'hotel-offer', component: HotelOfferComponent, canActivate: [AuthGuard]},
       {path: 'package', component: PackageComponent, canActivate: [AuthGuard]},
-      {path: 'user-profile', component: UserProfileComponent, canActivate: [AuthGuard]}
+      {path: 'user-profile', component: UserProfileComponent, canActivate: [AuthGuard]},
+      {path: 'configuration', component: ConfigurationComponent, canActivate: [AuthGuard]}
     ]},
   { path: 'signin', component: SigninComponent }
 ];

@@ -40,6 +40,7 @@ import { HotelOfferCardResultComponent } from './home/hotel-offer/components/hot
 import { UserProfileComponent } from './home/user-profile/user-profile.component';
 import { ChangeImageComponent } from './home/user-profile/components/change-image/change-image.component';
 import { HotelOfferListResultComponent } from './home/hotel-offer/components/hotel-offer-list-result/hotel-offer-list-result.component';
+import { ConfigurationComponent } from './home/configuration/configuration.component';
 
 @NgModule({
   declarations: [
@@ -58,7 +59,8 @@ import { HotelOfferListResultComponent } from './home/hotel-offer/components/hot
     HotelOfferCardResultComponent,
     HotelOfferListResultComponent,
     UserProfileComponent,
-    ChangeImageComponent
+    ChangeImageComponent,
+    ConfigurationComponent
   ],
   imports: [
     BrowserModule,
