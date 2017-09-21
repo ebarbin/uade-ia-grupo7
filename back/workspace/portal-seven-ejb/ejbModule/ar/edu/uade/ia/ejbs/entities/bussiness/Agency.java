@@ -2,8 +2,10 @@ package ar.edu.uade.ia.ejbs.entities.bussiness;
 
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "agency")
 public class Agency extends PersistentObject {
 
 	private static final long serialVersionUID = 954537632748254118L;

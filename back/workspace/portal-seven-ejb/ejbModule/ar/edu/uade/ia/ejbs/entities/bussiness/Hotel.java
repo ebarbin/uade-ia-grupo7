@@ -8,8 +8,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "hotel")
 public class Hotel extends PersistentObject {
 
 	private static final long serialVersionUID = 564408788585026377L;

@@ -3,8 +3,10 @@ package ar.edu.uade.ia.ejbs.entities.bussiness;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Lob;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "image")
 public class Image extends PersistentObject {
 	
 	private static final long serialVersionUID = -2382376870718857038L;
