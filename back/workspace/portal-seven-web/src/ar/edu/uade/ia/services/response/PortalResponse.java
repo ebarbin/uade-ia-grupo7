@@ -5,7 +5,7 @@ public class PortalResponse {
 	private boolean success = true;
 
 	private Object data;
-
+	
 	private String errorMessage;
 
 	public PortalResponse() {
@@ -43,5 +43,4 @@ public class PortalResponse {
 	public void setErrorMessage(String errorMessage) {
 		this.errorMessage = errorMessage;
 	}
-
 }

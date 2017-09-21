@@ -17,8 +17,13 @@ import { UserService } from './home/user-profile/services/user.service';
 import { AuthGuard } from './auth/services/auth-guard.service';
 import { AuthService } from './auth/services/auth.service';
 import { HotelService } from './home/hotel-offer/services/hotel.service';
+import { HotelAutocompleteService } from './home/hotel-offer/components/hotel-offer-filter/services/hotel-autocomplete.service';
 
 import { MyHttpInterceptor } from './shared/services/my-http-interceptor';
+
+import { DropdownDirective } from './shared/directives/dropdown.directive';
+
+import { ImageGetterPipe } from './shared/pipes/image-getter.pipe';
 
 import { AppComponent } from './app.component';
 import { SigninComponent } from './auth/components/signin/signin.component';
@@ -26,9 +31,8 @@ import { HomeComponent } from './home/home.component';
 import { HeaderComponent } from './home/header/header.component';
 import { HotelOfferComponent } from './home/hotel-offer/hotel-offer.component';
 import { PackageComponent } from './home/package/package.component';
-import { DropdownDirective } from './shared/directives/dropdown.directive';
 import { MapComponent } from './shared/components/map/map.component';
-import { ImageGetterPipe } from './shared/pipes/image-getter.pipe';
+
 import { HotelOfferFilterComponent } from './home/hotel-offer/components/hotel-offer-filter/hotel-offer-filter.component';
 import { HotelOfferGridResultComponent } from './home/hotel-offer/components/hotel-offer-grid-result/hotel-offer-grid-result.component';
 import { HotelOfferDetailComponent } from './home/hotel-offer/components/hotel-offer-detail/hotel-offer-detail.component';
@@ -78,6 +82,7 @@ import { HotelOfferListResultComponent } from './home/hotel-offer/components/hot
     AuthService,
     UserService,
     ImageService,
+    HotelAutocompleteService,
     HotelService,
     {provide: LOCALE_ID, useValue: 'es-AR'},
     { provide: HTTP_INTERCEPTORS, useClass: MyHttpInterceptor, multi: true }

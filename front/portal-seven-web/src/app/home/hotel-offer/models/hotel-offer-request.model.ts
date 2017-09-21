@@ -1,10 +1,11 @@
+import { HotelAutocomplete } from '../components/hotel-offer-filter/models/hotel-autocomplete.model';
+
 export class HotelOfferRequest {
     
-    public toDate: Date = null;
-    public fromDate:Date = null;
-    public hotel: string = null;
-    public peoplePerRoom: number= null;
-    public roomQuantity: number = null;
-    
-    constructor(){}
+    constructor(
+        public toDate: Date,
+        public fromDate:Date,
+        public hotel: HotelAutocomplete,
+        public peoplePerRoom: number,
+        public roomQuantity: number){}
 }

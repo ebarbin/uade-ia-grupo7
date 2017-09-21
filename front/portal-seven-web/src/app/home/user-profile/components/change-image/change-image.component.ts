@@ -33,7 +33,7 @@ export class ChangeImageComponent implements OnInit {
     let file = files[0];
     if (file) {
       formData.append('uploadFile', file, file.name);
-      this.imageService.uploadImage(this.authService.user, formData)
+      this.imageService.uploadImage(this.authService.getUser(), formData)
         .then((response:PortalResponse) => {
           if (response.success) {
             this.userService.userChanged.next(<User>response.data);
@@ -44,9 +44,13 @@ export class ChangeImageComponent implements OnInit {
           }
         }).catch((res:HttpErrorResponse) => {
           if (res.error){
-              this.toastr.error(res.error.errorMessage);
+            if (typeof res.error != 'object') {
+              this.toastr.error(JSON.parse(res.error).errorMessage)
+            } else {
+              this.toastr.error(res.error.errorMessage)
+            }            
           } else {
-              this.toastr.error(res.message);
+            this.toastr.error(res.message);
           }
         });
     } else {
