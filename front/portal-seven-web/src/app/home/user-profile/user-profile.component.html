@@ -1,39 +1,31 @@
-<div class="col-md-8 col-md-offset-2">
-  <form (ngSubmit)="onSubmit(form)" #form="ngForm">
-    <input type="hidden" name="id" [(ngModel)]="user.id"/>
-    <md-card>
-      <md-card-header>
-        <md-card-title>PERFIL DE USUARIO</md-card-title>
-      </md-card-header>
-      <md-card-content>
-        <div class="row">
-          <div class="col-md-12">
-              <md-form-field>
-                  <input mdInput placeholder="Nombre de Usuario" readonly name="userName" 
-                  [(ngModel)]="user.userName" required>
-              </md-form-field>
-          </div>
-          <div class="col-md-12">
-              <md-form-field>
-                  <input mdInput type="email" placeholder="Email" name="email" [(ngModel)]="user.email" email required>
-              </md-form-field>
-              <md-form-field>
-                  <input mdInput placeholder="Nombre" name="firstName" [(ngModel)]="user.firstName" required>
-              </md-form-field>
-              <md-form-field>
-                  <input mdInput placeholder="Apellido" name="sureName" [(ngModel)]="user.sureName" required>
-              </md-form-field>
-          </div>
-        </div>
-      </md-card-content>
-      <md-card-actions align="end">
-        <button md-raised-button type="submit" color="success" [disabled]="!form.valid">
-          Actualizar</button>
-        <button md-raised-button type="button" color="primary" (click)="onChangeProfileImage()">
-          Cambiar Imagen de Perfil</button>
-      </md-card-actions>
-    </md-card>
-  </form>
-</div>
-
-<router-outlet></router-outlet>
+<form (ngSubmit)="onSubmit(form)" #form="ngForm">
+  <input type="hidden" name="id" [(ngModel)]="user.id"/>
+  <md-card>
+    <md-card-header>
+      <md-card-title>PERFIL DE USUARIO</md-card-title>
+    </md-card-header>
+    <md-card-content>
+      <div class="row">
+        <md-form-field class="col-lg-6 col-md-6">
+            <input mdInput placeholder="Nombre de Usuario" readonly name="userName" 
+            [(ngModel)]="user.userName" required>
+        </md-form-field>
+        <md-form-field class="col-lg-6 col-md-6">
+            <input mdInput type="email" placeholder="Email" name="email" [(ngModel)]="user.email" email required>
+        </md-form-field>
+        <md-form-field class="col-lg-6 col-md-6">
+            <input mdInput placeholder="Nombre" name="firstName" [(ngModel)]="user.firstName" required>
+        </md-form-field>
+        <md-form-field class="col-lg-6 col-md-6">
+            <input mdInput placeholder="Apellido" name="sureName" [(ngModel)]="user.sureName" required>
+        </md-form-field>
+      </div>
+    </md-card-content>
+    <md-card-actions align="end">
+      <button md-raised-button type="submit" color="success" [disabled]="!form.valid">
+        Actualizar</button>
+      <button md-raised-button type="button" color="primary" (click)="onChangeProfileImage()">
+        Cambiar Imagen de Perfil</button>
+    </md-card-actions>
+  </md-card>
+</form>
