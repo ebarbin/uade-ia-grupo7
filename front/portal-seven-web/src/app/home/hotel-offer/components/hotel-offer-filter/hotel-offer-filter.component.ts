@@ -1,14 +1,11 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { HttpErrorResponse } from '@angular/common/http';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
 import { Observable } from 'rxjs/Observable';
 
-import { HttpErrorResponse } from '@angular/common/http';
-
-import { ToastrService } from 'ngx-toastr';
-import { HotelAutocompleteService } from './services/hotel-autocomplete.service';
-
-import { HotelAutocomplete } from './models/hotel-autocomplete.model';
-
+import { AutocompleteResource } from '../../../../shared/models/autocomplete-resource.model';
+import { AutocompleteService } from '../../../../shared/services/hotel-autocomplete.service';
 import { HotelOfferRequest } from '../../models/hotel-offer-request.model';
 import { HotelOffer } from '../../models/hotel-offer.model';
 
@@ -26,17 +23,17 @@ export class HotelOfferFilterComponent implements OnInit {
   toDate:Date = new Date();
   
   constructor(
-    private autocompleteService:HotelAutocompleteService, 
+    private autocompleteService:AutocompleteService, 
     private toastr: ToastrService) { }
 
   quantityOptions:any[] = [];
 
-  hotelResults:HotelAutocomplete[];
+  hotelResults:AutocompleteResource[];
   
     filterHotels(val: string) {
       if (!val) return;
-      this.autocompleteService.query(val).then((data:HotelAutocomplete[]) => {
-        this.hotelResults = data;
+      this.autocompleteService.queryHotels(val).then((resources:AutocompleteResource[]) => {
+        this.hotelResults = resources;
       }).catch((res:HttpErrorResponse) => {
         if (res.error){
           if (typeof res.error != 'object') {
@@ -50,8 +47,8 @@ export class HotelOfferFilterComponent implements OnInit {
       });
     }
 
-    autocompleteDisplaySelected(hotelAutocomplete: HotelAutocomplete): string {
-      return hotelAutocomplete ? hotelAutocomplete.name : null;
+    autocompleteDisplaySelected(resource: AutocompleteResource): string {
+      return resource ? resource.name : null;
     }
 
     ngOnInit() {

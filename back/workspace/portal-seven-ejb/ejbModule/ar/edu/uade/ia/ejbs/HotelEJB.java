@@ -15,7 +15,7 @@ import ar.edu.uade.ia.ejbs.entities.bussiness.Hotel;
  */
 @Stateless
 @LocalBean
-public class HotelAutocompleteEJB {
+public class HotelEJB {
 
 	@PersistenceContext(unitName = "mu")
 	protected EntityManager em;
@@ -23,9 +23,9 @@ public class HotelAutocompleteEJB {
     /**
      * Default constructor. 
      */
-    public HotelAutocompleteEJB() {}
+    public HotelEJB() {}
 
-	public List<Hotel> query(String value, Integer limit) {
+	public List<Hotel> autocompleteQuery(String value, Integer limit) {
 		Query query = this.em.createQuery("FROM Hotel WHERE lower(name) LIKE lower(:value)");
 		query.setParameter("value", '%'+value+'%');
 		query.setMaxResults(limit);

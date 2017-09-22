@@ -7,7 +7,7 @@ import javax.ejb.Remote;
 import ar.edu.uade.ia.commons.dtos.HotelAutocompleteDTO;
 
 @Remote
-public interface HotelAutocompleteManagerRemote {
+public interface AutocompleteManagerRemote {
 	
-	List<HotelAutocompleteDTO> query(String value, Integer limit) throws Exception;
+	List<HotelAutocompleteDTO> queryHotels(String value, Integer limit) throws Exception;
 }

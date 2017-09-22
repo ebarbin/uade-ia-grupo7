@@ -7,7 +7,7 @@ import javax.ejb.Local;
 import ar.edu.uade.ia.commons.dtos.HotelAutocompleteDTO;
 
 @Local
-public interface HotelAutocompleteManagerLocal {
+public interface AutocompleteManagerLocal {
 
-	List<HotelAutocompleteDTO> query(String value, Integer limit) throws Exception;
+	List<HotelAutocompleteDTO> queryHotels(String value, Integer limit) throws Exception;
 }

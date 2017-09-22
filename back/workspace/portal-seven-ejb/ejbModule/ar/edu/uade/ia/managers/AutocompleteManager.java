@@ -8,32 +8,30 @@ import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 
 import ar.edu.uade.ia.commons.dtos.HotelAutocompleteDTO;
-import ar.edu.uade.ia.ejbs.HotelAutocompleteEJB;
+import ar.edu.uade.ia.ejbs.HotelEJB;
 import ar.edu.uade.ia.ejbs.entities.bussiness.Hotel;
-import ar.edu.uade.ia.managers.interfaces.HotelAutocompleteManagerLocal;
-import ar.edu.uade.ia.managers.interfaces.HotelAutocompleteManagerRemote;
+import ar.edu.uade.ia.managers.interfaces.AutocompleteManagerLocal;
+import ar.edu.uade.ia.managers.interfaces.AutocompleteManagerRemote;
 
 /**
  * Session Bean implementation class HotelAutocompleteManager
  */
 @Stateless
 @LocalBean
-public class HotelAutocompleteManager implements HotelAutocompleteManagerRemote, HotelAutocompleteManagerLocal {
+public class AutocompleteManager implements AutocompleteManagerRemote, AutocompleteManagerLocal {
 
 	@EJB
-	private HotelAutocompleteEJB hotelAutocompleteEJB;
+	private HotelEJB hotelEJB;
 	
     /**
      * Default constructor. 
      */
-    public HotelAutocompleteManager() {
-        // TODO Auto-generated constructor stub
-    }
+    public AutocompleteManager() {}
 
 	@Override
-	public List<HotelAutocompleteDTO> query(String value, Integer limit) throws Exception {
+	public List<HotelAutocompleteDTO> queryHotels(String value, Integer limit) throws Exception {
 		List<HotelAutocompleteDTO> results = new ArrayList<HotelAutocompleteDTO>();
-		List<Hotel> hotels = this.hotelAutocompleteEJB.query(value, limit);
+		List<Hotel> hotels = this.hotelEJB.autocompleteQuery(value, limit);
 		for (Hotel hotel : hotels) {
 			results.add(new HotelAutocompleteDTO(hotel.getId(), hotel.getName()));
 		}

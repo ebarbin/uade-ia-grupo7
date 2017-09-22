@@ -9,22 +9,22 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-import ar.edu.uade.ia.managers.interfaces.HotelAutocompleteManagerRemote;
+import ar.edu.uade.ia.managers.interfaces.AutocompleteManagerRemote;
 import ar.edu.uade.ia.services.response.PortalResponse;
 
-@Path("/hotel-autocomplete")
+@Path("/autocomplete")
 @Stateless
-public class HotelAutocompleteService {
+public class AutocompleteService {
 
 	@EJB
-	private HotelAutocompleteManagerRemote autocompleteManager;
+	private AutocompleteManagerRemote autocompleteManager;
 	
 	@GET
-	@Path("/{value}/{limit}")
+	@Path("/hotel/{value}/{limit}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response get(@PathParam("value") String value, @PathParam("limit") Integer limit) {
 		try {
-		    return Response.ok(new PortalResponse(this.autocompleteManager.query(value, limit))).build();
+		    return Response.ok(new PortalResponse(this.autocompleteManager.queryHotels(value, limit))).build();
 		} catch (Exception e) {
 			return Response.status(Response.Status.BAD_REQUEST).entity(new PortalResponse(e.getMessage())).build();
 		}
