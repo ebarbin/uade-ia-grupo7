@@ -24,4 +24,17 @@ export class AutocompleteService {
         }
       }).toPromise();
   }
+
+  queryDestinations(value:String):Promise<AutocompleteResource[]>{
+    return this.httpClient.get('portal-seven-web/api/rest/autocomplete/destination/' + value + '/5')
+      .map((response:PortalResponse)=>{
+        return response;
+      }).map((response:PortalResponse)=> {
+        if (response.success){
+          return <AutocompleteResource[]>response.data;
+        } else {
+          return [];
+        }
+      }).toPromise();
+  }
 }

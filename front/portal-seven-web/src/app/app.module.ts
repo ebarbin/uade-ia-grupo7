@@ -34,7 +34,22 @@ import {
 } from './home/hotel-offer/components/hotel-offer-list-result/hotel-offer-list-result.component';
 import { HotelOfferComponent } from './home/hotel-offer/hotel-offer.component';
 import { HotelService } from './home/hotel-offer/services/hotel.service';
-import { PackageComponent } from './home/package/package.component';
+import {
+    PackageOfferCardResultComponent
+} from './home/package-offer/components/package-offer-card-result/package-offer-card-result.component';
+import {
+    PackageOfferDetailComponent
+} from './home/package-offer/components/package-offer-detail/package-offer-detail.component';
+import {
+    PackageOfferFilterComponent
+} from './home/package-offer/components/package-offer-filter/package-offer-filter.component';
+import {
+    PackageOfferGridResultComponent
+} from './home/package-offer/components/package-offer-grid-result/package-offer-grid-result.component';
+import {
+    PackageOfferListResultComponent
+} from './home/package-offer/components/package-offer-list-result/package-offer-list-result.component';
+import { PackageOfferComponent } from './home/package-offer/package-offer.component';
 import {
     ChangeImageComponent
 } from './home/user-profile/components/change-image/change-image.component';
@@ -54,7 +69,7 @@ import { MyHttpInterceptor } from './shared/services/my-http-interceptor';
     SigninComponent,
     HomeComponent,
     HeaderComponent,
-    PackageComponent,
+    PackageOfferComponent,
     DropdownDirective,
     MapComponent,
     ImageGetterPipe,
@@ -66,7 +81,12 @@ import { MyHttpInterceptor } from './shared/services/my-http-interceptor';
     HotelOfferListResultComponent,
     UserProfileComponent,
     ChangeImageComponent,
-    ConfigurationComponent
+    ConfigurationComponent,
+    PackageOfferFilterComponent,
+    PackageOfferCardResultComponent,
+    PackageOfferGridResultComponent,
+    PackageOfferListResultComponent,
+    PackageOfferDetailComponent
   ],
   imports: [
     BrowserModule,
@@ -96,7 +116,7 @@ import { MyHttpInterceptor } from './shared/services/my-http-interceptor';
     { provide: HTTP_INTERCEPTORS, useClass: MyHttpInterceptor, multi: true }
   ],
   entryComponents:[
-    HotelOfferDetailComponent, ChangeImageComponent
+    HotelOfferDetailComponent, PackageOfferDetailComponent, ChangeImageComponent
   ],
   bootstrap: [AppComponent]
 })

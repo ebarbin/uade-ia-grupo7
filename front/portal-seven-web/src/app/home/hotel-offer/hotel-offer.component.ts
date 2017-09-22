@@ -34,7 +34,8 @@ export class HotelOfferComponent implements OnInit {
 
   results:HotelOffer[] = [];
   onSearch(hotelOfferRequest: HotelOfferRequest){
-    //BUSCAR LOS HOTELES/OFERTAS??
+
+    //TODO Buscar la oferta hotelera segun packageOfferRequest
     console.log(hotelOfferRequest);
 
     this.results = [

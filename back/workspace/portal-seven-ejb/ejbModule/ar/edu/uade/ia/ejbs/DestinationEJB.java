@@ -8,14 +8,14 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
-import ar.edu.uade.ia.ejbs.entities.bussiness.Hotel;
+import ar.edu.uade.ia.ejbs.entities.bussiness.Destination;
 
 /**
- * Session Bean implementation class HotelAutocompleteEJB
+ * Session Bean implementation class Destination
  */
 @Stateless
 @LocalBean
-public class HotelEJB {
+public class DestinationEJB {
 
 	@PersistenceContext(unitName = "mu")
 	protected EntityManager em;
@@ -23,14 +23,14 @@ public class HotelEJB {
     /**
      * Default constructor. 
      */
-    public HotelEJB() {}
-
+    public DestinationEJB() {}
+    
 	@SuppressWarnings("unchecked")
-	public List<Hotel> autocompleteQuery(String value, Integer limit) {
-		Query query = this.em.createQuery("FROM Hotel WHERE lower(name) LIKE lower(:value)");
+	public List<Destination> autocompleteQuery(String value, Integer limit) {
+		Query query = this.em.createQuery("FROM Destination WHERE lower(name) LIKE lower(:value)");
 		query.setParameter("value", '%'+value+'%');
 		query.setMaxResults(limit);
-		return (List<Hotel>) query.getResultList();
+		return (List<Destination>) query.getResultList();
 	}
 
 }

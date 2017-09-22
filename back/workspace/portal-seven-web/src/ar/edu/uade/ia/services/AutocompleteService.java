@@ -22,9 +22,20 @@ public class AutocompleteService {
 	@GET
 	@Path("/hotel/{value}/{limit}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response get(@PathParam("value") String value, @PathParam("limit") Integer limit) {
+	public Response queryHotels(@PathParam("value") String value, @PathParam("limit") Integer limit) {
 		try {
 		    return Response.ok(new PortalResponse(this.autocompleteManager.queryHotels(value, limit))).build();
+		} catch (Exception e) {
+			return Response.status(Response.Status.BAD_REQUEST).entity(new PortalResponse(e.getMessage())).build();
+		}
+	}
+	
+	@GET
+	@Path("/destination/{value}/{limit}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response queryDestinations(@PathParam("value") String value, @PathParam("limit") Integer limit) {
+		try {
+		    return Response.ok(new PortalResponse(this.autocompleteManager.queryDestinations(value, limit))).build();
 		} catch (Exception e) {
 			return Response.status(Response.Status.BAD_REQUEST).entity(new PortalResponse(e.getMessage())).build();
 		}

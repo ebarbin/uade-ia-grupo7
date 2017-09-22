@@ -2,7 +2,7 @@ package ar.edu.uade.ia.commons.dtos;
 
 import java.io.Serializable;
 
-public class HotelAutocompleteDTO implements Serializable {
+public class AutocompleteResourceDTO implements Serializable {
 
 	private static final long serialVersionUID = 3176115022360295095L;
 
@@ -10,7 +10,7 @@ public class HotelAutocompleteDTO implements Serializable {
 	
 	private String name;
 
-	public HotelAutocompleteDTO(Integer id, String name) {
+	public AutocompleteResourceDTO(Integer id, String name) {
 		this.id = id;
 		this.name = name;
 	}
