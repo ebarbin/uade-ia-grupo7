@@ -8,6 +8,7 @@ import { AutocompleteResource } from '../../../../shared/models/autocomplete-res
 import { AutocompleteService } from '../../../../shared/services/hotel-autocomplete.service';
 import { HotelOfferRequest } from '../../models/hotel-offer-request.model';
 import { HotelOffer } from '../../models/hotel-offer.model';
+import { ErrorHandlerService } from '../../../../shared/services/error-handler.service';
 
 @Component({
   selector: 'app-hotel-offer-filter',
@@ -19,31 +20,34 @@ export class HotelOfferFilterComponent implements OnInit {
   @Output('search') search: EventEmitter<HotelOfferRequest> = new EventEmitter();
   @Output('reset') reset: EventEmitter<any> = new EventEmitter();
 
-  fromDate:Date = new Date();
-  toDate:Date = new Date();
+  quantityOptions:any[] = [];
+  hotelResults:AutocompleteResource[];
+  fromDate:Date = null
+  toDate:Date = null;
   
   constructor(
+    private errorHandlerService:ErrorHandlerService,
     private autocompleteService:AutocompleteService, 
     private toastr: ToastrService) { }
 
-  quantityOptions:any[] = [];
+    formValid(form:NgForm){
+      if (!form.valid) return false;
 
-  hotelResults:AutocompleteResource[];
-  
+      if (form.value.fromDate && form.value.toDate){
+        if (form.value.fromDate > form.value.toDate){
+          return false;
+        }
+      }
+
+      return true;
+    }
+
     filterHotels(val: string) {
       if (!val) return;
       this.autocompleteService.queryHotels(val).then((resources:AutocompleteResource[]) => {
         this.hotelResults = resources;
       }).catch((res:HttpErrorResponse) => {
-        if (res.error){
-          if (typeof res.error != 'object') {
-            this.toastr.error(JSON.parse(res.error).errorMessage)
-          } else {
-            this.toastr.error(res.error.errorMessage)
-          }            
-        } else {
-          this.toastr.error(res.message);
-        }
+        this.errorHandlerService.set(res);
       });
     }
 
@@ -62,7 +66,7 @@ export class HotelOfferFilterComponent implements OnInit {
     }
 
     onSubmit(form:NgForm){
-      console.log(form.value);
+      form.value.hotel = form.value.hotel && typeof form.value.hotel == 'object' ? form.value.hotel : null;
       this.search.next(form.value);
     }
 }

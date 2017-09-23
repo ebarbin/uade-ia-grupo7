@@ -16,7 +16,7 @@ const appRoutes: Routes = [
   { path: 'home', component: HomeComponent, 
     canActivate: [AuthGuard], children:[
       {path: 'hotel-offer', component: HotelOfferComponent, canActivate: [AuthGuard]},
-      {path: 'package', component: PackageOfferComponent, canActivate: [AuthGuard]},
+      {path: 'package-offer', component: PackageOfferComponent, canActivate: [AuthGuard]},
       {path: 'user-profile', component: UserProfileComponent, canActivate: [AuthGuard]},
       {path: 'configuration', component: ConfigurationComponent, canActivate: [AuthGuard]}
     ]},

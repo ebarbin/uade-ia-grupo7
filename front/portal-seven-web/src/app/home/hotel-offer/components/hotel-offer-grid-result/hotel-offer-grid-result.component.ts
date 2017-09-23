@@ -8,7 +8,6 @@ import { HotelOfferDetailComponent } from '../hotel-offer-detail/hotel-offer-det
 
 import { HotelOffer } from '../../models/hotel-offer.model';
 import { CustomDatasource } from '../../../../shared/models/custom-datasouce';
-import { HotelService } from '../../services/hotel.service';
 
 @Component({
   selector: 'app-hotel-offer-grid-result',
@@ -19,12 +18,9 @@ export class HotelOfferGridResultComponent implements OnInit, OnDestroy {
 
   dataSource: CustomDatasource;
 
-  //resultsSubs: Subscription;
-
   displayedColumns = ['id', 'name', 'image', 'other', 'action'];
 
   constructor(
-    private hotelService: HotelService, 
     private dialog: MdDialog) { }
 
   onDetail(hotel:HotelOffer){

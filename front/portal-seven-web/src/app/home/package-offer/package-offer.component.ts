@@ -1,6 +1,5 @@
 import { PackageOffer } from './models/package-offer.model';
 import { PackageOfferRequest } from './models/package-offer-request.model';
-import { HotelService } from './../hotel-offer/services/hotel.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -10,8 +9,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PackageOfferComponent implements OnInit {
 
-  constructor(
-    private hotelService:HotelService) { }
+  constructor() { }
 
   ngOnInit() {}
 

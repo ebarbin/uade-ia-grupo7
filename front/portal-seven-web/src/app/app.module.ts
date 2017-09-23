@@ -33,7 +33,6 @@ import {
     HotelOfferListResultComponent
 } from './home/hotel-offer/components/hotel-offer-list-result/hotel-offer-list-result.component';
 import { HotelOfferComponent } from './home/hotel-offer/hotel-offer.component';
-import { HotelService } from './home/hotel-offer/services/hotel.service';
 import {
     PackageOfferCardResultComponent
 } from './home/package-offer/components/package-offer-card-result/package-offer-card-result.component';
@@ -62,6 +61,8 @@ import { DropdownDirective } from './shared/directives/dropdown.directive';
 import { ImageGetterPipe } from './shared/pipes/image-getter.pipe';
 import { AutocompleteService } from './shared/services/hotel-autocomplete.service';
 import { MyHttpInterceptor } from './shared/services/my-http-interceptor';
+import { HotelOfferService } from './home/hotel-offer/services/hotel-offer.service';
+import { ErrorHandlerService } from './shared/services/error-handler.service';
 
 @NgModule({
   declarations: [
@@ -69,7 +70,6 @@ import { MyHttpInterceptor } from './shared/services/my-http-interceptor';
     SigninComponent,
     HomeComponent,
     HeaderComponent,
-    PackageOfferComponent,
     DropdownDirective,
     MapComponent,
     ImageGetterPipe,
@@ -82,6 +82,7 @@ import { MyHttpInterceptor } from './shared/services/my-http-interceptor';
     UserProfileComponent,
     ChangeImageComponent,
     ConfigurationComponent,
+    PackageOfferComponent,
     PackageOfferFilterComponent,
     PackageOfferCardResultComponent,
     PackageOfferGridResultComponent,
@@ -111,7 +112,8 @@ import { MyHttpInterceptor } from './shared/services/my-http-interceptor';
     UserService,
     ImageService,
     AutocompleteService,
-    HotelService,
+    HotelOfferService,
+    ErrorHandlerService,
     {provide: LOCALE_ID, useValue: 'es-AR'},
     { provide: HTTP_INTERCEPTORS, useClass: MyHttpInterceptor, multi: true }
   ],

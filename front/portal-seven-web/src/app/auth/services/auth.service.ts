@@ -8,6 +8,7 @@ import 'rxjs/Rx';
 import { User } from '../../home/user-profile/models/user.model';
 import { PortalResponse } from '../../shared/models/portal-response.model';
 import { UserService } from '../../home/user-profile/services/user.service';
+import { ErrorHandlerService } from '../../shared/services/error-handler.service';
 
 @Injectable()
 export class AuthService implements OnInit {
@@ -15,6 +16,7 @@ export class AuthService implements OnInit {
   private user: User;
   
   constructor(
+    private errorHandlerService:ErrorHandlerService,
     private userService:UserService,
     private httpClient:HttpClient, 
     private router: Router,
@@ -45,15 +47,7 @@ export class AuthService implements OnInit {
             this.router.navigate(['home']);
           }
       }).catch((res:HttpErrorResponse) => {
-          if (res.error){
-            if (typeof res.error != 'object') {
-              this.toastr.error(JSON.parse(res.error).errorMessage)
-            } else {
-              this.toastr.error(res.error.errorMessage)
-            }            
-          } else {
-            this.toastr.error(res.message);
-          }
+        this.errorHandlerService.set(res);
       });
   }
 

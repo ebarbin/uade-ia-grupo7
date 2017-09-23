@@ -7,7 +7,7 @@
       <md-card-content>
         <div class="row">
           <md-input-container class="col-lg-5 col-md-4 col-sm-4">
-            <input mdInput placeholder="Nombre de Hotel" 
+            <input mdInput placeholder="Nombre de Hotel"
               [mdAutocomplete]="auto" #hotel name="hotel" ngModel
               (ngModelChange)="filterHotels(hotel.value)">
           </md-input-container>
@@ -45,7 +45,7 @@
         </div>
       </md-card-content>
       <md-card-actions align="end">
-        <button md-raised-button type="submit" color="success" [disabled]="!form.valid">Buscar</button>
+        <button md-raised-button type="submit" color="success" [disabled]="!formValid(form)">Buscar</button>
         <button md-raised-button type="reset" color="warn" (click)="onReset()">Limpiar</button>
       </md-card-actions>
     </md-card>

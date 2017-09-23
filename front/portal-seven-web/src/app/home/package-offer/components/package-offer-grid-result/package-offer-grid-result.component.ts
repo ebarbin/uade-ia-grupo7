@@ -2,7 +2,6 @@ import { PackageOffer } from './../../models/package-offer.model';
 import { Component, Input, OnInit } from '@angular/core';
 import { MdDialog } from '@angular/material';
 import { CustomDatasource } from '../../../../shared/models/custom-datasouce';
-import { HotelService } from '../../../hotel-offer/services/hotel.service';
 import {
     PackageOfferDetailComponent
 } from '../package-offer-detail/package-offer-detail.component';
@@ -19,7 +18,6 @@ export class PackageOfferGridResultComponent implements OnInit {
   displayedColumns = ['id', 'name', 'image', 'other', 'action'];
 
   constructor(
-    private hotelService: HotelService, 
     private dialog: MdDialog) { }
 
   onDetail(packageOffer:PackageOffer){

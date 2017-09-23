@@ -10,6 +10,10 @@ public class AutocompleteResourceDTO implements Serializable {
 	
 	private String name;
 
+	public AutocompleteResourceDTO() {
+		
+	}
+	
 	public AutocompleteResourceDTO(Integer id, String name) {
 		this.id = id;
 		this.name = name;

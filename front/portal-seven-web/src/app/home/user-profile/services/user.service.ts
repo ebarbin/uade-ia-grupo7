@@ -6,6 +6,7 @@ import { Subject } from 'rxjs/Subject';
 
 import { User } from '../models/user.model';
 import { PortalResponse } from '../../../shared/models/portal-response.model';
+import { ErrorHandlerService } from '../../../shared/services/error-handler.service';
 
 @Injectable()
 export class UserService {
@@ -13,6 +14,7 @@ export class UserService {
   userChanged: Subject<User> = new Subject();
 
   constructor(
+    private errorHandlerService:ErrorHandlerService,
     private httpClient: HttpClient,
     private toastr:ToastrService) { }
 
@@ -28,15 +30,7 @@ export class UserService {
         this.toastr.error(response.errorMessage);
       }
     }).catch((res:HttpErrorResponse) => {
-      if (res.error){
-        if (typeof res.error != 'object') {
-          this.toastr.error(JSON.parse(res.error).errorMessage)
-        } else {
-          this.toastr.error(res.error.errorMessage)
-        }            
-      } else {
-        this.toastr.error(res.message);
-      }
+      this.errorHandlerService.set(res);
     });
   }
 }

@@ -6,6 +6,7 @@ import { ToastrService } from 'ngx-toastr';
 import { AutocompleteResource } from '../../../../shared/models/autocomplete-resource.model';
 import { AutocompleteService } from '../../../../shared/services/hotel-autocomplete.service';
 import { PackageOfferRequest } from '../../models/package-offer-request.model';
+import { ErrorHandlerService } from '../../../../shared/services/error-handler.service';
 
 @Component({
   selector: 'app-package-offer-filter',
@@ -17,10 +18,11 @@ export class PackageOfferFilterComponent implements OnInit {
   @Output('search') search: EventEmitter<PackageOfferRequest> = new EventEmitter();
   @Output('reset') reset: EventEmitter<any> = new EventEmitter();
 
-  fromDate:Date = new Date();
-  toDate:Date = new Date();
+  fromDate:Date = null;
+  toDate:Date = null;
   
   constructor(
+    private errorHandlerService:ErrorHandlerService,
     private autocompleteService:AutocompleteService, 
     private toastr: ToastrService) { }
 
@@ -33,15 +35,7 @@ export class PackageOfferFilterComponent implements OnInit {
       this.autocompleteService.queryDestinations(val).then((resources:AutocompleteResource[]) => {
         this.restinationResults = resources;
       }).catch((res:HttpErrorResponse) => {
-        if (res.error){
-          if (typeof res.error != 'object') {
-            this.toastr.error(JSON.parse(res.error).errorMessage)
-          } else {
-            this.toastr.error(res.error.errorMessage)
-          }            
-        } else {
-          this.toastr.error(res.message);
-        }
+        this.errorHandlerService.set(res);
       });
     }
 
@@ -60,8 +54,6 @@ export class PackageOfferFilterComponent implements OnInit {
     }
 
     onSubmit(form:NgForm){
-      console.log(form.value);
       this.search.next(form.value);
     }
-
 }

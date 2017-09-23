@@ -5,10 +5,12 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/startWith';
 import 'rxjs/add/operator/map';
 
-import { HotelService } from './services/hotel.service';
-
 import { HotelOfferRequest } from './models/hotel-offer-request.model';
 import { HotelOffer } from './models/hotel-offer.model';
+import { HotelOfferService } from './services/hotel-offer.service';
+import { PortalResponse } from '../../shared/models/portal-response.model';
+import { HttpErrorResponse } from '@angular/common/http';
+import { ErrorHandlerService } from '../../shared/services/error-handler.service';
 
 @Component({
   selector: 'app-hotel-offer',
@@ -18,7 +20,8 @@ import { HotelOffer } from './models/hotel-offer.model';
 export class HotelOfferComponent implements OnInit {
 
   constructor(
-    private hotelService:HotelService) { }
+    private errorHandlerService:ErrorHandlerService,
+    private hotelOfferService:HotelOfferService) { }
 
   ngOnInit() {}
 
@@ -34,19 +37,12 @@ export class HotelOfferComponent implements OnInit {
 
   results:HotelOffer[] = [];
   onSearch(hotelOfferRequest: HotelOfferRequest){
-
-    //TODO Buscar la oferta hotelera segun packageOfferRequest
-    console.log(hotelOfferRequest);
-
-    this.results = [
-      new HotelOffer(1, 'Hotel 1', null),
-      new HotelOffer(2, 'Hotel 2', null),
-      new HotelOffer(3, 'Hotel 3', null),
-      new HotelOffer(4, 'Hotel 4', null),
-      new HotelOffer(5, 'Hotel 5', null),
-      new HotelOffer(6, 'Hotel 6', null),
-      new HotelOffer(7, 'Hotel 7', null)
-    ];
+    this.hotelOfferService.search(hotelOfferRequest)
+     .then((results:HotelOffer[]) => {
+      this.results = results;
+     }).catch((res:HttpErrorResponse) => {
+      this.errorHandlerService.set(res);
+    });
   }
   
 }
