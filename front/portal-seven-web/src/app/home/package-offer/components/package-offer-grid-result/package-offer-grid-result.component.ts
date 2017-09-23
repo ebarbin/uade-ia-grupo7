@@ -1,6 +1,6 @@
 import { PackageOffer } from './../../models/package-offer.model';
-import { Component, Input, OnInit } from '@angular/core';
-import { MdDialog } from '@angular/material';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { MdDialog, MdSort } from '@angular/material';
 import { CustomDatasource } from '../../../../shared/models/custom-datasouce';
 import {
     PackageOfferDetailComponent
@@ -12,6 +12,8 @@ import {
   styleUrls: ['./package-offer-grid-result.component.css']
 })
 export class PackageOfferGridResultComponent implements OnInit {
+
+  @ViewChild(MdSort) sort: MdSort;
 
   dataSource: CustomDatasource;
   

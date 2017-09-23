@@ -1,4 +1,4 @@
-package ar.edu.uade.ia;
+package ar.edu.uade.ia.services;
 
 import java.util.ArrayList;
 
@@ -24,7 +24,7 @@ public class HotelOfferService {
 	@POST
 	@Path("/search")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response update(HotelOfferRequestDTO request) {
+	public Response search(HotelOfferRequestDTO request) {
 		try {
 			return Response.ok(new PortalResponse(new ArrayList<HotelOfferRequestDTO>())).build();
 		} catch (Exception e) {

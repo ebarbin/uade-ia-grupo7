@@ -1,8 +1,8 @@
 <div class="grid-result">  
-    <md-table #table [dataSource]="dataSource">
+    <md-table #table [dataSource]="dataSource" mdSort> 
   
       <ng-container mdColumnDef="id">
-          <md-header-cell *mdHeaderCellDef> ID </md-header-cell>
+          <md-header-cell *mdHeaderCellDef md-sort-header> ID </md-header-cell>
           <md-cell *mdCellDef="let packageOffer"> 
               {{packageOffer.id}} 
               <img class="img-circle" height="30" width="30" 
@@ -11,17 +11,17 @@
         </ng-container>
     
         <ng-container mdColumnDef="name">
-          <md-header-cell *mdHeaderCellDef> NAME </md-header-cell>
+          <md-header-cell *mdHeaderCellDef md-sort-header> NAME </md-header-cell>
           <md-cell *mdCellDef="let packageOffer"> {{packageOffer.name}} </md-cell>
         </ng-container>
     
         <ng-container mdColumnDef="image">
-          <md-header-cell *mdHeaderCellDef> IMAGE </md-header-cell>
+          <md-header-cell *mdHeaderCellDef md-sort-header> IMAGE </md-header-cell>
           <md-cell *mdCellDef="let packageOffer"> {{packageOffer.image}} </md-cell>
         </ng-container>
     
         <ng-container mdColumnDef="other">
-            <md-header-cell *mdHeaderCellDef> IMAGE </md-header-cell>
+            <md-header-cell *mdHeaderCellDef md-sort-header> IMAGE </md-header-cell>
             <md-cell *mdCellDef="let packageOffer"> {{packageOffer.image}} </md-cell>
           </ng-container>
   
