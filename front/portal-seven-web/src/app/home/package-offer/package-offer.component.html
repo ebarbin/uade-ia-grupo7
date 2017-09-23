@@ -1,7 +1,7 @@
 <app-package-offer-filter (search)="onSearch($event)" (reset)="onReset()"></app-package-offer-filter>
 <div class="change-view-toggle" *ngIf="results.length > 0">
-  <md-button-toggle-group>
-    <md-button-toggle md-mini-fab color="primary" value="left" 
+  <md-button-toggle-group mdTooltip="Cambio de vistas">
+    <md-button-toggle md-mini-fab color="primary" value="left"
       (click)="onChangeView('grid')" [checked]="view == 'grid'">
         <i class="fa fa-table" aria-hidden="true"></i>
     </md-button-toggle>

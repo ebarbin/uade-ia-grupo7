@@ -37,10 +37,6 @@ public class ImageEJB {
 		}
 	}
 
-	public Image update(Image image) throws Exception {
-		return this.em.merge(image);
-	}
-
 	public Image create(Image image) {
 		this.em.persist(image);
 		return image;

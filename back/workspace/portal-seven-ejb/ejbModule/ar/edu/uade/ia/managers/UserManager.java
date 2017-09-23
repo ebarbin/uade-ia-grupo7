@@ -8,6 +8,7 @@ import org.dozer.DozerBeanMapperBuilder;
 import org.dozer.Mapper;
 
 import ar.edu.uade.ia.commons.dtos.UserDTO;
+import ar.edu.uade.ia.ejbs.ImageEJB;
 import ar.edu.uade.ia.ejbs.UserEJB;
 import ar.edu.uade.ia.ejbs.entities.bussiness.Image;
 import ar.edu.uade.ia.ejbs.entities.bussiness.User;
@@ -27,6 +28,9 @@ public class UserManager implements UserManagerRemote, UserManagerLocal {
 
 	@EJB
 	private UserEJB userEJB;
+
+	@EJB
+	private ImageEJB imageEJB;
 
 	/**
 	 * Default constructor.
@@ -59,9 +63,10 @@ public class UserManager implements UserManagerRemote, UserManagerLocal {
 
 		Image image = new Image();
 		image.setData(bytes);
+		this.imageEJB.create(image);
 		user.setImage(image);
-
 		user = this.userEJB.update(user);
+
 		return this.mapper.map(user, UserDTO.class);
 	}
 
