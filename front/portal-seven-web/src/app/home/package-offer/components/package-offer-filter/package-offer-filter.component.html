@@ -1,11 +1,14 @@
-<form (ngSubmit)="onSubmit(form)" #form="ngForm">
-    <md-card>
-      <md-card-header>
-        <md-card-title>BUSQUEDA DE OFERTAS DE PAQUETES</md-card-title>
-        <md-card-subtitle>Complete los filtros para buscar ofertas disponibles</md-card-subtitle>
-      </md-card-header>
-      <md-card-content>
-        <div class="row">
+<md-expansion-panel expanded="true">
+  <md-expansion-panel-header>
+    <md-panel-title>
+      BUSQUEDA DE OFERTAS DE PAQUETES
+    </md-panel-title>
+    <md-panel-description>
+      Complete los filtros para buscar ofertas disponibles
+    </md-panel-description>
+  </md-expansion-panel-header>
+  <form (ngSubmit)="onSubmit(form)" #form="ngForm">
+      <div class="row">
           <md-input-container class="col-lg-5 col-md-4 col-sm-4">
             <input mdInput placeholder="Nombre del Destino" 
               [mdAutocomplete]="auto" #destination name="destination" ngModel
@@ -37,10 +40,11 @@
             </md-option>
           </md-select>
         </div>
-      </md-card-content>
-      <md-card-actions align="end">
-        <button md-raised-button type="submit" color="success" [disabled]="!form.valid">Buscar</button>
-        <button md-raised-button type="reset" color="warn" (click)="onReset()">Limpiar</button>
-      </md-card-actions>
-    </md-card>
+        <br>
+        <div style="margin-bottom:10px;" class="pull-right">
+          <button md-raised-button type="submit" color="success" [disabled]="!form.valid">Buscar</button>
+          <button md-raised-button type="reset" color="warn" (click)="onReset()">Limpiar</button>
+        </div>
   </form>
+</md-expansion-panel>
+
