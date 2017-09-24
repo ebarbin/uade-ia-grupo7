@@ -16,6 +16,8 @@ public class Agency extends PersistentObject {
 	private Address address;
 	
 	private String email;
+	
+	private Boolean state;
 
 	public String getName() {
 		return name;
@@ -39,5 +41,13 @@ public class Agency extends PersistentObject {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	public Boolean getState() {
+		return state;
+	}
+
+	public void setState(Boolean state) {
+		this.state = state;
 	}
 }

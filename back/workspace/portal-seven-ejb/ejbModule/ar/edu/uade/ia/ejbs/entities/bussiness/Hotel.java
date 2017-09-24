@@ -16,10 +16,6 @@ public class Hotel extends PersistentObject {
 
 	private static final long serialVersionUID = 564408788585026377L;
 	
-	private Float price;
-	
-	private String cancellationPolicy;
-	
 	private String name;
 	
 	@ManyToOne
@@ -54,6 +50,8 @@ public class Hotel extends PersistentObject {
 					@JoinColumn(name = "payment_method_id", nullable = false, updatable = false) })
 	private List<PaymentMethod>paymentMethods;
 
+	private Boolean state;
+	
 	public String getName() {
 		return name;
 	}
@@ -118,19 +116,11 @@ public class Hotel extends PersistentObject {
 		this.paymentMethods = paymentMethods;
 	}
 
-	public Float getPrice() {
-		return price;
+	public Boolean getState() {
+		return state;
 	}
 
-	public void setPrice(Float price) {
-		this.price = price;
-	}
-
-	public String getCancellationPolicy() {
-		return cancellationPolicy;
-	}
-
-	public void setCancellationPolicy(String cancellationPolicy) {
-		this.cancellationPolicy = cancellationPolicy;
+	public void setState(Boolean state) {
+		this.state = state;
 	}
 }
