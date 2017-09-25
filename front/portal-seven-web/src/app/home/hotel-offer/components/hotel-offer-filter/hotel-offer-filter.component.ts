@@ -56,6 +56,7 @@ export class HotelOfferFilterComponent implements OnInit {
     }
 
     ngOnInit() {
+      this.quantityOptions.push({value: -1, viewValue: '- Vacio -'});
       for(let i = 1; i <= 10;i++) {
         this.quantityOptions.push({value: i, viewValue: i});
        }
@@ -65,8 +66,15 @@ export class HotelOfferFilterComponent implements OnInit {
       this.reset.next({});
     }
 
-    onSubmit(form:NgForm){
+    private fixForm(form:NgForm){
       form.value.hotel = form.value.hotel && typeof form.value.hotel == 'object' ? form.value.hotel : null;
+      form.value.peoplePerRoom = form.value.peoplePerRoom == -1 ? null : form.value.peoplePerRoom;
+      form.value.roomQuantity = form.value.roomQuantity == -1 ? null : form.value.roomQuantity;
+    }
+
+    onSubmit(form:NgForm){
+      this.fixForm(form)
+      
       this.search.next(form.value);
     }
 }

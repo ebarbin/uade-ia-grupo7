@@ -44,6 +44,7 @@ export class PackageOfferFilterComponent implements OnInit {
     }
 
     ngOnInit() {
+      this.quantityOptions.push({value: -1, viewValue: '- Vacio -'});
       for(let i = 1; i <= 10;i++) {
         this.quantityOptions.push({value: i, viewValue: i});
        }
@@ -51,6 +52,11 @@ export class PackageOfferFilterComponent implements OnInit {
     
     onReset() {
       this.reset.next({});
+    }
+
+    private fixForm(form:NgForm){
+      form.value.destination = form.value.destination && typeof form.value.destination == 'object' ? form.value.destination : null;
+      form.value.peoplePerRoom = form.value.peoplePerRoom == -1 ? null : form.value.peoplePerRoom;
     }
 
     onSubmit(form:NgForm){
