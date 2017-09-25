@@ -1,5 +1,6 @@
 package ar.edu.uade.ia.ejbs.entities.bussiness;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
@@ -11,8 +12,10 @@ public class Address extends PersistentObject {
 
 	private String street;
 	
+	@Column(columnDefinition="Decimal(10,6)")
 	private Float lat;
 	
+	@Column(columnDefinition="Decimal(10,6)")
 	private Float lng;
 
 	public String getStreet() {
