@@ -4,12 +4,12 @@ import java.util.List;
 
 import javax.ejb.Local;
 
-import ar.edu.uade.ia.commons.dtos.AutocompleteResourceDTO;
+import ar.edu.uade.ia.commons.dtos.SimpleNamedDTO;
 
 @Local
 public interface AutocompleteManagerLocal {
 
-	List<AutocompleteResourceDTO> queryHotels(String value, Integer limit) throws Exception;
+	List<SimpleNamedDTO> queryHotels(String value, Integer limit) throws Exception;
 	
-	List<AutocompleteResourceDTO> queryDestinations(String value, Integer limit) throws Exception;
+	List<SimpleNamedDTO> queryDestinations(String value, Integer limit) throws Exception;
 }

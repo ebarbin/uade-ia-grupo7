@@ -1,29 +1,29 @@
 <div class="grid-result">  
   <md-table #table [dataSource]="dataSource">
-
-    <ng-container mdColumnDef="id">
-        <md-header-cell *mdHeaderCellDef> ID </md-header-cell>
+  
+      <ng-container mdColumnDef="name">
+        <md-header-cell *mdHeaderCellDef> Hotel </md-header-cell>
         <md-cell *mdCellDef="let hotelOffer"> 
-            {{hotelOffer.id}} 
-            <img class="img-circle" height="30" width="30" 
-            [src]="hotelOffer.image | imageGetter">
+          <img class="img-circle" height="30" width="30" 
+          [src]="hotelOffer.images[0] | imageGetter">
+          {{hotelOffer.name}} 
         </md-cell>
       </ng-container>
   
-      <ng-container mdColumnDef="name">
-        <md-header-cell *mdHeaderCellDef> NAME </md-header-cell>
-        <md-cell *mdCellDef="let hotelOffer"> {{hotelOffer.name}} </md-cell>
+      <ng-container mdColumnDef="description">
+        <md-header-cell *mdHeaderCellDef> Descripcion </md-header-cell>
+        <md-cell *mdCellDef="let hotelOffer"> {{hotelOffer.description}} </md-cell>
       </ng-container>
   
-      <ng-container mdColumnDef="image">
-        <md-header-cell *mdHeaderCellDef> IMAGE </md-header-cell>
-        <md-cell *mdCellDef="let hotelOffer"> {{hotelOffer.image}} </md-cell>
+      <ng-container mdColumnDef="services">
+        <md-header-cell *mdHeaderCellDef> Servicios </md-header-cell>
+        <md-cell *mdCellDef="let hotelOffer"> {{hotelOffer.services | service}} </md-cell>
       </ng-container>
-  
-      <ng-container mdColumnDef="other">
-          <md-header-cell *mdHeaderCellDef> IMAGE </md-header-cell>
-          <md-cell *mdCellDef="let hotelOffer"> {{hotelOffer.image}} </md-cell>
-        </ng-container>
+
+      <ng-container mdColumnDef="price">
+          <md-header-cell *mdHeaderCellDef> Precio </md-header-cell>
+          <md-cell *mdCellDef="let hotelOffer"> {{hotelOffer.price | currency:'ARS':true}} </md-cell>
+      </ng-container>
 
       <ng-container mdColumnDef="action">
         <md-header-cell *mdHeaderCellDef align="end"> Acciones </md-header-cell>

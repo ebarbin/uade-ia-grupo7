@@ -6,7 +6,7 @@ import 'rxjs/add/operator/startWith';
 import 'rxjs/add/operator/map';
 
 import { HotelOfferRequest } from './models/hotel-offer-request.model';
-import { HotelOffer } from './models/hotel-offer.model';
+import { HotelOfferHeader } from './models/hotel-offer-header.model';
 import { HotelOfferService } from './services/hotel-offer.service';
 import { PortalResponse } from '../../shared/models/portal-response.model';
 import { HttpErrorResponse } from '@angular/common/http';
@@ -35,10 +35,10 @@ export class HotelOfferComponent implements OnInit {
     this.results = [];
   }
 
-  results:HotelOffer[] = [];
+  results:HotelOfferHeader[] = [];
   onSearch(hotelOfferRequest: HotelOfferRequest){
     this.hotelOfferService.search(hotelOfferRequest)
-     .then((results:HotelOffer[]) => {
+     .then((results:HotelOfferHeader[]) => {
       this.results = results;
      }).catch((res:HttpErrorResponse) => {
       this.errorHandlerService.set(res);

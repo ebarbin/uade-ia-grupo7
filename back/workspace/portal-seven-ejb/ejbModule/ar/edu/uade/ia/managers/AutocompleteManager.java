@@ -7,7 +7,7 @@ import javax.ejb.EJB;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 
-import ar.edu.uade.ia.commons.dtos.AutocompleteResourceDTO;
+import ar.edu.uade.ia.commons.dtos.SimpleNamedDTO;
 import ar.edu.uade.ia.ejbs.AutocompleteEJB;
 import ar.edu.uade.ia.ejbs.entities.bussiness.Destination;
 import ar.edu.uade.ia.ejbs.entities.bussiness.Hotel;
@@ -30,21 +30,21 @@ public class AutocompleteManager implements AutocompleteManagerRemote, Autocompl
     public AutocompleteManager() {}
 
 	@Override
-	public List<AutocompleteResourceDTO> queryHotels(String value, Integer limit) throws Exception {
-		List<AutocompleteResourceDTO> results = new ArrayList<AutocompleteResourceDTO>();
+	public List<SimpleNamedDTO> queryHotels(String value, Integer limit) throws Exception {
+		List<SimpleNamedDTO> results = new ArrayList<SimpleNamedDTO>();
 		List<Hotel> hotels = this.autocompleteEJB.hotelQuery(value, limit);
 		for (Hotel hotel : hotels) {
-			results.add(new AutocompleteResourceDTO(hotel.getId(), hotel.getName()));
+			results.add(new SimpleNamedDTO(hotel.getId(), hotel.getName()));
 		}
 		return results;
 	}
 
 	@Override
-	public List<AutocompleteResourceDTO> queryDestinations(String value, Integer limit) throws Exception {
-		List<AutocompleteResourceDTO> results = new ArrayList<AutocompleteResourceDTO>();
+	public List<SimpleNamedDTO> queryDestinations(String value, Integer limit) throws Exception {
+		List<SimpleNamedDTO> results = new ArrayList<SimpleNamedDTO>();
 		List<Destination> destinations = this.autocompleteEJB.destinationQuery(value, limit);
 		for (Destination destination : destinations) {
-			results.add(new AutocompleteResourceDTO(destination.getId(), destination.getName()));
+			results.add(new SimpleNamedDTO(destination.getId(), destination.getName()));
 		}
 		return results;
 	}

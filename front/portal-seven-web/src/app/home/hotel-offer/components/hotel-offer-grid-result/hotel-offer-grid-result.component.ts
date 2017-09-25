@@ -6,7 +6,7 @@ import { MdDialog } from '@angular/material';
 
 import { HotelOfferDetailComponent } from '../hotel-offer-detail/hotel-offer-detail.component';
 
-import { HotelOffer } from '../../models/hotel-offer.model';
+import { HotelOfferHeader } from '../../models/hotel-offer-header.model';
 import { CustomDatasource } from '../../../../shared/models/custom-datasouce';
 
 @Component({
@@ -18,12 +18,12 @@ export class HotelOfferGridResultComponent implements OnInit, OnDestroy {
 
   dataSource: CustomDatasource;
 
-  displayedColumns = ['id', 'name', 'image', 'other', 'action'];
+  displayedColumns = [ 'name', 'description', 'services', 'price', 'action'];
 
   constructor(
     private dialog: MdDialog) { }
 
-  onDetail(hotel:HotelOffer){
+  onDetail(hotel:HotelOfferHeader){
     const dialogRef = this.dialog.open(HotelOfferDetailComponent, {
       height: '600px',
       width: '900px',
@@ -37,7 +37,7 @@ export class HotelOfferGridResultComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(){}
   
-  @Input()hotelOffers:HotelOffer[];
+  @Input()hotelOffers:HotelOfferHeader[];
   
   ngOnInit() {
     this.dataSource = new CustomDatasource(this.hotelOffers);

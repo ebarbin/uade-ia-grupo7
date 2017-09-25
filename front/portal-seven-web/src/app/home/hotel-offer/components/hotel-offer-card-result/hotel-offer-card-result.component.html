@@ -1,13 +1,16 @@
 <div class="card-result">
   <md-card class="card-row card col-lg-3 col-md-4 col-sm-6 col-xs-12" *ngFor="let hotelOffer of hotelOffers">
     <md-card-header>
-      <img md-card-avatar [src]="hotelOffer.image | imageGetter">
+      <img md-card-avatar [src]="hotelOffer.images[0] | imageGetter">
       <md-card-title>{{hotelOffer.name}}</md-card-title>
-      <md-card-subtitle>mostrar mas info</md-card-subtitle>
+      <md-card-subtitle>{{hotelOffer.description}}</md-card-subtitle>
     </md-card-header>
     <md-card-content>
       <p>
-        mas info detalle, bla bla bla
+          {{hotelOffer.services | service}}
+      </p>
+      <p>
+          {{hotelOffer.price | currency:'ARS':true}}
       </p>
     </md-card-content>
     <md-card-actions align="end">

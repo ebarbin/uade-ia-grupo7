@@ -1,7 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import {MdDialogRef, MD_DIALOG_DATA} from '@angular/material';
 
-import { HotelOffer } from '../../models/hotel-offer.model';
+import { HotelOfferHeader } from '../../models/hotel-offer-header.model';
 
 @Component({
   selector: 'app-hotel-offer-detail',
@@ -11,7 +11,7 @@ import { HotelOffer } from '../../models/hotel-offer.model';
 export class HotelOfferDetailComponent implements OnInit {
 
   constructor(public dialogRef: MdDialogRef<HotelOfferDetailComponent>,
-    @Inject(MD_DIALOG_DATA) public hotelOffer: HotelOffer) { 
+    @Inject(MD_DIALOG_DATA) public hotelOffer: HotelOfferHeader) { 
       console.log(hotelOffer);
     }
 

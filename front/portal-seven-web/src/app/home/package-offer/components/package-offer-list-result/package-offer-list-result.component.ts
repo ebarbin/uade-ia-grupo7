@@ -1,7 +1,6 @@
 import { PackageOffer } from './../../models/package-offer.model';
 import { Component, Input, OnInit } from '@angular/core';
 import { MdDialog } from '@angular/material';
-import { HotelOffer } from '../../../hotel-offer/models/hotel-offer.model';
 import {
     PackageOfferDetailComponent
 } from '../package-offer-detail/package-offer-detail.component';

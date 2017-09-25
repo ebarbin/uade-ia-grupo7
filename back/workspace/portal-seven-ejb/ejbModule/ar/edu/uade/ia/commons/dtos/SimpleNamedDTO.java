@@ -2,7 +2,9 @@ package ar.edu.uade.ia.commons.dtos;
 
 import java.io.Serializable;
 
-public class AutocompleteResourceDTO implements Serializable {
+import ar.edu.uade.ia.ejbs.entities.bussiness.Service;
+
+public class SimpleNamedDTO implements Serializable {
 
 	private static final long serialVersionUID = 3176115022360295095L;
 
@@ -10,11 +12,12 @@ public class AutocompleteResourceDTO implements Serializable {
 	
 	private String name;
 
-	public AutocompleteResourceDTO() {
-		
+	public SimpleNamedDTO(Service service) {
+		this.id = service.getId();
+		this.name = service.getName();
 	}
 	
-	public AutocompleteResourceDTO(Integer id, String name) {
+	public SimpleNamedDTO(Integer id, String name) {
 		this.id = id;
 		this.name = name;
 	}

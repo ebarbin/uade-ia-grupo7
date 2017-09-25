@@ -1,23 +1,25 @@
-package ar.edu.uade.ia.commons.dtos;
+package ar.edu.uade.ia.commons.dtos.requests;
 
 import java.io.Serializable;
 import java.util.Date;
+
+import ar.edu.uade.ia.commons.dtos.SimpleNamedDTO;
 
 public class HotelOfferRequestDTO implements Serializable {
 
 	private static final long serialVersionUID = 5783638598859106720L;
 	
-	private AutocompleteResourceDTO hotel;
+	private SimpleNamedDTO hotel;
 	private Date toDate;
 	private Date fromDate;
 	private Integer roomQuantity;
 	private Integer peoplePerRoom;
 
-	public AutocompleteResourceDTO getHotel() {
+	public SimpleNamedDTO getHotel() {
 		return hotel;
 	}
 
-	public void setHotel(AutocompleteResourceDTO hotel) {
+	public void setHotel(SimpleNamedDTO hotel) {
 		this.hotel = hotel;
 	}
 

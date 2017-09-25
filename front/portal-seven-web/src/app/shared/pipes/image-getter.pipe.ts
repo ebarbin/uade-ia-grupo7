@@ -1,6 +1,6 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
-import { Image } from '../../home/user-profile/models/image.model';
+import { Image } from '../models/image.model';
 
 @Pipe({
   name: 'imageGetter'

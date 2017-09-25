@@ -1,4 +1,4 @@
-import { Image } from './image.model';
+import { Image } from '../../../shared/models/image.model';
 
 export class User {
 

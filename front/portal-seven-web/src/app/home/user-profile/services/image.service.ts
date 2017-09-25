@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 
-import { Image } from '../models/image.model';
+import { Image } from '../../../shared/models/image.model';
 import { PortalResponse } from '../../../shared/models/portal-response.model';
 import { ToastrService } from 'ngx-toastr';
 import { User } from '../models/user.model';

@@ -6,7 +6,7 @@ import { ToastrService } from 'ngx-toastr';
 import 'rxjs/Rx';
 
 import { HotelOfferRequest } from '../models/hotel-offer-request.model';
-import { HotelOffer } from '../models/hotel-offer.model';
+import { HotelOfferHeader } from '../models/hotel-offer-header.model';
 import { PortalResponse } from '../../../shared/models/portal-response.model';
 
 @Injectable()
@@ -19,13 +19,13 @@ export class HotelOfferService {
     private router: Router,
     private toastr: ToastrService) {}
 
-    search(request:HotelOfferRequest):Promise<HotelOffer[]>{
+    search(request:HotelOfferRequest):Promise<HotelOfferHeader[]>{
       return this.httpClient.post('portal-seven-web/api/rest/hotel-offer/search', request)
         .map((response:PortalResponse)=>{
           if(response.success) {
-            var results = <HotelOffer[]>response.data;
+            var results = <HotelOfferHeader[]>response.data;
             if (results.length == 0) this.toastr.info('No hay resultados.')
-            return <HotelOffer[]>response.data;
+            return results;
           }
         }).toPromise();
     }

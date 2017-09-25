@@ -7,7 +7,7 @@ import { Observable } from 'rxjs/Observable';
 import { AutocompleteResource } from '../../../../shared/models/autocomplete-resource.model';
 import { AutocompleteService } from '../../../../shared/services/hotel-autocomplete.service';
 import { HotelOfferRequest } from '../../models/hotel-offer-request.model';
-import { HotelOffer } from '../../models/hotel-offer.model';
+import { HotelOfferHeader } from '../../models/hotel-offer-header.model';
 import { ErrorHandlerService } from '../../../../shared/services/error-handler.service';
 
 @Component({

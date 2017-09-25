@@ -6,18 +6,20 @@
         </md-card-header> -->
         
         <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
-            <img class="img-responsive" height="100" width="100" [src]="hotelOffer.image | imageGetter">
+            <img class="img-responsive" height="100" width="100" [src]="hotelOffer.images[0] | imageGetter">
         </div>
         <div class="col-lg-9 col-md-8 col-sm-8 col-xs-8">
             <b>{{hotelOffer.name}}</b>
         </div>
         <div class="col-lg-9 col-md-8 col-sm-8 col-xs-8">
-            {{hotelOffer.name}}
+            {{hotelOffer.description}}
         </div>
         <div class="col-lg-9 col-md-8 col-sm-8 col-xs-8">
-            {{hotelOffer.name}}
+            {{hotelOffer.services | service}}
         </div>
-        
+        <div class="col-lg-9 col-md-8 col-sm-8 col-xs-8">
+            {{hotelOffer.price | currency:'ARS':true}}
+        </div>
         <div class="col-lg-1 col-md-2 col-sm-2 col-xs-2">
             <button (click)="onDetail(hotelOffer)" md-raised-button type="button" color="primary">Detalle</button>
         </div>
