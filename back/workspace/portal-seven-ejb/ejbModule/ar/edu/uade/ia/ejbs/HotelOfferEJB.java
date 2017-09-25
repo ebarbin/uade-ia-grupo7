@@ -31,4 +31,8 @@ public class HotelOfferEJB {
 		return query.getResultList();
 	}
 
+	public HotelOffer getDetail(Integer id) {
+		return this.em.find(HotelOffer.class, id);
+	}
+
 }

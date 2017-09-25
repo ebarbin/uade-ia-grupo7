@@ -8,6 +8,8 @@ import { HotelOfferDetailComponent } from '../hotel-offer-detail/hotel-offer-det
 
 import { HotelOfferHeader } from '../../models/hotel-offer-header.model';
 import { CustomDatasource } from '../../../../shared/models/custom-datasouce';
+import { HotelOfferService } from '../../services/hotel-offer.service';
+import { HotelOffer } from '../../models/hotel-offer.model';
 
 @Component({
   selector: 'app-hotel-offer-grid-result',
@@ -21,18 +23,21 @@ export class HotelOfferGridResultComponent implements OnInit, OnDestroy {
   displayedColumns = [ 'name', 'description', 'services', 'price', 'action'];
 
   constructor(
+    private hotelOfferService: HotelOfferService,
     private dialog: MdDialog) { }
 
-  onDetail(hotel:HotelOfferHeader){
-    const dialogRef = this.dialog.open(HotelOfferDetailComponent, {
-      height: '600px',
-      width: '900px',
-      data: hotel
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
-    });
+  onDetail(hotelOfferHeader:HotelOfferHeader){
+    this.hotelOfferService.getDetail(hotelOfferHeader).then((hotelOffer:HotelOffer)=>{
+      const dialogRef = this.dialog.open(HotelOfferDetailComponent, {
+        height: '600px',
+        width: '900px',
+        data: hotelOffer
+      });
+  
+      dialogRef.afterClosed().subscribe(result => {
+        console.log(`Dialog result: ${result}`);
+      });
+    })
   }
 
   ngOnDestroy(){}

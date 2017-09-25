@@ -10,7 +10,7 @@ import javax.ejb.Stateless;
 import org.dozer.DozerBeanMapperBuilder;
 import org.dozer.Mapper;
 
-import ar.edu.uade.ia.commons.ListMapperDecorator;
+import ar.edu.uade.ia.commons.dtos.HotelOfferDTO;
 import ar.edu.uade.ia.commons.dtos.HotelOfferHeaderDTO;
 import ar.edu.uade.ia.commons.dtos.requests.HotelOfferRequestDTO;
 import ar.edu.uade.ia.ejbs.HotelOfferEJB;
@@ -45,6 +45,12 @@ public class HotelOfferManager implements HotelOfferManagerRemote, HotelOfferMan
 			results.add(new HotelOfferHeaderDTO(hotelOffer));
 		}
 		return results;
+	}
+
+	@Override
+	public HotelOfferDTO getDetail(Integer id) throws Exception {
+		HotelOffer ho = this.hotelOfferEJB.getDetail(id);
+		return this.mapper.map(ho, HotelOfferDTO.class);
 	}
 
 }

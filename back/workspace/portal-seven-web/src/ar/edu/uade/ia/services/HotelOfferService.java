@@ -2,8 +2,10 @@ package ar.edu.uade.ia.services;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
+import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -25,6 +27,17 @@ public class HotelOfferService {
 	public Response search(HotelOfferRequestDTO request) {
 		try {
 			return Response.ok(new PortalResponse(this.hotelOfferManager.search(request))).build();
+		} catch (Exception e) {
+			return Response.status(Response.Status.BAD_REQUEST).entity(new PortalResponse(e.getMessage())).build();
+		}
+	}
+	
+	@GET
+	@Path("/detail/{id}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response getDetail(@PathParam("id") Integer id) {
+		try {
+			return Response.ok(new PortalResponse(this.hotelOfferManager.getDetail(id))).build();
 		} catch (Exception e) {
 			return Response.status(Response.Status.BAD_REQUEST).entity(new PortalResponse(e.getMessage())).build();
 		}
