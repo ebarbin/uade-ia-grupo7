@@ -1,0 +1,38 @@
+<div class="grid-result">  
+    <md-table #table [dataSource]="dataSource" mdSort> 
+  
+      <ng-container mdColumnDef="id">
+          <md-header-cell *mdHeaderCellDef md-sort-header> ID </md-header-cell>
+          <md-cell *mdCellDef="let packageOffer"> 
+              {{packageOffer.id}} 
+              <img class="img-circle" height="30" width="30" 
+              [src]="packageOffer.image | imageGetter">
+          </md-cell>
+        </ng-container>
+    
+        <ng-container mdColumnDef="name">
+          <md-header-cell *mdHeaderCellDef md-sort-header> NAME </md-header-cell>
+          <md-cell *mdCellDef="let packageOffer"> {{packageOffer.name}} </md-cell>
+        </ng-container>
+    
+        <ng-container mdColumnDef="image">
+          <md-header-cell *mdHeaderCellDef md-sort-header> IMAGE </md-header-cell>
+          <md-cell *mdCellDef="let packageOffer"> {{packageOffer.image}} </md-cell>
+        </ng-container>
+    
+        <ng-container mdColumnDef="other">
+            <md-header-cell *mdHeaderCellDef md-sort-header> IMAGE </md-header-cell>
+            <md-cell *mdCellDef="let packageOffer"> {{packageOffer.image}} </md-cell>
+          </ng-container>
+  
+        <ng-container mdColumnDef="action">
+          <md-header-cell *mdHeaderCellDef align="end"> Acciones </md-header-cell>
+          <md-cell *mdCellDef="let packageOffer" align="end"> 
+            <button (click)="onDetail(packageOffer)" md-raised-button type="button" color="primary">Detalle</button>
+          </md-cell>
+        </ng-container>
+        
+        <md-header-row *mdHeaderRowDef="displayedColumns"></md-header-row>
+        <md-row *mdRowDef="let row; columns: displayedColumns;"></md-row>
+    </md-table>
+  </div>

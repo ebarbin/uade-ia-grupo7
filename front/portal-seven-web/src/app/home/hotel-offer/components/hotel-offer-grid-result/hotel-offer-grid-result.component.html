@@ -1,0 +1,42 @@
+<div class="grid-result">  
+  <md-table #table [dataSource]="dataSource">
+  
+      <ng-container mdColumnDef="name">
+        <md-header-cell *mdHeaderCellDef>Hotel</md-header-cell>
+        <md-cell *mdCellDef="let hotelOfferHeader"> 
+          <img class="img-circle" height="30" width="30" 
+          [src]="hotelOfferHeader.images | first | imageGetter">
+          {{hotelOfferHeader.name}} 
+        </md-cell>
+      </ng-container>
+  
+      <ng-container mdColumnDef="description">
+        <md-header-cell *mdHeaderCellDef>Descripción</md-header-cell>
+        <md-cell *mdCellDef="let hotelOfferHeader"[mdTooltip]="hotelOfferHeader.description">
+          {{hotelOfferHeader.description | truncate:10}}
+        </md-cell>
+      </ng-container>
+  
+      <ng-container mdColumnDef="services">
+        <md-header-cell *mdHeaderCellDef>Servicios</md-header-cell>
+        <md-cell *mdCellDef="let hotelOfferHeader" [mdTooltip]="hotelOfferHeader.services | join:' - '"> 
+          {{hotelOfferHeader.services | join:' - ' | truncate:10}} 
+        </md-cell>
+      </ng-container>
+
+      <ng-container mdColumnDef="price">
+          <md-header-cell *mdHeaderCellDef>Precio</md-header-cell>
+          <md-cell *mdCellDef="let hotelOfferHeader"> {{hotelOfferHeader.price | currency:'ARS':true}} </md-cell>
+      </ng-container>
+
+      <ng-container mdColumnDef="action">
+        <md-header-cell *mdHeaderCellDef align="end">Acciones</md-header-cell>
+        <md-cell *mdCellDef="let hotelOfferHeader" align="end"> 
+          <button (click)="onDetail(hotelOfferHeader)" md-raised-button type="button" color="primary">Detalle</button>
+        </md-cell>
+      </ng-container>
+      
+      <md-header-row *mdHeaderRowDef="displayedColumns"></md-header-row>
+      <md-row *mdRowDef="let row; columns: displayedColumns;"></md-row>
+  </md-table>
+</div>

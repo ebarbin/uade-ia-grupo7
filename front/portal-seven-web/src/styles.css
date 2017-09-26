@@ -27,3 +27,7 @@
 .mat-card-subtitle{
     font-style: italic;
 }
+
+.mat-expansion-panel-content {
+    height: auto;
+}

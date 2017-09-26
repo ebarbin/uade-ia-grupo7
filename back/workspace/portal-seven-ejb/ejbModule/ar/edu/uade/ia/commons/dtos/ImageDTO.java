@@ -10,6 +10,12 @@ public class ImageDTO implements Serializable {
 	
 	private byte[] data;
 	
+	public ImageDTO() {}
+	
+	public ImageDTO(Integer id) {
+		this.id = id;
+	}
+
 	public Integer getId() {
 		return id;
 	}

@@ -1,0 +1,25 @@
+<div class="list-result">
+    <md-card class="card-row card col-lg-12 col-md-12 col-sm-12 col-xs-12" *ngFor="let packageOffer of packageOffers">
+        <!-- <md-card-header>
+        <md-card-title>{{hotel.name}}</md-card-title>
+        <md-card-subtitle>mostrar mas info</md-card-subtitle>
+        </md-card-header> -->
+        
+        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+            <img class="img-responsive" height="100" width="100" [src]="packageOffer.image | imageGetter">
+        </div>
+        <div class="col-lg-9 col-md-8 col-sm-8 col-xs-8">
+            <b>{{packageOffer.name}}</b>
+        </div>
+        <div class="col-lg-9 col-md-8 col-sm-8 col-xs-8">
+            {{packageOffer.name}}
+        </div>
+        <div class="col-lg-9 col-md-8 col-sm-8 col-xs-8">
+            {{packageOffer.name}}
+        </div>
+        
+        <div class="col-lg-1 col-md-2 col-sm-2 col-xs-2">
+            <button (click)="onDetail(packageOffer)" md-raised-button type="button" color="primary">Detalle</button>
+        </div>
+    </md-card>
+</div>

@@ -1,0 +1,55 @@
+<md-expansion-panel expanded="true">
+  <md-expansion-panel-header>
+    <md-panel-title>
+        BUSQUEDA DE OFERTAS HOTELERAS
+    </md-panel-title>
+    <md-panel-description>
+      Complete los filtros para buscar ofertas disponibles
+    </md-panel-description>
+  </md-expansion-panel-header>
+  <form (ngSubmit)="onSubmit(form)" #form="ngForm">
+    <div class="row">
+      <md-input-container class="col-lg-5 col-md-4 col-sm-4">
+        <input mdInput placeholder="Nombre de Hotel"
+          [mdAutocomplete]="auto" #hotel name="hotel" ngModel
+          (ngModelChange)="filterHotels(hotel.value)">
+      </md-input-container>
+      <md-autocomplete #auto="mdAutocomplete" [displayWith]="autocompleteDisplaySelected">
+          <md-option *ngFor="let hr of hotelResults" [value]="hr">
+            <span>{{ hr.name }}</span>
+          </md-option>
+      </md-autocomplete>
+      <md-form-field class="col-lg-5 col-md-4 col-sm-4">
+        <input name="fromDate" [(ngModel)]="fromDate"
+        [mdDatepicker]="fromPicker" placeholder="Fecha Desde" mdInput>
+        <md-datepicker-toggle mdSuffix [for]="fromPicker"></md-datepicker-toggle>
+        <md-datepicker #fromPicker></md-datepicker>
+      </md-form-field>
+      <md-form-field class="col-lg-5 col-md-4 col-sm-4">
+        <input name="toDate" [(ngModel)]="toDate"
+        [mdDatepicker]="toPicker" placeholder="Fecha Hasta" mdInput>
+        <md-datepicker-toggle mdSuffix [for]="toPicker"></md-datepicker-toggle>
+        <md-datepicker #toPicker></md-datepicker>
+      </md-form-field>
+    </div>
+    <div class="row">
+      <md-select class="col-lg-6 col-md-6 col-sm-6" placeholder="Cantidad de Habitaciones" ngModel
+        name="roomQuantity">
+        <md-option *ngFor="let rq of quantityOptions" [value]="rq.value">
+          {{ rq.viewValue }}
+        </md-option>
+      </md-select>
+      <md-select class="col-lg-6 col-md-6 col-sm-6" placeholder="Personas por habitación" ngModel 
+      name="peoplePerRoom">
+        <md-option *ngFor="let pr of quantityOptions" [value]="pr.value">
+          {{ pr.viewValue }}
+        </md-option>
+      </md-select>
+    </div>
+    <br>
+    <div style="margin-bottom:10px;" class="pull-right">
+      <button md-raised-button type="submit" color="success" [disabled]="!formValid(form)">Buscar</button>
+      <button md-raised-button type="reset" color="warn" (click)="onReset()">Limpiar</button>
+    </div>
+  </form>
+</md-expansion-panel>

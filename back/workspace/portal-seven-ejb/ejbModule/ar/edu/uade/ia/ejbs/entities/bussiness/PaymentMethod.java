@@ -1,8 +1,10 @@
 package ar.edu.uade.ia.ejbs.entities.bussiness;
 
 import javax.persistence.Entity;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "payment_method")
 public class PaymentMethod extends PersistentObject {
 
 	private static final long serialVersionUID = 4857775724267046382L;

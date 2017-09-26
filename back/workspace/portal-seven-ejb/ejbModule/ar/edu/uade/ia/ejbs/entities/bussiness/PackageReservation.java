@@ -1,14 +1,16 @@
 package ar.edu.uade.ia.ejbs.entities.bussiness;
 
-import java.sql.Timestamp;
+import java.util.Date;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "package_reservation")
 public class PackageReservation extends PersistentObject {
 
 	private static final long serialVersionUID = 1322663302447235060L;
@@ -17,7 +19,7 @@ public class PackageReservation extends PersistentObject {
 	@JoinColumn(name="uuser")
 	private User user;
 	
-	private Timestamp reservationDate;
+	private Date reservationDate;
 	
 	private Float totalPrice;
 	
@@ -50,11 +52,11 @@ public class PackageReservation extends PersistentObject {
 		this.user = user;
 	}
 
-	public Timestamp getReservationDate() {
+	public Date getReservationDate() {
 		return reservationDate;
 	}
 
-	public void setReservationDate(Timestamp reservationDate) {
+	public void setReservationDate(Date reservationDate) {
 		this.reservationDate = reservationDate;
 	}
 

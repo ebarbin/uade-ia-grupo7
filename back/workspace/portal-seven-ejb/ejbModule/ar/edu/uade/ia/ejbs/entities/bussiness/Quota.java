@@ -1,30 +1,31 @@
 package ar.edu.uade.ia.ejbs.entities.bussiness;
 
-import java.sql.Timestamp;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "quota")
 public class Quota extends PersistentObject {
 
 	private static final long serialVersionUID = 7791774625364655871L;
-
-	@Column(name="tdate")
-	private Timestamp date;
+	
+	private Date quotaDate;
 	
 	@ManyToOne
 	private HotelOffer offer;
 	
 	private Integer  availableQuota;
 
-	public Timestamp getDate() {
-		return date;
+	public Date getQuotaDate() {
+		return quotaDate;
 	}
 
-	public void setDate(Timestamp date) {
-		this.date = date;
+	public void setQuotaDate(Date quotaDate) {
+		this.quotaDate = quotaDate;
 	}
 
 	public HotelOffer getOffer() {

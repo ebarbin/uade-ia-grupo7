@@ -7,14 +7,16 @@ import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "room")
 public class Room extends PersistentObject {
 
 	private static final long serialVersionUID = 5243270004093839420L;
 
 	@ManyToMany(fetch = FetchType.LAZY)
-	@JoinTable(name = "Room_Image", joinColumns = {
+	@JoinTable(name = "room_image", joinColumns = {
 			@JoinColumn(name = "room_id", nullable = false, updatable = false) }, inverseJoinColumns = {
 					@JoinColumn(name = "image_id", nullable = false, updatable = false) })
 	private List<Image>images;
@@ -22,7 +24,7 @@ public class Room extends PersistentObject {
 	private String descripcion;
 	
 	@ManyToMany(fetch = FetchType.LAZY)
-	@JoinTable(name = "Room_Service", joinColumns = {
+	@JoinTable(name = "room_service", joinColumns = {
 			@JoinColumn(name = "room_id", nullable = false, updatable = false) }, inverseJoinColumns = {
 					@JoinColumn(name = "service_id", nullable = false, updatable = false) })
 	private List<Service>services;

@@ -1,0 +1,22 @@
+<app-hotel-offer-filter (search)="onSearch($event)" (reset)="onReset()"></app-hotel-offer-filter>
+<div class="change-view-toggle" *ngIf="results.length > 0">
+  <md-button-toggle-group mdTooltip="Cambio de vistas">
+    <md-button-toggle md-mini-fab color="primary" value="left" 
+      (click)="onChangeView('grid')" [checked]="view == 'grid'">
+        <i class="fa fa-table" aria-hidden="true"></i>
+    </md-button-toggle>
+    <md-button-toggle md-mini-fab color="primary" value="center" 
+      (click)="onChangeView('list')" [checked]="view == 'list'">
+        <i class="fa fa-th-list" aria-hidden="true"></i>
+    </md-button-toggle>
+    <md-button-toggle md-mini-fab color="accent" value="right"
+      (click)="onChangeView('card')" [checked]="view == 'card'">
+        <i class="fa fa-th" aria-hidden="true"></i>
+    </md-button-toggle>
+  </md-button-toggle-group>
+</div>
+<div *ngIf="results.length > 0">
+    <app-hotel-offer-grid-result [hotelOffers]="results" *ngIf="view == 'grid'"></app-hotel-offer-grid-result>
+    <app-hotel-offer-list-result [hotelOffers]="results" *ngIf="view == 'list'"></app-hotel-offer-list-result>
+    <app-hotel-offer-card-result [hotelOffers]="results" *ngIf="view == 'card'"></app-hotel-offer-card-result>
+</div>

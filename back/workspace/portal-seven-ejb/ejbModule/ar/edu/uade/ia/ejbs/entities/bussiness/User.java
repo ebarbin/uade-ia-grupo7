@@ -5,7 +5,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="Uuser")
+@Table(name = "uuser")
 public class User extends PersistentObject {
 
 	private static final long serialVersionUID = -580923980124579922L;

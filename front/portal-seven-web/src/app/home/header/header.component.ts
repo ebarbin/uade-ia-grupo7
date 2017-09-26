@@ -19,11 +19,12 @@ export class HeaderComponent implements OnInit, OnDestroy {
   constructor(private userService:UserService, private authService:AuthService) { }
 
   user: User;
+  isCollapsedContent:boolean = false;
 
   ngOnInit() {
-    this.user = this.authService.user;
+    this.user = this.authService.getUser();
     this.userSubs = this.userService.userChanged.subscribe((user:User)=>{
-      this.user = user;
+      this.user = Object.assign({}, user);
     });
   }
 
