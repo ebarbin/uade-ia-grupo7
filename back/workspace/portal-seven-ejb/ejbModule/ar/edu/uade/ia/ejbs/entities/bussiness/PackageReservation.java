@@ -3,7 +3,9 @@ package ar.edu.uade.ia.ejbs.entities.bussiness;
 import java.sql.Timestamp;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 @Entity
@@ -12,6 +14,7 @@ public class PackageReservation extends PersistentObject {
 	private static final long serialVersionUID = 1322663302447235060L;
 
 	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name="uuser")
 	private User user;
 	
 	private Timestamp reservationDate;

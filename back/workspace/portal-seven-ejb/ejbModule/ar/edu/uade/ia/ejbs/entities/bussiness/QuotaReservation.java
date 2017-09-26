@@ -4,6 +4,7 @@ import java.sql.Timestamp;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
@@ -17,6 +18,7 @@ public class QuotaReservation extends PersistentObject {
 	private static final long serialVersionUID = 4555465608403169617L;
 
 	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name="uuser")
 	private User user;
 	
 	private Timestamp reservationDate;

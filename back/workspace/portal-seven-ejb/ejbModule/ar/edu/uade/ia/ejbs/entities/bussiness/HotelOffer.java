@@ -2,6 +2,7 @@ package ar.edu.uade.ia.ejbs.entities.bussiness;
 
 import java.sql.Timestamp;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 
@@ -10,8 +11,10 @@ public class HotelOffer extends PersistentObject {
 
 	private static final long serialVersionUID = -5955498653697555495L;
 
+	@Column(name="tfrom")
 	private Timestamp from;
 	
+	@Column(name="tto")
 	private Timestamp to;
 	
 	private Float price;

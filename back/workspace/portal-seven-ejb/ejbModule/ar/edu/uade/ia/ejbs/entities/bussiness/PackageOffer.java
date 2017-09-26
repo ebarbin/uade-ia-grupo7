@@ -4,6 +4,7 @@ import java.sql.Timestamp;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
@@ -16,8 +17,10 @@ public class PackageOffer extends PersistentObject {
 
 	private static final long serialVersionUID = 6647993123948723384L;
 
+	@Column(name="tfrom")
 	private Timestamp from;
 	
+	@Column(name="tto")
 	private Timestamp to;
 	
 	private Float price;

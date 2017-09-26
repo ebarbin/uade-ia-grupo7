@@ -2,6 +2,7 @@ package ar.edu.uade.ia.ejbs.entities.bussiness;
 
 import java.sql.Timestamp;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 
@@ -10,6 +11,7 @@ public class Quota extends PersistentObject {
 
 	private static final long serialVersionUID = 7791774625364655871L;
 
+	@Column(name="tdate")
 	private Timestamp date;
 	
 	@ManyToOne
