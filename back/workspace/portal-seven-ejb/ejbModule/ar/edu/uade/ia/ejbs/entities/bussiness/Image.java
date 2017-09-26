@@ -6,13 +6,13 @@ import javax.persistence.Lob;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "image")
+@Table(name="Image")
 public class Image extends PersistentObject {
 	
 	private static final long serialVersionUID = -2382376870718857038L;
 	
 	@Lob
-    @Column(columnDefinition="mediumblob")
+    @Column(columnDefinition="image")
     private byte[] data;
 
 	public byte[] getData() {

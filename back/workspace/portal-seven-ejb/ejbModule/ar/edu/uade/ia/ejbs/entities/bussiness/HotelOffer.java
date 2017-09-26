@@ -2,6 +2,7 @@ package ar.edu.uade.ia.ejbs.entities.bussiness;
 
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -13,9 +14,9 @@ public class HotelOffer extends PersistentObject {
 	private static final long serialVersionUID = -5955498653697555495L;
 
 	private Date start;
-
+	
 	private Date end;
-
+	
 	private Float price;
 
 	private String cancellationPolicy;
@@ -42,22 +43,6 @@ public class HotelOffer extends PersistentObject {
 		this.room = room;
 	}
 
-	public Date getStart() {
-		return start;
-	}
-
-	public void setStart(Date start) {
-		this.start = start;
-	}
-
-	public Date getEnd() {
-		return end;
-	}
-
-	public void setEnd(Date end) {
-		this.end = end;
-	}
-
 	public Float getPrice() {
 		return price;
 	}
@@ -72,5 +57,21 @@ public class HotelOffer extends PersistentObject {
 
 	public void setCancellationPolicy(String cancellationPolicy) {
 		this.cancellationPolicy = cancellationPolicy;
+	}
+
+	public Date getStart() {
+		return start;
+	}
+
+	public void setStart(Date start) {
+		this.start = start;
+	}
+
+	public Date getEnd() {
+		return end;
+	}
+
+	public void setEnd(Date end) {
+		this.end = end;
 	}
 }

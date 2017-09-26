@@ -3,6 +3,8 @@ package ar.edu.uade.ia.ejbs.entities.bussiness;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
