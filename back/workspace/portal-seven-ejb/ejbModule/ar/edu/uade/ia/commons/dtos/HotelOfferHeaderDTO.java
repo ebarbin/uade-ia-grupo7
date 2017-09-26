@@ -1,12 +1,7 @@
 package ar.edu.uade.ia.commons.dtos;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
-
-import ar.edu.uade.ia.ejbs.entities.bussiness.HotelOffer;
-import ar.edu.uade.ia.ejbs.entities.bussiness.Image;
-import ar.edu.uade.ia.ejbs.entities.bussiness.Service;
 
 public class HotelOfferHeaderDTO implements Serializable {
 
@@ -23,22 +18,9 @@ public class HotelOfferHeaderDTO implements Serializable {
 	private List<SimpleNamedDTO>services;
 	
 	private Float price;
-
-	public HotelOfferHeaderDTO(HotelOffer ho) {
-		this.id = ho.getId();
-		this.name = ho.getHotel().getName();
-		this.description = ho.getHotel().getDescription();
-		this.services = new ArrayList<SimpleNamedDTO>();
-		for(Service service : ho.getHotel().getServices()) {
-			this.services.add(new SimpleNamedDTO(service));
-		}
-		this.price = ho.getPrice();
-		this.images = new ArrayList<ImageDTO>();
-		for(Image img : ho.getHotel().getImages()) {
-			this.images.add(new ImageDTO(img.getId()));
-		}
-	}
-
+	
+	public HotelOfferHeaderDTO() {}
+	
 	public Integer getId() {
 		return id;
 	}
