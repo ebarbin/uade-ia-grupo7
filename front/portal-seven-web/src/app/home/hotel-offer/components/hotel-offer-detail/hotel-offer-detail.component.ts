@@ -11,11 +11,18 @@ import { HotelOfferHeader } from '../../models/hotel-offer-header.model';
 export class HotelOfferDetailComponent implements OnInit {
 
   constructor(public dialogRef: MdDialogRef<HotelOfferDetailComponent>,
-    @Inject(MD_DIALOG_DATA) public hotelOffer: HotelOfferHeader) { 
-      console.log(hotelOffer);
+    @Inject(MD_DIALOG_DATA) public hotelOffer: HotelOfferHeader) {}
+
+    onClose(){
+      this.dialogRef.close("Close");
     }
 
-  ngOnInit() {
-  }
+    onReserve(){
+      //TODO MAKE RESERVATION
+      this.dialogRef.close("Reserve");
+    }
+
+    ngOnInit() {
+    }
 
 }

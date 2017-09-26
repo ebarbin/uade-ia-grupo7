@@ -2,7 +2,7 @@
   <md-table #table [dataSource]="dataSource">
   
       <ng-container mdColumnDef="name">
-        <md-header-cell *mdHeaderCellDef> Hotel </md-header-cell>
+        <md-header-cell *mdHeaderCellDef>Hotel</md-header-cell>
         <md-cell *mdCellDef="let hotelOffer"> 
           <img class="img-circle" height="30" width="30" 
           [src]="hotelOffer.images[0] | imageGetter">
@@ -11,22 +11,24 @@
       </ng-container>
   
       <ng-container mdColumnDef="description">
-        <md-header-cell *mdHeaderCellDef> Descripcion </md-header-cell>
+        <md-header-cell *mdHeaderCellDef>Descripción</md-header-cell>
         <md-cell *mdCellDef="let hotelOffer"> {{hotelOffer.description}} </md-cell>
       </ng-container>
   
       <ng-container mdColumnDef="services">
-        <md-header-cell *mdHeaderCellDef> Servicios </md-header-cell>
-        <md-cell *mdCellDef="let hotelOffer"> {{hotelOffer.services | service}} </md-cell>
+        <md-header-cell *mdHeaderCellDef>Servicios</md-header-cell>
+        <md-cell *mdCellDef="let hotelOffer" [mdTooltip]="hotelOffer.services | join:' - '"> 
+          {{hotelOffer.services | join:' - ' | truncate:10}} 
+        </md-cell>
       </ng-container>
 
       <ng-container mdColumnDef="price">
-          <md-header-cell *mdHeaderCellDef> Precio </md-header-cell>
+          <md-header-cell *mdHeaderCellDef>Precio</md-header-cell>
           <md-cell *mdCellDef="let hotelOffer"> {{hotelOffer.price | currency:'ARS':true}} </md-cell>
       </ng-container>
 
       <ng-container mdColumnDef="action">
-        <md-header-cell *mdHeaderCellDef align="end"> Acciones </md-header-cell>
+        <md-header-cell *mdHeaderCellDef align="end">Acciones</md-header-cell>
         <md-cell *mdCellDef="let hotelOffer" align="end"> 
           <button (click)="onDetail(hotelOffer)" md-raised-button type="button" color="primary">Detalle</button>
         </md-cell>

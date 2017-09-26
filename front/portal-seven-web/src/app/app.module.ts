@@ -63,7 +63,8 @@ import { AutocompleteService } from './shared/services/hotel-autocomplete.servic
 import { MyHttpInterceptor } from './shared/services/my-http-interceptor';
 import { HotelOfferService } from './home/hotel-offer/services/hotel-offer.service';
 import { ErrorHandlerService } from './shared/services/error-handler.service';
-import { ServicePipe } from './shared/pipes/service.pipe';
+import { JoinPipe } from './shared/pipes/join.pipe';
+import { TruncatePipe } from './shared/pipes/truncate.pipe';
 
 @NgModule({
   declarations: [
@@ -89,7 +90,8 @@ import { ServicePipe } from './shared/pipes/service.pipe';
     PackageOfferGridResultComponent,
     PackageOfferListResultComponent,
     PackageOfferDetailComponent,
-    ServicePipe
+    JoinPipe,
+    TruncatePipe
   ],
   imports: [
     BrowserModule,

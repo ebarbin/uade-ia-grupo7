@@ -10,6 +10,8 @@ import { HotelOfferHeader } from '../../models/hotel-offer-header.model';
 import { CustomDatasource } from '../../../../shared/models/custom-datasouce';
 import { HotelOfferService } from '../../services/hotel-offer.service';
 import { HotelOffer } from '../../models/hotel-offer.model';
+import { HttpErrorResponse } from '@angular/common/http';
+import { ErrorHandlerService } from '../../../../shared/services/error-handler.service';
 
 @Component({
   selector: 'app-hotel-offer-grid-result',
@@ -23,6 +25,7 @@ export class HotelOfferGridResultComponent implements OnInit, OnDestroy {
   displayedColumns = [ 'name', 'description', 'services', 'price', 'action'];
 
   constructor(
+    private errorHandlerService:ErrorHandlerService,
     private hotelOfferService: HotelOfferService,
     private dialog: MdDialog) { }
 
@@ -35,9 +38,11 @@ export class HotelOfferGridResultComponent implements OnInit, OnDestroy {
       });
   
       dialogRef.afterClosed().subscribe(result => {
-        console.log(`Dialog result: ${result}`);
+        console.log(result);
       });
-    })
+    }).catch((res:HttpErrorResponse)=>{
+      this.errorHandlerService.set(res);
+    });
   }
 
   ngOnDestroy(){}
