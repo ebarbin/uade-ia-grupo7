@@ -9,6 +9,7 @@
       "outDir": "../../back/workspace/portal-seven-web/WebContent",
       "assets": [
         "assets",
+        "portal-seven-web",
         "favicon.ico"
       ],
       "index": "index.html",

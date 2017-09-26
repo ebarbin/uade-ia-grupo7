@@ -11,7 +11,7 @@ export class ImageGetterPipe implements PipeTransform {
     if (image) {
       return 'portal-seven-web/api/rest/image/' + image.id;
     } else {
-      return 'assets/images/no-image.png';
+      return 'portal-seven-web/assets/images/no-image.png';
     }
   }
 
