@@ -2,6 +2,7 @@ package ar.edu.uade.ia.ejbs.entities.bussiness;
 
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
@@ -21,7 +22,8 @@ public class Hotel extends PersistentObject {
 	@ManyToOne
 	private Destination destination;
 	
-	private String descripcion;
+	@Column(length = 500)
+	private String description;
 	
 	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(name = "hotel_image", joinColumns = {
@@ -68,12 +70,12 @@ public class Hotel extends PersistentObject {
 		this.destination = destination;
 	}
 
-	public String getDescripcion() {
-		return descripcion;
+	public String getDescription() {
+		return description;
 	}
 
-	public void setDescripcion(String descripcion) {
-		this.descripcion = descripcion;
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
 	public List<Image> getImages() {

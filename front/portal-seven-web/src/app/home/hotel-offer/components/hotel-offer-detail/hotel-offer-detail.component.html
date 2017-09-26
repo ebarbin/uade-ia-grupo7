@@ -1,10 +1,15 @@
-<h2 md-dialog-title>Install Angular</h2>
+<h2 md-dialog-title>OFERTA HOTELERA</h2>
 <md-dialog-content>
-  <h3>DEVELOP ACROSS ALL PLATFORMS</h3>
-  <p>Learn one way to build applications with Angular and reuse your code and abilities to build 
-    apps for any deployment target. For web, mobile web, native mobile and native desktop.</p>
-  
-    <app-map [address]="hotelOffer.hotel.address"></app-map>
+  <h3>{{hotelOffer.hotel.name}}</h3>
+
+  <div class="col-md-12">
+      <div class="col-md-6">
+        <p> {{hotelOffer.hotel.description}} </p>
+      </div>
+      <div class="col-md-6">
+          <app-map [address]="hotelOffer.hotel.address"></app-map>
+      </div>
+  </div>
     
   <h3>SPEED & PERFORMANCE</h3>
   <p>Achieve the maximum speed possible on the Web Platform today, and take it further, via Web 

@@ -11,6 +11,8 @@ public class HotelDTO implements Serializable {
 	
 	private String name;
 	
+	private String description;
+	
 	private List<ImageDTO>images;
 	
 	private AddressDTO address;
@@ -45,5 +47,13 @@ public class HotelDTO implements Serializable {
 
 	public void setAddress(AddressDTO address) {
 		this.address = address;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
 	}
 }

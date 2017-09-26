@@ -7,5 +7,6 @@ export class Hotel {
         public id: number, 
         public images: Image[], 
         public name: string,
+        public description: string,
         public address:Address){}
 }

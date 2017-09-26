@@ -27,7 +27,7 @@ public class HotelOfferHeaderDTO implements Serializable {
 	public HotelOfferHeaderDTO(HotelOffer ho) {
 		this.id = ho.getId();
 		this.name = ho.getHotel().getName();
-		this.description = ho.getHotel().getDescripcion();
+		this.description = ho.getHotel().getDescription();
 		this.services = new ArrayList<SimpleNamedDTO>();
 		for(Service service : ho.getHotel().getServices()) {
 			this.services.add(new SimpleNamedDTO(service));
