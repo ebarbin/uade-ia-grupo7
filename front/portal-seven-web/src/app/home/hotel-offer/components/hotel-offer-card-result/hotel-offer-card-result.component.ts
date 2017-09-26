@@ -16,7 +16,7 @@ import { ErrorHandlerService } from '../../../../shared/services/error-handler.s
 })
 export class HotelOfferCardResultComponent implements OnInit {
 
-  @Input()hotelOffers:HotelOfferHeader[];
+  @Input()hotelOffers:HotelOfferHeader[] = [];
 
   constructor(
     private errorHandlerService:ErrorHandlerService,
@@ -28,7 +28,7 @@ export class HotelOfferCardResultComponent implements OnInit {
       const dialogRef = this.dialog.open(HotelOfferDetailComponent, {
         height: '600px',
         width: '900px',
-        data: hotelOffer
+        data: {hotelOffer: hotelOffer}
       });
   
       dialogRef.afterClosed().subscribe(result => {

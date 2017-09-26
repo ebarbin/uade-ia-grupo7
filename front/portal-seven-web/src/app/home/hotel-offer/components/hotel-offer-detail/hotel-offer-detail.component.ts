@@ -2,6 +2,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import {MdDialogRef, MD_DIALOG_DATA} from '@angular/material';
 
 import { HotelOfferHeader } from '../../models/hotel-offer-header.model';
+import { HotelOffer } from '../../models/hotel-offer.model';
 
 @Component({
   selector: 'app-hotel-offer-detail',
@@ -10,8 +11,12 @@ import { HotelOfferHeader } from '../../models/hotel-offer-header.model';
 })
 export class HotelOfferDetailComponent implements OnInit {
 
-  constructor(public dialogRef: MdDialogRef<HotelOfferDetailComponent>,
-    @Inject(MD_DIALOG_DATA) public hotelOffer: HotelOfferHeader) {}
+  hotelOffer: HotelOffer;
+
+  constructor(
+    private dialogRef: MdDialogRef<HotelOfferDetailComponent>,
+    @Inject(MD_DIALOG_DATA) private data: { hotelOffer: HotelOffer }) {
+    }
 
     onClose(){
       this.dialogRef.close("Close");
@@ -23,6 +28,7 @@ export class HotelOfferDetailComponent implements OnInit {
     }
 
     ngOnInit() {
+      this.hotelOffer = this.data.hotelOffer;
     }
 
 }

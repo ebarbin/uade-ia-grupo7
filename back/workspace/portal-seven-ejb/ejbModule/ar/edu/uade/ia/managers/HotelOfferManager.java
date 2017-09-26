@@ -50,6 +50,7 @@ public class HotelOfferManager implements HotelOfferManagerRemote, HotelOfferMan
 	@Override
 	public HotelOfferDTO getDetail(Integer id) throws Exception {
 		HotelOffer ho = this.hotelOfferEJB.getDetail(id);
+		//TODO clear image data fields
 		return this.mapper.map(ho, HotelOfferDTO.class);
 	}
 

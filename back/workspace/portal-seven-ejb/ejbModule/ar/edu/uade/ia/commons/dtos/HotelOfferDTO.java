@@ -8,11 +8,21 @@ public class HotelOfferDTO implements Serializable {
 
 	private Integer id;
 
+	private HotelDTO hotel;
+	
 	public Integer getId() {
 		return id;
 	}
 
 	public void setId(Integer id) {
 		this.id = id;
+	}
+
+	public HotelDTO getHotel() {
+		return hotel;
+	}
+
+	public void setHotel(HotelDTO hotel) {
+		this.hotel = hotel;
 	}
 }

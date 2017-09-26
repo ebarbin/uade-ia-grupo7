@@ -8,6 +8,7 @@ import { AgmCoreModule } from '@agm/core';
 import { AngularFontAwesomeModule } from 'angular-font-awesome/angular-font-awesome';
 import { BlockUIModule } from 'ng-block-ui';
 import { ToastrModule } from 'ngx-toastr';
+import { NgxGalleryModule } from 'ngx-gallery';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -66,6 +67,7 @@ import { ErrorHandlerService } from './shared/services/error-handler.service';
 import { JoinPipe } from './shared/pipes/join.pipe';
 import { TruncatePipe } from './shared/pipes/truncate.pipe';
 import { FirstPipe } from './shared/pipes/first.pipe';
+import { ImgGalleryComponent } from './shared/components/img-gallery/img-gallery.component';
 
 @NgModule({
   declarations: [
@@ -93,7 +95,8 @@ import { FirstPipe } from './shared/pipes/first.pipe';
     PackageOfferDetailComponent,
     JoinPipe,
     TruncatePipe,
-    FirstPipe
+    FirstPipe,
+    ImgGalleryComponent
   ],
   imports: [
     BrowserModule,
@@ -104,6 +107,7 @@ import { FirstPipe } from './shared/pipes/first.pipe';
     BrowserAnimationsModule,
     AngularFontAwesomeModule,
     BlockUIModule,
+    NgxGalleryModule,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyCAyih95bNn9V9XXdUe6DQaLGCw_R0_uXA'
     }),
