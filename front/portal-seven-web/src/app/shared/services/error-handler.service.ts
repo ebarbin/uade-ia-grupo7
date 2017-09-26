@@ -10,7 +10,7 @@ export class ErrorHandlerService {
   set(res:HttpErrorResponse) {
     if (res.error){
       if (typeof res.error != 'object') {
-        this.toastr.error(JSON.parse(res.error).errorMessage)
+        this.toastr.error(res.error)
       } else {
         this.toastr.error(res.error.errorMessage)
       }            

@@ -1,32 +1,21 @@
-<h2 md-dialog-title>OFERTA HOTELERA</h2>
+<h2 md-dialog-title>Hotel {{hotelOffer.hotel.name}}</h2>
 <md-dialog-content>
-  <h3>{{hotelOffer.hotel.name}}</h3>
 
-  <div class="col-md-12">
-      <div class="col-md-6">
-        <p> {{hotelOffer.hotel.description}} </p>
-      </div>
-      <div class="col-md-6">
-          <app-map [address]="hotelOffer.hotel.address"></app-map>
-      </div>
-  </div>
-    
-  <h3>SPEED & PERFORMANCE</h3>
-  <p>Achieve the maximum speed possible on the Web Platform today, and take it further, via Web 
-    Workers and server-side rendering. Angular puts you in control over scalability. Meet huge data requirements 
-    by building data models on RxJS, Immutable.js or another push-model.</p>
-  
-  <h3>INCREDIBLE TOOLING</h3>
-  <p>Build features quickly with simple, declarative templates. Extend the template language with your own 
-    components and use a wide array of existing components. Get immediate Angular-specific help and feedback 
-    with nearly every IDE and editor. All this comes together so you can focus on building amazing apps rather 
-    than trying to make the code work.</p>
+  <h3>Descripción</h3>
+  <p>{{hotelOffer.hotel.description}}</p>
 
+  <h3>Ubicación</h3>
+  <app-map [address]="hotelOffer.hotel.address"></app-map>
+
+  <h3>Habitación</h3>
+  <p>{{hotelOffer.cancellationPolicy}}</p>
+   
+  <h3>Politicas de cancelación</h3>
+  <p>{{hotelOffer.cancellationPolicy}}</p>
+
+  <h3>Imagenes del Hotel</h3>
   <app-img-gallery [images]="hotelOffer.hotel.images"></app-img-gallery>
 
-  <h3>LOVED BY MILLIONS</h3>
-  <p>From prototype through global deployment, Angular delivers the productivity and scalable infrastructure 
-    that supports Google's largest applications.</p>
 </md-dialog-content>
 <md-dialog-actions align="end">
     <button md-raised-button type="button" color="success" (click)="onReserve()">Reservar</button>
