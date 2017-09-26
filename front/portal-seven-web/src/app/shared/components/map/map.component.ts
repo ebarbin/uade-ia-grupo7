@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Address } from './../../../home/hotel-offer/models/address.model';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'app-map',
@@ -7,9 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MapComponent implements OnInit {
 
-  title: string = 'My first AGM project';
-  lat: number = 51.678418;
-  lng: number = 7.809007;
+  @Input()address: Address;
   
   constructor() { }
 

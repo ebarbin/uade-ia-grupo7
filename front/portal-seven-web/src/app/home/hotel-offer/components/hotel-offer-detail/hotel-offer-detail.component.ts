@@ -15,7 +15,7 @@ export class HotelOfferDetailComponent implements OnInit {
 
   constructor(
     private dialogRef: MdDialogRef<HotelOfferDetailComponent>,
-    @Inject(MD_DIALOG_DATA) private data: { hotelOffer: HotelOffer }) {
+    @Inject(MD_DIALOG_DATA) private data:HotelOffer) {
     }
 
     onClose(){
@@ -28,7 +28,8 @@ export class HotelOfferDetailComponent implements OnInit {
     }
 
     ngOnInit() {
-      this.hotelOffer = this.data.hotelOffer;
+      this.hotelOffer = this.data;
+      console.log(this.hotelOffer);
     }
 
 }

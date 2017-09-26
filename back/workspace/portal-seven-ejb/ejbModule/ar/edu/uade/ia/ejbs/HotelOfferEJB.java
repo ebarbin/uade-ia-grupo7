@@ -26,6 +26,7 @@ public class HotelOfferEJB {
      */
     public HotelOfferEJB() {}
 
+	@SuppressWarnings("unchecked")
 	public List<HotelOffer> search(HotelOfferRequestDTO hotelOfferRequest) {
 		Query query = this.em.createQuery("FROM HotelOffer");
 		return query.getResultList();

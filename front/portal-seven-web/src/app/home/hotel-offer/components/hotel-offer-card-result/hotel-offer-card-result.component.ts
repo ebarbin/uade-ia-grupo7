@@ -28,7 +28,7 @@ export class HotelOfferCardResultComponent implements OnInit {
       const dialogRef = this.dialog.open(HotelOfferDetailComponent, {
         height: '600px',
         width: '900px',
-        data: {hotelOffer: hotelOffer}
+        data: hotelOffer
       });
   
       dialogRef.afterClosed().subscribe(result => {
