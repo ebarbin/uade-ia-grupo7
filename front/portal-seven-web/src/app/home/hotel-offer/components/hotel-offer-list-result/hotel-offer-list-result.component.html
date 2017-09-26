@@ -6,7 +6,7 @@
         </md-card-header> -->
         
         <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
-            <img class="img-responsive" height="100" width="100" [src]="hotelOffer.images[0] | imageGetter">
+            <img class="img-responsive" height="100" width="100" [src]="hotelOffer.images | first | imageGetter">
         </div>
         <div class="col-lg-9 col-md-8 col-sm-8 col-xs-8">
             <b>{{hotelOffer.name}}</b>

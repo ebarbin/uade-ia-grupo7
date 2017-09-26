@@ -5,7 +5,7 @@
         <md-header-cell *mdHeaderCellDef>Hotel</md-header-cell>
         <md-cell *mdCellDef="let hotelOffer"> 
           <img class="img-circle" height="30" width="30" 
-          [src]="hotelOffer.images[0] | imageGetter">
+          [src]="hotelOffer.images | first | imageGetter">
           {{hotelOffer.name}} 
         </md-cell>
       </ng-container>

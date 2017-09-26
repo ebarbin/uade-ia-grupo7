@@ -65,6 +65,7 @@ import { HotelOfferService } from './home/hotel-offer/services/hotel-offer.servi
 import { ErrorHandlerService } from './shared/services/error-handler.service';
 import { JoinPipe } from './shared/pipes/join.pipe';
 import { TruncatePipe } from './shared/pipes/truncate.pipe';
+import { FirstPipe } from './shared/pipes/first.pipe';
 
 @NgModule({
   declarations: [
@@ -91,7 +92,8 @@ import { TruncatePipe } from './shared/pipes/truncate.pipe';
     PackageOfferListResultComponent,
     PackageOfferDetailComponent,
     JoinPipe,
-    TruncatePipe
+    TruncatePipe,
+    FirstPipe
   ],
   imports: [
     BrowserModule,
