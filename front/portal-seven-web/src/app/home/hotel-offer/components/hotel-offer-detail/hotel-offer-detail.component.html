@@ -1,29 +1,33 @@
 <h2 md-dialog-title>Hotel {{hotelOffer.hotel.name}}</h2>
 <md-dialog-content>
-
   <h3>Descripción</h3>
   <p>{{hotelOffer.hotel.description}}</p>
-   
   <h3>Politicas de cancelación</h3>
   <p>{{hotelOffer.cancellationPolicy}}</p>
-
   <h3>Imagenes del Hotel</h3>
   <app-img-gallery [images]="hotelOffer.hotel.images"></app-img-gallery>
-
   <hr>
-  <md-tab-group>
-    <md-tab label="Habitacióna">
-      Contenido de la habitacion de la oferta
-    </md-tab>
-    <md-tab label="Otras Habitaciones">
-      Otras Habitaciones
-    </md-tab>
-  </md-tab-group>
-  <hr>
-
   <h3>Ubicación</h3>
   <app-map [address]="hotelOffer.hotel.address"></app-map>
-
+  <hr>
+  <md-tab-group>
+    <md-tab label="Habitación">
+      <h3>Descripción</h3>
+      <p>{{hotelOffer.room.description}}</p>
+      <p>Tipo: {{hotelOffer.room.type}}</p>
+      <h3>Imagenes de la habitación</h3>
+      <app-img-gallery [images]="hotelOffer.room.images"></app-img-gallery>
+    </md-tab>
+    <md-tab label="Otras Habitaciones">
+      <div *ngFor="let room of hotelOffer.hotel.rooms">
+        <h3>Descripción</h3>
+        <p>{{room.description}}</p>
+        <p>Tipo: {{room.type}}</p>
+        <h3>Imagenes de la habitación</h3>
+        <app-img-gallery [images]="room.images"></app-img-gallery>
+      </div>
+    </md-tab>
+  </md-tab-group>
 </md-dialog-content>
 <md-dialog-actions align="end">
     <button md-raised-button type="button" color="success" (click)="onReserve()">Reservar</button>

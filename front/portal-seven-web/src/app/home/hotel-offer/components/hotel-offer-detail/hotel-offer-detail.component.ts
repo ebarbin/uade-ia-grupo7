@@ -29,7 +29,6 @@ export class HotelOfferDetailComponent implements OnInit {
 
     ngOnInit() {
       this.hotelOffer = this.data;
-      console.log(this.hotelOffer);
     }
 
 }
