@@ -52,7 +52,6 @@ public class ImageService {
 			MultipartFormDataInput input) {
 		try {
 			List<InputPart> inputParts = input.getFormDataMap().get("uploadFile");
-			inputParts.get(0);
 			InputStream inputStream = inputParts.get(0).getBody(InputStream.class, null);
 			byte[] bytes = IOUtils.toByteArray(inputStream);
 			PortalUserDTO userDTO = this.userManager.addImage(userId, bytes);
