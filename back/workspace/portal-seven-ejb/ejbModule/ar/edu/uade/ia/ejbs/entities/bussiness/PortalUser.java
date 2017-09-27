@@ -5,8 +5,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "portaluser")
-public class User extends PersistentObject {
+@Table(name = "portal_user")
+public class PortalUser extends PersistentObject {
 
 	private static final long serialVersionUID = -580923980124579922L;
 

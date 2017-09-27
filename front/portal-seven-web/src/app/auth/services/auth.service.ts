@@ -5,7 +5,7 @@ import { ToastrService } from 'ngx-toastr';
 
 import 'rxjs/Rx';
 
-import { User } from '../../home/user-profile/models/user.model';
+import { PortalUser } from '../../home/user-profile/models/portal-user.model';
 import { PortalResponse } from '../../shared/models/portal-response.model';
 import { UserService } from '../../home/user-profile/services/user.service';
 import { ErrorHandlerService } from '../../shared/services/error-handler.service';
@@ -13,7 +13,7 @@ import { ErrorHandlerService } from '../../shared/services/error-handler.service
 @Injectable()
 export class AuthService implements OnInit {
 
-  private user: User;
+  private user: PortalUser;
   
   constructor(
     private errorHandlerService:ErrorHandlerService,
@@ -23,7 +23,7 @@ export class AuthService implements OnInit {
     private toastr: ToastrService) {}
 
   ngOnInit(){
-    this.userService.userChanged.subscribe((user:User)=>{
+    this.userService.userChanged.subscribe((user:PortalUser)=>{
       this.user = user;
     })
   }
@@ -32,18 +32,18 @@ export class AuthService implements OnInit {
     return this.user ? Object.assign({}, this.user) : null;
   }
 
-  public setUser(user:User){
+  public setUser(user:PortalUser){
     this.user = user;
   }
 
   signin(userName: string) {
-    return this.httpClient.get('portal-seven-web/api/rest/user/' + userName)
+    return this.httpClient.get('portal-seven-web/api/rest/portal-user/' + userName)
       .map((response:PortalResponse)=>{
           return response;
       })
       .toPromise().then((response:PortalResponse)=>{
           if (response.success){
-            this.user = <User>response.data;
+            this.user = <PortalUser>response.data;
             this.router.navigate(['home']);
           }
       }).catch((res:HttpErrorResponse) => {

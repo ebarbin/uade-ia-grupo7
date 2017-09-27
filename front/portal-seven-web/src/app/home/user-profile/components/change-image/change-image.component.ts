@@ -7,7 +7,7 @@ import { AuthService } from '../../../../auth/services/auth.service';
 import { ToastrService } from 'ngx-toastr';
 import { PortalResponse } from '../../../../shared/models/portal-response.model';
 import { UserService } from '../../services/user.service';
-import { User } from '../../models/user.model';
+import { PortalUser } from '../../models/portal-user.model';
 import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
@@ -36,7 +36,7 @@ export class ChangeImageComponent implements OnInit {
       this.imageService.uploadImage(this.authService.getUser(), formData)
         .then((response:PortalResponse) => {
           if (response.success) {
-            this.userService.userChanged.next(<User>response.data);
+            this.userService.userChanged.next(<PortalUser>response.data);
             this.toastr.success('Imagen actualizada exitosamente.');
             this.dialogRef.close();
           } else {

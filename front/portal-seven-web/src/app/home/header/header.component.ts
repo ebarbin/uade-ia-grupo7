@@ -5,7 +5,7 @@ import { Subscription } from 'rxjs/Subscription';
 import { AuthService } from '../../auth/services/auth.service';
 import { UserService } from '../user-profile/services/user.service';
 
-import { User } from '../user-profile/models/user.model';
+import { PortalUser } from '../user-profile/models/portal-user.model';
 
 @Component({
   selector: 'app-header',
@@ -18,12 +18,12 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   constructor(private userService:UserService, private authService:AuthService) { }
 
-  user: User;
+  user: PortalUser;
   isCollapsedContent:boolean = false;
 
   ngOnInit() {
     this.user = this.authService.getUser();
-    this.userSubs = this.userService.userChanged.subscribe((user:User)=>{
+    this.userSubs = this.userService.userChanged.subscribe((user:PortalUser)=>{
       this.user = Object.assign({}, user);
     });
   }

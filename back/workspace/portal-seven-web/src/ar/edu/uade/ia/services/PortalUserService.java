@@ -14,7 +14,7 @@ import ar.edu.uade.ia.commons.dtos.PortalUserDTO;
 import ar.edu.uade.ia.managers.interfaces.PortalUserManagerRemote;
 import ar.edu.uade.ia.services.response.PortalResponse;
 
-@Path("/user")
+@Path("/portal-user")
 @Stateless
 public class PortalUserService {
 

@@ -2,14 +2,14 @@ package ar.edu.uade.ia.managers.interfaces;
 
 import javax.ejb.Remote;
 
-import ar.edu.uade.ia.commons.dtos.UserDTO;
+import ar.edu.uade.ia.commons.dtos.PortalUserDTO;
 
 @Remote
-public interface UserManagerRemote {
+public interface PortalUserManagerRemote {
 
-	UserDTO login(String userName) throws Exception;
+	PortalUserDTO login(String userName) throws Exception;
 	
-	UserDTO update (Integer id, UserDTO userDTO) throws Exception;
+	PortalUserDTO update (Integer id, PortalUserDTO userDTO) throws Exception;
 	
-	UserDTO addImage(Integer userId, byte[] bytes) throws Exception;
+	PortalUserDTO addImage(Integer userId, byte[] bytes) throws Exception;
 }

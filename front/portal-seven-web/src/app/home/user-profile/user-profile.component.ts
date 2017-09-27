@@ -6,7 +6,7 @@ import { Subscription } from 'rxjs/Subscription';
 import { AuthService } from '../../auth/services/auth.service';
 import { UserService } from './services/user.service';
 
-import { User } from './models/user.model';
+import { PortalUser } from './models/portal-user.model';
 import { Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
 
@@ -20,9 +20,9 @@ import { ChangeImageComponent } from './components/change-image/change-image.com
 })
 export class UserProfileComponent implements OnInit, OnDestroy {
 
-  userSubs:Subscription;
+  userSubs: Subscription;
 
-  user:User;
+  user: PortalUser;
 
   constructor(
     private dialog: MdDialog,
@@ -32,7 +32,7 @@ export class UserProfileComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.user =  Object.assign({}, this.auth.getUser());
-    this.userSubs = this.userService.userChanged.subscribe((user:User)=>{
+    this.userSubs = this.userService.userChanged.subscribe((user:PortalUser)=>{
       this.user = Object.assign({}, user);
     })
   }

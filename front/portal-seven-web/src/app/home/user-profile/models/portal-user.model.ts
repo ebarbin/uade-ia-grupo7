@@ -1,6 +1,6 @@
 import { Image } from '../../../shared/models/image.model';
 
-export class User {
+export class PortalUser {
 
     constructor(
         public id:number,
