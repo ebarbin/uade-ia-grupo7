@@ -31,3 +31,7 @@
 .mat-expansion-panel-content {
     height: auto;
 }
+
+body {
+	background: url('portal-seven-web/assets/images/background.png');
+}
