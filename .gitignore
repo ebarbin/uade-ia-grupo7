@@ -9,3 +9,5 @@ dist/
 
 back/workspace/RemoteSystemsTempFiles/
 *.MF
+
+back/workspace/portal-seven-web/META-INF/

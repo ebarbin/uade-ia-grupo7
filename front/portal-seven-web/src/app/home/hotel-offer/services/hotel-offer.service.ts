@@ -24,7 +24,13 @@ export class HotelOfferService {
       return this.httpClient.get('portal-seven-web/api/rest/hotel-offer/detail/' + hotelOfferHeader.id)
       .map((response:PortalResponse)=>{
         if(response.success) {
-          return <HotelOffer>response.data;
+          var hotelOffer = <HotelOffer>response.data;
+
+          hotelOffer.hotel.rooms = hotelOffer.hotel.rooms.filter((room)=>{
+            return room.id != hotelOffer.room.id;
+          });
+
+          return hotelOffer;
         }
       }).toPromise();
     }

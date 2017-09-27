@@ -19,7 +19,7 @@ export class UserService {
     private toastr:ToastrService) { }
 
   update(user: PortalUser){
-    this.httpClient.put('portal-seven-web/api/rest/user/'+ user.id, user)
+    this.httpClient.put('portal-seven-web/api/rest/portal-user/'+ user.id, user)
       .map((response:PortalResponse)=>{
       return response;
     }).toPromise().then((response:PortalResponse) => {

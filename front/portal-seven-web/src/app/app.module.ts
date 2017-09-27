@@ -68,6 +68,7 @@ import { JoinPipe } from './shared/pipes/join.pipe';
 import { TruncatePipe } from './shared/pipes/truncate.pipe';
 import { FirstPipe } from './shared/pipes/first.pipe';
 import { ImgGalleryComponent } from './shared/components/img-gallery/img-gallery.component';
+import { WhenNullPutBlankPipe } from './shared/pipes/when-null-put-blank.pipe';
 
 @NgModule({
   declarations: [
@@ -96,7 +97,8 @@ import { ImgGalleryComponent } from './shared/components/img-gallery/img-gallery
     JoinPipe,
     TruncatePipe,
     FirstPipe,
-    ImgGalleryComponent
+    ImgGalleryComponent,
+    WhenNullPutBlankPipe
   ],
   imports: [
     BrowserModule,

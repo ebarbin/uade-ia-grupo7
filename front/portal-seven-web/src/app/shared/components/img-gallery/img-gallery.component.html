@@ -1,1 +1,2 @@
-<ngx-gallery *ngIf="galleryImages" [options]="galleryOptions" [images]="galleryImages"></ngx-gallery>
+<ngx-gallery *ngIf="galleryImages.length > 0" [options]="galleryOptions" [images]="galleryImages"></ngx-gallery>
+<label *ngIf="galleryImages.length == 0">No hay imagenes</label>
