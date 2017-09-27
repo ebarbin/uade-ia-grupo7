@@ -33,8 +33,12 @@ public class AutocompleteManager implements AutocompleteManagerRemote, Autocompl
 	public List<SimpleNamedDTO> queryHotels(String value, Integer limit) throws Exception {
 		List<SimpleNamedDTO> results = new ArrayList<SimpleNamedDTO>();
 		List<Hotel> hotels = this.autocompleteEJB.hotelQuery(value, limit);
+		SimpleNamedDTO simpleNamedDTO;
 		for (Hotel hotel : hotels) {
-			results.add(new SimpleNamedDTO(hotel.getId(), hotel.getName()));
+			simpleNamedDTO = new SimpleNamedDTO();
+			simpleNamedDTO.setId(hotel.getId());
+			simpleNamedDTO.setName(hotel.getName());
+			results.add(simpleNamedDTO);
 		}
 		return results;
 	}
@@ -43,8 +47,12 @@ public class AutocompleteManager implements AutocompleteManagerRemote, Autocompl
 	public List<SimpleNamedDTO> queryDestinations(String value, Integer limit) throws Exception {
 		List<SimpleNamedDTO> results = new ArrayList<SimpleNamedDTO>();
 		List<Destination> destinations = this.autocompleteEJB.destinationQuery(value, limit);
+		SimpleNamedDTO simpleNamedDTO;
 		for (Destination destination : destinations) {
-			results.add(new SimpleNamedDTO(destination.getId(), destination.getName()));
+			simpleNamedDTO = new SimpleNamedDTO();
+			simpleNamedDTO.setId(destination.getId());
+			simpleNamedDTO.setName(destination.getName());
+			results.add(simpleNamedDTO);
 		}
 		return results;
 	}

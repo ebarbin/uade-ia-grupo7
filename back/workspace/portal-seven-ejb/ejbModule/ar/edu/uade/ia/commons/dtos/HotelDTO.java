@@ -16,6 +16,14 @@ public class HotelDTO implements Serializable {
 	private List<ImageDTO>images;
 	
 	private AddressDTO address;
+	
+	private List<RoomDTO>rooms;
+	
+	private List<SimpleNamedDTO>services;
+	
+	private List<SimpleNamedDTO>paymentMethods;
+	
+	private Boolean state;
 
 	public Integer getId() {
 		return id;
@@ -55,5 +63,37 @@ public class HotelDTO implements Serializable {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	public List<RoomDTO> getRooms() {
+		return rooms;
+	}
+
+	public void setRooms(List<RoomDTO> rooms) {
+		this.rooms = rooms;
+	}
+
+	public List<SimpleNamedDTO> getServices() {
+		return services;
+	}
+
+	public void setServices(List<SimpleNamedDTO> services) {
+		this.services = services;
+	}
+
+	public List<SimpleNamedDTO> getPaymentMethods() {
+		return paymentMethods;
+	}
+
+	public void setPaymentMethods(List<SimpleNamedDTO> paymentMethods) {
+		this.paymentMethods = paymentMethods;
+	}
+
+	public Boolean getState() {
+		return state;
+	}
+
+	public void setState(Boolean state) {
+		this.state = state;
 	}
 }
