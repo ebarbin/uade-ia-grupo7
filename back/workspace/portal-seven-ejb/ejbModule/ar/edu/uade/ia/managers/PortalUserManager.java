@@ -20,11 +20,9 @@ import ar.edu.uade.ia.managers.interfaces.PortalUserManagerRemote;
  */
 @Stateless
 @LocalBean
-public class PortalManager implements PortalUserManagerRemote, PortalUserManagerLocal {
+public class PortalUserManager implements PortalUserManagerRemote, PortalUserManagerLocal {
 
 	private Mapper mapper = DozerBeanMapperBuilder.buildDefault();
-
-	// private ListMapperDecorator listMapper = new ListMapperDecorator(mapper);
 
 	@EJB
 	private PortalUserEJB userEJB;
@@ -35,8 +33,7 @@ public class PortalManager implements PortalUserManagerRemote, PortalUserManager
 	/**
 	 * Default constructor.
 	 */
-	public PortalManager() {
-	}
+	public PortalUserManager() {}
 
 	@Override
 	public PortalUserDTO login(String userName) throws Exception {
@@ -48,13 +45,14 @@ public class PortalManager implements PortalUserManagerRemote, PortalUserManager
 	}
 
 	@Override
-	public PortalUserDTO update(Integer id, PortalUserDTO userDTO) throws Exception {
-		PortalUser user = this.userEJB.getById(id);
-		user.setEmail(userDTO.getEmail());
-		user.setFirstName(userDTO.getFirstName());
-		user.setSureName(userDTO.getSureName());
-		user = this.userEJB.update(user);
-		return this.mapper.map(user, PortalUserDTO.class);
+	public PortalUserDTO update(Integer id, PortalUserDTO portalUserDTO) throws Exception {
+		PortalUser portalUser = this.userEJB.getById(id);
+		portalUser.setEmail(portalUserDTO.getEmail());
+		portalUser.setFirstName(portalUserDTO.getFirstName());
+		portalUser.setSureName(portalUserDTO.getSureName());
+		portalUser = this.userEJB.update(portalUser);
+		
+		return this.mapper.map(portalUser, PortalUserDTO.class);
 	}
 
 	@Override
