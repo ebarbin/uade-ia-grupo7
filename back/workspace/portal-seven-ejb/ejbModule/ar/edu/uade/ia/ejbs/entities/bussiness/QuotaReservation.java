@@ -1,6 +1,5 @@
 package ar.edu.uade.ia.ejbs.entities.bussiness;
 
-import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
 
@@ -21,10 +20,10 @@ public class QuotaReservation extends PersistentObject {
 	private static final long serialVersionUID = 4555465608403169617L;
 
 	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name="uuser")
+	@JoinColumn(name="portaluser")
 	private User user;
 	
-	private Timestamp reservationDate;
+	private Date reservationDate;
 	
 	private Float totalPrice;
 	
@@ -36,6 +35,7 @@ public class QuotaReservation extends PersistentObject {
 	
 	private Date start;
 	
+	@Column(name="eend")
 	private Date end;
 	
 	public List<Quota> getQuotas() {
@@ -54,11 +54,11 @@ public class QuotaReservation extends PersistentObject {
 		this.user = user;
 	}
 
-	public Timestamp getReservationDate() {
+	public Date getReservationDate() {
 		return reservationDate;
 	}
 
-	public void setReservationDate(Timestamp reservationDate) {
+	public void setReservationDate(Date reservationDate) {
 		this.reservationDate = reservationDate;
 	}
 

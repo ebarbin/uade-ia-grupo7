@@ -21,6 +21,7 @@ public class PackageOffer extends PersistentObject {
 
 	private Date start;
 	
+	@Column(name="offer_end")
 	private Date end;
 	
 	private Float price;

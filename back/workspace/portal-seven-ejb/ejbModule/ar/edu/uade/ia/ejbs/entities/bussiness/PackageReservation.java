@@ -16,7 +16,7 @@ public class PackageReservation extends PersistentObject {
 	private static final long serialVersionUID = 1322663302447235060L;
 
 	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name="uuser")
+	@JoinColumn(name="portaluser")
 	private User user;
 	
 	private Date reservationDate;
