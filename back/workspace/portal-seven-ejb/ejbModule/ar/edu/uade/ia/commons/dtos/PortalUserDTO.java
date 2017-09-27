@@ -2,7 +2,7 @@ package ar.edu.uade.ia.commons.dtos;
 
 import java.io.Serializable;
 
-public class UserDTO implements Serializable {
+public class PortalUserDTO implements Serializable {
 
 	private static final long serialVersionUID = -1894418050880651314L;
 

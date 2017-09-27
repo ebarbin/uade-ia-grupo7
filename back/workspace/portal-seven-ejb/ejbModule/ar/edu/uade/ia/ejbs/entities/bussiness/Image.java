@@ -6,7 +6,7 @@ import javax.persistence.Lob;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="Image")
+@Table(name="image")
 public class Image extends PersistentObject {
 	
 	private static final long serialVersionUID = -2382376870718857038L;

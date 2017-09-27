@@ -18,9 +18,9 @@ import org.jboss.resteasy.plugins.providers.multipart.InputPart;
 import org.jboss.resteasy.plugins.providers.multipart.MultipartFormDataInput;
 
 import ar.edu.uade.ia.commons.dtos.ImageDTO;
-import ar.edu.uade.ia.commons.dtos.UserDTO;
+import ar.edu.uade.ia.commons.dtos.PortalUserDTO;
 import ar.edu.uade.ia.managers.interfaces.ImageManagerRemote;
-import ar.edu.uade.ia.managers.interfaces.UserManagerRemote;
+import ar.edu.uade.ia.managers.interfaces.PortalUserManagerRemote;
 import ar.edu.uade.ia.services.response.PortalResponse;
 
 @Path("/image")
@@ -31,7 +31,7 @@ public class ImageService {
 	private ImageManagerRemote imageManager;
 
 	@EJB
-	private UserManagerRemote userManager;
+	private PortalUserManagerRemote userManager;
 	
 	@GET
 	@Path("/{id}")
@@ -55,7 +55,7 @@ public class ImageService {
 			inputParts.get(0);
 			InputStream inputStream = inputParts.get(0).getBody(InputStream.class, null);
 			byte[] bytes = IOUtils.toByteArray(inputStream);
-			UserDTO userDTO = this.userManager.addImage(userId, bytes);
+			PortalUserDTO userDTO = this.userManager.addImage(userId, bytes);
 			return Response.ok(new PortalResponse(userDTO)).build();
 		} catch (Exception e) {
 			return Response.status(Response.Status.BAD_REQUEST).entity(new PortalResponse(e.getMessage())).build();

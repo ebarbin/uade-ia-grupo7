@@ -10,23 +10,23 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-import ar.edu.uade.ia.commons.dtos.UserDTO;
-import ar.edu.uade.ia.managers.interfaces.UserManagerRemote;
+import ar.edu.uade.ia.commons.dtos.PortalUserDTO;
+import ar.edu.uade.ia.managers.interfaces.PortalUserManagerRemote;
 import ar.edu.uade.ia.services.response.PortalResponse;
 
 @Path("/user")
 @Stateless
-public class UserService {
+public class PortalUserService {
 
 	@EJB
-	private UserManagerRemote userManager;
+	private PortalUserManagerRemote portalUserManager;
 
 	@GET
 	@Path("/{userName}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response login(@PathParam("userName") String userName) {
 		try {
-			return Response.ok(new PortalResponse(this.userManager.login(userName))).build();
+			return Response.ok(new PortalResponse(this.portalUserManager.login(userName))).build();
 		} catch (Exception e) {
 			return Response.status(Response.Status.BAD_REQUEST).entity(new PortalResponse(e.getMessage())).build();
 		}
@@ -35,9 +35,9 @@ public class UserService {
 	@PUT
 	@Path("/{id}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response update(@PathParam("id") Integer id, UserDTO userDTO) {
+	public Response update(@PathParam("id") Integer id, PortalUserDTO userDTO) {
 		try {
-			return Response.ok(new PortalResponse(this.userManager.update(id, userDTO))).build();
+			return Response.ok(new PortalResponse(this.portalUserManager.update(id, userDTO))).build();
 		} catch (Exception e) {
 			return Response.status(Response.Status.BAD_REQUEST).entity(new PortalResponse(e.getMessage())).build();
 		}

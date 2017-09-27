@@ -13,10 +13,11 @@ public class HotelOffer extends PersistentObject {
 
 	private static final long serialVersionUID = -5955498653697555495L;
 
-	private Date start;
+	@Column(name="offer_start")
+	private Date offerStart;
 	
 	@Column(name="offer_end")
-	private Date end;
+	private Date offerEnd;
 	
 	private Float price;
 
@@ -60,19 +61,19 @@ public class HotelOffer extends PersistentObject {
 		this.cancellationPolicy = cancellationPolicy;
 	}
 
-	public Date getStart() {
-		return start;
+	public Date getOfferStart() {
+		return offerStart;
 	}
 
-	public void setStart(Date start) {
-		this.start = start;
+	public void setOfferStart(Date offerStart) {
+		this.offerStart = offerStart;
 	}
 
-	public Date getEnd() {
-		return end;
+	public Date getOfferEnd() {
+		return offerEnd;
 	}
 
-	public void setEnd(Date end) {
-		this.end = end;
+	public void setOfferEnd(Date offerEnd) {
+		this.offerEnd = offerEnd;
 	}
 }

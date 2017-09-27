@@ -3,7 +3,6 @@ package ar.edu.uade.ia.ejbs.entities.bussiness;
 import java.util.Date;
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -19,10 +18,11 @@ public class PackageOffer extends PersistentObject {
 
 	private static final long serialVersionUID = 6647993123948723384L;
 
-	private Date start;
+	@Column(name="offer_start")
+	private Date offerStart;
 	
 	@Column(name="offer_end")
-	private Date end;
+	private Date offerEnd;
 	
 	private Float price;
 	
@@ -112,20 +112,22 @@ public class PackageOffer extends PersistentObject {
 		this.agency = agency;
 	}
 
-	public Date getStart() {
-		return start;
+	
+
+	public Date getOfferStart() {
+		return offerStart;
 	}
 
-	public void setStart(Date start) {
-		this.start = start;
+	public void setOfferStart(Date offerStart) {
+		this.offerStart = offerStart;
 	}
 
-	public Date getEnd() {
-		return end;
+	public Date getOfferEnd() {
+		return offerEnd;
 	}
 
-	public void setEnd(Date end) {
-		this.end = end;
+	public void setOfferEnd(Date offerEnd) {
+		this.offerEnd = offerEnd;
 	}
 
 	public Float getPrice() {

@@ -16,9 +16,10 @@ public class PackageReservation extends PersistentObject {
 	private static final long serialVersionUID = 1322663302447235060L;
 
 	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name="portaluser")
-	private User user;
+	@JoinColumn(name="portal_user_id")
+	private PortalUser portalUser;
 	
+	@Column(name="reservation_date")
 	private Date reservationDate;
 	
 	private Float totalPrice;
@@ -44,12 +45,12 @@ public class PackageReservation extends PersistentObject {
 		this.quotaQuantity = quotaQuantity;
 	}
 
-	public User getUser() {
-		return user;
+	public PortalUser getPortalUser() {
+		return portalUser;
 	}
 
-	public void setUser(User user) {
-		this.user = user;
+	public void setPortalUser(PortalUser portalUser) {
+		this.portalUser = portalUser;
 	}
 
 	public Date getReservationDate() {

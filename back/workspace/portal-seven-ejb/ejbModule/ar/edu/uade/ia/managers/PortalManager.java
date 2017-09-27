@@ -7,27 +7,27 @@ import javax.ejb.Stateless;
 import org.dozer.DozerBeanMapperBuilder;
 import org.dozer.Mapper;
 
-import ar.edu.uade.ia.commons.dtos.UserDTO;
+import ar.edu.uade.ia.commons.dtos.PortalUserDTO;
 import ar.edu.uade.ia.ejbs.ImageEJB;
-import ar.edu.uade.ia.ejbs.UserEJB;
+import ar.edu.uade.ia.ejbs.PortalUserEJB;
 import ar.edu.uade.ia.ejbs.entities.bussiness.Image;
-import ar.edu.uade.ia.ejbs.entities.bussiness.User;
-import ar.edu.uade.ia.managers.interfaces.UserManagerLocal;
-import ar.edu.uade.ia.managers.interfaces.UserManagerRemote;
+import ar.edu.uade.ia.ejbs.entities.bussiness.PortalUser;
+import ar.edu.uade.ia.managers.interfaces.PortalUserManagerLocal;
+import ar.edu.uade.ia.managers.interfaces.PortalUserManagerRemote;
 
 /**
  * Session Bean implementation class UserManager
  */
 @Stateless
 @LocalBean
-public class UserManager implements UserManagerRemote, UserManagerLocal {
+public class PortalManager implements PortalUserManagerRemote, PortalUserManagerLocal {
 
 	private Mapper mapper = DozerBeanMapperBuilder.buildDefault();
 
 	// private ListMapperDecorator listMapper = new ListMapperDecorator(mapper);
 
 	@EJB
-	private UserEJB userEJB;
+	private PortalUserEJB userEJB;
 
 	@EJB
 	private ImageEJB imageEJB;
@@ -35,31 +35,31 @@ public class UserManager implements UserManagerRemote, UserManagerLocal {
 	/**
 	 * Default constructor.
 	 */
-	public UserManager() {
+	public PortalManager() {
 	}
 
 	@Override
-	public UserDTO login(String userName) throws Exception {
-		User user = this.userEJB.login(userName);
-		UserDTO userDTO = this.mapper.map(user, UserDTO.class);
+	public PortalUserDTO login(String userName) throws Exception {
+		PortalUser user = this.userEJB.login(userName);
+		PortalUserDTO userDTO = this.mapper.map(user, PortalUserDTO.class);
 		if (userDTO.getImage() != null)
 			userDTO.getImage().setData(null);
 		return userDTO;
 	}
 
 	@Override
-	public UserDTO update(Integer id, UserDTO userDTO) throws Exception {
-		User user = this.userEJB.getById(id);
+	public PortalUserDTO update(Integer id, PortalUserDTO userDTO) throws Exception {
+		PortalUser user = this.userEJB.getById(id);
 		user.setEmail(userDTO.getEmail());
 		user.setFirstName(userDTO.getFirstName());
 		user.setSureName(userDTO.getSureName());
 		user = this.userEJB.update(user);
-		return this.mapper.map(user, UserDTO.class);
+		return this.mapper.map(user, PortalUserDTO.class);
 	}
 
 	@Override
-	public UserDTO addImage(Integer userId, byte[] bytes) throws Exception {
-		User user = this.userEJB.getById(userId);
+	public PortalUserDTO addImage(Integer userId, byte[] bytes) throws Exception {
+		PortalUser user = this.userEJB.getById(userId);
 
 		Image image = new Image();
 		image.setData(bytes);
@@ -67,7 +67,7 @@ public class UserManager implements UserManagerRemote, UserManagerLocal {
 		user.setImage(image);
 		user = this.userEJB.update(user);
 
-		return this.mapper.map(user, UserDTO.class);
+		return this.mapper.map(user, PortalUserDTO.class);
 	}
 
 }

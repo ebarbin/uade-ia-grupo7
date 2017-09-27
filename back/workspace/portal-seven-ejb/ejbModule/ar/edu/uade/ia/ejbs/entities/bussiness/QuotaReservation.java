@@ -20,9 +20,10 @@ public class QuotaReservation extends PersistentObject {
 	private static final long serialVersionUID = 4555465608403169617L;
 
 	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name="portaluser")
-	private User user;
+	@JoinColumn(name="portal_user_id")
+	private PortalUser portalUser;
 	
+	@Column(name="reservation_date")
 	private Date reservationDate;
 	
 	private Float totalPrice;
@@ -33,10 +34,11 @@ public class QuotaReservation extends PersistentObject {
 					@JoinColumn(name = "quota_id", nullable = false, updatable = false) })
 	private List<Quota>quotas;
 	
-	private Date start;
+	@Column(name="reservation_start")
+	private Date reservationStart;
 	
-	@Column(name="eend")
-	private Date end;
+	@Column(name="reservation_end")
+	private Date reservationEnd;
 	
 	public List<Quota> getQuotas() {
 		return quotas;
@@ -46,12 +48,12 @@ public class QuotaReservation extends PersistentObject {
 		this.quotas = quotas;
 	}
 
-	public User getUser() {
-		return user;
+	public PortalUser getPortalUser() {
+		return portalUser;
 	}
 
-	public void setUser(User user) {
-		this.user = user;
+	public void setPortalUser(PortalUser portalUser) {
+		this.portalUser = portalUser;
 	}
 
 	public Date getReservationDate() {
@@ -70,19 +72,19 @@ public class QuotaReservation extends PersistentObject {
 		this.totalPrice = totalPrice;
 	}
 
-	public Date getStart() {
-		return start;
+	public Date getReservationStart() {
+		return reservationStart;
 	}
 
-	public void setStart(Date start) {
-		this.start = start;
+	public void setReservationStart(Date reservationStart) {
+		this.reservationStart = reservationStart;
 	}
 
-	public Date getEnd() {
-		return end;
+	public Date getReservationEnd() {
+		return reservationEnd;
 	}
 
-	public void setEnd(Date end) {
-		this.end = end;
+	public void setReservationEnd(Date reservationEnd) {
+		this.reservationEnd = reservationEnd;
 	}
 }

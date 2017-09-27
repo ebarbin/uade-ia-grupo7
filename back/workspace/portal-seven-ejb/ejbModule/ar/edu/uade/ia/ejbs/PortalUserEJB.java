@@ -7,14 +7,14 @@ import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
-import ar.edu.uade.ia.ejbs.entities.bussiness.User;
+import ar.edu.uade.ia.ejbs.entities.bussiness.PortalUser;
 
 /**
  * Session Bean implementation class UserEJB
  */
 @Stateless
 @LocalBean
-public class UserEJB {
+public class PortalUserEJB {
 
 	@PersistenceContext(unitName = "mu")
 	protected EntityManager em;
@@ -22,25 +22,25 @@ public class UserEJB {
 	/**
 	 * Default constructor.
 	 */
-	public UserEJB() {
+	public PortalUserEJB() {
 	}
 
-	public User login(String userName) throws Exception {
+	public PortalUser login(String userName) throws Exception {
 		try {
-			Query query = this.em.createQuery("FROM User WHERE userName = :userName");
+			Query query = this.em.createQuery("FROM PortalUser WHERE userName = :userName");
 			query.setParameter("userName", userName);
-			return (User) query.getSingleResult();
+			return (PortalUser) query.getSingleResult();
 		} catch (NoResultException nre) {
 			throw new Exception("Usuario inexistente.");
 		}
 	}
 
-	public User update(User user) throws Exception {
+	public PortalUser update(PortalUser user) throws Exception {
 		return this.em.merge(user);
 	}
 
-	public User getById(Integer id) throws Exception {
-		User user = this.em.find(User.class, id);
+	public PortalUser getById(Integer id) throws Exception {
+		PortalUser user = this.em.find(PortalUser.class, id);
 		if (user == null) {
 			throw new Exception("Usuario inexistente.");
 		}

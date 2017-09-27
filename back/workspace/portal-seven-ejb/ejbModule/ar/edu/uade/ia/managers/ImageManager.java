@@ -9,9 +9,9 @@ import org.dozer.Mapper;
 
 import ar.edu.uade.ia.commons.dtos.ImageDTO;
 import ar.edu.uade.ia.ejbs.ImageEJB;
-import ar.edu.uade.ia.ejbs.UserEJB;
+import ar.edu.uade.ia.ejbs.PortalUserEJB;
 import ar.edu.uade.ia.ejbs.entities.bussiness.Image;
-import ar.edu.uade.ia.ejbs.entities.bussiness.User;
+import ar.edu.uade.ia.ejbs.entities.bussiness.PortalUser;
 import ar.edu.uade.ia.managers.interfaces.ImageManagerLocal;
 import ar.edu.uade.ia.managers.interfaces.ImageManagerRemote;
 
@@ -28,7 +28,7 @@ public class ImageManager implements ImageManagerRemote, ImageManagerLocal {
 	private ImageEJB imageEJB;
 
 	@EJB
-	private UserEJB userEJB;
+	private PortalUserEJB userEJB;
 
 	/**
 	 * Default constructor.
@@ -44,7 +44,7 @@ public class ImageManager implements ImageManagerRemote, ImageManagerLocal {
 
 	@Override
 	public ImageDTO save(Integer userId, byte[] bytes) throws Exception {
-		User user = this.userEJB.getById(userId);
+		PortalUser user = this.userEJB.getById(userId);
 		if (user.getImage() != null) {
 			user.getImage().setData(bytes);
 		} else {
