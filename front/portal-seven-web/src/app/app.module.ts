@@ -114,6 +114,7 @@ import { WhenNullPutBlankPipe } from './shared/pipes/when-null-put-blank.pipe';
       apiKey: 'AIzaSyCAyih95bNn9V9XXdUe6DQaLGCw_R0_uXA'
     }),
     ToastrModule.forRoot({
+      timeOut:2000,
       positionClass: 'toast-top-center',
       preventDuplicates: true,
     })

@@ -22,7 +22,11 @@ export class ErrorHandlerService {
     } else {
       try {
         var error = JSON.parse(res.error);
-        this.toastr.error(error.errorMessage);
+        if(error.errorMessage) {
+          this.toastr.error(error.errorMessage);
+        } else {
+          this.toastr.error('Ha ocurrido un error. Contacte a un administrador.');
+        }
       } catch (e) {
         this.toastr.error(res.error);
       }
