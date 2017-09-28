@@ -1,6 +1,7 @@
 package ar.edu.uade.ia.commons.dtos;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 
 public class HotelOfferHeaderDTO implements Serializable {
@@ -18,6 +19,12 @@ public class HotelOfferHeaderDTO implements Serializable {
 	private List<SimpleNamedDTO>services;
 	
 	private Float price;
+	
+	private Integer roomCapacity;
+	
+	private Date offerStart;
+	
+	private Date offerEnd;
 	
 	public HotelOfferHeaderDTO() {}
 	
@@ -67,5 +74,29 @@ public class HotelOfferHeaderDTO implements Serializable {
 
 	public void setImages(List<ImageDTO> images) {
 		this.images = images;
+	}
+
+	public Integer getRoomCapacity() {
+		return roomCapacity;
+	}
+
+	public void setRoomCapacity(Integer roomCapacity) {
+		this.roomCapacity = roomCapacity;
+	}
+
+	public Date getOfferStart() {
+		return offerStart;
+	}
+
+	public void setOfferStart(Date offerStart) {
+		this.offerStart = offerStart;
+	}
+
+	public Date getOfferEnd() {
+		return offerEnd;
+	}
+
+	public void setOfferEnd(Date offerEnd) {
+		this.offerEnd = offerEnd;
 	}
 }

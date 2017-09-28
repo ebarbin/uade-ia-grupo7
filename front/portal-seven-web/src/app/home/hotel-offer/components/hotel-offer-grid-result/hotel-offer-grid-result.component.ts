@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy,Input  } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 
 import { Subscription } from 'rxjs/Subscription'
 
@@ -20,9 +20,12 @@ import { ErrorHandlerService } from '../../../../shared/services/error-handler.s
 })
 export class HotelOfferGridResultComponent implements OnInit, OnDestroy {
 
-  dataSource: CustomDatasource;
+  @Input()hotelOffers:HotelOfferHeader[];
 
-  displayedColumns = [ 'name', 'description', 'services', 'price', 'action'];
+  private resultsChangeSub:Subscription;
+  
+  public dataSource: CustomDatasource;
+  public displayedColumns = [ 'name', 'description', 'services', 'price', 'roomCapacity', 'offerStart', 'offerEnd', 'action'];
 
   constructor(
     private errorHandlerService:ErrorHandlerService,
@@ -30,27 +33,31 @@ export class HotelOfferGridResultComponent implements OnInit, OnDestroy {
     private dialog: MdDialog) { }
 
   onDetail(hotelOfferHeader:HotelOfferHeader){
+
     this.hotelOfferService.getDetail(hotelOfferHeader).then((hotelOffer:HotelOffer)=>{
       const dialogRef = this.dialog.open(HotelOfferDetailComponent, {
         height: '600px',
         width: '900px',
         data: hotelOffer
-      });
+    });
   
-      dialogRef.afterClosed().subscribe(result => {
-        console.log(result);
-      });
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(result);
+    });
+
     }).catch((res:HttpErrorResponse)=>{
       this.errorHandlerService.set(res);
     });
   }
 
-  ngOnDestroy(){}
-  
-  @Input()hotelOffers:HotelOfferHeader[];
-  
   ngOnInit() {
     this.dataSource = new CustomDatasource(this.hotelOffers);
+    this.resultsChangeSub = this.hotelOfferService.resultsChanged.subscribe((data:HotelOfferHeader[])=>{
+      this.dataSource = new CustomDatasource(data);
+    });
   }
 
+  ngOnDestroy(){
+    this.resultsChangeSub.unsubscribe();
+  }
 }

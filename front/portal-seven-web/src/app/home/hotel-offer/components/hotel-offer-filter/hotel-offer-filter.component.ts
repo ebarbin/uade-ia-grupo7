@@ -33,12 +33,16 @@ export class HotelOfferFilterComponent implements OnInit {
     formValid(form:NgForm){
       if (!form.valid) return false;
 
-      if (form.value.fromDate && form.value.toDate){
-        if (form.value.fromDate > form.value.toDate){
-          return false;
-        }
-      }
+      /*var today = new Date();
+      if(form.value.fromDate && form.value.fromDate < today)
+        return false;
+      if(form.value.toDate && form.value.toDate < today)
+        return false;*/
 
+      if (form.value.fromDate && form.value.toDate)
+        if (form.value.fromDate > form.value.toDate)
+          return false;
+        
       return true;
     }
 
@@ -66,15 +70,14 @@ export class HotelOfferFilterComponent implements OnInit {
       this.reset.next({});
     }
 
+    onSubmit(form:NgForm){
+      this.fixForm(form)
+      this.search.next(form.value);
+    }
+
     private fixForm(form:NgForm){
       form.value.hotel = form.value.hotel && typeof form.value.hotel == 'object' ? form.value.hotel : null;
       form.value.peoplePerRoom = form.value.peoplePerRoom == -1 ? null : form.value.peoplePerRoom;
       form.value.roomQuantity = form.value.roomQuantity == -1 ? null : form.value.roomQuantity;
-    }
-
-    onSubmit(form:NgForm){
-      this.fixForm(form)
-      
-      this.search.next(form.value);
     }
 }

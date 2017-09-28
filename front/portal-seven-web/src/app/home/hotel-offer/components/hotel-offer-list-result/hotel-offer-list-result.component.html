@@ -1,15 +1,34 @@
 <div class="list-result">
     <md-card class="card-row card col-lg-12 col-md-12 col-sm-12 col-xs-12" *ngFor="let hotelOfferHeader of hotelOffers">
-        <div class="pull-left">
+
+        <div class="col-md-1">
             <img class="img-responsive" height="100" width="100" [src]="hotelOfferHeader.images | first | imageGetter">
         </div>
-        <div class="pull-left" style="margin-left:20px;">
+        <div class="col-md-2">
             <p><b>{{hotelOfferHeader.name}}</b></p>
             <p>{{hotelOfferHeader.description| truncate:100}}</p>
-            <p>{{hotelOfferHeader.services | join: ' - '}}</p>
-            <p><b>{{hotelOfferHeader.price | currency:'ARS':true}}</b></p>
         </div>
-        <div class="row pull-right">
+        <div class="col-md-2">
+            <p><b>Servicios</b></p>
+            <p>{{hotelOfferHeader.services | join: ' - '}}</p>
+        </div>
+        <div class="col-md-1">
+            <p><b>Precio</b></p>
+            <p>{{hotelOfferHeader.price | currency:'ARS':true}}</p>
+        </div>
+        <div class="col-md-2">
+            <p><b>Cap. Hab.</b></p>
+            <p>{{hotelOfferHeader.roomCapacity}}</p>
+        </div>
+        <div class="col-md-2">
+            <p><b>Desde</b></p>
+            <p>{{hotelOfferHeader.offerStart | date:'dd/MM/yyyy'}}</p>
+        </div>
+        <div class="col-md-2">
+            <p><b>Hasta</b></p>
+            <p>{{hotelOfferHeader.offerEnd | date:'dd/MM/yyyy'}}</p>
+        </div>
+        <div class="pull-right row">
             <button (click)="onDetail(hotelOfferHeader)" md-raised-button type="button" color="primary">Detalle</button>
         </div>
     </md-card>

@@ -1,3 +1,4 @@
+import { Subject } from 'rxjs/Subject';
 import { Router } from '@angular/router';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
@@ -13,7 +14,7 @@ import { HotelOffer } from '../models/hotel-offer.model';
 @Injectable()
 export class HotelOfferService {
 
-  public hotelOfferRequest:HotelOfferRequest;
+  resultsChanged:Subject<HotelOfferHeader[]> = new Subject;
 
   constructor(
     private httpClient:HttpClient, 
@@ -41,6 +42,7 @@ export class HotelOfferService {
           if(response.success) {
             var results = <HotelOfferHeader[]>response.data;
             if (results.length == 0) this.toastr.info('No hay resultados.')
+            this.resultsChanged.next(results);
             return results;
           }
         }).toPromise();

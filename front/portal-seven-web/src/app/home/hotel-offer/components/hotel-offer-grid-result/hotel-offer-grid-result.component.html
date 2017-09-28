@@ -1,5 +1,5 @@
 <div class="grid-result">  
-  <md-table #table [dataSource]="dataSource">
+  <md-table #table [dataSource]="dataSource" mdSort>
   
       <ng-container mdColumnDef="name">
         <md-header-cell *mdHeaderCellDef>Hotel</md-header-cell>
@@ -27,6 +27,21 @@
       <ng-container mdColumnDef="price">
           <md-header-cell *mdHeaderCellDef>Precio</md-header-cell>
           <md-cell *mdCellDef="let hotelOfferHeader"> {{hotelOfferHeader.price | currency:'ARS':true}} </md-cell>
+      </ng-container>
+
+      <ng-container mdColumnDef="roomCapacity">
+          <md-header-cell *mdHeaderCellDef>Cap. Hab.</md-header-cell>
+        <md-cell *mdCellDef="let hotelOfferHeader"> {{hotelOfferHeader.roomCapacity}} </md-cell>
+      </ng-container>
+
+      <ng-container mdColumnDef="offerStart">
+          <md-header-cell *mdHeaderCellDef>Desde</md-header-cell>
+        <md-cell *mdCellDef="let hotelOfferHeader"> {{hotelOfferHeader.offerStart | date:'dd/MM/yyyy'}} </md-cell>
+      </ng-container>
+
+      <ng-container mdColumnDef="offerEnd">
+          <md-header-cell *mdHeaderCellDef>Hasta</md-header-cell>
+        <md-cell *mdCellDef="let hotelOfferHeader"> {{hotelOfferHeader.offerEnd | date:'dd/MM/yyyy'}} </md-cell>
       </ng-container>
 
       <ng-container mdColumnDef="action">

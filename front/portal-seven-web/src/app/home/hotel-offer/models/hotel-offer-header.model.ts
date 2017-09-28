@@ -9,5 +9,8 @@ export class HotelOfferHeader {
         public images: Image[], 
         public description: string,
         public price: number,
+        public roomCapacity: number,
+        public offerStart: Date,
+        public offerEnd: Date,
         public services: SimpleNamed[]){}
 }

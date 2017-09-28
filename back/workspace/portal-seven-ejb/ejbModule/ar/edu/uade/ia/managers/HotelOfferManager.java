@@ -56,34 +56,36 @@ public class HotelOfferManager implements HotelOfferManagerRemote, HotelOfferMan
 	private List<HotelOfferHeaderDTO> convertToListOfHotelOfferHeaderDTO(List<HotelOffer> hotelOffers) {
 		List<HotelOfferHeaderDTO> results = new ArrayList<HotelOfferHeaderDTO>();
 
-		HotelOfferHeaderDTO hotelOfferHeaderDTO;
-		SimpleNamedDTO simpleNamedDTO;
+		HotelOfferHeaderDTO headerDTO;
+		SimpleNamedDTO namedDTO;
 		ImageDTO imageDTO;
 
 		for (HotelOffer hotelOffer : hotelOffers) {
-			hotelOfferHeaderDTO = new HotelOfferHeaderDTO();
+			headerDTO = new HotelOfferHeaderDTO();
 
-			hotelOfferHeaderDTO.setId(hotelOffer.getId());
-			hotelOfferHeaderDTO.setName(hotelOffer.getHotel().getName());
-			hotelOfferHeaderDTO.setDescription(hotelOffer.getHotel().getDescription());
-			hotelOfferHeaderDTO.setServices(new ArrayList<SimpleNamedDTO>());
+			headerDTO.setId(hotelOffer.getId());
+			headerDTO.setName(hotelOffer.getHotel().getName());
+			headerDTO.setDescription(hotelOffer.getHotel().getDescription());
+			headerDTO.setServices(new ArrayList<SimpleNamedDTO>());
 
 			for (Service service : hotelOffer.getHotel().getServices()) {
-				simpleNamedDTO = new SimpleNamedDTO();
-				simpleNamedDTO.setId(service.getId());
-				simpleNamedDTO.setName(service.getName());
-				hotelOfferHeaderDTO.getServices().add(simpleNamedDTO);
+				namedDTO = new SimpleNamedDTO();
+				namedDTO.setId(service.getId());
+				namedDTO.setName(service.getName());
+				headerDTO.getServices().add(namedDTO);
 			}
-			hotelOfferHeaderDTO.setPrice(hotelOffer.getPrice());
-
-			hotelOfferHeaderDTO.setImages(new ArrayList<ImageDTO>());
+			headerDTO.setPrice(hotelOffer.getPrice());
+			headerDTO.setRoomCapacity(hotelOffer.getRoom().getCapacity());
+			headerDTO.setImages(new ArrayList<ImageDTO>());
+			headerDTO.setOfferStart(hotelOffer.getOfferStart());
+			headerDTO.setOfferEnd(hotelOffer.getOfferEnd());
+			
 			for (Image img : hotelOffer.getHotel().getImages()) {
 				imageDTO = new ImageDTO();
 				imageDTO.setId(img.getId());
-				hotelOfferHeaderDTO.getImages().add(imageDTO);
+				headerDTO.getImages().add(imageDTO);
 			}
-
-			results.add(hotelOfferHeaderDTO);
+			results.add(headerDTO);
 		}
 		return results;
 	}
