@@ -42,8 +42,12 @@
         </div>
         <br>
         <div style="margin-bottom:10px;" class="pull-right">
-          <button md-raised-button type="submit" color="success" [disabled]="!formValid(form)">Buscar</button>
-          <button md-raised-button type="reset" color="warn" (click)="onReset()">Limpiar</button>
+          <button md-raised-button type="submit" color="success" [disabled]="!formValid(form)">
+             <i class="fa  fa-search" aria-hidden="true"></i> Buscar
+          </button>
+          <button md-raised-button type="reset" color="warn" (click)="onReset()">
+             <i class="fa fa-times" aria-hidden="true"></i> Limpiar
+          </button>
         </div>
   </form>
 </md-expansion-panel>

@@ -2,7 +2,8 @@
     <md-card class="card-row card col-lg-12 col-md-12 col-sm-12 col-xs-12" *ngFor="let hotelOfferHeader of hotelOffers">
 
         <div class="col-md-1">
-            <img class="img-responsive" height="100" width="100" [src]="hotelOfferHeader.images | first | imageGetter">
+            <img class="img-circle" height="60" width="60" style="margin-left:-10px; margin-top:10px;"
+            [src]="hotelOfferHeader.images | first | imageGetter">
         </div>
         <div class="col-md-2">
             <p><b>{{hotelOfferHeader.name}}</b></p>
@@ -29,7 +30,9 @@
             <p>{{hotelOfferHeader.offerEnd | date:'dd/MM/yyyy'}}</p>
         </div>
         <div class="pull-right row">
-            <button (click)="onDetail(hotelOfferHeader)" md-raised-button type="button" color="primary">Detalle</button>
+            <button (click)="onDetail(hotelOfferHeader)" md-raised-button type="button" color="primary">
+                <i class="fa fa-check" aria-hidden="true"></i> Detalle
+            </button>
         </div>
     </md-card>
 </div>

@@ -47,12 +47,12 @@ export class UserProfileComponent implements OnInit, OnDestroy {
 
   onChangeProfileImage(){
     const dialogRef = this.dialog.open(ChangeImageComponent, {
+      //height: '600px',
+      width: '500px',
       data: null
     });
   
-    dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
-    });
+    dialogRef.afterClosed().subscribe(result => {});
   }
 
   onSubmit(form:NgForm){

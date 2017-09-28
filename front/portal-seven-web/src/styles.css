@@ -41,5 +41,9 @@ body {
 }
 
 .mat-expansion-panel {
-    border:1px solid;
+    border:1px solid black;
+}
+
+.mat-dialog-container{
+    border: 1px solid black;
 }

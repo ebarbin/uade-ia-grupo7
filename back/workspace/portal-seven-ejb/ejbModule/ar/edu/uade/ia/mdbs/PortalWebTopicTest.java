@@ -19,11 +19,11 @@ import ar.edu.uade.ia.ejbs.entities.bussiness.PortalUser;
 @LocalBean
 public class PortalWebTopicTest {
 
-	@Resource(lookup = "java:/jms/topic/portalWebTopicTest")
+	//@Resource(lookup = "java:/jms/topic/portalWebTopicTest")
 	private Topic topic;
 
 	@Inject
-	@JMSConnectionFactory("java:/ConnectionFactory")
+	//@JMSConnectionFactory("java:/ConnectionFactory")
 	JMSContext context;
 	
     public PortalWebTopicTest() {}
