@@ -33,18 +33,15 @@ export class HotelOfferGridResultComponent implements OnInit, OnDestroy {
     private dialog: MdDialog) { }
 
   onDetail(hotelOfferHeader:HotelOfferHeader){
-
     this.hotelOfferService.getDetail(hotelOfferHeader).then((hotelOffer:HotelOffer)=>{
       const dialogRef = this.dialog.open(HotelOfferDetailComponent, {
         height: '600px',
         width: '900px',
         data: hotelOffer
-    });
-  
-    dialogRef.afterClosed().subscribe(result => {
-      console.log(result);
-    });
-
+      });
+      dialogRef.afterClosed().subscribe(result => {
+        console.log(result);
+      });
     }).catch((res:HttpErrorResponse)=>{
       this.errorHandlerService.set(res);
     });

@@ -1,6 +1,11 @@
+import { PackageOffer } from './../../models/package-offer.model';
+import { HttpErrorResponse } from '@angular/common/http';
+import { PackageOfferService } from './../../services/package-offer.service';
+import { ErrorHandlerService } from './../../../../shared/services/error-handler.service';
+import { Subscription } from 'rxjs/Subscription';
 import { PackageOfferHeader } from './../../models/package-offer-header.model';
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
-import { MdDialog, MdSort } from '@angular/material';
+import { Component, Input, OnInit } from '@angular/core';
+import { MdDialog } from '@angular/material';
 import { CustomDatasource } from '../../../../shared/models/custom-datasouce';
 import {
     PackageOfferDetailComponent
@@ -13,33 +18,40 @@ import {
 })
 export class PackageOfferGridResultComponent implements OnInit {
 
-  @ViewChild(MdSort) sort: MdSort;
+  @Input()packageOffers:PackageOfferHeader[];
+  private resultsChangeSub:Subscription;
 
-  dataSource: CustomDatasource;
-  
-  displayedColumns = ['id', 'name', 'image', 'other', 'action'];
+  public dataSource: CustomDatasource;
+  public displayedColumns = ['id', 'name', 'image', 'other', 'action'];
 
   constructor(
+    private errorHandlerService:ErrorHandlerService,
+    private packageOfferService: PackageOfferService,
     private dialog: MdDialog) { }
 
-  onDetail(packageOffer:PackageOfferHeader){
-    const dialogRef = this.dialog.open(PackageOfferDetailComponent, {
-      height: '600px',
-      width: '900px',
-      data: packageOffer
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
+  onDetail(packageOfferHeader:PackageOfferHeader){
+    this.packageOfferService.getDetail(packageOfferHeader).then((packageOffer:PackageOffer)=>{
+      const dialogRef = this.dialog.open(PackageOfferDetailComponent, {
+        height: '600px',
+        width: '900px',
+        data: packageOffer
+      });
+      dialogRef.afterClosed().subscribe(result => {
+        console.log(result);
+      });
+    }).catch((res:HttpErrorResponse)=>{
+      this.errorHandlerService.set(res);
     });
   }
 
-  ngOnDestroy(){}
-  
-  @Input()packageOffers:PackageOfferHeader[];
-  
   ngOnInit() {
     this.dataSource = new CustomDatasource(this.packageOffers);
+    this.resultsChangeSub = this.packageOfferService.resultsChanged.subscribe((data:PackageOfferHeader[])=>{
+      this.dataSource = new CustomDatasource(data);
+    });
   }
 
+  ngOnDestroy(){
+    this.resultsChangeSub.unsubscribe();
+  }
 }

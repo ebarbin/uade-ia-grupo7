@@ -25,6 +25,8 @@ export class HotelOfferService {
         if(response.success) {
           var hotelOffer = <HotelOffer>response.data;
 
+          //Como la habitacion de la oferta, esta dentro de las habitacion del hotel
+          //Debo quitarla de la lista de habitaciones, para no verla nuevamente.
           hotelOffer.hotel.rooms = hotelOffer.hotel.rooms.filter((room)=>{
             return room.id != hotelOffer.room.id;
           });
