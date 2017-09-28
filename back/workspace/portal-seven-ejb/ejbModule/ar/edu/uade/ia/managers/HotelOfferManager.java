@@ -39,13 +39,21 @@ public class HotelOfferManager implements HotelOfferManagerRemote, HotelOfferMan
 	/**
 	 * Default constructor.
 	 */
-	public HotelOfferManager() {
-	}
+	public HotelOfferManager() {}
 
 	@Override
 	public List<HotelOfferHeaderDTO> search(HotelOfferRequestDTO hotelOfferRequest) throws Exception {
 		List<HotelOffer> hotelOffers = this.hotelOfferEJB.search(hotelOfferRequest);
+		return this.convertToListOfHotelOfferHeaderDTO(hotelOffers);
+	}
 
+	@Override
+	public HotelOfferDTO getDetail(Integer id) throws Exception {
+		HotelOffer ho = this.hotelOfferEJB.getDetail(id);
+		return this.mapper.map(ho, HotelOfferDTO.class);
+	}
+	
+	private List<HotelOfferHeaderDTO> convertToListOfHotelOfferHeaderDTO(List<HotelOffer> hotelOffers) {
 		List<HotelOfferHeaderDTO> results = new ArrayList<HotelOfferHeaderDTO>();
 
 		HotelOfferHeaderDTO hotelOfferHeaderDTO;
@@ -79,12 +87,4 @@ public class HotelOfferManager implements HotelOfferManagerRemote, HotelOfferMan
 		}
 		return results;
 	}
-
-	@Override
-	public HotelOfferDTO getDetail(Integer id) throws Exception {
-		HotelOffer ho = this.hotelOfferEJB.getDetail(id);
-		// TODO clear image data fields
-		return this.mapper.map(ho, HotelOfferDTO.class);
-	}
-
 }
