@@ -22,7 +22,7 @@ public class Room extends PersistentObject {
 					@JoinColumn(name = "image_id", nullable = false, updatable = false) })
 	private List<Image>images;
 	
-	@Column(length = 500)
+//	@Column(length = 500)
 	private String description;
 	
 	@ManyToMany(fetch = FetchType.LAZY)

@@ -22,7 +22,7 @@ public class Hotel extends PersistentObject {
 	@ManyToOne
 	private Destination destination;
 	
-	@Column(length = 500)
+	//@Column(length = 500)
 	private String description;
 	
 	@ManyToMany(fetch = FetchType.LAZY)

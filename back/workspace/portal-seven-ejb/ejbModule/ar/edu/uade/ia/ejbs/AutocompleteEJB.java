@@ -22,7 +22,7 @@ public class AutocompleteEJB {
 	public List<Hotel> hotelQuery(String value, Integer limit) {
 		Query query = this.em.createQuery("FROM Hotel WHERE lower(name) LIKE lower(:value)");
 		query.setParameter("value", '%'+value+'%');
-		query.setMaxResults(limit);
+		//	query.setMaxResults(limit);
 		return (List<Hotel>) query.getResultList();
 	}
 	
@@ -30,7 +30,7 @@ public class AutocompleteEJB {
 	public List<Destination> destinationQuery(String value, Integer limit) {
 		Query query = this.em.createQuery("FROM Destination WHERE lower(name) LIKE lower(:value)");
 		query.setParameter("value", '%'+value+'%');
-		query.setMaxResults(limit);
+		//	query.setMaxResults(limit);
 		return (List<Destination>) query.getResultList();
 	}
 }
