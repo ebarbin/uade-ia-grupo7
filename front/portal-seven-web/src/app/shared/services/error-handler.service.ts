@@ -7,16 +7,25 @@ export class ErrorHandlerService {
 
   constructor(private toastr: ToastrService) { }
 
-  set(res:HttpErrorResponse) {
-    if (res.error){
-      if (typeof res.error != 'object') {
-        this.toastr.error(res.error)
-      } else {
-        this.toastr.error(res.error.errorMessage)
-      }            
-    } else {
-      this.toastr.error(res.message);
+  private isJson(str) {
+    try {
+        JSON.parse(str);
+    } catch (e) {
+        return false;
     }
+    return true;
   }
 
+  set(res:HttpErrorResponse) {
+    if (res.status == 504) {
+      this.toastr.error('El servidor no responde. Verifique el estado del mismo.');
+    } else {
+      try {
+        var error = JSON.parse(res.error);
+        this.toastr.error(error.errorMessage);
+      } catch (e) {
+        this.toastr.error(res.error);
+      }
+    }
+  }
 }
