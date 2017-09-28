@@ -70,6 +70,8 @@ import { TruncatePipe } from './shared/pipes/truncate.pipe';
 import { FirstPipe } from './shared/pipes/first.pipe';
 import { ImgGalleryComponent } from './shared/components/img-gallery/img-gallery.component';
 import { WhenNullPutBlankPipe } from './shared/pipes/when-null-put-blank.pipe';
+import { ConfirmComponent } from './shared/components/confirm/confirm.component';
+import { DialogService } from './shared/services/confirm.service';
 
 @NgModule({
   declarations: [
@@ -99,7 +101,8 @@ import { WhenNullPutBlankPipe } from './shared/pipes/when-null-put-blank.pipe';
     TruncatePipe,
     FirstPipe,
     ImgGalleryComponent,
-    WhenNullPutBlankPipe
+    WhenNullPutBlankPipe,
+    ConfirmComponent
   ],
   imports: [
     BrowserModule,
@@ -129,11 +132,13 @@ import { WhenNullPutBlankPipe } from './shared/pipes/when-null-put-blank.pipe';
     HotelOfferService,
     ErrorHandlerService,
     PackageOfferService,
+    DialogService,
     {provide: LOCALE_ID, useValue: 'es-AR'},
     { provide: HTTP_INTERCEPTORS, useClass: MyHttpInterceptor, multi: true }
   ],
   entryComponents:[
-    HotelOfferDetailComponent, PackageOfferDetailComponent, ChangeImageComponent
+    HotelOfferDetailComponent, PackageOfferDetailComponent, ChangeImageComponent, 
+    ConfirmComponent
   ],
   bootstrap: [AppComponent]
 })

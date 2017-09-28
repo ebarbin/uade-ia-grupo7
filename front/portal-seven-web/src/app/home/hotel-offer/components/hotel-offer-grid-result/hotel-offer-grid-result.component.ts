@@ -23,7 +23,8 @@ export class HotelOfferGridResultComponent implements OnInit, OnDestroy {
   @Input()hotelOffers:HotelOfferHeader[];
 
   private resultsChangeSub:Subscription;
-  
+  private detailDialogSub:Subscription;
+
   public dataSource: CustomDatasource;
   public displayedColumns = [ 'name', 'description', 'services', 'price', 'roomCapacity', 'offerStart', 'offerEnd', 'action'];
 
@@ -39,8 +40,8 @@ export class HotelOfferGridResultComponent implements OnInit, OnDestroy {
         width: '900px',
         data: hotelOffer
       });
-      dialogRef.afterClosed().subscribe(result => {
-        console.log(result);
+      this.detailDialogSub = dialogRef.afterClosed().subscribe(result => {
+        console.log("close detail");
       });
     }).catch((res:HttpErrorResponse)=>{
       this.errorHandlerService.set(res);
@@ -56,5 +57,8 @@ export class HotelOfferGridResultComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(){
     this.resultsChangeSub.unsubscribe();
+
+    if(this.detailDialogSub)
+      this.detailDialogSub.unsubscribe();
   }
 }

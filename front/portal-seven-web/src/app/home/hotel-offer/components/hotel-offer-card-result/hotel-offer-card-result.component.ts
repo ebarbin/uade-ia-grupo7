@@ -8,6 +8,7 @@ import { HotelOffer } from '../../models/hotel-offer.model';
 import { HotelOfferService } from '../../services/hotel-offer.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { ErrorHandlerService } from '../../../../shared/services/error-handler.service';
+import { Subscription } from 'rxjs/Subscription';
 
 @Component({
   selector: 'app-hotel-offer-card-result',
@@ -17,6 +18,8 @@ import { ErrorHandlerService } from '../../../../shared/services/error-handler.s
 export class HotelOfferCardResultComponent implements OnInit {
 
   @Input()hotelOffers:HotelOfferHeader[] = [];
+
+  private detailDialogSub:Subscription;
 
   constructor(
     private errorHandlerService:ErrorHandlerService,
@@ -31,7 +34,7 @@ export class HotelOfferCardResultComponent implements OnInit {
         data: hotelOffer
       });
   
-      dialogRef.afterClosed().subscribe(result => {
+     this.detailDialogSub = dialogRef.afterClosed().subscribe(result => {
         console.log(result);
       });
     }).catch((res:HttpErrorResponse)=>{
@@ -41,4 +44,8 @@ export class HotelOfferCardResultComponent implements OnInit {
 
   ngOnInit() {}
 
+  ngOnDestroy(){
+    if (this.detailDialogSub)
+      this.detailDialogSub.unsubscribe();
+  }
 }

@@ -27,8 +27,7 @@ export class HotelOfferFilterComponent implements OnInit {
   
   constructor(
     private errorHandlerService:ErrorHandlerService,
-    private autocompleteService:AutocompleteService, 
-    private toastr: ToastrService) { }
+    private autocompleteService:AutocompleteService) { }
 
     formValid(form:NgForm){
       if (!form.valid) return false;
