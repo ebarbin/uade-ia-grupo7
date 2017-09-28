@@ -20,6 +20,10 @@
     color: #fff;
 }
 
+.mat-card{
+    border: 1px solid;
+}
+
 .mat-card-title {
     font-weight: bold;
 }
@@ -30,4 +34,12 @@
 
 .mat-expansion-panel-content {
     height: auto;
+}
+
+body {
+	background: url('portal-seven-web/assets/images/background.png');
+}
+
+.mat-expansion-panel {
+    border:1px solid;
 }
