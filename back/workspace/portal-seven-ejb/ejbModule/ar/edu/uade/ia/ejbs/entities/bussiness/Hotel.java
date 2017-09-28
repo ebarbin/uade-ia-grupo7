@@ -2,7 +2,6 @@ package ar.edu.uade.ia.ejbs.entities.bussiness;
 
 import java.util.List;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
@@ -22,7 +21,6 @@ public class Hotel extends PersistentObject {
 	@ManyToOne
 	private Destination destination;
 	
-	//@Column(length = 500)
 	private String description;
 	
 	@ManyToMany(fetch = FetchType.LAZY)
