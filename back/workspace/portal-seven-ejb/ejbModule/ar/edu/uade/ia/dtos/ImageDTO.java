@@ -1,4 +1,4 @@
-package ar.edu.uade.ia.commons.dtos;
+package ar.edu.uade.ia.dtos;
 
 import java.io.Serializable;
 

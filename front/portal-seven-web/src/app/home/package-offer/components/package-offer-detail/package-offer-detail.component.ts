@@ -1,4 +1,4 @@
-import { PackageOffer } from './../../models/package-offer.model';
+import { PackageOfferHeader } from './../../models/package-offer-header.model';
 import { MD_DIALOG_DATA, MdDialogRef } from '@angular/material';
 import { Component, OnInit, Inject } from '@angular/core';
 
@@ -10,7 +10,7 @@ import { Component, OnInit, Inject } from '@angular/core';
 export class PackageOfferDetailComponent implements OnInit {
 
   constructor(public dialogRef: MdDialogRef<PackageOfferDetailComponent>,
-    @Inject(MD_DIALOG_DATA) public packageOffer: PackageOffer) { 
+    @Inject(MD_DIALOG_DATA) public packageOffer: PackageOfferHeader) { 
       console.log(packageOffer);
     }
 

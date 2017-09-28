@@ -1,4 +1,4 @@
-package ar.edu.uade.ia.mdb;
+package ar.edu.uade.ia.mdbs;
 
 import javax.annotation.Resource;
 import javax.ejb.LocalBean;

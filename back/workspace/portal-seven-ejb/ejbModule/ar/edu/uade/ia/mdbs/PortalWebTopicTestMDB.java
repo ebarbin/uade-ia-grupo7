@@ -1,4 +1,4 @@
-package ar.edu.uade.ia.mdb;
+package ar.edu.uade.ia.mdbs;
 
 import javax.ejb.ActivationConfigProperty;
 import javax.ejb.MessageDriven;

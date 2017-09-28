@@ -1,4 +1,4 @@
-package ar.edu.uade.ia.ejbs;
+package ar.edu.uade.ia.ejbs.common;
 
 import java.util.List;
 

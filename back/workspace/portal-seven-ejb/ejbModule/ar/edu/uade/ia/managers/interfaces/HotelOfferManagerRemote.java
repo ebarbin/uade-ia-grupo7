@@ -4,9 +4,9 @@ import java.util.List;
 
 import javax.ejb.Remote;
 
-import ar.edu.uade.ia.commons.dtos.HotelOfferDTO;
-import ar.edu.uade.ia.commons.dtos.HotelOfferHeaderDTO;
-import ar.edu.uade.ia.commons.dtos.requests.HotelOfferRequestDTO;
+import ar.edu.uade.ia.dtos.HotelOfferDTO;
+import ar.edu.uade.ia.dtos.HotelOfferHeaderDTO;
+import ar.edu.uade.ia.dtos.HotelOfferRequestDTO;
 
 @Remote
 public interface HotelOfferManagerRemote {

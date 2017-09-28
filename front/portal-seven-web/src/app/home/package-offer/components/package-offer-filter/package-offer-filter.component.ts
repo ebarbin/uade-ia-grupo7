@@ -39,6 +39,22 @@ export class PackageOfferFilterComponent implements OnInit {
       });
     }
 
+    formValid(form:NgForm){
+      if (!form.valid) return false;
+
+      /*var today = new Date();
+      if(form.value.fromDate && form.value.fromDate < today)
+        return false;
+      if(form.value.toDate && form.value.toDate < today)
+        return false;*/
+
+      if (form.value.fromDate && form.value.toDate)
+        if (form.value.fromDate > form.value.toDate)
+          return false;
+        
+      return true;
+    }
+    
     autocompleteDisplaySelected(resource: AutocompleteResource): string {
       return resource ? resource.name : null;
     }
@@ -54,12 +70,13 @@ export class PackageOfferFilterComponent implements OnInit {
       this.reset.next({});
     }
 
-    private fixForm(form:NgForm){
-      form.value.destination = form.value.destination && typeof form.value.destination == 'object' ? form.value.destination : null;
-      form.value.peoplePerRoom = form.value.peoplePerRoom == -1 ? null : form.value.peoplePerRoom;
+    onSubmit(form:NgForm){
+      this.fixForm(form);
+      this.search.next(form.value);
     }
 
-    onSubmit(form:NgForm){
-      this.search.next(form.value);
+    private fixForm(form:NgForm){
+      form.value.destination = form.value.destination && typeof form.value.destination == 'object' ? form.value.destination : null;
+      form.value.quantityPeople = form.value.quantityPeople == -1 || form.value.quantityPeople == '' ? null : form.value.quantityPeople;
     }
 }

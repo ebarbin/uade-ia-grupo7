@@ -10,11 +10,11 @@ import javax.ejb.Stateless;
 import org.dozer.DozerBeanMapperBuilder;
 import org.dozer.Mapper;
 
-import ar.edu.uade.ia.commons.dtos.HotelOfferDTO;
-import ar.edu.uade.ia.commons.dtos.HotelOfferHeaderDTO;
-import ar.edu.uade.ia.commons.dtos.ImageDTO;
-import ar.edu.uade.ia.commons.dtos.SimpleNamedDTO;
-import ar.edu.uade.ia.commons.dtos.requests.HotelOfferRequestDTO;
+import ar.edu.uade.ia.dtos.HotelOfferDTO;
+import ar.edu.uade.ia.dtos.HotelOfferHeaderDTO;
+import ar.edu.uade.ia.dtos.HotelOfferRequestDTO;
+import ar.edu.uade.ia.dtos.ImageDTO;
+import ar.edu.uade.ia.dtos.SimpleNamedDTO;
 import ar.edu.uade.ia.ejbs.HotelOfferEJB;
 import ar.edu.uade.ia.ejbs.entities.bussiness.HotelOffer;
 import ar.edu.uade.ia.ejbs.entities.bussiness.Image;
@@ -29,9 +29,7 @@ import ar.edu.uade.ia.managers.interfaces.HotelOfferManagerRemote;
 @LocalBean
 public class HotelOfferManager implements HotelOfferManagerRemote, HotelOfferManagerLocal {
 
-	private Mapper mapper = DozerBeanMapperBuilder.buildDefault();
-
-	// private ListMapperDecorator listMapper = new ListMapperDecorator(mapper);
+	private static Mapper mapper = DozerBeanMapperBuilder.buildDefault();
 
 	@EJB
 	private HotelOfferEJB hotelOfferEJB;
@@ -50,7 +48,7 @@ public class HotelOfferManager implements HotelOfferManagerRemote, HotelOfferMan
 	@Override
 	public HotelOfferDTO getDetail(Integer id) throws Exception {
 		HotelOffer ho = this.hotelOfferEJB.getDetail(id);
-		return this.mapper.map(ho, HotelOfferDTO.class);
+		return HotelOfferManager.mapper.map(ho, HotelOfferDTO.class);
 	}
 	
 	private List<HotelOfferHeaderDTO> convertToListOfHotelOfferHeaderDTO(List<HotelOffer> hotelOffers) {

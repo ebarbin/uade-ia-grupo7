@@ -1,4 +1,4 @@
-package ar.edu.uade.ia.commons;
+package ar.edu.uade.ia.utils;
 
 import java.util.ArrayList;
 import java.util.Arrays;

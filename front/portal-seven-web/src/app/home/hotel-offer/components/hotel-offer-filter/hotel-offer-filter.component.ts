@@ -71,13 +71,13 @@ export class HotelOfferFilterComponent implements OnInit {
     }
 
     onSubmit(form:NgForm){
-      this.fixForm(form)
+      this.fixForm(form);
       this.search.next(form.value);
     }
 
     private fixForm(form:NgForm){
       form.value.hotel = form.value.hotel && typeof form.value.hotel == 'object' ? form.value.hotel : null;
-      form.value.peoplePerRoom = form.value.peoplePerRoom == -1 ? null : form.value.peoplePerRoom;
-      form.value.roomQuantity = form.value.roomQuantity == -1 ? null : form.value.roomQuantity;
+      form.value.peoplePerRoom = form.value.peoplePerRoom == -1 || form.value.peoplePerRoom == '' ? null : form.value.peoplePerRoom;
+      form.value.roomQuantity = form.value.roomQuantity == -1 || form.value.roomQuantity == '' ? null : form.value.roomQuantity;
     }
 }

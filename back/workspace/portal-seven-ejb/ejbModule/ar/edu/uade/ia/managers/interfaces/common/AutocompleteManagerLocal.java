@@ -1,10 +1,10 @@
-package ar.edu.uade.ia.managers.interfaces;
+package ar.edu.uade.ia.managers.interfaces.common;
 
 import java.util.List;
 
 import javax.ejb.Local;
 
-import ar.edu.uade.ia.commons.dtos.SimpleNamedDTO;
+import ar.edu.uade.ia.dtos.SimpleNamedDTO;
 
 @Local
 public interface AutocompleteManagerLocal {

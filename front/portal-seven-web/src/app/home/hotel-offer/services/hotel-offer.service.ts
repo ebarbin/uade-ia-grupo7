@@ -1,5 +1,4 @@
 import { Subject } from 'rxjs/Subject';
-import { Router } from '@angular/router';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { ToastrService } from 'ngx-toastr';
@@ -17,8 +16,7 @@ export class HotelOfferService {
   resultsChanged:Subject<HotelOfferHeader[]> = new Subject;
 
   constructor(
-    private httpClient:HttpClient, 
-    private router: Router,
+    private httpClient:HttpClient,
     private toastr: ToastrService) {}
 
     getDetail(hotelOfferHeader:HotelOfferHeader):Promise<HotelOffer>{

@@ -12,10 +12,10 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-import ar.edu.uade.ia.commons.dtos.HotelOfferDTO;
-import ar.edu.uade.ia.commons.dtos.HotelOfferHeaderDTO;
-import ar.edu.uade.ia.commons.dtos.ImageDTO;
-import ar.edu.uade.ia.commons.dtos.requests.HotelOfferRequestDTO;
+import ar.edu.uade.ia.dtos.HotelOfferDTO;
+import ar.edu.uade.ia.dtos.HotelOfferHeaderDTO;
+import ar.edu.uade.ia.dtos.HotelOfferRequestDTO;
+import ar.edu.uade.ia.dtos.ImageDTO;
 import ar.edu.uade.ia.managers.interfaces.HotelOfferManagerRemote;
 import ar.edu.uade.ia.services.response.PortalResponse;
 

@@ -1,9 +1,7 @@
-package ar.edu.uade.ia.commons.dtos.requests;
+package ar.edu.uade.ia.dtos;
 
 import java.io.Serializable;
 import java.util.Date;
-
-import ar.edu.uade.ia.commons.dtos.SimpleNamedDTO;
 
 public class HotelOfferRequestDTO implements Serializable {
 

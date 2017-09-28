@@ -10,7 +10,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.persistence.TemporalType;
 
-import ar.edu.uade.ia.commons.dtos.requests.HotelOfferRequestDTO;
+import ar.edu.uade.ia.dtos.HotelOfferRequestDTO;
 import ar.edu.uade.ia.ejbs.entities.bussiness.HotelOffer;
 
 /**
@@ -26,8 +26,7 @@ public class HotelOfferEJB {
 	/**
 	 * Default constructor.
 	 */
-	public HotelOfferEJB() {
-	}
+	public HotelOfferEJB() { }
 
 	@SuppressWarnings("unchecked")
 	public List<HotelOffer> search(HotelOfferRequestDTO request) {

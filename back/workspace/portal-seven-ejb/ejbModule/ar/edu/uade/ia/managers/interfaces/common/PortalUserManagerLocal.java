@@ -1,8 +1,8 @@
-package ar.edu.uade.ia.managers.interfaces;
+package ar.edu.uade.ia.managers.interfaces.common;
 
 import javax.ejb.Local;
 
-import ar.edu.uade.ia.commons.dtos.PortalUserDTO;
+import ar.edu.uade.ia.dtos.PortalUserDTO;
 
 @Local
 public interface PortalUserManagerLocal {

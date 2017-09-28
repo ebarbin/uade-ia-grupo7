@@ -1,4 +1,4 @@
-import { PackageOffer } from './../../models/package-offer.model';
+import { PackageOfferHeader } from './../../models/package-offer-header.model';
 import { Component, Input, OnInit } from '@angular/core';
 import { MdDialog } from '@angular/material';
 import {
@@ -12,11 +12,11 @@ import {
 })
 export class PackageOfferCardResultComponent implements OnInit {
 
-  @Input()packageOffers:PackageOffer[];
+  @Input()packageOffers:PackageOfferHeader[];
   
     constructor(private dialog: MdDialog) { }
   
-    onDetail(packageOffer:PackageOffer){
+    onDetail(packageOffer:PackageOfferHeader){
       const dialogRef = this.dialog.open(PackageOfferDetailComponent, {
         height: '600px',
         width: '900px',

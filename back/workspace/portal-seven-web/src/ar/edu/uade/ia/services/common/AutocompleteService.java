@@ -1,4 +1,4 @@
-package ar.edu.uade.ia.services;
+package ar.edu.uade.ia.services.common;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
@@ -9,7 +9,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-import ar.edu.uade.ia.managers.interfaces.AutocompleteManagerRemote;
+import ar.edu.uade.ia.managers.interfaces.common.AutocompleteManagerRemote;
 import ar.edu.uade.ia.services.response.PortalResponse;
 
 @Path("/autocomplete")

@@ -1,4 +1,4 @@
-package ar.edu.uade.ia.managers;
+package ar.edu.uade.ia.managers.common;
 
 import javax.ejb.EJB;
 import javax.ejb.LocalBean;
@@ -7,13 +7,13 @@ import javax.ejb.Stateless;
 import org.dozer.DozerBeanMapperBuilder;
 import org.dozer.Mapper;
 
-import ar.edu.uade.ia.commons.dtos.PortalUserDTO;
-import ar.edu.uade.ia.ejbs.ImageEJB;
-import ar.edu.uade.ia.ejbs.PortalUserEJB;
+import ar.edu.uade.ia.dtos.PortalUserDTO;
+import ar.edu.uade.ia.ejbs.common.ImageEJB;
+import ar.edu.uade.ia.ejbs.common.PortalUserEJB;
 import ar.edu.uade.ia.ejbs.entities.bussiness.Image;
 import ar.edu.uade.ia.ejbs.entities.bussiness.PortalUser;
-import ar.edu.uade.ia.managers.interfaces.PortalUserManagerLocal;
-import ar.edu.uade.ia.managers.interfaces.PortalUserManagerRemote;
+import ar.edu.uade.ia.managers.interfaces.common.PortalUserManagerLocal;
+import ar.edu.uade.ia.managers.interfaces.common.PortalUserManagerRemote;
 
 /**
  * Session Bean implementation class UserManager
@@ -22,7 +22,7 @@ import ar.edu.uade.ia.managers.interfaces.PortalUserManagerRemote;
 @LocalBean
 public class PortalUserManager implements PortalUserManagerRemote, PortalUserManagerLocal {
 
-	private Mapper mapper = DozerBeanMapperBuilder.buildDefault();
+	private static Mapper mapper = DozerBeanMapperBuilder.buildDefault();
 
 	@EJB
 	private PortalUserEJB userEJB;
@@ -38,7 +38,7 @@ public class PortalUserManager implements PortalUserManagerRemote, PortalUserMan
 	@Override
 	public PortalUserDTO login(String userName) throws Exception {
 		PortalUser user = this.userEJB.login(userName);
-		PortalUserDTO userDTO = this.mapper.map(user, PortalUserDTO.class);
+		PortalUserDTO userDTO = PortalUserManager.mapper.map(user, PortalUserDTO.class);
 		if (userDTO.getImage() != null)
 			userDTO.getImage().setData(null);
 		return userDTO;
@@ -52,7 +52,7 @@ public class PortalUserManager implements PortalUserManagerRemote, PortalUserMan
 		portalUser.setSureName(portalUserDTO.getSureName());
 		portalUser = this.userEJB.update(portalUser);
 		
-		return this.mapper.map(portalUser, PortalUserDTO.class);
+		return PortalUserManager.mapper.map(portalUser, PortalUserDTO.class);
 	}
 
 	@Override
@@ -65,7 +65,7 @@ public class PortalUserManager implements PortalUserManagerRemote, PortalUserMan
 		user.setImage(image);
 		user = this.userEJB.update(user);
 
-		return this.mapper.map(user, PortalUserDTO.class);
+		return PortalUserManager.mapper.map(user, PortalUserDTO.class);
 	}
 
 }

@@ -1,3 +1,4 @@
+import { PackageOfferService } from './home/package-offer/services/package-offer.service';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { LOCALE_ID, NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -127,6 +128,7 @@ import { WhenNullPutBlankPipe } from './shared/pipes/when-null-put-blank.pipe';
     AutocompleteService,
     HotelOfferService,
     ErrorHandlerService,
+    PackageOfferService,
     {provide: LOCALE_ID, useValue: 'es-AR'},
     { provide: HTTP_INTERCEPTORS, useClass: MyHttpInterceptor, multi: true }
   ],

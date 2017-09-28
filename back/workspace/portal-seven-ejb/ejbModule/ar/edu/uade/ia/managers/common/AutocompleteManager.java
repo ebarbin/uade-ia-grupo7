@@ -1,4 +1,4 @@
-package ar.edu.uade.ia.managers;
+package ar.edu.uade.ia.managers.common;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -7,12 +7,12 @@ import javax.ejb.EJB;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 
-import ar.edu.uade.ia.commons.dtos.SimpleNamedDTO;
-import ar.edu.uade.ia.ejbs.AutocompleteEJB;
+import ar.edu.uade.ia.dtos.SimpleNamedDTO;
+import ar.edu.uade.ia.ejbs.common.AutocompleteEJB;
 import ar.edu.uade.ia.ejbs.entities.bussiness.Destination;
 import ar.edu.uade.ia.ejbs.entities.bussiness.Hotel;
-import ar.edu.uade.ia.managers.interfaces.AutocompleteManagerLocal;
-import ar.edu.uade.ia.managers.interfaces.AutocompleteManagerRemote;
+import ar.edu.uade.ia.managers.interfaces.common.AutocompleteManagerLocal;
+import ar.edu.uade.ia.managers.interfaces.common.AutocompleteManagerRemote;
 
 /**
  * Session Bean implementation class HotelAutocompleteManager

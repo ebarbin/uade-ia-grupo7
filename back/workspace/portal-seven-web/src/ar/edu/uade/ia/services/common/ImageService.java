@@ -1,4 +1,4 @@
-package ar.edu.uade.ia.services;
+package ar.edu.uade.ia.services.common;
 
 import java.io.InputStream;
 import java.util.List;
@@ -17,10 +17,10 @@ import org.apache.commons.io.IOUtils;
 import org.jboss.resteasy.plugins.providers.multipart.InputPart;
 import org.jboss.resteasy.plugins.providers.multipart.MultipartFormDataInput;
 
-import ar.edu.uade.ia.commons.dtos.ImageDTO;
-import ar.edu.uade.ia.commons.dtos.PortalUserDTO;
-import ar.edu.uade.ia.managers.interfaces.ImageManagerRemote;
-import ar.edu.uade.ia.managers.interfaces.PortalUserManagerRemote;
+import ar.edu.uade.ia.dtos.ImageDTO;
+import ar.edu.uade.ia.dtos.PortalUserDTO;
+import ar.edu.uade.ia.managers.interfaces.common.ImageManagerRemote;
+import ar.edu.uade.ia.managers.interfaces.common.PortalUserManagerRemote;
 import ar.edu.uade.ia.services.response.PortalResponse;
 
 @Path("/image")

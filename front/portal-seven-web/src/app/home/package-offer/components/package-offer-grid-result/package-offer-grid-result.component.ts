@@ -1,4 +1,4 @@
-import { PackageOffer } from './../../models/package-offer.model';
+import { PackageOfferHeader } from './../../models/package-offer-header.model';
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { MdDialog, MdSort } from '@angular/material';
 import { CustomDatasource } from '../../../../shared/models/custom-datasouce';
@@ -22,7 +22,7 @@ export class PackageOfferGridResultComponent implements OnInit {
   constructor(
     private dialog: MdDialog) { }
 
-  onDetail(packageOffer:PackageOffer){
+  onDetail(packageOffer:PackageOfferHeader){
     const dialogRef = this.dialog.open(PackageOfferDetailComponent, {
       height: '600px',
       width: '900px',
@@ -36,7 +36,7 @@ export class PackageOfferGridResultComponent implements OnInit {
 
   ngOnDestroy(){}
   
-  @Input()packageOffers:PackageOffer[];
+  @Input()packageOffers:PackageOfferHeader[];
   
   ngOnInit() {
     this.dataSource = new CustomDatasource(this.packageOffers);

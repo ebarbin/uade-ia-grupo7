@@ -1,4 +1,7 @@
-import { PackageOffer } from './models/package-offer.model';
+import { HttpErrorResponse } from '@angular/common/http';
+import { PackageOfferService } from './services/package-offer.service';
+import { ErrorHandlerService } from './../../shared/services/error-handler.service';
+import { PackageOfferHeader } from './models/package-offer-header.model';
 import { PackageOfferRequest } from './models/package-offer-request.model';
 import { Component, OnInit } from '@angular/core';
 
@@ -9,7 +12,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PackageOfferComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private errorHandlerService:ErrorHandlerService,
+    private packageOfferService: PackageOfferService) { }
 
   ngOnInit() {}
 
@@ -23,21 +28,14 @@ export class PackageOfferComponent implements OnInit {
     this.results = [];
   }
 
-  results:PackageOffer[] = [];
+  results:PackageOfferHeader[] = [];
   onSearch(packageOfferRequest: PackageOfferRequest){
-
-    //TODO Buscar la oferta de paquetes segun packageOfferRequest
-    console.log(packageOfferRequest);
-
-    this.results = [
-      new PackageOffer(1, 'Package 1', null),
-      new PackageOffer(2, 'Package 2', null),
-      new PackageOffer(3, 'Package 3', null),
-      new PackageOffer(4, 'Package 4', null),
-      new PackageOffer(5, 'Package 5', null),
-      new PackageOffer(6, 'Package 6', null),
-      new PackageOffer(7, 'Package 7', null)
-    ];
+    this.packageOfferService.search(packageOfferRequest)
+    .then((results:PackageOfferHeader[]) => {
+     this.results = results;
+    }).catch((res:HttpErrorResponse) => {
+     this.errorHandlerService.set(res);
+   });
   }
 
 }

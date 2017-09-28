@@ -1,4 +1,4 @@
-package ar.edu.uade.ia.managers;
+package ar.edu.uade.ia.managers.common;
 
 import javax.ejb.EJB;
 import javax.ejb.LocalBean;
@@ -7,13 +7,13 @@ import javax.ejb.Stateless;
 import org.dozer.DozerBeanMapperBuilder;
 import org.dozer.Mapper;
 
-import ar.edu.uade.ia.commons.dtos.ImageDTO;
-import ar.edu.uade.ia.ejbs.ImageEJB;
-import ar.edu.uade.ia.ejbs.PortalUserEJB;
+import ar.edu.uade.ia.dtos.ImageDTO;
+import ar.edu.uade.ia.ejbs.common.ImageEJB;
+import ar.edu.uade.ia.ejbs.common.PortalUserEJB;
 import ar.edu.uade.ia.ejbs.entities.bussiness.Image;
 import ar.edu.uade.ia.ejbs.entities.bussiness.PortalUser;
-import ar.edu.uade.ia.managers.interfaces.ImageManagerLocal;
-import ar.edu.uade.ia.managers.interfaces.ImageManagerRemote;
+import ar.edu.uade.ia.managers.interfaces.common.ImageManagerLocal;
+import ar.edu.uade.ia.managers.interfaces.common.ImageManagerRemote;
 
 /**
  * Session Bean implementation class ImageManager
@@ -22,7 +22,7 @@ import ar.edu.uade.ia.managers.interfaces.ImageManagerRemote;
 @LocalBean
 public class ImageManager implements ImageManagerRemote, ImageManagerLocal {
 
-	private Mapper mapper = DozerBeanMapperBuilder.buildDefault();
+	private static Mapper mapper = DozerBeanMapperBuilder.buildDefault();
 
 	@EJB
 	private ImageEJB imageEJB;
@@ -39,7 +39,7 @@ public class ImageManager implements ImageManagerRemote, ImageManagerLocal {
 	@Override
 	public ImageDTO getById(Integer id) throws Exception {
 		Image image = this.imageEJB.getById(id);
-		return this.mapper.map(image, ImageDTO.class);
+		return ImageManager.mapper.map(image, ImageDTO.class);
 	}
 
 	@Override
@@ -53,7 +53,7 @@ public class ImageManager implements ImageManagerRemote, ImageManagerLocal {
 			user.setImage(image);
 		}
 		user = this.userEJB.update(user);
-		return this.mapper.map(user.getImage(), ImageDTO.class);
+		return ImageManager.mapper.map(user.getImage(), ImageDTO.class);
 	}
 
 }
