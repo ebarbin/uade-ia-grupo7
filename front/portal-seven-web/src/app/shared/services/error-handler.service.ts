@@ -21,14 +21,14 @@ export class ErrorHandlerService {
       this.toastr.error('El servidor no responde. Verifique el estado del mismo.');
     } else {
       try {
-        var error = JSON.parse(res.error);
+        var error = res.error;
         if(error.errorMessage) {
           this.toastr.error(error.errorMessage);
         } else {
           this.toastr.error('Ha ocurrido un error. Contacte a un administrador.');
         }
       } catch (e) {
-        this.toastr.error(res.error);
+        this.toastr.error('Ha ocurrido un error. Contacte a un administrador.');
       }
     }
   }
