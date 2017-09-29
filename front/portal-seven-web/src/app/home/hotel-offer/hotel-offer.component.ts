@@ -1,3 +1,4 @@
+import { ToastrService } from 'ngx-toastr';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm, FormControl } from '@angular/forms';
 import { Observable } from 'rxjs/Observable';
@@ -10,7 +11,6 @@ import { HotelOfferHeader } from './models/hotel-offer-header.model';
 import { HotelOfferService } from './services/hotel-offer.service';
 import { PortalResponse } from '../../shared/models/portal-response.model';
 import { HttpErrorResponse } from '@angular/common/http';
-import { ErrorHandlerService } from '../../shared/services/error-handler.service';
 
 @Component({
   selector: 'app-hotel-offer',
@@ -20,7 +20,7 @@ import { ErrorHandlerService } from '../../shared/services/error-handler.service
 export class HotelOfferComponent implements OnInit {
 
   constructor(
-    private errorHandlerService:ErrorHandlerService,
+    private toastr:ToastrService,
     private hotelOfferService:HotelOfferService) { }
 
   ngOnInit() {}
@@ -41,7 +41,7 @@ export class HotelOfferComponent implements OnInit {
      .then((results:HotelOfferHeader[]) => {
       this.results = results;
      }).catch((res:HttpErrorResponse) => {
-      this.errorHandlerService.set(res);
+      this.toastr.error('Ha ocurrido un error. Contacte a un administrador.');
     });
   }
   

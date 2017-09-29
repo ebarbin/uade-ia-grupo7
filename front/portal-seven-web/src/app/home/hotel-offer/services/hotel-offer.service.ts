@@ -32,6 +32,8 @@ export class HotelOfferService {
           });
 
           return hotelOffer;
+        } else {
+          this.toastr.error(response.errorMessage);
         }
       }).toPromise();
     }
@@ -44,6 +46,8 @@ export class HotelOfferService {
             if (results.length == 0) this.toastr.info('No hay resultados.')
             this.resultsChanged.next(results);
             return results;
+          } else {
+            this.toastr.error(response.errorMessage);
           }
         }).toPromise();
     }

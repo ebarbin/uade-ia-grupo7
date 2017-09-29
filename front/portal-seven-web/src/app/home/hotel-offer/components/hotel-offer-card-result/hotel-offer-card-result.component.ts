@@ -1,3 +1,4 @@
+import { ToastrService } from 'ngx-toastr';
 import { Component, OnInit, Input } from '@angular/core';
 
 import { HotelOfferHeader } from '../../models/hotel-offer-header.model';
@@ -7,7 +8,6 @@ import { HotelOfferDetailComponent } from '../hotel-offer-detail/hotel-offer-det
 import { HotelOffer } from '../../models/hotel-offer.model';
 import { HotelOfferService } from '../../services/hotel-offer.service';
 import { HttpErrorResponse } from '@angular/common/http';
-import { ErrorHandlerService } from '../../../../shared/services/error-handler.service';
 import { Subscription } from 'rxjs/Subscription';
 
 @Component({
@@ -22,7 +22,7 @@ export class HotelOfferCardResultComponent implements OnInit {
   private detailDialogSub:Subscription;
 
   constructor(
-    private errorHandlerService:ErrorHandlerService,
+    private toastr:ToastrService,
     private hotelOfferService: HotelOfferService,
     private dialog: MdDialog) { }
 
@@ -38,7 +38,7 @@ export class HotelOfferCardResultComponent implements OnInit {
         console.log(result);
       });
     }).catch((res:HttpErrorResponse)=>{
-      this.errorHandlerService.set(res);
+      this.toastr.error('Ha ocurrido un error. Contacte a un administrador.');
     });
   }
 

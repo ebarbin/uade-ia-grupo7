@@ -1,3 +1,4 @@
+import { ToastrService } from 'ngx-toastr';
 import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 
 import { Subscription } from 'rxjs/Subscription'
@@ -11,7 +12,6 @@ import { CustomDatasource } from '../../../../shared/models/custom-datasouce';
 import { HotelOfferService } from '../../services/hotel-offer.service';
 import { HotelOffer } from '../../models/hotel-offer.model';
 import { HttpErrorResponse } from '@angular/common/http';
-import { ErrorHandlerService } from '../../../../shared/services/error-handler.service';
 
 @Component({
   selector: 'app-hotel-offer-grid-result',
@@ -29,7 +29,7 @@ export class HotelOfferGridResultComponent implements OnInit, OnDestroy {
   public displayedColumns = [ 'name', 'description', 'services', 'price', 'roomCapacity', 'offerStart', 'offerEnd', 'action'];
 
   constructor(
-    private errorHandlerService:ErrorHandlerService,
+    private toastr: ToastrService,
     private hotelOfferService: HotelOfferService,
     private dialog: MdDialog) { }
 
@@ -44,7 +44,7 @@ export class HotelOfferGridResultComponent implements OnInit, OnDestroy {
         console.log("close detail");
       });
     }).catch((res:HttpErrorResponse)=>{
-      this.errorHandlerService.set(res);
+      this.toastr.error('Ha ocurrido un error. Contacte a un administrador.');
     });
   }
 

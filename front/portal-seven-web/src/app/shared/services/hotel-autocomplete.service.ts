@@ -20,6 +20,7 @@ export class AutocompleteService {
         if (response.success){
           return <AutocompleteResource[]>response.data;
         } else {
+          this.toastr.error(response.errorMessage);
           return [];
         }
       }).toPromise();

@@ -9,6 +9,8 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import org.jboss.logging.Logger;
+
 import ar.edu.uade.ia.managers.interfaces.common.AutocompleteManagerRemote;
 import ar.edu.uade.ia.services.response.PortalResponse;
 
@@ -16,6 +18,8 @@ import ar.edu.uade.ia.services.response.PortalResponse;
 @Stateless
 public class AutocompleteService {
 
+	private static Logger LOGGER = Logger.getLogger(AutocompleteService.class);
+	
 	@EJB
 	private AutocompleteManagerRemote autocompleteManager;
 	
@@ -26,7 +30,8 @@ public class AutocompleteService {
 		try {
 		    return Response.ok(new PortalResponse(this.autocompleteManager.queryHotels(value, limit))).build();
 		} catch (Exception e) {
-			return Response.status(Response.Status.BAD_REQUEST).entity(new PortalResponse(e.getMessage())).build();
+			AutocompleteService.LOGGER.error(e.getMessage(), e);
+			return Response.ok(new PortalResponse(e.getMessage())).build();
 		}
 	}
 	
@@ -37,7 +42,8 @@ public class AutocompleteService {
 		try {
 		    return Response.ok(new PortalResponse(this.autocompleteManager.queryDestinations(value, limit))).build();
 		} catch (Exception e) {
-			return Response.status(Response.Status.BAD_REQUEST).entity(new PortalResponse(e.getMessage())).build();
+			AutocompleteService.LOGGER.error(e.getMessage(), e);
+			return Response.ok(new PortalResponse(e.getMessage())).build();
 		}
 	}
 }

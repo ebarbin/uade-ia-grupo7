@@ -8,7 +8,6 @@ import 'rxjs/Rx';
 import { PortalUser } from '../../home/user-profile/models/portal-user.model';
 import { PortalResponse } from '../../shared/models/portal-response.model';
 import { UserService } from '../../home/user-profile/services/user.service';
-import { ErrorHandlerService } from '../../shared/services/error-handler.service';
 
 @Injectable()
 export class AuthService implements OnInit {
@@ -16,7 +15,6 @@ export class AuthService implements OnInit {
   private user: PortalUser;
   
   constructor(
-    private errorHandlerService:ErrorHandlerService,
     private userService:UserService,
     private httpClient:HttpClient, 
     private router: Router,
@@ -45,9 +43,11 @@ export class AuthService implements OnInit {
           if (response.success){
             this.user = <PortalUser>response.data;
             this.router.navigate(['home']);
+          } else {
+            this.toastr.error(response.errorMessage);
           }
       }).catch((res:HttpErrorResponse) => {
-        this.errorHandlerService.set(res);
+        this.toastr.error('Ha ocurrido un error. Contacte a un administrador.');
       });
   }
 

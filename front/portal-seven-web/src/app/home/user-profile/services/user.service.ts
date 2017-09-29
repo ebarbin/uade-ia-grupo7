@@ -6,7 +6,6 @@ import { Subject } from 'rxjs/Subject';
 
 import { PortalUser } from '../models/portal-user.model';
 import { PortalResponse } from '../../../shared/models/portal-response.model';
-import { ErrorHandlerService } from '../../../shared/services/error-handler.service';
 
 @Injectable()
 export class UserService {
@@ -14,7 +13,6 @@ export class UserService {
   userChanged: Subject<PortalUser> = new Subject();
 
   constructor(
-    private errorHandlerService:ErrorHandlerService,
     private httpClient: HttpClient,
     private toastr:ToastrService) { }
 
@@ -30,7 +28,7 @@ export class UserService {
         this.toastr.error(response.errorMessage);
       }
     }).catch((res:HttpErrorResponse) => {
-      this.errorHandlerService.set(res);
+      this.toastr.error('Ha ocurrido un error. Contacte a un administrador.');
     });
   }
 }

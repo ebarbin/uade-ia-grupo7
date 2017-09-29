@@ -14,6 +14,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.Response;
 
 import org.apache.commons.io.IOUtils;
+import org.jboss.logging.Logger;
 import org.jboss.resteasy.plugins.providers.multipart.InputPart;
 import org.jboss.resteasy.plugins.providers.multipart.MultipartFormDataInput;
 
@@ -27,6 +28,8 @@ import ar.edu.uade.ia.services.response.PortalResponse;
 @Stateless
 public class ImageService {
 
+	private static Logger LOGGER = Logger.getLogger(ImageService.class);
+	
 	@EJB
 	private ImageManagerRemote imageManager;
 
@@ -41,7 +44,8 @@ public class ImageService {
 			ImageDTO imageDTO = this.imageManager.getById(id);
 			return Response.ok(imageDTO.getData()).build();
 		} catch (Exception e) {
-			return Response.status(Response.Status.BAD_REQUEST).entity(new PortalResponse(e.getMessage())).build();
+			ImageService.LOGGER.error(e.getMessage(), e);
+			return Response.ok(new PortalResponse(e.getMessage())).build();
 		}
 	}
 
@@ -57,7 +61,8 @@ public class ImageService {
 			PortalUserDTO userDTO = this.userManager.addImage(userId, bytes);
 			return Response.ok(new PortalResponse(userDTO)).build();
 		} catch (Exception e) {
-			return Response.status(Response.Status.BAD_REQUEST).entity(new PortalResponse(e.getMessage())).build();
+			ImageService.LOGGER.error(e.getMessage(), e);
+			return Response.ok(new PortalResponse(e.getMessage())).build();
 		}
 	}
 }

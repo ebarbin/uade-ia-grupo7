@@ -12,6 +12,8 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import org.jboss.logging.Logger;
+
 import ar.edu.uade.ia.dtos.HotelOfferDTO;
 import ar.edu.uade.ia.dtos.HotelOfferHeaderDTO;
 import ar.edu.uade.ia.dtos.HotelOfferRequestDTO;
@@ -23,6 +25,8 @@ import ar.edu.uade.ia.services.response.PortalResponse;
 @Stateless
 public class HotelOfferService {
 
+	private static Logger LOGGER = Logger.getLogger(HotelOfferService.class);
+	
 	@EJB
 	private HotelOfferManagerRemote hotelOfferManager;
 
@@ -35,7 +39,8 @@ public class HotelOfferService {
 			this.clearImageDataField(result);
 			return Response.ok(new PortalResponse(result)).build();
 		} catch (Exception e) {
-			return Response.status(Response.Status.BAD_REQUEST).entity(new PortalResponse(e.getMessage())).build();
+			HotelOfferService.LOGGER.error(e.getMessage(), e);
+			return Response.ok(new PortalResponse(e.getMessage())).build();
 		}
 	}
 
@@ -48,6 +53,7 @@ public class HotelOfferService {
 			this.clearImageDataField(dto);
 			return Response.ok(new PortalResponse(dto)).build();
 		} catch (Exception e) {
+			HotelOfferService.LOGGER.error(e.getMessage(), e);
 			return Response.status(Response.Status.BAD_REQUEST).entity(new PortalResponse(e.getMessage())).build();
 		}
 	}

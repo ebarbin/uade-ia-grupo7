@@ -27,6 +27,8 @@ export class PackageOfferService {
         });*/
 
         return PackageOffer;
+      } else {
+        this.toastr.error(response.errorMessage);
       }
     }).toPromise();
   }
@@ -36,9 +38,11 @@ export class PackageOfferService {
       .map((response:PortalResponse)=>{
         if(response.success) {
           var results = <PackageOfferHeader[]>response.data;
-          if (results.length == 0) this.toastr.info('No hay resultados.')
+          if (results.length == 0) this.toastr.info('No hay resultados.');
           this.resultsChanged.next(results);
           return results;
+        } else {
+          this.toastr.error(response.errorMessage);
         }
       }).toPromise();
   }

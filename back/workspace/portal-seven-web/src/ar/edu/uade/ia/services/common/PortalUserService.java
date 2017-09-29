@@ -10,6 +10,8 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import org.jboss.logging.Logger;
+
 import ar.edu.uade.ia.dtos.PortalUserDTO;
 import ar.edu.uade.ia.managers.interfaces.common.PortalUserManagerRemote;
 import ar.edu.uade.ia.services.response.PortalResponse;
@@ -18,6 +20,8 @@ import ar.edu.uade.ia.services.response.PortalResponse;
 @Stateless
 public class PortalUserService {
 
+	private static Logger LOGGER = Logger.getLogger(PortalUserService.class);
+	
 	@EJB
 	private PortalUserManagerRemote portalUserManager;
 
@@ -28,7 +32,8 @@ public class PortalUserService {
 		try {
 			return Response.ok(new PortalResponse(this.portalUserManager.login(userName))).build();
 		} catch (Exception e) {
-			return Response.status(Response.Status.BAD_REQUEST).entity(new PortalResponse(e.getMessage())).build();
+			PortalUserService.LOGGER.error(e.getMessage(), e);
+			return Response.ok(new PortalResponse(e.getMessage())).build();
 		}
 	}
 
@@ -39,7 +44,8 @@ public class PortalUserService {
 		try {
 			return Response.ok(new PortalResponse(this.portalUserManager.update(id, userDTO))).build();
 		} catch (Exception e) {
-			return Response.status(Response.Status.BAD_REQUEST).entity(new PortalResponse(e.getMessage())).build();
+			PortalUserService.LOGGER.error(e.getMessage(), e);
+			return Response.ok(new PortalResponse(e.getMessage())).build();
 		}
 	}
 }

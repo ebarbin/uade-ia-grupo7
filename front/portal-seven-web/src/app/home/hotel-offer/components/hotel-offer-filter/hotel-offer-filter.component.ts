@@ -8,7 +8,6 @@ import { AutocompleteResource } from '../../../../shared/models/autocomplete-res
 import { AutocompleteService } from '../../../../shared/services/hotel-autocomplete.service';
 import { HotelOfferRequest } from '../../models/hotel-offer-request.model';
 import { HotelOfferHeader } from '../../models/hotel-offer-header.model';
-import { ErrorHandlerService } from '../../../../shared/services/error-handler.service';
 
 @Component({
   selector: 'app-hotel-offer-filter',
@@ -26,7 +25,7 @@ export class HotelOfferFilterComponent implements OnInit {
   toDate:Date = null;
   
   constructor(
-    private errorHandlerService:ErrorHandlerService,
+    private toastr: ToastrService,
     private autocompleteService:AutocompleteService) { }
 
     formValid(form:NgForm){
@@ -50,7 +49,7 @@ export class HotelOfferFilterComponent implements OnInit {
       this.autocompleteService.queryHotels(val).then((resources:AutocompleteResource[]) => {
         this.hotelResults = resources;
       }).catch((res:HttpErrorResponse) => {
-        this.errorHandlerService.set(res);
+        this.toastr.error('Ha ocurrido un error. Contacte a un administrador.');
       });
     }
 

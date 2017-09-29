@@ -1,7 +1,7 @@
+import { ToastrService } from 'ngx-toastr';
 import { HttpErrorResponse } from '@angular/common/http';
 import { PackageOffer } from './../../models/package-offer.model';
 import { PackageOfferService } from './../../services/package-offer.service';
-import { ErrorHandlerService } from './../../../../shared/services/error-handler.service';
 import { PackageOfferHeader } from './../../models/package-offer-header.model';
 import { Component, Input, OnInit } from '@angular/core';
 import { MdDialog } from '@angular/material';
@@ -19,7 +19,7 @@ export class PackageOfferCardResultComponent implements OnInit {
   @Input()packageOffers:PackageOfferHeader[];
   
     constructor(
-      private errorHandlerService:ErrorHandlerService,
+      private toastr: ToastrService,
       private packageOfferService: PackageOfferService,
       private dialog: MdDialog) { }
   
@@ -34,7 +34,7 @@ export class PackageOfferCardResultComponent implements OnInit {
           console.log(result);
         });
       }).catch((res:HttpErrorResponse)=>{
-        this.errorHandlerService.set(res);
+        this.toastr.error('Ha ocurrido un error. Contacte a un administrador.');
       });
     }
   

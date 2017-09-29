@@ -64,7 +64,6 @@ import { ImageGetterPipe } from './shared/pipes/image-getter.pipe';
 import { AutocompleteService } from './shared/services/hotel-autocomplete.service';
 import { MyHttpInterceptor } from './shared/services/my-http-interceptor';
 import { HotelOfferService } from './home/hotel-offer/services/hotel-offer.service';
-import { ErrorHandlerService } from './shared/services/error-handler.service';
 import { JoinPipe } from './shared/pipes/join.pipe';
 import { TruncatePipe } from './shared/pipes/truncate.pipe';
 import { FirstPipe } from './shared/pipes/first.pipe';
@@ -130,7 +129,6 @@ import { DialogService } from './shared/services/confirm.service';
     ImageService,
     AutocompleteService,
     HotelOfferService,
-    ErrorHandlerService,
     PackageOfferService,
     DialogService,
     {provide: LOCALE_ID, useValue: 'es-AR'},

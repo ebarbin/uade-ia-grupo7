@@ -12,6 +12,8 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import org.jboss.logging.Logger;
+
 import ar.edu.uade.ia.dtos.PackageOfferDTO;
 import ar.edu.uade.ia.dtos.PackageOfferHeaderDTO;
 import ar.edu.uade.ia.dtos.PackageOfferRequestDTO;
@@ -25,6 +27,8 @@ import ar.edu.uade.ia.services.response.PortalResponse;
 @Stateless
 public class PackageOfferService {
 
+	private static Logger LOGGER = Logger.getLogger(PackageOfferService.class);
+	 
 	@EJB
 	private PackageOfferManagerRemote packageOfferManager;
 	
@@ -42,7 +46,8 @@ public class PackageOfferService {
 			this.clearImageDataField(result);
 			return Response.ok(new PortalResponse(result)).build();
 		} catch (Exception e) {
-			return Response.status(Response.Status.BAD_REQUEST).entity(new PortalResponse(e.getMessage())).build();
+			PackageOfferService.LOGGER.error(e.getMessage(), e);
+			return Response.ok(new PortalResponse(e.getMessage())).build();
 		}
 	}
 
@@ -55,6 +60,7 @@ public class PackageOfferService {
 			this.clearImageDataField(dto);
 			return Response.ok(new PortalResponse(dto)).build();
 		} catch (Exception e) {
+			PackageOfferService.LOGGER.error(e.getMessage(), e);
 			return Response.status(Response.Status.BAD_REQUEST).entity(new PortalResponse(e.getMessage())).build();
 		}
 	}
