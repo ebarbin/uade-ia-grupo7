@@ -3,7 +3,7 @@ import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 
 import { Subscription } from 'rxjs/Subscription'
 
-import { MdDialog } from '@angular/material';
+import { MdDialog, Sort } from '@angular/material';
 
 import { HotelOfferDetailComponent } from '../hotel-offer-detail/hotel-offer-detail.component';
 
@@ -61,4 +61,16 @@ export class HotelOfferGridResultComponent implements OnInit, OnDestroy {
     if(this.detailDialogSub)
       this.detailDialogSub.unsubscribe();
   }
+
+  sortData(sort: Sort) {
+    this.dataSource.data = this.dataSource.data.sort((a, b) => {
+      let isAsc = sort.direction == 'asc';
+      return compare(a[sort.active], b[sort.active], isAsc);
+    });
+    this.hotelOfferService.resultsChanged.next(this.dataSource.data);
+  }
+}
+
+function compare(a, b, isAsc) {
+  return (a < b ? -1 : 1) * (isAsc ? 1 : -1);
 }

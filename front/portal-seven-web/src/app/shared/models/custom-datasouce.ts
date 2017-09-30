@@ -5,7 +5,7 @@ export class CustomDatasource extends DataSource<any> {
     
   length: number = 0;
   
-  constructor(private data: any[]){
+  constructor(public data: any[]){
     super();
     this.length = data.length;
   }
