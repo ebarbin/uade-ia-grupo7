@@ -12,4 +12,6 @@ public interface PortalUserManagerLocal {
 	PortalUserDTO update (Integer id, PortalUserDTO userDTO) throws Exception;
 
 	PortalUserDTO addImage(Integer userId, byte[] bytes) throws Exception;
+	
+	PortalUserDTO create(PortalUserDTO userDTO) throws Exception;
 }

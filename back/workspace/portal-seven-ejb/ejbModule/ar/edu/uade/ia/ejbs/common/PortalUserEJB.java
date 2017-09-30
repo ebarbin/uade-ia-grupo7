@@ -22,14 +22,13 @@ public class PortalUserEJB {
 	/**
 	 * Default constructor.
 	 */
-	public PortalUserEJB() {
-	}
+	public PortalUserEJB() {}
 
 	public PortalUser login(String userName) throws Exception {
 		try {
-			Query query = this.em.createQuery("FROM PortalUser WHERE userName = :userName");
-			query.setParameter("userName", userName);
-			return (PortalUser) query.getSingleResult();
+			PortalUser pu = this.getByUsername(userName);
+			if (pu != null) return pu;
+			else throw new NoResultException();
 		} catch (NoResultException nre) {
 			throw new Exception("Usuario inexistente.");
 		}
@@ -39,6 +38,20 @@ public class PortalUserEJB {
 		return this.em.merge(user);
 	}
 
+	public void create(PortalUser user) throws Exception {
+		this.em.persist(user);
+	}
+	
+	public PortalUser getByUsername(String userName) throws Exception {
+		try {
+			Query query = this.em.createQuery("FROM PortalUser WHERE userName = :userName");
+			query.setParameter("userName", userName);
+			return (PortalUser) query.getSingleResult();
+		} catch (NoResultException nre) {
+			return null;
+		}
+	}
+	
 	public PortalUser getById(Integer id) throws Exception {
 		PortalUser user = this.em.find(PortalUser.class, id);
 		if (user == null) {

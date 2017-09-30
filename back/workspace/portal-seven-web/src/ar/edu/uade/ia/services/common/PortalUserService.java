@@ -3,6 +3,7 @@ package ar.edu.uade.ia.services.common;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
@@ -43,6 +44,17 @@ public class PortalUserService {
 	public Response update(@PathParam("id") Integer id, PortalUserDTO userDTO) {
 		try {
 			return Response.ok(new PortalResponse(this.portalUserManager.update(id, userDTO))).build();
+		} catch (Exception e) {
+			PortalUserService.LOGGER.error(e.getMessage(), e);
+			return Response.ok(new PortalResponse(e.getMessage())).build();
+		}
+	}
+	
+	@POST
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response create(PortalUserDTO userDTO) {
+		try {
+			return Response.ok(new PortalResponse(this.portalUserManager.create(userDTO))).build();
 		} catch (Exception e) {
 			PortalUserService.LOGGER.error(e.getMessage(), e);
 			return Response.ok(new PortalResponse(e.getMessage())).build();

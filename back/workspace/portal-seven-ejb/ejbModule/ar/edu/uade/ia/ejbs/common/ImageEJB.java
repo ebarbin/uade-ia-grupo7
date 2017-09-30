@@ -37,9 +37,8 @@ public class ImageEJB {
 		}
 	}
 
-	public Image create(Image image) {
+	public void create(Image image) {
 		this.em.persist(image);
-		return image;
 	}
 
 }

@@ -11,7 +11,6 @@ import { UserService } from './user.service';
 export class ImageService {
 
     constructor(
-      private userService: UserService, 
       private toastr:ToastrService,  
       private httpClient:HttpClient){}
 

@@ -11,6 +11,7 @@ import { Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
 
 import { ChangeImageComponent } from './components/change-image/change-image.component';
+import { NewUserComponent } from './components/new-user/new-user.component';
 
 
 @Component({
@@ -47,7 +48,15 @@ export class UserProfileComponent implements OnInit, OnDestroy {
 
   onChangeProfileImage(){
     const dialogRef = this.dialog.open(ChangeImageComponent, {
-      //height: '600px',
+      width: '500px',
+      data: null
+    });
+  
+    dialogRef.afterClosed().subscribe(result => {});
+  }
+
+  onNewUser(){
+    const dialogRef = this.dialog.open(NewUserComponent, {
       width: '500px',
       data: null
     });

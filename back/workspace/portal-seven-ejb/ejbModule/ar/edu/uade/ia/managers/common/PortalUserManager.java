@@ -68,4 +68,15 @@ public class PortalUserManager implements PortalUserManagerRemote, PortalUserMan
 		return PortalUserManager.mapper.map(user, PortalUserDTO.class);
 	}
 
+	@Override
+	public PortalUserDTO create(PortalUserDTO userDTO) throws Exception {
+		if(this.userEJB.getByUsername(userDTO.getUserName()) == null) {
+			PortalUser portalUser = PortalUserManager.mapper.map(userDTO, PortalUser.class);
+			this.userEJB.create(portalUser);
+			return PortalUserManager.mapper.map(portalUser, PortalUserDTO.class);
+		} else {
+			throw new Exception("Nombre de usuario ya existente.");
+		}
+	}
+
 }

@@ -37,21 +37,13 @@ export class ChangeImageComponent implements OnInit {
         .then((response:PortalResponse) => {
           if (response.success) {
             this.userService.userChanged.next(<PortalUser>response.data);
-            this.toastr.success('Imagen actualizada exitosamente.');
+            this.toastr.success('Imagen actualizada con éxito.');
             this.dialogRef.close();
           } else {
               this.toastr.error(response.errorMessage);
           }
         }).catch((res:HttpErrorResponse) => {
-          if (res.error){
-            if (typeof res.error != 'object') {
-              this.toastr.error(JSON.parse(res.error).errorMessage)
-            } else {
-              this.toastr.error(res.error.errorMessage)
-            }            
-          } else {
-            this.toastr.error(res.message);
-          }
+          this.toastr.error('Ha ocurrido un error. Contacte a un administrador.');
         });
     } else {
       this.toastr.error('Debe seleccionar una imagen.');
