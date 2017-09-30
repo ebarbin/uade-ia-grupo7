@@ -20,6 +20,9 @@ export class HotelOfferListResultComponent implements OnInit, OnDestroy {
 
   @Input()hotelOffers:HotelOfferHeader[];
 
+  @Input()sortDirection:string;
+  @Input()sortField:string;
+
   private detailDialogSub:Subscription;
 
   constructor(

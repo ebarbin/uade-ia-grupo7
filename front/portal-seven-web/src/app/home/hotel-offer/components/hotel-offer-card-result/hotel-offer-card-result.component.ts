@@ -19,6 +19,9 @@ export class HotelOfferCardResultComponent implements OnInit {
 
   @Input()hotelOffers:HotelOfferHeader[] = [];
 
+  @Input()sortDirection:string;
+  @Input()sortField:string;
+  
   private detailDialogSub:Subscription;
 
   constructor(

@@ -10,6 +10,7 @@ import { BlockUIModule } from 'ng-block-ui';
 import { NgxGalleryModule } from 'ngx-gallery';
 import { AgmCoreModule } from '@agm/core';
 import { ToastrModule } from 'ngx-toastr';
+import { Ng2OrderModule } from 'ng2-order-pipe';
 
 import { TruncatePipe } from './pipes/truncate.pipe';
 import { FirstPipe } from './pipes/first.pipe';
@@ -22,12 +23,13 @@ import { ConfirmComponent } from './components/confirm/confirm.component';
 import { MapComponent } from './components/map/map.component';
 
 import { DropdownDirective } from './directives/dropdown.directive';
+import { SortComponent } from './components/sort/sort.component';
 
 @NgModule({
   imports: [
     CommonModule, AngularMaterialModule, FormsModule, HttpClientModule,
     AppRoutingModule, BrowserAnimationsModule, AngularFontAwesomeModule,
-    BlockUIModule, NgxGalleryModule,
+    BlockUIModule, NgxGalleryModule, Ng2OrderModule,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyCAyih95bNn9V9XXdUe6DQaLGCw_R0_uXA'
     }),
@@ -39,15 +41,16 @@ import { DropdownDirective } from './directives/dropdown.directive';
   ],
   exports: [
     AngularMaterialModule, FormsModule, HttpClientModule, AppRoutingModule,
-    BrowserAnimationsModule, AngularFontAwesomeModule, BlockUIModule,
+    BrowserAnimationsModule, AngularFontAwesomeModule, BlockUIModule, Ng2OrderModule,
     NgxGalleryModule, AgmCoreModule, ToastrModule, JoinPipe,
     TruncatePipe, FirstPipe, ImageGetterPipe, WhenNullPutBlankPipe,
-    ImgGalleryComponent, MapComponent, ConfirmComponent, DropdownDirective
+    ImgGalleryComponent, MapComponent, ConfirmComponent, DropdownDirective, 
+    SortComponent
   ],
   declarations: [
     JoinPipe, TruncatePipe, FirstPipe, ImageGetterPipe,
     WhenNullPutBlankPipe, ImgGalleryComponent, ConfirmComponent,
-    MapComponent, DropdownDirective,
+    MapComponent, DropdownDirective, SortComponent,
   ],
   entryComponents: [ConfirmComponent]
 })

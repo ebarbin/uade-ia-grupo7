@@ -33,7 +33,7 @@ export class UserService {
     }).toPromise().then((response:PortalResponse) => {
       if (response.success) {
         this.userChanged.next(<PortalUser>response.data);
-        this.toastr.success('Usuario actualizado exitosamente.');
+        this.toastr.success('Usuario actualizado con éxito.');
       } else {
         this.toastr.error(response.errorMessage);
       }

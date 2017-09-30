@@ -45,4 +45,12 @@ export class HotelOfferComponent implements OnInit {
     });
   }
   
+  sortDirection:string;
+  onDirectionChange(direction){
+    this.sortDirection = direction;
+  }
+  sortField:string;
+  onSortFieldChange(sortField){
+    this.sortField = sortField;
+  }
 }
