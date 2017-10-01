@@ -1,23 +1,15 @@
 <div class="card-result">
-  <md-card class="card-row card col-lg-3 col-md-4 col-sm-6 col-xs-12" 
-  *ngFor="let hotelOfferHeader of hotelOffers | orderBy: sortField : sortDirection != 'asc'">
-    <md-card-header>
-      <img md-card-avatar [src]="hotelOfferHeader.images | first | imageGetter">
+  <md-card class="card-row card col-lg-3 col-md-4 col-sm-6 col-xs-6" (click)="onDetail(hotelOfferHeader)"
+  *ngFor="let hotelOfferHeader of hotelOffers">
+    <img class="img-responsive" style="margin: auto; max-height: 150px; max-width: 100%;" [src]="hotelOfferHeader.images | first | imageGetter">
+    <md-card-header>  
       <md-card-title>{{hotelOfferHeader.name}}</md-card-title>
-      <md-card-subtitle [mdTooltip]="hotelOfferHeader.description">{{hotelOfferHeader.description| truncate:30}}</md-card-subtitle>
+      <md-card-subtitle [mdTooltip]="hotelOfferHeader.description">{{hotelOfferHeader.description}}</md-card-subtitle>
     </md-card-header>
     <md-card-content>
-      <p>
-          {{hotelOfferHeader.services | join: ' - '}}
-      </p>
-      <p>
-          {{hotelOfferHeader.price | currency:'ARS':true}}
-      </p>
+      <p>{{hotelOfferHeader.services | join: ' - '}}</p>
+      <p>Capacidad: {{hotelOfferHeader.roomCapacity}} personas</p>
+      <div class="pull-right"><b>{{hotelOfferHeader.price | currency:'ARS':true}}</b></div>
     </md-card-content>
-    <md-card-actions align="end">
-        <button (click)="onDetail(hotelOfferHeader)" md-raised-button type="button" color="primary">
-            <i class="fa fa-check" aria-hidden="true"></i> Detalle
-        </button>
-    </md-card-actions>
   </md-card>
 </div>

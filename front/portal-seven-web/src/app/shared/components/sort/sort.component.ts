@@ -38,11 +38,7 @@ export class SortComponent implements OnInit {
   }
 
   getSortDirectionDescription(){
-    if (this.sortDirection == 'asc'){
-      return 'Ascendente';
-    } else {
-      return 'Descendente';
-    }
+    return this.sortDirection == 'asc' ? 'Ascendente' : 'Descendente';
   }
 
   getSortValues() {
@@ -60,7 +56,5 @@ export class SortComponent implements OnInit {
     }
   }
   
-
   ngOnInit() {}
-
 }

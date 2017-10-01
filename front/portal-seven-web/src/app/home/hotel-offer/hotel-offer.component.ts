@@ -27,7 +27,7 @@ export class HotelOfferComponent implements OnInit {
     this.hotelOfferService.reset();
   }
 
-  view:string = 'grid';
+  view:string = 'card';
 
   onChangeView(view){
     this.view = view;

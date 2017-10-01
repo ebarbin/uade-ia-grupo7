@@ -1,7 +1,8 @@
 <div class="card-result">
-    <md-card class="card-row card col-lg-3 col-md-4 col-sm-6 col-xs-12" *ngFor="let packageOffer of packageOffers">
+    <md-card class="card-row card col-lg-3 col-md-4 col-sm-6 col-xs-12" (click)="onDetail(packageOffer)"
+      *ngFor="let packageOffer of packageOffers">
+      <img class="img-responsive" style="margin: auto; max-height: 150px; max-width: 100%;" [src]="packageOffer.image | imageGetter">
       <md-card-header>
-        <img md-card-avatar [src]="packageOffer.image | imageGetter">
         <md-card-title>{{packageOffer.name}}</md-card-title>
         <md-card-subtitle>mostrar mas info</md-card-subtitle>
       </md-card-header>
@@ -10,10 +11,5 @@
           mas info detalle, bla bla bla
         </p>
       </md-card-content>
-      <md-card-actions align="end">
-          <button (click)="onDetail(packageOffer)" md-raised-button type="button" color="primary">
-              <i class="fa fa-check" aria-hidden="true"></i>  Detalle
-          </button>
-      </md-card-actions>
     </md-card>
   </div>
