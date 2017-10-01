@@ -14,6 +14,8 @@ public class HotelOfferDTO implements Serializable {
 	
 	private RoomDTO room;
 	
+	private Float price;
+	
 	public Integer getId() {
 		return id;
 	}
@@ -44,5 +46,13 @@ public class HotelOfferDTO implements Serializable {
 
 	public void setRoom(RoomDTO room) {
 		this.room = room;
+	}
+
+	public Float getPrice() {
+		return price;
+	}
+
+	public void setPrice(Float price) {
+		this.price = price;
 	}
 }

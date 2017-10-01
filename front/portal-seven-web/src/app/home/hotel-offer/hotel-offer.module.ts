@@ -8,6 +8,7 @@ import { HotelOfferDetailComponent } from './components/hotel-offer-detail/hotel
 import { HotelOfferGridResultComponent } from './components/hotel-offer-grid-result/hotel-offer-grid-result.component';
 import { HotelOfferCardResultComponent } from './components/hotel-offer-card-result/hotel-offer-card-result.component';
 import { HotelOfferListResultComponent } from './components/hotel-offer-list-result/hotel-offer-list-result.component';
+import { HotelOfferConfirmComponent } from './components/hotel-offer-confirm/hotel-offer-confirm.component';
 
 @NgModule({
   imports: [
@@ -21,7 +22,8 @@ import { HotelOfferListResultComponent } from './components/hotel-offer-list-res
     HotelOfferGridResultComponent,
     HotelOfferCardResultComponent,
     HotelOfferListResultComponent,
+    HotelOfferConfirmComponent,
   ],
-  entryComponents: [HotelOfferDetailComponent]
+  entryComponents: [HotelOfferDetailComponent, HotelOfferConfirmComponent]
 })
 export class HotelOfferModule { }

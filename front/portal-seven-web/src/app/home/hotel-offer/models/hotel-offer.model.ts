@@ -9,5 +9,6 @@ export class HotelOffer {
         public id: number, 
         public hotel: Hotel,
         public cancellationPolicy: string,
-        public room: Room){}
+        public room: Room,
+        public price:number){}
 }

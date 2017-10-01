@@ -1,5 +1,5 @@
 import { Component, Inject, OnInit, OnDestroy } from '@angular/core';
-import { MdDialogRef, MD_DIALOG_DATA } from '@angular/material';
+import { MdDialogRef, MD_DIALOG_DATA, MdDialog } from '@angular/material';
 
 import { HotelOfferHeader } from '../../models/hotel-offer-header.model';
 import { HotelOffer } from '../../models/hotel-offer.model';
@@ -7,6 +7,7 @@ import { ConfirmComponent } from '../../../../shared/components/confirm/confirm.
 import { DialogService } from '../../../../shared/services/confirm.service';
 import { ToastrService } from 'ngx-toastr';
 import { Subscription } from 'rxjs/Subscription';
+import { HotelOfferConfirmComponent } from '../hotel-offer-confirm/hotel-offer-confirm.component';
 
 @Component({
   selector: 'app-hotel-offer-detail',
@@ -20,6 +21,7 @@ export class HotelOfferDetailComponent implements OnInit, OnDestroy {
   private confirmSub:Subscription;
 
   constructor(
+    private dialog: MdDialog,
     private toastr: ToastrService,
     private dialogService: DialogService,
     private dialogRef: MdDialogRef<HotelOfferDetailComponent>,
@@ -30,14 +32,17 @@ export class HotelOfferDetailComponent implements OnInit, OnDestroy {
     }
 
     onReserve(){
-      //TODO MAKE RESERVATION
-      this.confirmSub = this.dialogService.confirm('Atención', '¿Esta seguro que desea realizar la reserva?')
-        .subscribe((confirm:boolean)=>{
-          if (confirm) {
-            this.toastr.success('Se ha reservado con éxito.');
-            this.dialogRef.close();
-          }
-        });
+      const confirmDialogRef = this.dialog.open(HotelOfferConfirmComponent, {
+        width: '300px',
+        data: this.hotelOffer
+      });
+  
+      this.confirmSub = confirmDialogRef.afterClosed().subscribe(confirm => {
+        if (confirm) {
+          //TODO Make reservation!
+          this.dialogRef.close();
+        }
+      });
     }
 
     ngOnInit() {

@@ -9,26 +9,29 @@
   <app-img-gallery [images]="hotelOffer.hotel.images"></app-img-gallery>
   <hr>
   <h3>Ubicación</h3>
-  <app-map [address]="hotelOffer.hotel.address"></app-map>
+      <p>{{hotelOffer.hotel.address.street}}</p>
+      <app-map [address]="hotelOffer.hotel.address"></app-map>
   <hr>
-  <md-tab-group>
-    <md-tab label="Habitación" >
-      <h3>Descripción</h3>
-      <p>{{hotelOffer.room.description}}</p>
-      <p>Tipo: {{hotelOffer.room.type}}</p>
-      <h3>Imagenes de la habitación</h3>
-      <app-img-gallery [images]="hotelOffer.room.images"></app-img-gallery>
-    </md-tab>
-    <md-tab label="Otras Habitaciones" *ngIf="hotelOffer.hotel.rooms.length > 0">
-      <div *ngFor="let room of hotelOffer.hotel.rooms">
+  <div class="col-md-12 tabs-detail">
+    <md-tab-group>
+      <md-tab label="Habitación" >
         <h3>Descripción</h3>
-        <p>{{room.description}}</p>
-        <p>Tipo: {{room.type}}</p>
+        <p>{{hotelOffer.room.description}}</p>
+        <p>Tipo: {{hotelOffer.room.type}}</p>
         <h3>Imagenes de la habitación</h3>
-        <app-img-gallery [images]="room.images"></app-img-gallery>
-      </div>
-    </md-tab>
-  </md-tab-group>
+        <app-img-gallery [images]="hotelOffer.room.images"></app-img-gallery>
+      </md-tab>
+      <md-tab label="Otras Habitaciones" *ngIf="hotelOffer.hotel.rooms.length > 0">
+        <div *ngFor="let room of hotelOffer.hotel.rooms">
+          <h3>Descripción</h3>
+          <p>{{room.description}}</p>
+          <p>Tipo: {{room.type}}</p>
+          <h3>Imagenes de la habitación</h3>
+          <app-img-gallery [images]="room.images"></app-img-gallery>
+        </div>
+      </md-tab>
+    </md-tab-group>
+  </div>
 </md-dialog-content>
 <md-dialog-actions align="end">
     <button md-raised-button type="button" color="success" (click)="onReserve()">
