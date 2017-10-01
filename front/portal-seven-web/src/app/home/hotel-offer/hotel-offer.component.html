@@ -1,11 +1,8 @@
 <app-hotel-offer-filter (search)="onSearch($event)" (reset)="onReset()"></app-hotel-offer-filter>
-<app-sort *ngIf="results.length > 0" 
-  [active]="view == 'list' || view == 'card'"
-  [type]="'hotel'"
-  (sortFieldChange)="onSortFieldChange($event)"
-  (directionChange)="onDirectionChange($event)">
+<app-sort *ngIf="hasResults()"
+  [type]="'hotel'">
 </app-sort>
-  <div class="change-view-toggle" *ngIf="results.length > 0">
+  <div class="change-view-toggle" *ngIf="hasResults()">
     <md-button-toggle-group mdTooltip="Cambio de vistas">
       <md-button-toggle md-mini-fab color="primary" value="left" 
         (click)="onChangeView('grid')" [checked]="view == 'grid'">
@@ -21,21 +18,18 @@
       </md-button-toggle>
     </md-button-toggle-group>
   </div>
-<div *ngIf="results.length > 0">
+<div *ngIf="hasResults()">
     <app-hotel-offer-grid-result 
-      *ngIf="view == 'grid'" 
-      [hotelOffers]="results">
+      *ngIf="view == 'grid'">
     </app-hotel-offer-grid-result>
     <app-hotel-offer-list-result 
       *ngIf="view == 'list'" 
       [sortDirection]="sortDirection"
-      [sortField]="sortField"
-      [hotelOffers]="results">
+      [sortField]="sortField">
     </app-hotel-offer-list-result>
     <app-hotel-offer-card-result 
       [sortDirection]="sortDirection"
       [sortField]="sortField"
-      *ngIf="view == 'card'" 
-      [hotelOffers]="results">
+      *ngIf="view == 'card'">
     </app-hotel-offer-card-result>
 </div>

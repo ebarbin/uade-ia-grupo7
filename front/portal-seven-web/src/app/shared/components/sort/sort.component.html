@@ -1,13 +1,15 @@
 <div style="margin-top:1px;" class="pull-right form-inline">
     <label>Ordenar por: </label>
-    <select class="form-control" [(ngModel)]="sortFieldSelected" [disabled]="!active"
-      (ngModelChange)="onSortChange($event)">
+    <select class="form-control" [(ngModel)]="sortField"
+      (ngModelChange)="onSortChange()">
         <option *ngFor="let sort of getSortValues()" [value]="sort.value"> 
           {{sort.viewValue}}
         </option>
     </select>
-    <button md-mini-fab color="accent" (click)="toogleDirection()" [disabled]="!active || sortFieldSelected == ''">
-        <i *ngIf="direction == 'asc'" class="fa fa-sort-amount-asc" aria-hidden="true"></i>
-        <i *ngIf="direction == 'desc'" class="fa fa-sort-amount-desc" aria-hidden="true"></i>
+    <button md-mini-fab color="accent" 
+        (click)="toogleSortDirection()" 
+        [disabled]="sortField == ''">
+        <i *ngIf="sortDirection == 'asc'" class="fa fa-sort-amount-asc" aria-hidden="true"></i>
+        <i *ngIf="sortDirection == 'desc'" class="fa fa-sort-amount-desc" aria-hidden="true"></i>
     </button>
 </div>

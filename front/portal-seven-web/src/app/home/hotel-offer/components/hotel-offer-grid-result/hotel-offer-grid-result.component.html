@@ -1,44 +1,44 @@
 <div class="grid-result">  
-  <md-table #table [dataSource]="dataSource" mdSort (mdSortChange)="sortData($event)">
+  <md-table #table [dataSource]="dataSource">
   
       <ng-container mdColumnDef="name">
-        <md-header-cell *mdHeaderCellDef md-sort-header>Hotel</md-header-cell>
+        <md-header-cell *mdHeaderCellDef>Hotel</md-header-cell>
         <md-cell *mdCellDef="let hotelOfferHeader"> 
           {{hotelOfferHeader.name}} 
         </md-cell>
       </ng-container>
   
       <ng-container mdColumnDef="description">
-        <md-header-cell *mdHeaderCellDef md-sort-header>Descripción</md-header-cell>
+        <md-header-cell *mdHeaderCellDef>Descripción</md-header-cell>
         <md-cell *mdCellDef="let hotelOfferHeader"[mdTooltip]="hotelOfferHeader.description">
           {{hotelOfferHeader.description | truncate:10}}
         </md-cell>
       </ng-container>
   
       <ng-container mdColumnDef="services">
-        <md-header-cell *mdHeaderCellDef md-sort-header>Servicios</md-header-cell>
+        <md-header-cell *mdHeaderCellDef>Servicios</md-header-cell>
         <md-cell *mdCellDef="let hotelOfferHeader" [mdTooltip]="hotelOfferHeader.services | join:' - '"> 
           {{hotelOfferHeader.services | join:' - ' | truncate:10}} 
         </md-cell>
       </ng-container>
 
       <ng-container mdColumnDef="price">
-          <md-header-cell *mdHeaderCellDef md-sort-header>Precio</md-header-cell>
+          <md-header-cell *mdHeaderCellDef>Precio</md-header-cell>
           <md-cell *mdCellDef="let hotelOfferHeader"> {{hotelOfferHeader.price | currency:'ARS':true}} </md-cell>
       </ng-container>
 
       <ng-container mdColumnDef="roomCapacity">
-          <md-header-cell *mdHeaderCellDef md-sort-header>Capacidad</md-header-cell>
+          <md-header-cell *mdHeaderCellDef>Capacidad</md-header-cell>
         <md-cell *mdCellDef="let hotelOfferHeader"> {{hotelOfferHeader.roomCapacity}} </md-cell>
       </ng-container>
 
       <ng-container mdColumnDef="offerStart">
-          <md-header-cell *mdHeaderCellDef md-sort-header>Desde</md-header-cell>
+          <md-header-cell *mdHeaderCellDef>Desde</md-header-cell>
         <md-cell *mdCellDef="let hotelOfferHeader"> {{hotelOfferHeader.offerStart | date:'dd/MM/yyyy'}} </md-cell>
       </ng-container>
 
       <ng-container mdColumnDef="offerEnd">
-          <md-header-cell *mdHeaderCellDef md-sort-header>Hasta</md-header-cell>
+          <md-header-cell *mdHeaderCellDef>Hasta</md-header-cell>
         <md-cell *mdCellDef="let hotelOfferHeader"> {{hotelOfferHeader.offerEnd | date:'dd/MM/yyyy'}} </md-cell>
       </ng-container>
 

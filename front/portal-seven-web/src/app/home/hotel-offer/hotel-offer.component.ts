@@ -31,26 +31,16 @@ export class HotelOfferComponent implements OnInit {
     this.view = view;
   }
 
+  hasResults(){
+    return this.hotelOfferService.getResults().length > 0;
+  }
+
   onReset(){
-    this.results = [];
+    this.hotelOfferService.reset();
   }
 
   results:HotelOfferHeader[] = [];
   onSearch(hotelOfferRequest: HotelOfferRequest){
-    this.hotelOfferService.search(hotelOfferRequest)
-     .then((results:HotelOfferHeader[]) => {
-      this.results = results;
-     }).catch((res:HttpErrorResponse) => {
-      this.toastr.error('Ha ocurrido un error. Contacte a un administrador.');
-    });
-  }
-  
-  sortDirection:string;
-  onDirectionChange(direction){
-    this.sortDirection = direction;
-  }
-  sortField:string;
-  onSortFieldChange(sortField){
-    this.sortField = sortField;
+    this.hotelOfferService.search(hotelOfferRequest);
   }
 }

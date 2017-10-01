@@ -17,12 +17,13 @@ import { Subscription } from 'rxjs/Subscription';
 })
 export class HotelOfferCardResultComponent implements OnInit {
 
-  @Input()hotelOffers:HotelOfferHeader[] = [];
+  hotelOffers:HotelOfferHeader[] = [];
 
   @Input()sortDirection:string;
   @Input()sortField:string;
   
   private detailDialogSub:Subscription;
+  private hotelOffersSub:Subscription;
 
   constructor(
     private toastr:ToastrService,
@@ -45,9 +46,16 @@ export class HotelOfferCardResultComponent implements OnInit {
     });
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.hotelOffers = this.hotelOfferService.getResults();
+    this.hotelOffersSub = this.hotelOfferService.resultsChanged
+      .subscribe((results:HotelOfferHeader[])=>{
+      this.hotelOffers = results;
+    });
+  }
 
   ngOnDestroy(){
+    this.hotelOffersSub.unsubscribe();
     if (this.detailDialogSub)
       this.detailDialogSub.unsubscribe();
   }

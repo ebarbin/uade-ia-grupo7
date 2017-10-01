@@ -1,4 +1,5 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output } from '@angular/core';
+import { HotelOfferService } from '../../../home/hotel-offer/services/hotel-offer.service';
 
 @Component({
   selector: 'app-sort',
@@ -8,24 +9,24 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 export class SortComponent implements OnInit {
 
   @Input()type:string;
-  @Input()active:boolean;
-  @Output()directionChange:EventEmitter<string> = new EventEmitter();
-  @Output()sortFieldChange:EventEmitter<string> = new EventEmitter();
 
-  sortFieldSelected:string = '';
+  sortField:string = '';
+  sortDirection:string = 'desc';
 
-  direction:string = 'desc';
+  toogleSortDirection() {
+    if(this.sortDirection == 'asc') this.sortDirection = 'desc';
+    else this.sortDirection = 'asc';
 
-  toogleDirection() {
-    if(this.direction == 'asc') this.direction = 'desc';
-    else this.direction = 'asc';
-    this.directionChange.next(this.direction);
+    if(this.type == 'hotel') {
+      this.hotelOfferService.sortResults(this.sortDirection, this.sortField);
+    }
   }
 
   onSortChange(){
-    this.direction = 'desc'
-    this.directionChange.next(this.direction);
-    this.sortFieldChange.next(this.sortFieldSelected);
+    this.sortDirection = 'desc'
+    if(this.type == 'hotel') {
+      this.hotelOfferService.sortResults(this.sortDirection, this.sortField);
+    }
   }
 
   getSortValues() {
@@ -41,9 +42,8 @@ export class SortComponent implements OnInit {
       ];
     } 
   }
-  constructor() { }
+  constructor(private hotelOfferService:HotelOfferService) { }
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
 }
