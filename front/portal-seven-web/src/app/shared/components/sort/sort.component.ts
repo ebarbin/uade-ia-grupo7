@@ -1,3 +1,4 @@
+import { PackageOfferService } from './../../../home/package-offer/services/package-offer.service';
 import { Component, OnInit, Input, Output } from '@angular/core';
 import { HotelOfferService } from '../../../home/hotel-offer/services/hotel-offer.service';
 
@@ -13,36 +14,52 @@ export class SortComponent implements OnInit {
   sortField:string = '';
   sortDirection:string = 'desc';
 
+  constructor(
+    private packageOfferService:PackageOfferService,
+    private hotelOfferService:HotelOfferService) { }
+
   toogleSortDirection() {
-    if(this.sortDirection == 'asc') this.sortDirection = 'desc';
+    if (this.sortDirection == 'asc') this.sortDirection = 'desc';
     else this.sortDirection = 'asc';
 
     if(this.type == 'hotel') {
       this.hotelOfferService.sortResults(this.sortDirection, this.sortField);
+    } else if (this.type == 'package'){
+      this.packageOfferService.sortResults(this.sortDirection, this.sortField);
     }
   }
 
   onSortChange(){
-    this.sortDirection = 'desc'
-    if(this.type == 'hotel') {
+    if (this.type == 'hotel') {
       this.hotelOfferService.sortResults(this.sortDirection, this.sortField);
+    } else if (this.type == 'package'){
+      this.packageOfferService.sortResults(this.sortDirection, this.sortField);
+    }
+  }
+
+  getSortDirectionDescription(){
+    if (this.sortDirection == 'asc'){
+      return 'Ascendente';
+    } else {
+      return 'Descendente';
     }
   }
 
   getSortValues() {
     if (this.type == 'hotel') {
       return [
-        {value:'', viewValue:''},
-        {value:'name', viewValue:'Nombre Hotel'},
-        {value:'description', viewValue:'Descripción'},
+        {value:'', viewValue:'Seleccione...'},
+        {value:'name', viewValue:'Hotel'},
         {value:'price', viewValue:'Precio'},
         {value:'roomCapacity', viewValue:'Capacidad'},
         {value:'offerStart', viewValue:'Desde'},
         {value:'offerEnd', viewValue:'Hasta'}
       ];
-    } 
+    } else if (this.type == 'package') {
+      return [];
+    }
   }
-  constructor(private hotelOfferService:HotelOfferService) { }
+  
 
   ngOnInit() {}
 

@@ -56,7 +56,6 @@ export class HotelOfferGridResultComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(){
     this.resultsChangeSub.unsubscribe();
-    if(this.detailDialogSub)
-      this.detailDialogSub.unsubscribe();
+    if(this.detailDialogSub) this.detailDialogSub.unsubscribe();
   }
 }

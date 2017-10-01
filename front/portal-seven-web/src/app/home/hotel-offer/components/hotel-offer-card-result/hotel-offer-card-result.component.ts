@@ -1,5 +1,5 @@
 import { ToastrService } from 'ngx-toastr';
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 import { HotelOfferHeader } from '../../models/hotel-offer-header.model';
 import { MdDialog } from '@angular/material';
@@ -18,9 +18,6 @@ import { Subscription } from 'rxjs/Subscription';
 export class HotelOfferCardResultComponent implements OnInit {
 
   hotelOffers:HotelOfferHeader[] = [];
-
-  @Input()sortDirection:string;
-  @Input()sortField:string;
   
   private detailDialogSub:Subscription;
   private hotelOffersSub:Subscription;
@@ -37,7 +34,6 @@ export class HotelOfferCardResultComponent implements OnInit {
         width: '900px',
         data: hotelOffer
       });
-  
      this.detailDialogSub = dialogRef.afterClosed().subscribe(result => {
         console.log(result);
       });
@@ -56,7 +52,6 @@ export class HotelOfferCardResultComponent implements OnInit {
 
   ngOnDestroy(){
     this.hotelOffersSub.unsubscribe();
-    if (this.detailDialogSub)
-      this.detailDialogSub.unsubscribe();
+    if (this.detailDialogSub) this.detailDialogSub.unsubscribe();
   }
 }

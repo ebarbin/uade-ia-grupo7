@@ -14,7 +14,6 @@ import { HotelOffer } from '../models/hotel-offer.model';
 export class HotelOfferService {
 
   resultsChanged:Subject<HotelOfferHeader[]> = new Subject;
-
   results:HotelOfferHeader[] = [];
 
   constructor(

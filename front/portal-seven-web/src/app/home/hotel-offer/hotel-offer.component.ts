@@ -23,7 +23,9 @@ export class HotelOfferComponent implements OnInit {
     private toastr:ToastrService,
     private hotelOfferService:HotelOfferService) { }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.hotelOfferService.reset();
+  }
 
   view:string = 'grid';
 

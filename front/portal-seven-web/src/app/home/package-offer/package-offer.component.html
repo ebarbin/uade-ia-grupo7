@@ -1,5 +1,8 @@
 <app-package-offer-filter (search)="onSearch($event)" (reset)="onReset()"></app-package-offer-filter>
-<div class="change-view-toggle" *ngIf="results.length > 0">
+<app-sort *ngIf="hasResults()"
+  [type]="'package'">
+</app-sort>
+<div class="change-view-toggle" *ngIf="hasResults()">
   <md-button-toggle-group mdTooltip="Cambio de vistas">
     <md-button-toggle md-mini-fab color="primary" value="left"
       (click)="onChangeView('grid')" [checked]="view == 'grid'">
@@ -15,12 +18,8 @@
     </md-button-toggle>
   </md-button-toggle-group>
 </div>
-<div *ngIf="results.length > 0">
-    <app-package-offer-grid-result [packageOffers]="results" *ngIf="view == 'grid'"></app-package-offer-grid-result>
-    <app-package-offer-list-result [packageOffers]="results" *ngIf="view == 'list'"></app-package-offer-list-result>
-    <app-package-offer-card-result [packageOffers]="results" *ngIf="view == 'card'"></app-package-offer-card-result>
+<div *ngIf="hasResults()">
+  <app-package-offer-grid-result *ngIf="view == 'grid'"></app-package-offer-grid-result>
+  <app-package-offer-list-result *ngIf="view == 'list'"></app-package-offer-list-result>
+  <app-package-offer-card-result *ngIf="view == 'card'"></app-package-offer-card-result>
 </div>
-<!--<md-paginator [length]="100"
-[pageSize]="10"
-[pageSizeOptions]="[5, 10, 25, 100]">
-</md-paginator>-->

@@ -1,5 +1,5 @@
 import { ToastrService } from 'ngx-toastr';
-import { Component, OnInit, Input, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 
 import { MdDialog } from '@angular/material';
 
@@ -19,9 +19,6 @@ import { Subscription } from 'rxjs/Subscription';
 export class HotelOfferListResultComponent implements OnInit, OnDestroy {
 
   hotelOffers:HotelOfferHeader[];
-
-  @Input()sortDirection:string;
-  @Input()sortField:string;
 
   private detailDialogSub:Subscription;
   private hotelOffersSub:Subscription;
