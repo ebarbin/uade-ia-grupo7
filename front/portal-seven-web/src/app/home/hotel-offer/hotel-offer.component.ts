@@ -23,26 +23,26 @@ export class HotelOfferComponent implements OnInit {
     private toastr:ToastrService,
     private hotelOfferService:HotelOfferService) { }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.hotelOfferService.reset();
+  }
 
-  view:string = 'grid';
+  view:string = 'card';
 
   onChangeView(view){
     this.view = view;
   }
 
+  hasResults(){
+    return this.hotelOfferService.getResults().length > 0;
+  }
+
   onReset(){
-    this.results = [];
+    this.hotelOfferService.reset();
   }
 
   results:HotelOfferHeader[] = [];
   onSearch(hotelOfferRequest: HotelOfferRequest){
-    this.hotelOfferService.search(hotelOfferRequest)
-     .then((results:HotelOfferHeader[]) => {
-      this.results = results;
-     }).catch((res:HttpErrorResponse) => {
-      this.toastr.error('Ha ocurrido un error. Contacte a un administrador.');
-    });
+    this.hotelOfferService.search(hotelOfferRequest);
   }
-  
 }

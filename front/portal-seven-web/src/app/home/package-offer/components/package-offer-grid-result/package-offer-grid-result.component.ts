@@ -18,8 +18,8 @@ import {
 })
 export class PackageOfferGridResultComponent implements OnInit {
 
-  @Input()packageOffers:PackageOfferHeader[];
   private resultsChangeSub:Subscription;
+  private detailDialogSub:Subscription;
 
   public dataSource: CustomDatasource;
   public displayedColumns = ['id', 'name', 'image', 'other', 'action'];
@@ -36,8 +36,8 @@ export class PackageOfferGridResultComponent implements OnInit {
         width: '900px',
         data: packageOffer
       });
-      dialogRef.afterClosed().subscribe(result => {
-        console.log(result);
+      this.detailDialogSub = dialogRef.afterClosed().subscribe(result => {
+        console.log("close detail");
       });
     }).catch((res:HttpErrorResponse)=>{
       this.toastr.error('Ha ocurrido un error. Contacte a un administrador.');
@@ -45,7 +45,7 @@ export class PackageOfferGridResultComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.dataSource = new CustomDatasource(this.packageOffers);
+    this.dataSource = new CustomDatasource(this.packageOfferService.getResults());
     this.resultsChangeSub = this.packageOfferService.resultsChanged.subscribe((data:PackageOfferHeader[])=>{
       this.dataSource = new CustomDatasource(data);
     });
@@ -53,5 +53,6 @@ export class PackageOfferGridResultComponent implements OnInit {
 
   ngOnDestroy(){
     this.resultsChangeSub.unsubscribe();
+    if(this.detailDialogSub) this.detailDialogSub.unsubscribe();
   }
 }

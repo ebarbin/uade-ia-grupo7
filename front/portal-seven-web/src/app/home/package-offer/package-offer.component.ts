@@ -16,7 +16,9 @@ export class PackageOfferComponent implements OnInit {
     private toastr:ToastrService,
     private packageOfferService: PackageOfferService) { }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.packageOfferService.reset();
+  }
 
   view:string = 'grid';
 
@@ -24,18 +26,17 @@ export class PackageOfferComponent implements OnInit {
     this.view = view;
   }
 
+  hasResults(){
+    return this.packageOfferService.getResults().length > 0;
+  }
+
   onReset(){
-    this.results = [];
+    this.packageOfferService.reset();
   }
 
   results:PackageOfferHeader[] = [];
   onSearch(packageOfferRequest: PackageOfferRequest){
-    this.packageOfferService.search(packageOfferRequest)
-    .then((results:PackageOfferHeader[]) => {
-     this.results = results;
-    }).catch((res:HttpErrorResponse) => {
-      this.toastr.error('Ha ocurrido un error. Contacte a un administrador.');
-   });
+    this.packageOfferService.search(packageOfferRequest);
   }
 
 }

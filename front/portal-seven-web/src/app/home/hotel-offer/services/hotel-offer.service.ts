@@ -14,11 +14,28 @@ import { HotelOffer } from '../models/hotel-offer.model';
 export class HotelOfferService {
 
   resultsChanged:Subject<HotelOfferHeader[]> = new Subject;
+  results:HotelOfferHeader[] = [];
 
   constructor(
     private httpClient:HttpClient,
     private toastr: ToastrService) {}
 
+    private compare(a, b, isAsc) {
+      return (a < b ? -1 : 1) * (isAsc ? 1 : -1);
+    }
+
+    getResults():HotelOfferHeader[]{
+      return this.results;
+    }
+
+    sortResults(sortDirection:string, sortField:string){
+      this.results = this.results.sort((a, b) => {
+        let isAsc = sortDirection == 'asc';
+        return this.compare(a[sortField], b[sortField], isAsc);
+      });
+      this.resultsChanged.next(this.results);
+    }
+    
     getDetail(hotelOfferHeader:HotelOfferHeader):Promise<HotelOffer>{
       return this.httpClient.get('portal-seven-web/api/rest/hotel-offer/detail/' + hotelOfferHeader.id)
       .map((response:PortalResponse)=>{
@@ -38,17 +55,26 @@ export class HotelOfferService {
       }).toPromise();
     }
 
-    search(request:HotelOfferRequest):Promise<HotelOfferHeader[]>{
+    reset(){
+      this.results = [];
+      this.resultsChanged.next(this.results);
+    }
+
+    search(request:HotelOfferRequest){
       return this.httpClient.post('portal-seven-web/api/rest/hotel-offer/search', request)
         .map((response:PortalResponse)=>{
           if(response.success) {
-            var results = <HotelOfferHeader[]>response.data;
-            if (results.length == 0) this.toastr.info('No hay resultados.')
-            this.resultsChanged.next(results);
-            return results;
+            return <HotelOfferHeader[]>response.data;
           } else {
             this.toastr.error(response.errorMessage);
+            return [];
           }
-        }).toPromise();
+        }).toPromise().then((results:HotelOfferHeader[]) => {
+          this.results = results;
+          if (this.results.length == 0) this.toastr.info('No hay resultados.');
+          this.resultsChanged.next(this.results);
+        }).catch((res:HttpErrorResponse) => {
+          this.toastr.error('Ha ocurrido un error. Contacte a un administrador.');
+        });
     }
 }

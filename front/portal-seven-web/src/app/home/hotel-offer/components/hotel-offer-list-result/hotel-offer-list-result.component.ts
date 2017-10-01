@@ -1,5 +1,5 @@
 import { ToastrService } from 'ngx-toastr';
-import { Component, OnInit, Input, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 
 import { MdDialog } from '@angular/material';
 
@@ -18,18 +18,26 @@ import { Subscription } from 'rxjs/Subscription';
 })
 export class HotelOfferListResultComponent implements OnInit, OnDestroy {
 
-  @Input()hotelOffers:HotelOfferHeader[];
+  hotelOffers:HotelOfferHeader[];
 
   private detailDialogSub:Subscription;
+  private hotelOffersSub:Subscription;
 
   constructor(
     private toastr: ToastrService,
     private hotelOfferService: HotelOfferService,
     private dialog: MdDialog) { }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.hotelOffers = this.hotelOfferService.getResults();
+    this.hotelOffersSub = this.hotelOfferService.resultsChanged
+      .subscribe((results:HotelOfferHeader[])=>{
+      this.hotelOffers = results;
+    })
+  }
 
   ngOnDestroy(){
+    this.hotelOffersSub.unsubscribe();
     if (this.detailDialogSub)
       this.detailDialogSub.unsubscribe();
   }

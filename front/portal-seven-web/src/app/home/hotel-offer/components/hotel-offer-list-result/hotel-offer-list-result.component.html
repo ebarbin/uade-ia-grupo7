@@ -1,6 +1,6 @@
 <div class="list-result">
-    <md-card class="card-row card col-lg-12 col-md-12 col-sm-12 col-xs-12" *ngFor="let hotelOfferHeader of hotelOffers">
-
+    <md-card class="card-row card col-lg-12 col-md-12 col-sm-12 col-xs-12" (click)="onDetail(hotelOfferHeader)"
+    *ngFor="let hotelOfferHeader of hotelOffers">
         <div class="col-md-1 col-sm-1 col-xs-2">
             <img class="img-circle" height="60" width="60" style="margin-left:-10px; margin-top:10px;"
             [src]="hotelOfferHeader.images | first | imageGetter">
@@ -18,7 +18,7 @@
             <p>{{hotelOfferHeader.price | currency:'ARS':true}}</p>
         </div>
         <div class="col-md-2 col-sm-2 col-xs-3">
-            <p><b>Cap. Hab.</b></p>
+            <p><b>Capacidad</b></p>
             <p>{{hotelOfferHeader.roomCapacity}}</p>
         </div>
         <div class="col-md-2 col-sm-2 col-xs-3">
@@ -28,11 +28,6 @@
         <div class="col-md-2 col-sm-2 col-xs-3">
             <p><b>Hasta</b></p>
             <p>{{hotelOfferHeader.offerEnd | date:'dd/MM/yyyy'}}</p>
-        </div>
-        <div class="pull-right row">
-            <button (click)="onDetail(hotelOfferHeader)" md-raised-button type="button" color="primary">
-                <i class="fa fa-check" aria-hidden="true"></i> Detalle
-            </button>
         </div>
     </md-card>
 </div>

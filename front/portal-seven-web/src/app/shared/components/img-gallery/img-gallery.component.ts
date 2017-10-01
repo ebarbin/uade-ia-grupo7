@@ -11,7 +11,6 @@ import { HotelOffer } from '../../../home/hotel-offer/models/hotel-offer.model';
 })
 export class ImgGalleryComponent implements OnInit {
 
-  
   @Input()images:Image[] = [];
 
   galleryOptions: NgxGalleryOptions[];

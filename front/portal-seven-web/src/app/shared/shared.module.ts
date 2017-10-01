@@ -22,6 +22,7 @@ import { ConfirmComponent } from './components/confirm/confirm.component';
 import { MapComponent } from './components/map/map.component';
 
 import { DropdownDirective } from './directives/dropdown.directive';
+import { SortComponent } from './components/sort/sort.component';
 
 @NgModule({
   imports: [
@@ -42,12 +43,13 @@ import { DropdownDirective } from './directives/dropdown.directive';
     BrowserAnimationsModule, AngularFontAwesomeModule, BlockUIModule,
     NgxGalleryModule, AgmCoreModule, ToastrModule, JoinPipe,
     TruncatePipe, FirstPipe, ImageGetterPipe, WhenNullPutBlankPipe,
-    ImgGalleryComponent, MapComponent, ConfirmComponent, DropdownDirective
+    ImgGalleryComponent, MapComponent, ConfirmComponent, DropdownDirective, 
+    SortComponent
   ],
   declarations: [
     JoinPipe, TruncatePipe, FirstPipe, ImageGetterPipe,
     WhenNullPutBlankPipe, ImgGalleryComponent, ConfirmComponent,
-    MapComponent, DropdownDirective,
+    MapComponent, DropdownDirective, SortComponent,
   ],
   entryComponents: [ConfirmComponent]
 })

@@ -2,5 +2,10 @@
     margin-top:2px;
 }
 .card-row {
+    height: 300px;
+    cursor:pointer;
     margin-bottom: 2px;
+}
+.mat-card-header {
+    margin-top: 10px;
 }

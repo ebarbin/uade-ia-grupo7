@@ -1,9 +1,10 @@
+import { Subscription } from 'rxjs/Subscription';
 import { ToastrService } from 'ngx-toastr';
 import { HttpErrorResponse } from '@angular/common/http';
 import { PackageOffer } from './../../models/package-offer.model';
 import { PackageOfferService } from './../../services/package-offer.service';
 import { PackageOfferHeader } from './../../models/package-offer-header.model';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { MdDialog } from '@angular/material';
 import {
     PackageOfferDetailComponent
@@ -14,10 +15,13 @@ import {
   templateUrl: './package-offer-card-result.component.html',
   styleUrls: ['./package-offer-card-result.component.css']
 })
-export class PackageOfferCardResultComponent implements OnInit {
+export class PackageOfferCardResultComponent implements OnInit, OnDestroy {
 
-  @Input()packageOffers:PackageOfferHeader[];
+    packageOffers:PackageOfferHeader[];
   
+    private detailDialogSub:Subscription;
+    private packageOffersSub:Subscription;
+
     constructor(
       private toastr: ToastrService,
       private packageOfferService: PackageOfferService,
@@ -30,7 +34,7 @@ export class PackageOfferCardResultComponent implements OnInit {
           width: '900px',
           data: packageOffer
         });
-        dialogRef.afterClosed().subscribe(result => {
+        this.detailDialogSub = dialogRef.afterClosed().subscribe(result => {
           console.log(result);
         });
       }).catch((res:HttpErrorResponse)=>{
@@ -38,6 +42,16 @@ export class PackageOfferCardResultComponent implements OnInit {
       });
     }
   
-    ngOnInit() {}
+    ngOnInit() {
+      this.packageOffers = this.packageOfferService.getResults();
+      this.packageOffersSub = this.packageOfferService.resultsChanged
+        .subscribe((results:PackageOfferHeader[])=>{
+        this.packageOffers = results;
+      });
+    }
 
+    ngOnDestroy(){
+      this.packageOffersSub.unsubscribe();
+      if (this.detailDialogSub) this.detailDialogSub.unsubscribe();
+    }
 }
