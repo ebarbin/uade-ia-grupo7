@@ -1,6 +1,5 @@
 package ar.edu.uade.ia.ejbs;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.LocalBean;
@@ -26,8 +25,9 @@ public class PackageOfferEJB {
      */
     public PackageOfferEJB() {}
     
+	@SuppressWarnings("unchecked")
 	public List<PackageOffer> search(PackageOfferRequestDTO request) {
-		return new ArrayList<PackageOffer>();
+		return this.em.createQuery("from PackageOffer").getResultList();
 	}
 	
 	public PackageOffer getDetail(Integer id) {

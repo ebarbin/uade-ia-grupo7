@@ -37,10 +37,10 @@ public class HotelOfferEJB {
 		Integer roomQty = request.getRoomQuantity();
 		Integer peoplePerRoom = request.getPeoplePerRoom();
 
-		// Quota cuyo día este dentro del rango del filtro
+		// Quota cuyo dia este dentro del rango del filtro
 		// Quota cuyo hotel de su oferta coincida con el hotel del filtro
 		// Quota cuyo cupo diario supere o iguale la cantidad de habitaciones del filtro
-		// Quota cuya capacidad de personas de habitación de la oferta sea superior o
+		// Quota cuya capacidad de personas de habitacion de la oferta sea superior o
 		// igual a cantidad de personas del filtro
 		StringBuffer queryBuilder = new StringBuffer("select ofe");
 		queryBuilder.append(" from Quota as quo");

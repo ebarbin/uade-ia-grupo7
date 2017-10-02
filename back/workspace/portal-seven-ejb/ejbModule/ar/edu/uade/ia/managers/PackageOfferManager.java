@@ -10,11 +10,15 @@ import javax.ejb.Stateless;
 import org.dozer.DozerBeanMapperBuilder;
 import org.dozer.Mapper;
 
+import ar.edu.uade.ia.dtos.ImageDTO;
 import ar.edu.uade.ia.dtos.PackageOfferDTO;
 import ar.edu.uade.ia.dtos.PackageOfferHeaderDTO;
 import ar.edu.uade.ia.dtos.PackageOfferRequestDTO;
+import ar.edu.uade.ia.dtos.SimpleNamedDTO;
 import ar.edu.uade.ia.ejbs.PackageOfferEJB;
+import ar.edu.uade.ia.ejbs.entities.bussiness.Image;
 import ar.edu.uade.ia.ejbs.entities.bussiness.PackageOffer;
+import ar.edu.uade.ia.ejbs.entities.bussiness.Service;
 import ar.edu.uade.ia.managers.interfaces.PackageOfferManagerLocal;
 import ar.edu.uade.ia.managers.interfaces.PackageOfferManagerRemote;
 
@@ -48,6 +52,38 @@ public class PackageOfferManager implements PackageOfferManagerRemote, PackageOf
 	}
 
 	private List<PackageOfferHeaderDTO> convertToListOfPackageOfferHeaderDTO(List<PackageOffer> packageOffers) {
-		return new ArrayList<PackageOfferHeaderDTO>();
+		List<PackageOfferHeaderDTO> results = new ArrayList<PackageOfferHeaderDTO>();
+		
+		PackageOfferHeaderDTO headerDTO;
+		SimpleNamedDTO namedDTO;
+		ImageDTO imageDTO;
+		
+		for (PackageOffer packageOffer : packageOffers) {
+			headerDTO = new PackageOfferHeaderDTO();
+
+			headerDTO.setId(packageOffer.getId());
+			headerDTO.setDescription(packageOffer.getDescription());
+			headerDTO.setServices(new ArrayList<SimpleNamedDTO>());
+
+			for (Service service : packageOffer.getServices()) {
+				namedDTO = new SimpleNamedDTO();
+				namedDTO.setId(service.getId());
+				namedDTO.setName(service.getName());
+				headerDTO.getServices().add(namedDTO);
+			}
+			headerDTO.setPrice(packageOffer.getPrice());
+			headerDTO.setOfferStart(packageOffer.getOfferStart());
+			headerDTO.setOfferEnd(packageOffer.getOfferEnd());
+			
+			headerDTO.setImages(new ArrayList<ImageDTO>());
+			for (Image img : packageOffer.getImages()) {
+				imageDTO = new ImageDTO();
+				imageDTO.setId(img.getId());
+				headerDTO.getImages().add(imageDTO);
+			}
+			results.add(headerDTO);
+		}
+		
+		return results;
 	}
 }

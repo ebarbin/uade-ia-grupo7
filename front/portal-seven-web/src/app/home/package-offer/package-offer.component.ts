@@ -20,7 +20,7 @@ export class PackageOfferComponent implements OnInit {
     this.packageOfferService.reset();
   }
 
-  view:string = 'grid';
+  view:string = 'card';
 
   onChangeView(view){
     this.view = view;
@@ -34,7 +34,6 @@ export class PackageOfferComponent implements OnInit {
     this.packageOfferService.reset();
   }
 
-  results:PackageOfferHeader[] = [];
   onSearch(packageOfferRequest: PackageOfferRequest){
     this.packageOfferService.search(packageOfferRequest);
   }

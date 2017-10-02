@@ -43,7 +43,6 @@ public class PackageOfferService {
 	public Response search(PackageOfferRequestDTO request) {
 		try {
 			List<PackageOfferHeaderDTO> result = this.packageOfferManager.search(request);
-			this.clearImageDataField(result);
 			return Response.ok(new PortalResponse(result)).build();
 		} catch (Exception e) {
 			PackageOfferService.LOGGER.error(e.getMessage(), e);
@@ -66,10 +65,6 @@ public class PackageOfferService {
 	}
 	
 	private void clearImageDataField(PackageOfferDTO dto) {
-		// TODO Auto-generated method stub
-	}
-
-	private void clearImageDataField(List<PackageOfferHeaderDTO> result) {
 		// TODO Auto-generated method stub
 	}
 }

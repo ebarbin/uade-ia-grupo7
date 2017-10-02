@@ -36,7 +36,6 @@ public class HotelOfferService {
 	public Response search(HotelOfferRequestDTO request) {
 		try {
 			List<HotelOfferHeaderDTO> result = this.hotelOfferManager.search(request);
-			this.clearImageDataField(result);
 			return Response.ok(new PortalResponse(result)).build();
 		} catch (Exception e) {
 			HotelOfferService.LOGGER.error(e.getMessage(), e);
@@ -55,16 +54,6 @@ public class HotelOfferService {
 		} catch (Exception e) {
 			HotelOfferService.LOGGER.error(e.getMessage(), e);
 			return Response.status(Response.Status.BAD_REQUEST).entity(new PortalResponse(e.getMessage())).build();
-		}
-	}
-
-	private void clearImageDataField(List<HotelOfferHeaderDTO> result) {
-		for (HotelOfferHeaderDTO header : result) {
-			if (header.getImages() != null) {
-				for (ImageDTO img : header.getImages()) {
-					img.setData(null);
-				}
-			}
 		}
 	}
 	

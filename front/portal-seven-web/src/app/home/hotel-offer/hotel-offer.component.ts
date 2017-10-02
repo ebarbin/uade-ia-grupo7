@@ -41,7 +41,6 @@ export class HotelOfferComponent implements OnInit {
     this.hotelOfferService.reset();
   }
 
-  results:HotelOfferHeader[] = [];
   onSearch(hotelOfferRequest: HotelOfferRequest){
     this.hotelOfferService.search(hotelOfferRequest);
   }

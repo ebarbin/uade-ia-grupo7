@@ -74,10 +74,10 @@ public class HotelOfferManager implements HotelOfferManagerRemote, HotelOfferMan
 			}
 			headerDTO.setPrice(hotelOffer.getPrice());
 			headerDTO.setRoomCapacity(hotelOffer.getRoom().getCapacity());
-			headerDTO.setImages(new ArrayList<ImageDTO>());
 			headerDTO.setOfferStart(hotelOffer.getOfferStart());
 			headerDTO.setOfferEnd(hotelOffer.getOfferEnd());
 			
+			headerDTO.setImages(new ArrayList<ImageDTO>());
 			for (Image img : hotelOffer.getHotel().getImages()) {
 				imageDTO = new ImageDTO();
 				imageDTO.setId(img.getId());
