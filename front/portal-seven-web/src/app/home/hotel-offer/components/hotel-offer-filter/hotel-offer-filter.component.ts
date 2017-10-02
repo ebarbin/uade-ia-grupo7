@@ -1,5 +1,5 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { Observable } from 'rxjs/Observable';
@@ -8,6 +8,7 @@ import { AutocompleteResource } from '../../../../shared/models/autocomplete-res
 import { AutocompleteService } from '../../../../shared/services/hotel-autocomplete.service';
 import { HotelOfferRequest } from '../../models/hotel-offer-request.model';
 import { HotelOfferHeader } from '../../models/hotel-offer-header.model';
+import { HotelOfferService } from '../../services/hotel-offer.service';
 
 @Component({
   selector: 'app-hotel-offer-filter',
@@ -16,26 +17,18 @@ import { HotelOfferHeader } from '../../models/hotel-offer-header.model';
 })
 export class HotelOfferFilterComponent implements OnInit {
 
-  @Output('search') search: EventEmitter<HotelOfferRequest> = new EventEmitter();
-  @Output('reset') reset: EventEmitter<any> = new EventEmitter();
-
   quantityOptions:any[] = [];
   hotelResults:AutocompleteResource[];
   fromDate:Date = null
   toDate:Date = null;
   
   constructor(
+    private hotelOfferService: HotelOfferService,
     private toastr: ToastrService,
     private autocompleteService:AutocompleteService) { }
 
     formValid(form:NgForm){
       if (!form.valid) return false;
-
-      /*var today = new Date();
-      if(form.value.fromDate && form.value.fromDate < today)
-        return false;
-      if(form.value.toDate && form.value.toDate < today)
-        return false;*/
 
       if (form.value.fromDate && form.value.toDate)
         if (form.value.fromDate > form.value.toDate)
@@ -65,12 +58,12 @@ export class HotelOfferFilterComponent implements OnInit {
     }
     
     onReset() {
-      this.reset.next({});
+      this.hotelOfferService.reset();
     }
 
     onSubmit(form:NgForm){
       this.fixForm(form);
-      this.search.next(form.value);
+      this.hotelOfferService.search(<HotelOfferRequest>form.value);
     }
 
     private fixForm(form:NgForm){

@@ -1,11 +1,12 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 
 import { AutocompleteResource } from '../../../../shared/models/autocomplete-resource.model';
 import { AutocompleteService } from '../../../../shared/services/hotel-autocomplete.service';
 import { PackageOfferRequest } from '../../models/package-offer-request.model';
+import { PackageOfferService } from '../../services/package-offer.service';
 
 @Component({
   selector: 'app-package-offer-filter',
@@ -14,13 +15,11 @@ import { PackageOfferRequest } from '../../models/package-offer-request.model';
 })
 export class PackageOfferFilterComponent implements OnInit {
 
-  @Output('search') search: EventEmitter<PackageOfferRequest> = new EventEmitter();
-  @Output('reset') reset: EventEmitter<any> = new EventEmitter();
-
   fromDate:Date = null;
   toDate:Date = null;
   
   constructor(
+    private packageOfferService: PackageOfferService,
     private autocompleteService:AutocompleteService, 
     private toastr: ToastrService) { }
 
@@ -40,12 +39,6 @@ export class PackageOfferFilterComponent implements OnInit {
     formValid(form:NgForm){
       if (!form.valid) return false;
 
-      /*var today = new Date();
-      if(form.value.fromDate && form.value.fromDate < today)
-        return false;
-      if(form.value.toDate && form.value.toDate < today)
-        return false;*/
-
       if (form.value.fromDate && form.value.toDate)
         if (form.value.fromDate > form.value.toDate)
           return false;
@@ -63,14 +56,14 @@ export class PackageOfferFilterComponent implements OnInit {
         this.quantityOptions.push({value: i, viewValue: i});
        }
     }
-    
+
     onReset() {
-      this.reset.next({});
+      this.packageOfferService.reset();
     }
 
     onSubmit(form:NgForm){
       this.fixForm(form);
-      this.search.next(form.value);
+      this.packageOfferService.search(<PackageOfferRequest>form.value);
     }
 
     private fixForm(form:NgForm){

@@ -29,13 +29,4 @@ export class PackageOfferComponent implements OnInit {
   hasResults(){
     return this.packageOfferService.getResults().length > 0;
   }
-
-  onReset(){
-    this.packageOfferService.reset();
-  }
-
-  onSearch(packageOfferRequest: PackageOfferRequest){
-    this.packageOfferService.search(packageOfferRequest);
-  }
-
 }

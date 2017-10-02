@@ -1,4 +1,4 @@
-<app-hotel-offer-filter (search)="onSearch($event)" (reset)="onReset()"></app-hotel-offer-filter>
+<app-hotel-offer-filter></app-hotel-offer-filter>
 <app-sort *ngIf="hasResults()" [type]="'hotel'"></app-sort>
 <div class="change-view-toggle" *ngIf="hasResults()">
   <md-button-toggle-group mdTooltip="Cambio de vistas">

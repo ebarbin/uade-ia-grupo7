@@ -36,12 +36,4 @@ export class HotelOfferComponent implements OnInit {
   hasResults(){
     return this.hotelOfferService.getResults().length > 0;
   }
-
-  onReset(){
-    this.hotelOfferService.reset();
-  }
-
-  onSearch(hotelOfferRequest: HotelOfferRequest){
-    this.hotelOfferService.search(hotelOfferRequest);
-  }
 }

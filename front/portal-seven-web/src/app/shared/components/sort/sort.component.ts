@@ -52,7 +52,13 @@ export class SortComponent implements OnInit {
         {value:'offerEnd', viewValue:'Hasta'}
       ];
     } else if (this.type == 'package') {
-      return [];
+      return [
+        {value:'', viewValue:'Seleccione...'},
+        {value:'description', viewValue:'Descripción'},
+        {value:'price', viewValue:'Precio'},
+        {value:'offerStart', viewValue:'Desde'},
+        {value:'offerEnd', viewValue:'Hasta'}
+      ];
     }
   }
   
