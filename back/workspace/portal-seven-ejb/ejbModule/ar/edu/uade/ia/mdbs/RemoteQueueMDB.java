@@ -12,10 +12,10 @@ import org.jboss.logging.Logger;
 /**
  * Message-Driven Bean implementation class for: RemoteQueueMDB
  */
-@MessageDriven(name = "RemoteQueueMDB", activationConfig = {
+/*@MessageDriven(name = "RemoteQueueMDB", activationConfig = {
 		@ActivationConfigProperty(propertyName = "destinationLookup", propertyValue = "queue/ExampleQueue"),
 		@ActivationConfigProperty(propertyName = "destinationType", propertyValue = "javax.jms.Queue"),
-		@ActivationConfigProperty(propertyName = "acknowledgeMode", propertyValue = "Auto-acknowledge") })
+		@ActivationConfigProperty(propertyName = "acknowledgeMode", propertyValue = "Auto-acknowledge") })*/
 public class RemoteQueueMDB implements MessageListener {
 
 	private static final Logger LOGGER = Logger.getLogger(RemoteQueueMDB.class.toString());

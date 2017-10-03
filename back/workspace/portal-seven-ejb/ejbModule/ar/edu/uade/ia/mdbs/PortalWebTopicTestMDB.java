@@ -12,12 +12,12 @@ import ar.edu.uade.ia.ejbs.entities.bussiness.PortalUser;
 /**
  * Message-Driven Bean implementation class for: PortalWebTopicTestMDB
  */
-@MessageDriven(
+/*@MessageDriven(
 		activationConfig = { 
 				@ActivationConfigProperty(propertyName = "destination", propertyValue = "java:/jms/topic/portalWebTopicTest"), 
 				@ActivationConfigProperty(propertyName = "destinationType", propertyValue = "javax.jms.Topic")
 		}, 
-		mappedName = "java:/jms/topic/portalWebTopicTest")
+		mappedName = "java:/jms/topic/portalWebTopicTest")*/
 public class PortalWebTopicTestMDB implements MessageListener {
 
     /**
