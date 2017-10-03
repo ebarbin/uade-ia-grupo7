@@ -6,9 +6,6 @@ import { ConfigurationComponent } from './home/configuration/configuration.compo
 import { HomeComponent } from './home/home.component';
 import { HotelOfferComponent } from './home/hotel-offer/hotel-offer.component';
 import { PackageOfferComponent } from './home/package-offer/package-offer.component';
-import {
-    ChangeImageComponent
-} from './home/user-profile/components/change-image/change-image.component';
 import { UserProfileComponent } from './home/user-profile/user-profile.component';
 
 const appRoutes: Routes = [

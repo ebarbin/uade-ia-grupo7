@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { ToastrService } from 'ngx-toastr';
 
 import { Subject } from 'rxjs/Subject';
 
@@ -16,8 +15,7 @@ export class UserService {
 
   constructor(
     private imageService:ImageService,
-    private httpClient: HttpClient,
-    private toastr:ToastrService) { }
+    private httpClient: HttpClient) { }
 
   addNewUser(user: PortalUser):Promise<PortalResponse>{
     return this.httpClient.post('portal-seven-web/api/rest/portal-user', user)
@@ -26,19 +24,10 @@ export class UserService {
       }).toPromise();
   }
 
-  update(user: PortalUser){
-    this.httpClient.put('portal-seven-web/api/rest/portal-user/'+ user.id, user)
+  update(user: PortalUser):Promise<PortalResponse>{
+    return this.httpClient.put('portal-seven-web/api/rest/portal-user/'+ user.id, user)
       .map((response:PortalResponse)=>{
       return response;
-    }).toPromise().then((response:PortalResponse) => {
-      if (response.success) {
-        this.userChanged.next(<PortalUser>response.data);
-        this.toastr.success('Usuario actualizado con éxito.');
-      } else {
-        this.toastr.error(response.errorMessage);
-      }
-    }).catch((res:HttpErrorResponse) => {
-      this.toastr.error('Ha ocurrido un error. Contacte a un administrador.');
-    });
+    }).toPromise();
   }
 }

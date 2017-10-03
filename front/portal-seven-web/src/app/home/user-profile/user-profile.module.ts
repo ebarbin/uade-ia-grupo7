@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SharedModule } from '../../shared/shared.module';
 import { UserProfileComponent } from './user-profile.component';
-import { ChangeImageComponent } from './components/change-image/change-image.component';
 import { NewUserComponent } from './components/new-user/new-user.component';
 
 @NgModule({
@@ -12,9 +11,8 @@ import { NewUserComponent } from './components/new-user/new-user.component';
   ],
   declarations: [
     UserProfileComponent,
-    ChangeImageComponent,
     NewUserComponent,
   ],
-  entryComponents:[ChangeImageComponent,NewUserComponent],
+  entryComponents:[NewUserComponent],
 })
 export class UserProfileModule { }

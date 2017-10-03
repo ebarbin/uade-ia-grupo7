@@ -34,6 +34,7 @@ export class HotelOfferGridResultComponent implements OnInit, OnDestroy {
   onDetail(hotelOfferHeader:HotelOfferHeader){
     this.hotelOfferService.getDetail(hotelOfferHeader).then((hotelOffer:HotelOffer)=>{
       const dialogRef = this.dialog.open(HotelOfferDetailComponent, {
+        width:'800px',
         data: hotelOffer
       });
       this.detailDialogSub = dialogRef.afterClosed().subscribe(result => {
