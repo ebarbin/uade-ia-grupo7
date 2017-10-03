@@ -8,8 +8,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
-import ar.edu.uade.ia.ejbs.entities.bussiness.Destination;
-import ar.edu.uade.ia.ejbs.entities.bussiness.Hotel;
+import ar.edu.uade.ia.entities.business.Destination;
+import ar.edu.uade.ia.entities.business.Hotel;
 
 @Stateless
 @LocalBean

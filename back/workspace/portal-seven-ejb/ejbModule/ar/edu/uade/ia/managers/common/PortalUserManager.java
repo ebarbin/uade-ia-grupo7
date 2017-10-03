@@ -10,8 +10,8 @@ import org.dozer.Mapper;
 import ar.edu.uade.ia.dtos.PortalUserDTO;
 import ar.edu.uade.ia.ejbs.common.ImageEJB;
 import ar.edu.uade.ia.ejbs.common.PortalUserEJB;
-import ar.edu.uade.ia.ejbs.entities.bussiness.Image;
-import ar.edu.uade.ia.ejbs.entities.bussiness.PortalUser;
+import ar.edu.uade.ia.entities.business.Image;
+import ar.edu.uade.ia.entities.business.PortalUser;
 import ar.edu.uade.ia.managers.interfaces.common.PortalUserManagerLocal;
 import ar.edu.uade.ia.managers.interfaces.common.PortalUserManagerRemote;
 

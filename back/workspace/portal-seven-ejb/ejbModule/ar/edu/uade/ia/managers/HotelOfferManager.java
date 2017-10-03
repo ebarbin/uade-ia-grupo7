@@ -16,9 +16,9 @@ import ar.edu.uade.ia.dtos.HotelOfferRequestDTO;
 import ar.edu.uade.ia.dtos.ImageDTO;
 import ar.edu.uade.ia.dtos.SimpleNamedDTO;
 import ar.edu.uade.ia.ejbs.HotelOfferEJB;
-import ar.edu.uade.ia.ejbs.entities.bussiness.HotelOffer;
-import ar.edu.uade.ia.ejbs.entities.bussiness.Image;
-import ar.edu.uade.ia.ejbs.entities.bussiness.Service;
+import ar.edu.uade.ia.entities.business.HotelOffer;
+import ar.edu.uade.ia.entities.business.Image;
+import ar.edu.uade.ia.entities.business.Service;
 import ar.edu.uade.ia.managers.interfaces.HotelOfferManagerLocal;
 import ar.edu.uade.ia.managers.interfaces.HotelOfferManagerRemote;
 

@@ -7,7 +7,7 @@ import javax.jms.MessageListener;
 import javax.jms.ObjectMessage;
 import javax.jms.TextMessage;
 
-import ar.edu.uade.ia.ejbs.entities.bussiness.PortalUser;
+import ar.edu.uade.ia.entities.business.PortalUser;
 
 /**
  * Message-Driven Bean implementation class for: PortalWebTopicTestMDB

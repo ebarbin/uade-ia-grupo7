@@ -9,8 +9,8 @@ import javax.ejb.Stateless;
 
 import ar.edu.uade.ia.dtos.SimpleNamedDTO;
 import ar.edu.uade.ia.ejbs.common.AutocompleteEJB;
-import ar.edu.uade.ia.ejbs.entities.bussiness.Destination;
-import ar.edu.uade.ia.ejbs.entities.bussiness.Hotel;
+import ar.edu.uade.ia.entities.business.Destination;
+import ar.edu.uade.ia.entities.business.Hotel;
 import ar.edu.uade.ia.managers.interfaces.common.AutocompleteManagerLocal;
 import ar.edu.uade.ia.managers.interfaces.common.AutocompleteManagerRemote;
 

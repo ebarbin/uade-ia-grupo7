@@ -1,4 +1,4 @@
-package ar.edu.uade.ia.utils;
+package ar.edu.uade.ia.dtos;
 
 import java.util.ArrayList;
 import java.util.Arrays;

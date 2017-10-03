@@ -8,7 +8,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 import ar.edu.uade.ia.dtos.PackageOfferRequestDTO;
-import ar.edu.uade.ia.ejbs.entities.bussiness.PackageOffer;
+import ar.edu.uade.ia.entities.business.PackageOffer;
 
 /**
  * Session Bean implementation class PackageOfferEJB

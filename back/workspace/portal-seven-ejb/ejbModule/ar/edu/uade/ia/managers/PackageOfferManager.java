@@ -16,9 +16,9 @@ import ar.edu.uade.ia.dtos.PackageOfferHeaderDTO;
 import ar.edu.uade.ia.dtos.PackageOfferRequestDTO;
 import ar.edu.uade.ia.dtos.SimpleNamedDTO;
 import ar.edu.uade.ia.ejbs.PackageOfferEJB;
-import ar.edu.uade.ia.ejbs.entities.bussiness.Image;
-import ar.edu.uade.ia.ejbs.entities.bussiness.PackageOffer;
-import ar.edu.uade.ia.ejbs.entities.bussiness.Service;
+import ar.edu.uade.ia.entities.business.Image;
+import ar.edu.uade.ia.entities.business.PackageOffer;
+import ar.edu.uade.ia.entities.business.Service;
 import ar.edu.uade.ia.managers.interfaces.PackageOfferManagerLocal;
 import ar.edu.uade.ia.managers.interfaces.PackageOfferManagerRemote;
 

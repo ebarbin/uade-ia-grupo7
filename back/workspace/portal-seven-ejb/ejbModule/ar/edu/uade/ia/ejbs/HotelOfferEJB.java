@@ -11,7 +11,7 @@ import javax.persistence.Query;
 import javax.persistence.TemporalType;
 
 import ar.edu.uade.ia.dtos.HotelOfferRequestDTO;
-import ar.edu.uade.ia.ejbs.entities.bussiness.HotelOffer;
+import ar.edu.uade.ia.entities.business.HotelOffer;
 
 /**
  * Session Bean implementation class HotelOfferEJB

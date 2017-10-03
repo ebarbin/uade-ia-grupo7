@@ -6,7 +6,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 
-import ar.edu.uade.ia.ejbs.entities.bussiness.Image;
+import ar.edu.uade.ia.entities.business.Image;
 
 /**
  * Session Bean implementation class ImageEJB

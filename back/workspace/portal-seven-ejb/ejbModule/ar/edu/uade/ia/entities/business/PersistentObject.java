@@ -1,4 +1,4 @@
-package ar.edu.uade.ia.ejbs.entities.bussiness;
+package ar.edu.uade.ia.entities.business;
 
 import java.io.Serializable;
 
