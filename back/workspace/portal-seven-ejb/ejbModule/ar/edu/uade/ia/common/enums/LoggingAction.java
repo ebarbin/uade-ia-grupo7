@@ -1,6 +1,6 @@
 package ar.edu.uade.ia.common.enums;
 
-public enum LogginAction {
+public enum LoggingAction {
 
 	HOTEL_RESERVATION(1, "Reserva Hotel"),
 	PACKAGE_RESERVATION(2, "Reserva Paquete"),
@@ -17,7 +17,7 @@ public enum LogginAction {
 	
 	private String description;
 	
-	private LogginAction(Integer id, String description) {
+	private LoggingAction(Integer id, String description) {
 		this.id = id;
 		this.description = description;
 	}

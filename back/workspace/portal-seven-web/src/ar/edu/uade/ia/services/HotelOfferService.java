@@ -20,6 +20,7 @@ import ar.edu.uade.ia.common.dtos.HotelOfferOtherRoomsRequestDTO;
 import ar.edu.uade.ia.common.dtos.HotelOfferRequestDTO;
 import ar.edu.uade.ia.common.dtos.ImageDTO;
 import ar.edu.uade.ia.common.dtos.RoomDTO;
+import ar.edu.uade.ia.integrations.backOffice.logging.LoggingJMS;
 import ar.edu.uade.ia.managers.interfaces.HotelOfferManagerRemote;
 import ar.edu.uade.ia.services.response.PortalResponse;
 
@@ -32,6 +33,9 @@ public class HotelOfferService {
 	@EJB
 	private HotelOfferManagerRemote hotelOfferManager;
 
+	@EJB
+	private LoggingJMS logging;
+	
 	@POST
 	@Path("/search")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -40,6 +44,7 @@ public class HotelOfferService {
 			List<HotelOfferHeaderDTO> result = this.hotelOfferManager.search(request);
 			return Response.ok(new PortalResponse(result)).build();
 		} catch (Exception e) {
+			this.logging.error();
 			HotelOfferService.LOGGER.error(e.getMessage(), e);
 			return Response.ok(new PortalResponse(e.getMessage())).build();
 		}

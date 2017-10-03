@@ -17,6 +17,7 @@ import org.jboss.logging.Logger;
 import ar.edu.uade.ia.common.dtos.PackageOfferDTO;
 import ar.edu.uade.ia.common.dtos.PackageOfferHeaderDTO;
 import ar.edu.uade.ia.common.dtos.PackageOfferRequestDTO;
+import ar.edu.uade.ia.integrations.backOffice.logging.LoggingJMS;
 import ar.edu.uade.ia.managers.interfaces.PackageOfferManagerRemote;
 import ar.edu.uade.ia.services.response.PortalResponse;
 
@@ -32,6 +33,9 @@ public class PackageOfferService {
 	@EJB
 	private PackageOfferManagerRemote packageOfferManager;
 	
+	@EJB
+	private LoggingJMS logging;
+	
     /**
      * Default constructor. 
      */
@@ -45,6 +49,7 @@ public class PackageOfferService {
 			List<PackageOfferHeaderDTO> result = this.packageOfferManager.search(request);
 			return Response.ok(new PortalResponse(result)).build();
 		} catch (Exception e) {
+			this.logging.error();
 			PackageOfferService.LOGGER.error(e.getMessage(), e);
 			return Response.ok(new PortalResponse(e.getMessage())).build();
 		}
