@@ -12,14 +12,9 @@
       (click)="onChangeView('grid')" [checked]="view == 'grid'">
         <i class="fa fa-table" aria-hidden="true"></i>
     </md-button-toggle>
- <!--   <md-button-toggle md-mini-fab color="primary" value="center" 
-      (click)="onChangeView('list')" [checked]="view == 'list'">
-        <i class="fa fa-th-list" aria-hidden="true"></i>
-    </md-button-toggle>-->
   </md-button-toggle-group>
 </div>
 <div *ngIf="hasResults()">
   <app-package-offer-grid-result *ngIf="view == 'grid'"></app-package-offer-grid-result>
-  <!--<app-package-offer-list-result *ngIf="view == 'list'"></app-package-offer-list-result>-->
   <app-package-offer-card-result *ngIf="view == 'card'"></app-package-offer-card-result>
 </div>
