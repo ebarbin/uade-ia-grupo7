@@ -1,3 +1,5 @@
+import { Room } from './../models/room.model';
+import { HotelOfferOtherRoomsRequest } from './../models/hotel-offer-other-room-request.model';
 import { Subject } from 'rxjs/Subject';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
@@ -55,12 +57,16 @@ export class HotelOfferService {
       }).toPromise();
     }
 
+    filterRequest:HotelOfferRequest;
+
     reset(){
+      this.filterRequest = null;
       this.results = [];
       this.resultsChanged.next(this.results);
     }
 
     search(request:HotelOfferRequest){
+      this.filterRequest = request;
       return this.httpClient.post('portal-seven-web/api/rest/hotel-offer/search', request)
         .map((response:PortalResponse)=>{
           if(response.success) {
@@ -76,5 +82,19 @@ export class HotelOfferService {
         }).catch((res:HttpErrorResponse) => {
           this.toastr.error('Ha ocurrido un error. Contacte a un administrador.');
         });
+    }
+
+    searchOtherRooms(request:HotelOfferOtherRoomsRequest):Promise<Room[]>{
+      request.fromDate = this.filterRequest.fromDate;
+      request.toDate = this.filterRequest.toDate;
+      return this.httpClient.post('portal-seven-web/api/rest/hotel-offer/search/other-rooms', request)
+        .map((response:PortalResponse)=>{
+          if(response.success) {
+            return <Room[]>response.data;
+          } else {
+            this.toastr.error(response.errorMessage);
+            return [];
+          }
+        }).toPromise();
     }
 }

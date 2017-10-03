@@ -12,12 +12,15 @@ import org.dozer.Mapper;
 
 import ar.edu.uade.ia.dtos.HotelOfferDTO;
 import ar.edu.uade.ia.dtos.HotelOfferHeaderDTO;
+import ar.edu.uade.ia.dtos.HotelOfferOtherRoomsRequestDTO;
 import ar.edu.uade.ia.dtos.HotelOfferRequestDTO;
 import ar.edu.uade.ia.dtos.ImageDTO;
+import ar.edu.uade.ia.dtos.RoomDTO;
 import ar.edu.uade.ia.dtos.SimpleNamedDTO;
 import ar.edu.uade.ia.ejbs.HotelOfferEJB;
 import ar.edu.uade.ia.entities.business.HotelOffer;
 import ar.edu.uade.ia.entities.business.Image;
+import ar.edu.uade.ia.entities.business.Room;
 import ar.edu.uade.ia.entities.business.Service;
 import ar.edu.uade.ia.managers.interfaces.HotelOfferManagerLocal;
 import ar.edu.uade.ia.managers.interfaces.HotelOfferManagerRemote;
@@ -37,7 +40,8 @@ public class HotelOfferManager implements HotelOfferManagerRemote, HotelOfferMan
 	/**
 	 * Default constructor.
 	 */
-	public HotelOfferManager() {}
+	public HotelOfferManager() {
+	}
 
 	@Override
 	public List<HotelOfferHeaderDTO> search(HotelOfferRequestDTO hotelOfferRequest) throws Exception {
@@ -46,11 +50,55 @@ public class HotelOfferManager implements HotelOfferManagerRemote, HotelOfferMan
 	}
 
 	@Override
+	public List<RoomDTO> searchOtherRooms(HotelOfferOtherRoomsRequestDTO request) throws Exception {
+		List<HotelOffer> hotelOffers = this.hotelOfferEJB.searchOtherRooms(request);
+		return this.converToRoomDTOList(hotelOffers);
+	}
+
+	@Override
 	public HotelOfferDTO getDetail(Integer id) throws Exception {
 		HotelOffer ho = this.hotelOfferEJB.getDetail(id);
 		return HotelOfferManager.mapper.map(ho, HotelOfferDTO.class);
 	}
-	
+
+	private List<RoomDTO> converToRoomDTOList(List<HotelOffer> hotelOffers) {
+
+		List<RoomDTO> results = new ArrayList<RoomDTO>();
+		RoomDTO roomDTO;
+		SimpleNamedDTO namedDTO;
+		ImageDTO imageDTO;
+
+		Room room;
+		for (HotelOffer hotelOffer : hotelOffers) {
+			room = hotelOffer.getRoom();
+			roomDTO = new RoomDTO();
+
+			roomDTO.setId(room.getId());
+			roomDTO.setDescription(room.getDescription());
+			roomDTO.setCapacity(room.getCapacity());
+			roomDTO.setType(room.getType());
+
+			roomDTO.setServices(new ArrayList<SimpleNamedDTO>());
+			for (Service service : room.getServices()) {
+				namedDTO = new SimpleNamedDTO();
+				namedDTO.setId(service.getId());
+				namedDTO.setName(service.getName());
+				roomDTO.getServices().add(namedDTO);
+			}
+
+			roomDTO.setImages(new ArrayList<ImageDTO>());
+			for (Image img : room.getImages()) {
+				imageDTO = new ImageDTO();
+				imageDTO.setId(img.getId());
+				roomDTO.getImages().add(imageDTO);
+			}
+
+			results.add(roomDTO);
+		}
+
+		return results;
+	}
+
 	private List<HotelOfferHeaderDTO> convertToListOfHotelOfferHeaderDTO(List<HotelOffer> hotelOffers) {
 		List<HotelOfferHeaderDTO> results = new ArrayList<HotelOfferHeaderDTO>();
 
@@ -76,7 +124,7 @@ public class HotelOfferManager implements HotelOfferManagerRemote, HotelOfferMan
 			headerDTO.setRoomCapacity(hotelOffer.getRoom().getCapacity());
 			headerDTO.setOfferStart(hotelOffer.getOfferStart());
 			headerDTO.setOfferEnd(hotelOffer.getOfferEnd());
-			
+
 			headerDTO.setImages(new ArrayList<ImageDTO>());
 			for (Image img : hotelOffer.getHotel().getImages()) {
 				imageDTO = new ImageDTO();

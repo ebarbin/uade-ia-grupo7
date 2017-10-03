@@ -10,6 +10,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.persistence.TemporalType;
 
+import ar.edu.uade.ia.dtos.HotelOfferOtherRoomsRequestDTO;
 import ar.edu.uade.ia.dtos.HotelOfferRequestDTO;
 import ar.edu.uade.ia.entities.business.HotelOffer;
 
@@ -86,8 +87,12 @@ public class HotelOfferEJB {
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<HotelOffer> searchOtherRooms(Date dateFrom, Date dateTo, Integer idHotel, Integer idRoom) {
-
+	public List<HotelOffer> searchOtherRooms(HotelOfferOtherRoomsRequestDTO request) {
+		
+		Integer idHotel = request.getHotel().getId();
+		Date dateFrom = request.getFromDate();
+		Date dateTo = request.getToDate();
+		Integer idRoom = request.getRoom().getId();
 		
 		// Quota cuyo dia este dentro del rango del filtro
 		// Quota cuyo hotel de su oferta coincida con el hotel del filtro

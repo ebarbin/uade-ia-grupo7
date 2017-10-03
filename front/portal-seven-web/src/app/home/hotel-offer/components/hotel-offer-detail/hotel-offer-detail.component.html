@@ -13,7 +13,7 @@
       <app-map [address]="hotelOffer.hotel.address"></app-map>
   <hr>
   <div class="col-md-12 tabs-detail">
-    <md-tab-group>
+    <md-tab-group (selectChange)="getOtherRooms($event)">
       <md-tab label="Habitación" >
         <h3>Descripción</h3>
         <p>{{hotelOffer.room.description}}</p>
@@ -21,8 +21,8 @@
         <h3>Imagenes de la habitación</h3>
         <app-img-gallery [images]="hotelOffer.room.images"></app-img-gallery>
       </md-tab>
-      <md-tab label="Otras Habitaciones" *ngIf="hotelOffer.hotel.rooms.length > 0">
-        <div *ngFor="let room of hotelOffer.hotel.rooms">
+      <md-tab label="Otras Habitaciones">
+        <div *ngFor="let room of otherRooms">
           <h3>Descripción</h3>
           <p>{{room.description}}</p>
           <p>Tipo: {{room.type}}</p>
