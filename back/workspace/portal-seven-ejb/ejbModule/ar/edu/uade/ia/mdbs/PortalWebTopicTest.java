@@ -1,10 +1,8 @@
 package ar.edu.uade.ia.mdbs;
 
-import javax.annotation.Resource;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
-import javax.jms.JMSConnectionFactory;
 import javax.jms.JMSContext;
 import javax.jms.ObjectMessage;
 import javax.jms.TextMessage;

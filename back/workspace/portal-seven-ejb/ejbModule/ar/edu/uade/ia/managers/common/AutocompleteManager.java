@@ -7,7 +7,7 @@ import javax.ejb.EJB;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 
-import ar.edu.uade.ia.dtos.SimpleNamedDTO;
+import ar.edu.uade.ia.common.dtos.SimpleNamedDTO;
 import ar.edu.uade.ia.ejbs.common.AutocompleteEJB;
 import ar.edu.uade.ia.entities.business.Destination;
 import ar.edu.uade.ia.entities.business.Hotel;

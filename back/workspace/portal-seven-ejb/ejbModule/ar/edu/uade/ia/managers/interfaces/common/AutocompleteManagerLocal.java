@@ -4,7 +4,7 @@ import java.util.List;
 
 import javax.ejb.Local;
 
-import ar.edu.uade.ia.dtos.SimpleNamedDTO;
+import ar.edu.uade.ia.common.dtos.SimpleNamedDTO;
 
 @Local
 public interface AutocompleteManagerLocal {

@@ -18,8 +18,8 @@ import org.jboss.logging.Logger;
 import org.jboss.resteasy.plugins.providers.multipart.InputPart;
 import org.jboss.resteasy.plugins.providers.multipart.MultipartFormDataInput;
 
-import ar.edu.uade.ia.dtos.ImageDTO;
-import ar.edu.uade.ia.dtos.PortalUserDTO;
+import ar.edu.uade.ia.common.dtos.ImageDTO;
+import ar.edu.uade.ia.common.dtos.PortalUserDTO;
 import ar.edu.uade.ia.managers.interfaces.common.ImageManagerRemote;
 import ar.edu.uade.ia.managers.interfaces.common.PortalUserManagerRemote;
 import ar.edu.uade.ia.services.response.PortalResponse;

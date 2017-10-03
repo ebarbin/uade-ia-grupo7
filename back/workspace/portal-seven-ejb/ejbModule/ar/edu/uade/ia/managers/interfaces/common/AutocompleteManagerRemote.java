@@ -4,7 +4,7 @@ import java.util.List;
 
 import javax.ejb.Remote;
 
-import ar.edu.uade.ia.dtos.SimpleNamedDTO;
+import ar.edu.uade.ia.common.dtos.SimpleNamedDTO;
 
 @Remote
 public interface AutocompleteManagerRemote {

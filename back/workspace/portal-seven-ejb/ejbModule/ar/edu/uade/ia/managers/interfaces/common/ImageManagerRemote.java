@@ -2,7 +2,7 @@ package ar.edu.uade.ia.managers.interfaces.common;
 
 import javax.ejb.Remote;
 
-import ar.edu.uade.ia.dtos.ImageDTO;
+import ar.edu.uade.ia.common.dtos.ImageDTO;
 
 @Remote
 public interface ImageManagerRemote {

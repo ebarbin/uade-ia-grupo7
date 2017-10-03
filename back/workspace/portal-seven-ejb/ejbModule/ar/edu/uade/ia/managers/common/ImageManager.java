@@ -7,7 +7,7 @@ import javax.ejb.Stateless;
 import org.dozer.DozerBeanMapperBuilder;
 import org.dozer.Mapper;
 
-import ar.edu.uade.ia.dtos.ImageDTO;
+import ar.edu.uade.ia.common.dtos.ImageDTO;
 import ar.edu.uade.ia.ejbs.common.ImageEJB;
 import ar.edu.uade.ia.ejbs.common.PortalUserEJB;
 import ar.edu.uade.ia.entities.business.Image;

@@ -1,4 +1,4 @@
-package ar.edu.uade.ia.dtos;
+package ar.edu.uade.ia.common.dozer;
 
 import java.util.ArrayList;
 import java.util.Arrays;

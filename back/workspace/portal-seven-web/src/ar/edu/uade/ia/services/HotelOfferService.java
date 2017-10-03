@@ -14,12 +14,12 @@ import javax.ws.rs.core.Response;
 
 import org.jboss.logging.Logger;
 
-import ar.edu.uade.ia.dtos.HotelOfferDTO;
-import ar.edu.uade.ia.dtos.HotelOfferHeaderDTO;
-import ar.edu.uade.ia.dtos.HotelOfferOtherRoomsRequestDTO;
-import ar.edu.uade.ia.dtos.HotelOfferRequestDTO;
-import ar.edu.uade.ia.dtos.ImageDTO;
-import ar.edu.uade.ia.dtos.RoomDTO;
+import ar.edu.uade.ia.common.dtos.HotelOfferDTO;
+import ar.edu.uade.ia.common.dtos.HotelOfferHeaderDTO;
+import ar.edu.uade.ia.common.dtos.HotelOfferOtherRoomsRequestDTO;
+import ar.edu.uade.ia.common.dtos.HotelOfferRequestDTO;
+import ar.edu.uade.ia.common.dtos.ImageDTO;
+import ar.edu.uade.ia.common.dtos.RoomDTO;
 import ar.edu.uade.ia.managers.interfaces.HotelOfferManagerRemote;
 import ar.edu.uade.ia.services.response.PortalResponse;
 

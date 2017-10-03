@@ -4,9 +4,9 @@ import java.util.List;
 
 import javax.ejb.Remote;
 
-import ar.edu.uade.ia.dtos.PackageOfferDTO;
-import ar.edu.uade.ia.dtos.PackageOfferHeaderDTO;
-import ar.edu.uade.ia.dtos.PackageOfferRequestDTO;
+import ar.edu.uade.ia.common.dtos.PackageOfferDTO;
+import ar.edu.uade.ia.common.dtos.PackageOfferHeaderDTO;
+import ar.edu.uade.ia.common.dtos.PackageOfferRequestDTO;
 
 @Remote
 public interface PackageOfferManagerRemote {

@@ -10,8 +10,8 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.persistence.TemporalType;
 
-import ar.edu.uade.ia.dtos.HotelOfferOtherRoomsRequestDTO;
-import ar.edu.uade.ia.dtos.HotelOfferRequestDTO;
+import ar.edu.uade.ia.common.dtos.HotelOfferOtherRoomsRequestDTO;
+import ar.edu.uade.ia.common.dtos.HotelOfferRequestDTO;
 import ar.edu.uade.ia.entities.business.HotelOffer;
 
 /**

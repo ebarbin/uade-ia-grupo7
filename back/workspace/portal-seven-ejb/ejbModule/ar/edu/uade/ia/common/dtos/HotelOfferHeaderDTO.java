@@ -1,26 +1,32 @@
-package ar.edu.uade.ia.dtos;
+package ar.edu.uade.ia.common.dtos;
 
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
-public class PackageOfferHeaderDTO implements Serializable {
-	
-	private static final long serialVersionUID = 2287388135848248683L;
+public class HotelOfferHeaderDTO implements Serializable {
+
+	private static final long serialVersionUID = -5056225701663864983L;
 	
 	private Integer id;
-
+	
+	private List<ImageDTO>images;
+	
+	private String name;
+	
 	private String description;
 	
 	private List<SimpleNamedDTO>services;
 	
-	private List<ImageDTO>images;
-	
 	private Float price;
+	
+	private Integer roomCapacity;
 	
 	private Date offerStart;
 	
 	private Date offerEnd;
+	
+	public HotelOfferHeaderDTO() {}
 	
 	public Integer getId() {
 		return id;
@@ -28,6 +34,14 @@ public class PackageOfferHeaderDTO implements Serializable {
 
 	public void setId(Integer id) {
 		this.id = id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public String getDescription() {
@@ -46,6 +60,14 @@ public class PackageOfferHeaderDTO implements Serializable {
 		this.services = services;
 	}
 
+	public Float getPrice() {
+		return price;
+	}
+
+	public void setPrice(Float price) {
+		this.price = price;
+	}
+
 	public List<ImageDTO> getImages() {
 		return images;
 	}
@@ -54,12 +76,12 @@ public class PackageOfferHeaderDTO implements Serializable {
 		this.images = images;
 	}
 
-	public Float getPrice() {
-		return price;
+	public Integer getRoomCapacity() {
+		return roomCapacity;
 	}
 
-	public void setPrice(Float price) {
-		this.price = price;
+	public void setRoomCapacity(Integer roomCapacity) {
+		this.roomCapacity = roomCapacity;
 	}
 
 	public Date getOfferStart() {

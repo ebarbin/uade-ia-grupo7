@@ -10,11 +10,11 @@ import javax.ejb.Stateless;
 import org.dozer.DozerBeanMapperBuilder;
 import org.dozer.Mapper;
 
-import ar.edu.uade.ia.dtos.ImageDTO;
-import ar.edu.uade.ia.dtos.PackageOfferDTO;
-import ar.edu.uade.ia.dtos.PackageOfferHeaderDTO;
-import ar.edu.uade.ia.dtos.PackageOfferRequestDTO;
-import ar.edu.uade.ia.dtos.SimpleNamedDTO;
+import ar.edu.uade.ia.common.dtos.ImageDTO;
+import ar.edu.uade.ia.common.dtos.PackageOfferDTO;
+import ar.edu.uade.ia.common.dtos.PackageOfferHeaderDTO;
+import ar.edu.uade.ia.common.dtos.PackageOfferRequestDTO;
+import ar.edu.uade.ia.common.dtos.SimpleNamedDTO;
 import ar.edu.uade.ia.ejbs.PackageOfferEJB;
 import ar.edu.uade.ia.entities.business.Image;
 import ar.edu.uade.ia.entities.business.PackageOffer;

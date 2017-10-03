@@ -4,11 +4,11 @@ import java.util.List;
 
 import javax.ejb.Local;
 
-import ar.edu.uade.ia.dtos.HotelOfferDTO;
-import ar.edu.uade.ia.dtos.HotelOfferHeaderDTO;
-import ar.edu.uade.ia.dtos.HotelOfferOtherRoomsRequestDTO;
-import ar.edu.uade.ia.dtos.HotelOfferRequestDTO;
-import ar.edu.uade.ia.dtos.RoomDTO;
+import ar.edu.uade.ia.common.dtos.HotelOfferDTO;
+import ar.edu.uade.ia.common.dtos.HotelOfferHeaderDTO;
+import ar.edu.uade.ia.common.dtos.HotelOfferOtherRoomsRequestDTO;
+import ar.edu.uade.ia.common.dtos.HotelOfferRequestDTO;
+import ar.edu.uade.ia.common.dtos.RoomDTO;
 
 @Local
 public interface HotelOfferManagerLocal {

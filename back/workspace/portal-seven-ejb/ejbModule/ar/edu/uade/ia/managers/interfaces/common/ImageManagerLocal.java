@@ -2,7 +2,7 @@ package ar.edu.uade.ia.managers.interfaces.common;
 
 import javax.ejb.Local;
 
-import ar.edu.uade.ia.dtos.ImageDTO;
+import ar.edu.uade.ia.common.dtos.ImageDTO;
 
 @Local
 public interface ImageManagerLocal {
