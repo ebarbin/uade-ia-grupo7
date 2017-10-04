@@ -11,6 +11,7 @@ import { Injectable } from '@angular/core';
 export class PackageOfferService {
 
   resultsChanged:Subject<PackageOfferHeader[]> = new Subject;
+  view: string = 'card';
   results:PackageOfferHeader[] = [];
 
   constructor(

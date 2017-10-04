@@ -1,3 +1,4 @@
+import { AuthorizeStatus } from './../../../shared/models/authorize-status.model';
 import { Room } from './../models/room.model';
 import { HotelOfferOtherRoomsRequest } from './../models/hotel-offer-other-room-request.model';
 import { Subject } from 'rxjs/Subject';
@@ -15,73 +16,62 @@ import { HotelOffer } from '../models/hotel-offer.model';
 @Injectable()
 export class HotelOfferService {
 
-  resultsChanged:Subject<HotelOfferHeader[]> = new Subject;
-  results:HotelOfferHeader[] = [];
+  hotelOffers: HotelOfferHeader[] = [];
+  hotelOffer: HotelOffer;
+
+  //Necesario porque el grid utiliza otra estructura
+  resultsChanged: Subject<HotelOfferHeader[]> = new Subject;
+  
+  view: string = 'card';
+  filterRequest:HotelOfferRequest;
 
   constructor(
-    private httpClient:HttpClient,
+    private httpClient: HttpClient,
     private toastr: ToastrService) {}
 
-    private compare(a, b, isAsc) {
-      return (a < b ? -1 : 1) * (isAsc ? 1 : -1);
-    }
-
-    getResults():HotelOfferHeader[]{
-      return this.results;
-    }
-
     sortResults(sortDirection:string, sortField:string){
-      this.results = this.results.sort((a, b) => {
+      this.hotelOffers = this.hotelOffers.sort((a, b) => {
         let isAsc = sortDirection == 'asc';
         return this.compare(a[sortField], b[sortField], isAsc);
       });
-      this.resultsChanged.next(this.results);
+      this.resultsChanged.next(this.hotelOffers);
     }
     
     getDetail(hotelOfferHeader:HotelOfferHeader):Promise<HotelOffer>{
       return this.httpClient.get('portal-seven-web/api/rest/hotel-offer/detail/' + hotelOfferHeader.id)
       .map((response:PortalResponse)=>{
         if(response.success) {
-          var hotelOffer = <HotelOffer>response.data;
-
-          //Como la habitacion de la oferta, esta dentro de las habitacion del hotel
-          //Debo quitarla de la lista de habitaciones, para no verla nuevamente.
-          hotelOffer.hotel.rooms = hotelOffer.hotel.rooms.filter((room)=>{
-            return room.id != hotelOffer.room.id;
-          });
-
-          return hotelOffer;
+          this.hotelOffer = <HotelOffer>response.data;
+          return <HotelOffer>response.data
         } else {
+          this.hotelOffer = null;
           this.toastr.error(response.errorMessage);
+          return null;
         }
       }).toPromise();
     }
 
-    filterRequest:HotelOfferRequest;
-
     reset(){
       this.filterRequest = null;
-      this.results = [];
-      this.resultsChanged.next(this.results);
+      this.hotelOffers = [];
+      this.resultsChanged.next(this.hotelOffers);
     }
 
-    search(request:HotelOfferRequest){
+    search(request:HotelOfferRequest):Promise<HotelOfferHeader[]>{
       this.filterRequest = request;
       return this.httpClient.post('portal-seven-web/api/rest/hotel-offer/search', request)
         .map((response:PortalResponse)=>{
           if(response.success) {
+            this.hotelOffers = <HotelOfferHeader[]>response.data;
+            this.resultsChanged.next(this.hotelOffers);
             return <HotelOfferHeader[]>response.data;
           } else {
             this.toastr.error(response.errorMessage);
+            this.hotelOffers = [];
+            this.resultsChanged.next(this.hotelOffers);
             return [];
           }
-        }).toPromise().then((results:HotelOfferHeader[]) => {
-          this.results = results;
-          if (this.results.length == 0) this.toastr.info('No hay resultados.');
-          this.resultsChanged.next(this.results);
-        }).catch((res:HttpErrorResponse) => {
-          this.toastr.error('Ha ocurrido un error. Contacte a un administrador.');
-        });
+        }).toPromise();
     }
 
     searchOtherRooms(request:HotelOfferOtherRoomsRequest):Promise<Room[]>{
@@ -96,5 +86,21 @@ export class HotelOfferService {
             return [];
           }
         }).toPromise();
+    }
+
+    authorizeReservation(hotelOffer:HotelOffer):Promise<AuthorizeStatus>{
+      return this.httpClient.put('portal-seven-web/api/rest/hotel-offer/authorize/' + hotelOffer.id, {})
+        .map((response:PortalResponse)=>{
+          if(response.success) {
+            return <AuthorizeStatus>response.data;
+          } else {
+            this.toastr.error(response.errorMessage);
+            return null;
+          }
+        }).toPromise();
+    }
+
+    private compare(a, b, isAsc) {
+      return (a < b ? -1 : 1) * (isAsc ? 1 : -1);
     }
 }

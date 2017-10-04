@@ -21,7 +21,6 @@ import { HttpErrorResponse } from '@angular/common/http';
 export class HotelOfferGridResultComponent implements OnInit, OnDestroy {
 
   private resultsChangeSub:Subscription;
-  private detailDialogSub:Subscription;
 
   public dataSource: CustomDatasource;
   public displayedColumns = [ 'name', 'description', 'services', 'price', 'roomCapacity', 'offerStart', 'offerEnd', 'action'];
@@ -32,21 +31,16 @@ export class HotelOfferGridResultComponent implements OnInit, OnDestroy {
     private dialog: MdDialog) { }
 
   onDetail(hotelOfferHeader:HotelOfferHeader){
-    this.hotelOfferService.getDetail(hotelOfferHeader).then((hotelOffer:HotelOffer)=>{
-      const dialogRef = this.dialog.open(HotelOfferDetailComponent, {
-        width:'800px',
-        data: hotelOffer
-      });
-      this.detailDialogSub = dialogRef.afterClosed().subscribe(result => {
-        console.log("close detail");
-      });
+    this.hotelOfferService.getDetail(hotelOfferHeader).then((hotelOffer:HotelOffer) =>{
+      if (hotelOffer)
+        this.dialog.open(HotelOfferDetailComponent);
     }).catch((res:HttpErrorResponse)=>{
       this.toastr.error('Ha ocurrido un error. Contacte a un administrador.');
     });
   }
 
   ngOnInit() {
-    this.dataSource = new CustomDatasource(this.hotelOfferService.getResults());
+    this.dataSource = new CustomDatasource(this.hotelOfferService.hotelOffers);
     this.resultsChangeSub = this.hotelOfferService.resultsChanged
       .subscribe((data:HotelOfferHeader[])=>{
       this.dataSource = new CustomDatasource(data);
@@ -55,6 +49,5 @@ export class HotelOfferGridResultComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(){
     this.resultsChangeSub.unsubscribe();
-    if(this.detailDialogSub) this.detailDialogSub.unsubscribe();
   }
 }

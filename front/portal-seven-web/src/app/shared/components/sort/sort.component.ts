@@ -1,5 +1,5 @@
 import { PackageOfferService } from './../../../home/package-offer/services/package-offer.service';
-import { Component, OnInit, Input, Output } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { HotelOfferService } from '../../../home/hotel-offer/services/hotel-offer.service';
 
 @Component({
@@ -7,7 +7,7 @@ import { HotelOfferService } from '../../../home/hotel-offer/services/hotel-offe
   templateUrl: './sort.component.html',
   styleUrls: ['./sort.component.css']
 })
-export class SortComponent implements OnInit {
+export class SortComponent {
 
   @Input()type:string;
 
@@ -61,6 +61,4 @@ export class SortComponent implements OnInit {
       ];
     }
   }
-  
-  ngOnInit() {}
 }

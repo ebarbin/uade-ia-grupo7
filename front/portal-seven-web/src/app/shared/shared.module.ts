@@ -23,6 +23,7 @@ import { MapComponent } from './components/map/map.component';
 
 import { DropdownDirective } from './directives/dropdown.directive';
 import { SortComponent } from './components/sort/sort.component';
+import { ViewChangeResultComponent } from './components/view-change-result/view-change-result.component';
 
 @NgModule({
   imports: [
@@ -44,12 +45,12 @@ import { SortComponent } from './components/sort/sort.component';
     NgxGalleryModule, AgmCoreModule, ToastrModule, JoinPipe,
     TruncatePipe, FirstPipe, ImageGetterPipe, WhenNullPutBlankPipe,
     ImgGalleryComponent, MapComponent, ConfirmComponent, DropdownDirective, 
-    SortComponent
+    SortComponent, ViewChangeResultComponent
   ],
   declarations: [
     JoinPipe, TruncatePipe, FirstPipe, ImageGetterPipe,
     WhenNullPutBlankPipe, ImgGalleryComponent, ConfirmComponent,
-    MapComponent, DropdownDirective, SortComponent,
+    MapComponent, DropdownDirective, SortComponent, ViewChangeResultComponent,
   ],
   entryComponents: [ConfirmComponent]
 })

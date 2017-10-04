@@ -1,3 +1,8 @@
+import { PackageOfferCardResultComponent } from './home/package-offer/components/package-offer-card-result/package-offer-card-result.component';
+import { PackageOfferGridResultComponent } from './home/package-offer/components/package-offer-grid-result/package-offer-grid-result.component';
+import { HotelOfferCardResultComponent } from './home/hotel-offer/components/hotel-offer-card-result/hotel-offer-card-result.component';
+import { HotelOfferGridResultComponent } from './home/hotel-offer/components/hotel-offer-grid-result/hotel-offer-grid-result.component';
+import { HotelOfferReservationResumeComponent } from './home/hotel-offer/components/hotel-offer-reservation-resume/hotel-offer-reservation-resume.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { SigninComponent } from './auth/components/signin/signin.component';
@@ -12,8 +17,19 @@ const appRoutes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full'},
   { path: 'home', component: HomeComponent, 
     canActivate: [AuthGuard], children:[
-      {path: 'hotel-offer', component: HotelOfferComponent, canActivate: [AuthGuard]},
-      {path: 'package-offer', component: PackageOfferComponent, canActivate: [AuthGuard]},
+      {path: 'hotel-offer', component: HotelOfferComponent, canActivate: [AuthGuard],
+        children:[
+          {path: 'result-grid', component: HotelOfferGridResultComponent, canActivate: [AuthGuard]},
+          {path: 'result-card', component: HotelOfferCardResultComponent, canActivate: [AuthGuard]},
+        ]
+      },
+      {path: 'hotel-authorization-resume', component: HotelOfferReservationResumeComponent, canActivate: [AuthGuard]},
+      {path: 'package-offer', component: PackageOfferComponent, canActivate: [AuthGuard],
+        children:[
+          {path: 'result-grid', component: PackageOfferGridResultComponent, canActivate: [AuthGuard]},
+          {path: 'result-card', component: PackageOfferCardResultComponent, canActivate: [AuthGuard]},
+        ]
+      },
       {path: 'user-profile', component: UserProfileComponent, canActivate: [AuthGuard]},
       {path: 'configuration', component: ConfigurationComponent, canActivate: [AuthGuard]}
     ]},

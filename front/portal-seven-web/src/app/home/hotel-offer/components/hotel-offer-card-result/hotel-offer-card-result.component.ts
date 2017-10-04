@@ -1,5 +1,5 @@
 import { ToastrService } from 'ngx-toastr';
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 import { HotelOfferHeader } from '../../models/hotel-offer-header.model';
 import { MdDialog } from '@angular/material';
@@ -8,48 +8,25 @@ import { HotelOfferDetailComponent } from '../hotel-offer-detail/hotel-offer-det
 import { HotelOffer } from '../../models/hotel-offer.model';
 import { HotelOfferService } from '../../services/hotel-offer.service';
 import { HttpErrorResponse } from '@angular/common/http';
-import { Subscription } from 'rxjs/Subscription';
 
 @Component({
   selector: 'app-hotel-offer-card-result',
   templateUrl: './hotel-offer-card-result.component.html',
   styleUrls: ['./hotel-offer-card-result.component.css']
 })
-export class HotelOfferCardResultComponent implements OnInit {
-
-  hotelOffers:HotelOfferHeader[] = [];
-  
-  private detailDialogSub:Subscription;
-  private hotelOffersSub:Subscription;
+export class HotelOfferCardResultComponent {
 
   constructor(
+    public hotelOfferService: HotelOfferService,
     private toastr:ToastrService,
-    private hotelOfferService: HotelOfferService,
     private dialog: MdDialog) { }
 
   onDetail(hotelOfferHeader:HotelOfferHeader){
     this.hotelOfferService.getDetail(hotelOfferHeader).then((hotelOffer:HotelOffer)=>{
-      const dialogRef = this.dialog.open(HotelOfferDetailComponent, {
-        data: hotelOffer
-      });
-     this.detailDialogSub = dialogRef.afterClosed().subscribe(result => {
-        console.log(result);
-      });
+      if (hotelOffer)
+        this.dialog.open(HotelOfferDetailComponent);
     }).catch((res:HttpErrorResponse)=>{
       this.toastr.error('Ha ocurrido un error. Contacte a un administrador.');
     });
-  }
-
-  ngOnInit() {
-    this.hotelOffers = this.hotelOfferService.getResults();
-    this.hotelOffersSub = this.hotelOfferService.resultsChanged
-      .subscribe((results:HotelOfferHeader[])=>{
-      this.hotelOffers = results;
-    });
-  }
-
-  ngOnDestroy(){
-    this.hotelOffersSub.unsubscribe();
-    if (this.detailDialogSub) this.detailDialogSub.unsubscribe();
   }
 }

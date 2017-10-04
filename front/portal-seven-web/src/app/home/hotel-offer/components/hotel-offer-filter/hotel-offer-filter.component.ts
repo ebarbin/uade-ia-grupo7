@@ -1,3 +1,4 @@
+import { ActivatedRoute, Router } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
@@ -23,6 +24,8 @@ export class HotelOfferFilterComponent implements OnInit {
   toDate:Date = null;
   
   constructor(
+    private route: ActivatedRoute,
+    private router: Router,
     private hotelOfferService: HotelOfferService,
     private toastr: ToastrService,
     private autocompleteService:AutocompleteService) { }
@@ -59,11 +62,22 @@ export class HotelOfferFilterComponent implements OnInit {
     
     onReset() {
       this.hotelOfferService.reset();
+      this.router.navigate(['/home/hotel-offer']);
     }
 
     onSubmit(form:NgForm){
       this.fixForm(form);
-      this.hotelOfferService.search(<HotelOfferRequest>form.value);
+      this.hotelOfferService.search(<HotelOfferRequest>form.value)
+      .then((results:HotelOfferHeader[]) => {
+        if (results.length > 0)
+          this.router.navigate(['home/hotel-offer/result-' + this.hotelOfferService.view]);
+        else {
+          this.toastr.info('No hay resultados.');
+          this.router.navigate(['home/hotel-offer']);
+        }
+      }).catch((res:HttpErrorResponse) => {
+        this.toastr.error('Ha ocurrido un error. Contacte a un administrador.');
+      });
     }
 
     private fixForm(form:NgForm){

@@ -1,25 +1,25 @@
-<h2 md-dialog-title>{{hotelOffer.hotel.name}}</h2>
+<h2 md-dialog-title>{{srv.hotelOffer.hotel.name}}</h2>
 <hr style="border-color: black;">
 <md-dialog-content>
   <h3>Descripción</h3>
-  <p>{{hotelOffer.hotel.description}}</p>
+  <p>{{srv.hotelOffer.hotel.description}}</p>
   <h3>Politicas de cancelación</h3>
-  <p>{{hotelOffer.cancellationPolicy}}</p>
+  <p>{{srv.hotelOffer.cancellationPolicy}}</p>
   <h3>Imagenes del Hotel</h3>
-  <app-img-gallery [images]="hotelOffer.hotel.images"></app-img-gallery>
+  <app-img-gallery [images]="srv.hotelOffer.hotel.images"></app-img-gallery>
   <hr>
   <h3>Ubicación</h3>
-      <p>{{hotelOffer.hotel.address.street}}</p>
-      <app-map [address]="hotelOffer.hotel.address"></app-map>
+      <p>{{srv.hotelOffer.hotel.address.street}}</p>
+      <app-map [address]="srv.hotelOffer.hotel.address"></app-map>
   <hr>
   <div class="col-md-12 tabs-detail">
     <md-tab-group (selectChange)="getOtherRooms($event)">
       <md-tab label="Habitación" >
         <h3>Descripción</h3>
-        <p>{{hotelOffer.room.description}}</p>
-        <p>Tipo: {{hotelOffer.room.type}}</p>
+        <p>{{srv.hotelOffer.room.description}}</p>
+        <p>Tipo: {{srv.hotelOffer.room.type}}</p>
         <h3>Imagenes de la habitación</h3>
-        <app-img-gallery [images]="hotelOffer.room.images"></app-img-gallery>
+        <app-img-gallery [images]="srv.hotelOffer.room.images"></app-img-gallery>
       </md-tab>
       <md-tab label="Otras Habitaciones">
         <div *ngFor="let room of otherRooms">

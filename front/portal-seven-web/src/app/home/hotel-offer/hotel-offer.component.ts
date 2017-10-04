@@ -1,3 +1,4 @@
+import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm, FormControl } from '@angular/forms';
@@ -20,6 +21,8 @@ import { HttpErrorResponse } from '@angular/common/http';
 export class HotelOfferComponent implements OnInit {
 
   constructor(
+    private route: ActivatedRoute,
+    private router: Router,
     private toastr:ToastrService,
     private hotelOfferService:HotelOfferService) { }
 
@@ -31,9 +34,6 @@ export class HotelOfferComponent implements OnInit {
 
   onChangeView(view){
     this.view = view;
-  }
-
-  hasResults(){
-    return this.hotelOfferService.getResults().length > 0;
+    this.router.navigate([this.view], {relativeTo:this.route});
   }
 }

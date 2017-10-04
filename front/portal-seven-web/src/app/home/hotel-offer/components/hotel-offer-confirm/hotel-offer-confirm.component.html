@@ -1,10 +1,10 @@
 <h2 md-dialog-title>Confirmación de Reserva</h2>
 <hr style="border-color: black;">
 <md-dialog-content>
-  <h2>{{hotelOffer.hotel.name}}</h2>
-  <p>Habitación tipo: {{hotelOffer.room.type}}</p>
-  <p>Precio Final: {{hotelOffer.price | currency:'ARS':true}}</p>
-  <p>Medios de Pago: {{hotelOffer.hotel.paymentMethods | join: ' - '}}</p>
+  <h2>{{srv.hotelOffer.hotel.name}}</h2>
+  <p>Habitación tipo: {{srv.hotelOffer.room.type}}</p>
+  <p>Precio Final: {{srv.hotelOffer.price | currency:'ARS':true}}</p>
+  <p>Medios de Pago: {{srv.hotelOffer.hotel.paymentMethods | join: ' - '}}</p>
 </md-dialog-content>
 <md-dialog-actions align="center">
     <button md-raised-button type="button" color="success" (click)="onConfirm()">

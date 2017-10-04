@@ -1,5 +1,11 @@
-import { Component, OnInit, Inject } from '@angular/core';
-import { MdDialogRef, MD_DIALOG_DATA } from '@angular/material';
+import { HotelOfferDetailComponent } from './../hotel-offer-detail/hotel-offer-detail.component';
+import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
+import { HttpErrorResponse } from '@angular/common/http';
+import { AuthorizeStatus } from './../../../../shared/models/authorize-status.model';
+import { HotelOfferService } from './../../services/hotel-offer.service';
+import { Component, Inject } from '@angular/core';
+import { MdDialogRef, MdDialog } from '@angular/material';
 import { HotelOffer } from '../../models/hotel-offer.model';
 
 @Component({
@@ -7,21 +13,35 @@ import { HotelOffer } from '../../models/hotel-offer.model';
   templateUrl: './hotel-offer-confirm.component.html',
   styleUrls: ['./hotel-offer-confirm.component.css']
 })
-export class HotelOfferConfirmComponent implements OnInit {
+export class HotelOfferConfirmComponent {
 
   constructor(
-    private dialogRef: MdDialogRef<HotelOfferConfirmComponent>,
-    @Inject(MD_DIALOG_DATA) public hotelOffer: HotelOffer) { 
+    public srv: HotelOfferService,
+    private dialog: MdDialog,
+    private router: Router,
+    private toastr: ToastrService,
+    private dialogRef: MdDialogRef<HotelOfferConfirmComponent>) { 
   }
 
-  ngOnInit() {}
-
   onCancel(){
-    this.dialogRef.close(false);
+    this.dialogRef.close();
+    this.dialog.open(HotelOfferDetailComponent, {
+      data: this.srv.hotelOffer
+    });
   }
 
   onConfirm(){
-    this.dialogRef.close(true);
+    this.srv.authorizeReservation(this.srv.hotelOffer)
+    .then((authorizeStatus:AuthorizeStatus)=>{
+      if (authorizeStatus.status) {
+        this.dialogRef.close();
+        this.router.navigate(['home/hotel-authorization-resume']);
+      } else {
+        this.toastr.error('Prestador no autorizador.');
+        this.onCancel();
+      }
+    }).catch((res:HttpErrorResponse) => {
+      this.toastr.error('Ha ocurrido un error. Contacte a un administrador.');
+    });
   }
-
 }
