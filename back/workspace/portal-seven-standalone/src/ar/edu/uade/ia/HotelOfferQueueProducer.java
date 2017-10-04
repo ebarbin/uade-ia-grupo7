@@ -1,5 +1,7 @@
 package ar.edu.uade.ia;
 
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.Hashtable;
 
 import javax.naming.Context;
@@ -23,10 +25,13 @@ public class HotelOfferQueueProducer {
 		String lookupName = "ejb:" + earName + "/" + ejbModuleName + "/" + distinctName + "/" + ejbClassName + "!"
 				+ fullInterfaceName;
 		System.out.println("Conectando a " + lookupName);
-		HotelOfferProducerRemote mbr = (HotelOfferProducerRemote)
+		HotelOfferProducerRemote remoteProducer = (HotelOfferProducerRemote)
 
 		context.lookup(lookupName);
-		mbr.sendTextMessage("Mensaje de prueba");
+		
+		String hotelOffers = new String(Files.readAllBytes(Paths.get("hotel-offer.json")));
+        
+		remoteProducer.sendTextMessage(hotelOffers);
 	}
 
 }

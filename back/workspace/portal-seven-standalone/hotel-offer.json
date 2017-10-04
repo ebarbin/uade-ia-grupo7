@@ -1,0 +1,21 @@
+{
+	"codigo_prestador": "OH_1_1",
+	"nombre": "Dazzler",
+	"destino": "Miami",
+	"fecha_desde": "20170920",
+	"fecha_hasta": "20170920",
+	"cantidad_personas": 1,
+	"foto_hotel": "http://localhost:3000/images/hotel1/frente.png",
+	"descripcion_hotel": "Descripcion Hotel",
+	"lista_servicios": ["Wifi", "Frigo Bar"],
+	"precio_habitacion": 10.5,
+	"foto_habitacion": "http://localhost:3000/images/hotel1/frente.png",
+	"descripcion_habitacion": "Descripcion",
+	"lista_servicios_habitacion": ["Wifi", "Frigo Bar"],
+	"latitud": -34.606299,
+	"longitud": -58.364667,
+	"politica_cancelacion": "Politica de cancelacion",
+	"medio_pago_hotel": [1,2,3],
+	"email_hotel": "",
+	"cupo": 10
+}

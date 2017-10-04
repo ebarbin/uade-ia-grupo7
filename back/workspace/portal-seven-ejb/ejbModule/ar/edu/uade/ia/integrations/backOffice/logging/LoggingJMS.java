@@ -30,6 +30,7 @@ public class LoggingJMS {
 
 	public void error() {
 		try {
+			if (this.queue == null) return;
 			LoggingMessage lm = new LoggingMessage();
 			lm.setAccion(LoggingAction.ERROR.getId());
 			ObjectMessage message = this.context.createObjectMessage(lm);
@@ -41,6 +42,7 @@ public class LoggingJMS {
 
 	public void info(LoggingAction action) {
 		try {
+			if (this.queue == null) return;
 			LoggingMessage lm = new LoggingMessage();
 			lm.setAccion(action.getId());
 			ObjectMessage message = this.context.createObjectMessage(lm);
