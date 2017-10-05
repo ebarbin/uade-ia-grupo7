@@ -24,7 +24,7 @@ export class ViewChangeResultComponent implements OnInit {
       this.router.navigate(['home/hotel-offer/result-' + view]);
     } else if (this.type == 'package'){
       this.pckSrv.view = view;
-      this.router.navigate(['home/hotel-offer/result-' + view]);
+      this.router.navigate(['home/package-offer/result-' + view]);
     }
   }
 

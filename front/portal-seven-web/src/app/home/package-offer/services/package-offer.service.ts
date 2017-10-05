@@ -10,9 +10,12 @@ import { Injectable } from '@angular/core';
 @Injectable()
 export class PackageOfferService {
 
-  resultsChanged:Subject<PackageOfferHeader[]> = new Subject;
   view: string = 'card';
-  results:PackageOfferHeader[] = [];
+  packageOffer: PackageOffer;
+  filterRequest: PackageOfferRequest;
+
+  resultsChanged:Subject<PackageOfferHeader[]> = new Subject;
+  packageOffers:PackageOfferHeader[] = [];
 
   constructor(
     private httpClient:HttpClient,
@@ -22,55 +25,47 @@ export class PackageOfferService {
     return (a < b ? -1 : 1) * (isAsc ? 1 : -1);
   }
 
-  getResults():PackageOfferHeader[]{
-    return this.results;
-  }
-
   sortResults(sortDirection:string, sortField:string){
-    this.results = this.results.sort((a, b) => {
+    this.packageOffers = this.packageOffers.sort((a, b) => {
       let isAsc = sortDirection == 'asc';
       return this.compare(a[sortField], b[sortField], isAsc);
     });
-    this.resultsChanged.next(this.results);
+    this.resultsChanged.next(this.packageOffers);
   }
 
   getDetail(packageOfferHeader:PackageOfferHeader):Promise<PackageOffer>{
     return this.httpClient.get('portal-seven-web/api/rest/package-offerr/detail/' + packageOfferHeader.id)
     .map((response:PortalResponse)=>{
       if(response.success) {
-        var packageOffer = <PackageOffer>response.data;
-
-        /*hotelOffer.hotel.rooms = hotelOffer.hotel.rooms.filter((room)=>{
-          return room.id != hotelOffer.room.id;
-        });*/
-
-        return PackageOffer;
+        this.packageOffer = <PackageOffer>response.data;
+        return  <PackageOffer>response.data;
       } else {
+        this.packageOffer = null;
         this.toastr.error(response.errorMessage);
       }
     }).toPromise();
   }
 
   reset(){
-    this.results = [];
-    this.resultsChanged.next(this.results);
+    this.filterRequest = null;
+    this.packageOffers = [];
+    this.resultsChanged.next(this.packageOffers);
   }
 
-  search(request:PackageOfferRequest){
+  search(request:PackageOfferRequest):Promise<PackageOfferHeader[]>{
+    this.filterRequest = request;
     return this.httpClient.post('portal-seven-web/api/rest/package-offer/search', request)
       .map((response:PortalResponse)=>{
         if(response.success) {
+          this.packageOffers = <PackageOfferHeader[]>response.data;
+          this.resultsChanged.next(this.packageOffers);
           return <PackageOfferHeader[]>response.data;
         } else {
           this.toastr.error(response.errorMessage);
+          this.packageOffers = [];
+          this.resultsChanged.next(this.packageOffers);
           return [];
         }
-      }).toPromise().then((results:PackageOfferHeader[]) => {
-        this.results = results;
-        if (this.results.length == 0) this.toastr.info('No hay resultados.');
-        this.resultsChanged.next(this.results);
-      }).catch((res:HttpErrorResponse) => {
-        this.toastr.error('Ha ocurrido un error. Contacte a un administrador.');
-      });
+      }).toPromise();
   }
 }

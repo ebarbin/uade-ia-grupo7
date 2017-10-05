@@ -1,20 +1,2 @@
 <app-package-offer-filter></app-package-offer-filter>
-<app-sort *ngIf="hasResults()"
-  [type]="'package'">
-</app-sort>
-<div class="change-view-toggle" *ngIf="hasResults()">
-  <md-button-toggle-group mdTooltip="Cambio de vistas">
-    <md-button-toggle md-mini-fab color="accent" value="left"
-      (click)="onChangeView('card')" [checked]="view == 'card'">
-        <i class="fa fa-th" aria-hidden="true"></i>
-    </md-button-toggle>
-    <md-button-toggle md-mini-fab color="primary" value="right"
-      (click)="onChangeView('grid')" [checked]="view == 'grid'">
-        <i class="fa fa-table" aria-hidden="true"></i>
-    </md-button-toggle>
-  </md-button-toggle-group>
-</div>
-<div *ngIf="hasResults()">
-  <app-package-offer-grid-result *ngIf="view == 'grid'"></app-package-offer-grid-result>
-  <app-package-offer-card-result *ngIf="view == 'card'"></app-package-offer-card-result>
-</div>
+<router-outlet></router-outlet>

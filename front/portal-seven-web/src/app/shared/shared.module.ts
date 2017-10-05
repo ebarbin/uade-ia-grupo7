@@ -18,7 +18,6 @@ import { ImageGetterPipe } from './pipes/image-getter.pipe';
 import { JoinPipe } from './pipes/join.pipe';
 
 import { ImgGalleryComponent } from './components/img-gallery/img-gallery.component';
-import { ConfirmComponent } from './components/confirm/confirm.component';
 import { MapComponent } from './components/map/map.component';
 
 import { DropdownDirective } from './directives/dropdown.directive';
@@ -44,14 +43,14 @@ import { ViewChangeResultComponent } from './components/view-change-result/view-
     BrowserAnimationsModule, AngularFontAwesomeModule, BlockUIModule,
     NgxGalleryModule, AgmCoreModule, ToastrModule, JoinPipe,
     TruncatePipe, FirstPipe, ImageGetterPipe, WhenNullPutBlankPipe,
-    ImgGalleryComponent, MapComponent, ConfirmComponent, DropdownDirective, 
+    ImgGalleryComponent, MapComponent, DropdownDirective, 
     SortComponent, ViewChangeResultComponent
   ],
   declarations: [
     JoinPipe, TruncatePipe, FirstPipe, ImageGetterPipe,
-    WhenNullPutBlankPipe, ImgGalleryComponent, ConfirmComponent,
+    WhenNullPutBlankPipe, ImgGalleryComponent,
     MapComponent, DropdownDirective, SortComponent, ViewChangeResultComponent,
   ],
-  entryComponents: [ConfirmComponent]
+  entryComponents: []
 })
 export class SharedModule { }

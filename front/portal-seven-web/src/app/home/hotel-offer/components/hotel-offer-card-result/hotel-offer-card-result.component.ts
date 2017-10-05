@@ -17,12 +17,12 @@ import { HttpErrorResponse } from '@angular/common/http';
 export class HotelOfferCardResultComponent {
 
   constructor(
-    public hotelOfferService: HotelOfferService,
+    public srv: HotelOfferService,
     private toastr:ToastrService,
     private dialog: MdDialog) { }
 
   onDetail(hotelOfferHeader:HotelOfferHeader){
-    this.hotelOfferService.getDetail(hotelOfferHeader).then((hotelOffer:HotelOffer)=>{
+    this.srv.getDetail(hotelOfferHeader).then((hotelOffer:HotelOffer)=>{
       if (hotelOffer)
         this.dialog.open(HotelOfferDetailComponent);
     }).catch((res:HttpErrorResponse)=>{

@@ -8,7 +8,6 @@ import { MdDialogRef, MdDialog, MdTabChangeEvent } from '@angular/material';
 
 import { HotelOfferHeader } from '../../models/hotel-offer-header.model';
 import { HotelOffer } from '../../models/hotel-offer.model';
-import { ConfirmComponent } from '../../../../shared/components/confirm/confirm.component';
 import { ToastrService } from 'ngx-toastr';
 import { HotelOfferConfirmComponent } from '../hotel-offer-confirm/hotel-offer-confirm.component';
 

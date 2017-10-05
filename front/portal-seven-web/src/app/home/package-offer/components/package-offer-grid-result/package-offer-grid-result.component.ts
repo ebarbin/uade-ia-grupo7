@@ -19,40 +19,34 @@ import {
 export class PackageOfferGridResultComponent implements OnInit {
 
   private resultsChangeSub:Subscription;
-  private detailDialogSub:Subscription;
 
   public dataSource: CustomDatasource;
   public displayedColumns = ['id', 'name', 'image', 'other', 'action'];
 
   constructor(
+    public packageOfferService: PackageOfferService,
     private toastr: ToastrService,
-    private packageOfferService: PackageOfferService,
     private dialog: MdDialog) { }
 
   onDetail(packageOfferHeader:PackageOfferHeader){
+    
     this.packageOfferService.getDetail(packageOfferHeader).then((packageOffer:PackageOffer)=>{
-      const dialogRef = this.dialog.open(PackageOfferDetailComponent, {
-        height: '600px',
-        width: '900px',
-        data: packageOffer
-      });
-      this.detailDialogSub = dialogRef.afterClosed().subscribe(result => {
-        console.log("close detail");
-      });
+      if(packageOffer)
+        this.dialog.open(PackageOfferDetailComponent);
     }).catch((res:HttpErrorResponse)=>{
       this.toastr.error('Ha ocurrido un error. Contacte a un administrador.');
     });
   }
 
   ngOnInit() {
-    this.dataSource = new CustomDatasource(this.packageOfferService.getResults());
-    this.resultsChangeSub = this.packageOfferService.resultsChanged.subscribe((data:PackageOfferHeader[])=>{
+    this.dataSource = new CustomDatasource(this.packageOfferService.packageOffers);
+    this.resultsChangeSub = this.packageOfferService.resultsChanged
+    .subscribe((data:PackageOfferHeader[])=>{
       this.dataSource = new CustomDatasource(data);
     });
   }
 
   ngOnDestroy(){
     this.resultsChangeSub.unsubscribe();
-    if(this.detailDialogSub) this.detailDialogSub.unsubscribe();
   }
 }

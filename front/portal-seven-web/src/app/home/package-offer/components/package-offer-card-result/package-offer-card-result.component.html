@@ -1,6 +1,8 @@
+<app-sort [type]="'package'"></app-sort>
+<app-view-change-result [type]="'package'"></app-view-change-result>
 <div class="card-result">
     <md-card class="card-row card col-lg-3 col-md-4 col-sm-6 col-xs-12" (click)="onDetail(packageOffer)"
-      *ngFor="let packageOffer of packageOffers">
+      *ngFor="let packageOffer of srv.packageOffers">
       <img class="img-responsive" style="margin: auto; max-height: 150px; max-width: 100%;" [src]="packageOffer.image | imageGetter">
       <md-card-header>
         <md-card-title>{{packageOffer.name}}</md-card-title>
