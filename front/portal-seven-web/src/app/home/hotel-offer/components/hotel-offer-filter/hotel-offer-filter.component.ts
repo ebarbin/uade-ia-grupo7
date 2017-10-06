@@ -70,7 +70,7 @@ export class HotelOfferFilterComponent implements OnInit {
       this.hotelOfferService.search(<HotelOfferRequest>form.value)
       .then((results:HotelOfferHeader[]) => {
         if (results.length > 0)
-          this.router.navigate(['home/hotel-offer/result-' + this.hotelOfferService.view]);
+          this.router.navigate(['home/hotel-offer/result-' + this.hotelOfferService.getView()]);
         else {
           this.toastr.info('No hay resultados.');
           this.router.navigate(['home/hotel-offer']);

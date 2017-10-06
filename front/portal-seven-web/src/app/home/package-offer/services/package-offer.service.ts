@@ -1,3 +1,4 @@
+import { Holder } from './../../../shared/models/holder.interface';
 import { PackageOffer } from './../models/package-offer.model';
 import { Subject } from 'rxjs/Subject';
 import { ToastrService } from 'ngx-toastr';
@@ -8,7 +9,7 @@ import { PackageOfferHeader } from './../models/package-offer-header.model';
 import { Injectable } from '@angular/core';
 
 @Injectable()
-export class PackageOfferService {
+export class PackageOfferService implements Holder {
 
   view: string = 'card';
   packageOffer: PackageOffer;
@@ -21,8 +22,14 @@ export class PackageOfferService {
     private httpClient:HttpClient,
     private toastr: ToastrService) { }
 
-  private compare(a, b, isAsc) {
-    return (a < b ? -1 : 1) * (isAsc ? 1 : -1);
+  getSortValues():any[]{
+    return [
+      {value:'', viewValue:'Seleccione...'},
+      {value:'description', viewValue:'Descripción'},
+      {value:'price', viewValue:'Precio'},
+      {value:'offerStart', viewValue:'Desde'},
+      {value:'offerEnd', viewValue:'Hasta'}
+    ];
   }
 
   sortResults(sortDirection:string, sortField:string){
@@ -31,6 +38,18 @@ export class PackageOfferService {
       return this.compare(a[sortField], b[sortField], isAsc);
     });
     this.resultsChanged.next(this.packageOffers);
+  }
+
+  setView(view:string){
+    this.view = view;
+  }
+
+  getView():string {
+    return this.view;
+  }
+
+  getType():string {
+    return 'package';
   }
 
   getDetail(packageOfferHeader:PackageOfferHeader):Promise<PackageOffer>{
@@ -67,5 +86,9 @@ export class PackageOfferService {
           return [];
         }
       }).toPromise();
+  }
+
+  private compare(a, b, isAsc) {
+    return (a < b ? -1 : 1) * (isAsc ? 1 : -1);
   }
 }

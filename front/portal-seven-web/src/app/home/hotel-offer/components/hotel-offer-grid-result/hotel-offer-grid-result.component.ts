@@ -26,8 +26,8 @@ export class HotelOfferGridResultComponent implements OnInit, OnDestroy {
   public displayedColumns = [ 'name', 'description', 'services', 'price', 'roomCapacity', 'offerStart', 'offerEnd', 'action'];
 
   constructor(
+    public hotelOfferService: HotelOfferService,
     private toastr: ToastrService,
-    private hotelOfferService: HotelOfferService,
     private dialog: MdDialog) { }
 
   onDetail(hotelOfferHeader:HotelOfferHeader){

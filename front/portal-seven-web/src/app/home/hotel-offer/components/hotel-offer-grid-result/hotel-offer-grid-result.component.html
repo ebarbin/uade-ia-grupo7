@@ -1,5 +1,6 @@
-<app-sort [type]="'hotel'"></app-sort>
-<app-view-change-result [type]="'hotel'"></app-view-change-result>
+<app-sort [holder]="hotelOfferService"></app-sort>
+<app-view-change-result [holder]="hotelOfferService"></app-view-change-result>
+
 <div class="grid-result">  
   <md-table #table [dataSource]="dataSource">
   

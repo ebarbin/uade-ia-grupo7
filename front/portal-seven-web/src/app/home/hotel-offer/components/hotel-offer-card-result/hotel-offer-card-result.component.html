@@ -1,8 +1,9 @@
-<app-sort [type]="'hotel'"></app-sort>
-<app-view-change-result [type]="'hotel'"></app-view-change-result>
+<app-sort [holder]="hotelOfferService"></app-sort>
+<app-view-change-result [holder]="hotelOfferService"></app-view-change-result>
+
 <div class="card-result">
   <md-card class="card-row card col-lg-3 col-md-4 col-sm-6 col-xs-6" (click)="onDetail(hotelOfferHeader)"
-  *ngFor="let hotelOfferHeader of srv.hotelOffers">
+  *ngFor="let hotelOfferHeader of hotelOfferService.hotelOffers">
     <img class="img-responsive" style="margin: auto; max-height: 150px; max-width: 100%;" 
     [src]="hotelOfferHeader.images | first | imageGetter">
     <md-card-header>  

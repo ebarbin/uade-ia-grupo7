@@ -1,3 +1,4 @@
+import { Holder } from './../../../shared/models/holder.interface';
 import { AuthorizeStatus } from './../../../shared/models/authorize-status.model';
 import { Room } from './../models/room.model';
 import { HotelOfferOtherRoomsRequest } from './../models/hotel-offer-other-room-request.model';
@@ -14,7 +15,7 @@ import { PortalResponse } from '../../../shared/models/portal-response.model';
 import { HotelOffer } from '../models/hotel-offer.model';
 
 @Injectable()
-export class HotelOfferService {
+export class HotelOfferService implements Holder {
 
   hotelOffers: HotelOfferHeader[] = [];
   hotelOffer: HotelOffer;
@@ -22,13 +23,35 @@ export class HotelOfferService {
   //Necesario porque el grid utiliza otra estructura
   resultsChanged: Subject<HotelOfferHeader[]> = new Subject;
   
-  view: string = 'card';
+  private view: string = 'card';
   filterRequest:HotelOfferRequest;
 
   constructor(
     private httpClient: HttpClient,
     private toastr: ToastrService) {}
 
+    setView(view:string){
+      this.view = view;
+    }
+
+    getView():string {
+      return this.view;
+    }
+
+    getType():string {
+      return 'hotel';
+    }
+
+    getSortValues():any[]{
+      return [
+        {value:'', viewValue:'Seleccione...'},
+        {value:'description', viewValue:'Descripción'},
+        {value:'price', viewValue:'Precio'},
+        {value:'offerStart', viewValue:'Desde'},
+        {value:'offerEnd', viewValue:'Hasta'}
+      ];
+    }
+    
     sortResults(sortDirection:string, sortField:string){
       this.hotelOffers = this.hotelOffers.sort((a, b) => {
         let isAsc = sortDirection == 'asc';

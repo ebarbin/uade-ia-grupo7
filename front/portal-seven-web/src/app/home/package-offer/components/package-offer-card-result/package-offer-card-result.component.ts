@@ -18,12 +18,12 @@ import {
 export class PackageOfferCardResultComponent {
 
     constructor(
-      public srv: PackageOfferService,
+      public packageOfferService: PackageOfferService,
       private toastr: ToastrService,
       private dialog: MdDialog) { }
   
     onDetail(packageOfferHeader:PackageOfferHeader){
-      this.srv.getDetail(packageOfferHeader).then((packageOffer:PackageOffer)=>{
+      this.packageOfferService.getDetail(packageOfferHeader).then((packageOffer:PackageOffer)=>{
         if(packageOffer)
           this.dialog.open(PackageOfferDetailComponent);
       }).catch((res:HttpErrorResponse)=>{
