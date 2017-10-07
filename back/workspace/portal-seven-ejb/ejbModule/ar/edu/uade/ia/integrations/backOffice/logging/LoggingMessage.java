@@ -10,6 +10,7 @@ public class LoggingMessage implements Serializable {
 	private String modulo = "PW_7";
 	private Integer accion;
 	private Date fecha = new Date();
+	private String descripcion;
 
 	public String getModulo() {
 		return modulo;
@@ -25,5 +26,17 @@ public class LoggingMessage implements Serializable {
 
 	public Date getFecha() {
 		return fecha;
+	}
+
+	public void setDescripcion(String descripcion) {
+		this.descripcion = descripcion;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
+	public String getDescripcion() {
+		return descripcion;
 	}
 }

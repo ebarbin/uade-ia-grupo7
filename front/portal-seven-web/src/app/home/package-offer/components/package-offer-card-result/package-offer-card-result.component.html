@@ -4,15 +4,16 @@
 <div class="card-result">
     <md-card class="card-row card col-lg-3 col-md-4 col-sm-6 col-xs-12" (click)="onDetail(packageOffer)"
       *ngFor="let packageOffer of packageOfferService.getResults()">
-      <img class="img-responsive" style="margin: auto; max-height: 150px; max-width: 100%;" [src]="packageOffer.image | imageGetter">
+      <img class="img-responsive" style="margin: auto; max-height: 150px; max-width: 100%;" 
+        [src]="packageOffer.image | imageGetter">
       <md-card-header>
-        <md-card-title>{{packageOffer.name}}</md-card-title>
-        <md-card-subtitle>mostrar mas info</md-card-subtitle>
+        <md-card-title>{{packageOffer.description}}</md-card-title>
+        <md-card-subtitle>{{packageOffer.services | join:' - ' | truncate:10}}</md-card-subtitle>
       </md-card-header>
       <md-card-content>
-        <p>
-          mas info detalle, bla bla bla
-        </p>
+          <p>Desde: {{packageOffer.offerStart | date:'dd/MM/yyyy'}}</p> 
+          <p>Hasta: {{packageOffer.offerEnd | date:'dd/MM/yyyy'}}</p>
+        <div class="pull-right"><b>{{packageOffer.price | currency:'ARS':true}}</b></div>
       </md-card-content>
     </md-card>
   </div>

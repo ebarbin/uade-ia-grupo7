@@ -40,10 +40,15 @@ public class PackageOfferQueueListener implements MessageListener {
 			String jsonString = ((TextMessage) message).getText();
 			HotelOfferMessage hom = (HotelOfferMessage) JsonConverter.convertToObject(jsonString, HotelOfferMessage.class);
 			
+			//TODO Implementar:
+			//1- Validar la informacion (caso erroneo, enviar log)
+			//2- Persistir en nuestras tablas
+			
 			System.out.println(hom);
+			
 			this.logging.info(LoggingAction.HOTEL_OFFER_REGISTRATION);
 		} catch (Exception e) {
-			this.logging.error();
+			this.logging.error(e.getMessage());
 			PackageOfferQueueListener.LOGGER.error(e.getMessage(), e);
 		}
 	}

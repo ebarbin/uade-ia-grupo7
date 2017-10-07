@@ -3,30 +3,33 @@
 
 <div class="grid-result">  
     <md-table #table [dataSource]="dataSource" mdSort> 
-  
-      <ng-container mdColumnDef="id">
-          <md-header-cell *mdHeaderCellDef md-sort-header> ID </md-header-cell>
-          <md-cell *mdCellDef="let packageOffer"> 
-              {{packageOffer.id}} 
-              <img class="img-circle" height="30" width="30" 
-              [src]="packageOffer.image | imageGetter">
-          </md-cell>
+    
+        <ng-container mdColumnDef="description">
+          <md-header-cell *mdHeaderCellDef md-sort-header> Descripción </md-header-cell>
+          <md-cell *mdCellDef="let packageOffer"> {{packageOffer.description}} </md-cell>
         </ng-container>
     
-        <ng-container mdColumnDef="name">
-          <md-header-cell *mdHeaderCellDef md-sort-header> NAME </md-header-cell>
-          <md-cell *mdCellDef="let packageOffer"> {{packageOffer.name}} </md-cell>
-        </ng-container>
-    
-        <ng-container mdColumnDef="image">
-          <md-header-cell *mdHeaderCellDef md-sort-header> IMAGE </md-header-cell>
-          <md-cell *mdCellDef="let packageOffer"> {{packageOffer.image}} </md-cell>
-        </ng-container>
-    
-        <ng-container mdColumnDef="other">
-            <md-header-cell *mdHeaderCellDef md-sort-header> IMAGE </md-header-cell>
-            <md-cell *mdCellDef="let packageOffer"> {{packageOffer.image}} </md-cell>
+        <ng-container mdColumnDef="services">
+            <md-header-cell *mdHeaderCellDef>Servicios</md-header-cell>
+            <md-cell *mdCellDef="let packageOffer" [mdTooltip]="packageOffer.services | join:' - '"> 
+              {{packageOffer.services | join:' - ' | truncate:10}} 
+            </md-cell>
           </ng-container>
+
+        <ng-container mdColumnDef="price">
+          <md-header-cell *mdHeaderCellDef md-sort-header>Precio</md-header-cell>
+          <md-cell *mdCellDef="let packageOffer">{{packageOffer.price | currency:'ARS':true}}</md-cell>
+        </ng-container>
+    
+        <ng-container mdColumnDef="offerStart">
+            <md-header-cell *mdHeaderCellDef>Desde</md-header-cell>
+          <md-cell *mdCellDef="let packageOffer"> {{packageOffer.offerStart | date:'dd/MM/yyyy'}} </md-cell>
+        </ng-container>
+  
+        <ng-container mdColumnDef="offerEnd">
+            <md-header-cell *mdHeaderCellDef>Hasta</md-header-cell>
+          <md-cell *mdCellDef="let packageOffer"> {{packageOffer.offerEnd | date:'dd/MM/yyyy'}} </md-cell>
+        </ng-container>
   
         <ng-container mdColumnDef="action">
           <md-header-cell *mdHeaderCellDef align="end"></md-header-cell>

@@ -46,7 +46,7 @@ public class HotelOfferService {
 			List<HotelOfferHeaderDTO> result = this.hotelOfferManager.search(request);
 			return Response.ok(new PortalResponse(result)).build();
 		} catch (Exception e) {
-			this.logging.error();
+			this.logging.error(e.getMessage());
 			HotelOfferService.LOGGER.error(e.getMessage(), e);
 			return Response.ok(new PortalResponse(e.getMessage())).build();
 		}

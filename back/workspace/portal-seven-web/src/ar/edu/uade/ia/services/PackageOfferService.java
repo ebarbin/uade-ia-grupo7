@@ -49,7 +49,7 @@ public class PackageOfferService {
 			List<PackageOfferHeaderDTO> result = this.packageOfferManager.search(request);
 			return Response.ok(new PortalResponse(result)).build();
 		} catch (Exception e) {
-			this.logging.error();
+			this.logging.error(e.getMessage());
 			PackageOfferService.LOGGER.error(e.getMessage(), e);
 			return Response.ok(new PortalResponse(e.getMessage())).build();
 		}

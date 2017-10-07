@@ -28,11 +28,12 @@ public class LoggingJMS {
 	public LoggingJMS() {
 	}
 
-	public void error() {
+	public void error(String desc) {
 		try {
 			if (this.queue == null) return;
 			LoggingMessage lm = new LoggingMessage();
 			lm.setAccion(LoggingAction.ERROR.getId());
+			lm.setDescripcion(desc);
 			ObjectMessage message = this.context.createObjectMessage(lm);
 			this.context.createProducer().send(this.queue, message);
 		} catch (Exception e) {
