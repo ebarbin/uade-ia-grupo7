@@ -90,9 +90,13 @@ export class HotelOfferService implements Holder {
       this.filterRequest = null;
       this.hotelOffers = [];
       this.resultsChanged.next(this.hotelOffers);
+      this.router.navigate(['/home/hotel-offer']);
     }
 
     search(request:HotelOfferRequest){
+      //HACK guard reevaluate
+      this.router.navigate(['/home/hotel-offer']);
+
       this.filterRequest = request;
       return this.httpClient.post('portal-seven-web/api/rest/hotel-offer/search', request)
         .map((response:PortalResponse)=>{

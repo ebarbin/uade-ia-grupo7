@@ -7,7 +7,6 @@ import { AutocompleteResource } from '../../../../shared/models/autocomplete-res
 import { AutocompleteService } from '../../../../shared/services/hotel-autocomplete.service';
 import { PackageOfferRequest } from '../../models/package-offer-request.model';
 import { PackageOfferService } from '../../services/package-offer.service';
-import { Router } from '@angular/router';
 import { PackageOfferHeader } from '../../models/package-offer-header.model';
 
 @Component({
@@ -21,7 +20,6 @@ export class PackageOfferFilterComponent implements OnInit {
   toDate:Date = null;
   
   constructor(
-    private router:Router,
     private packageOfferService: PackageOfferService,
     private autocompleteService:AutocompleteService, 
     private toastr: ToastrService) { }
@@ -62,11 +60,9 @@ export class PackageOfferFilterComponent implements OnInit {
 
     onReset() {
       this.packageOfferService.reset();
-      this.router.navigate(['/home/package-offer']);
     }
 
     onSubmit(form:NgForm){
-      this.router.navigate(['/home/package-offer']);
       this.fixForm(form);
       this.packageOfferService.search(<PackageOfferRequest>form.value);
     }

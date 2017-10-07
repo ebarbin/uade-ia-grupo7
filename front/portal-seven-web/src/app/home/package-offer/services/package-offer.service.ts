@@ -83,9 +83,11 @@ export class PackageOfferService implements Holder {
     this.filterRequest = null;
     this.packageOffers = [];
     this.resultsChanged.next(this.packageOffers);
+    this.router.navigate(['/home/package-offer']);
   }
 
   search(request:PackageOfferRequest){
+    this.router.navigate(['/home/package-offer']);
     this.filterRequest = request;
     return this.httpClient.post('portal-seven-web/api/rest/package-offer/search', request)
       .map((response:PortalResponse)=>{

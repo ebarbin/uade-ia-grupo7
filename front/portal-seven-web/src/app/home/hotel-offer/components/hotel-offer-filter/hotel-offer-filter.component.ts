@@ -1,4 +1,3 @@
-import { ActivatedRoute, Router } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
@@ -24,8 +23,6 @@ export class HotelOfferFilterComponent implements OnInit {
   toDate:Date = null;
   
   constructor(
-    private route: ActivatedRoute,
-    private router: Router,
     private hotelOfferService: HotelOfferService,
     private toastr: ToastrService,
     private autocompleteService:AutocompleteService) { }
@@ -62,12 +59,9 @@ export class HotelOfferFilterComponent implements OnInit {
     
     onReset() {
       this.hotelOfferService.reset();
-      this.router.navigate(['/home/hotel-offer']);
     }
 
     onSubmit(form:NgForm){
-      //HACK guard reevaluate
-      this.router.navigate(['/home/hotel-offer']);
       this.fixForm(form);
       this.hotelOfferService.search(<HotelOfferRequest>form.value);
     }
