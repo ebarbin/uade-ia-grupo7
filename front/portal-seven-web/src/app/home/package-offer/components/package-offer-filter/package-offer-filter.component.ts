@@ -66,18 +66,9 @@ export class PackageOfferFilterComponent implements OnInit {
     }
 
     onSubmit(form:NgForm){
+      this.router.navigate(['/home/package-offer']);
       this.fixForm(form);
-      this.packageOfferService.search(<PackageOfferRequest>form.value)
-      .then((results:PackageOfferHeader[]) => {
-        if (results.length > 0)
-          this.router.navigate(['home/package-offer/result-' + this.packageOfferService.view]);
-        else {
-          this.toastr.info('No hay resultados.');
-          this.router.navigate(['home/package-offer']);
-        }
-      }).catch((res:HttpErrorResponse) => {
-        this.toastr.error('Ha ocurrido un error. Contacte a un administrador.');
-      });
+      this.packageOfferService.search(<PackageOfferRequest>form.value);
     }
 
     private fixForm(form:NgForm){

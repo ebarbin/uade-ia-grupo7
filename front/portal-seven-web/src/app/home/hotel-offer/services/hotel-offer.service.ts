@@ -13,22 +13,34 @@ import { HotelOfferRequest } from '../models/hotel-offer-request.model';
 import { HotelOfferHeader } from '../models/hotel-offer-header.model';
 import { PortalResponse } from '../../../shared/models/portal-response.model';
 import { HotelOffer } from '../models/hotel-offer.model';
+import { Router } from '@angular/router';
 
 @Injectable()
 export class HotelOfferService implements Holder {
 
-  hotelOffers: HotelOfferHeader[] = [];
-  hotelOffer: HotelOffer;
-
-  //Necesario porque el grid utiliza otra estructura
-  resultsChanged: Subject<HotelOfferHeader[]> = new Subject;
-  
   private view: string = 'card';
-  filterRequest:HotelOfferRequest;
-
+  private filterRequest:HotelOfferRequest;
+  private hotelOffers: HotelOfferHeader[] = [];
+  private hotelOffer: HotelOffer;
+  //Necesario porque el grid utiliza otra estructura
+  private resultsChanged: Subject<HotelOfferHeader[]> = new Subject;
+  
   constructor(
+    private router:Router,
     private httpClient: HttpClient,
     private toastr: ToastrService) {}
+
+    getResultsChanged(): Subject<HotelOfferHeader[]>{
+      return this.resultsChanged;
+    }
+
+    getResults():HotelOfferHeader[]{
+      return this.hotelOffers;
+    }
+
+    getSelected():HotelOffer{
+      return this.hotelOffer;
+    }
 
     setView(view:string){
       this.view = view;
@@ -80,7 +92,7 @@ export class HotelOfferService implements Holder {
       this.resultsChanged.next(this.hotelOffers);
     }
 
-    search(request:HotelOfferRequest):Promise<HotelOfferHeader[]>{
+    search(request:HotelOfferRequest){
       this.filterRequest = request;
       return this.httpClient.post('portal-seven-web/api/rest/hotel-offer/search', request)
         .map((response:PortalResponse)=>{
@@ -94,7 +106,11 @@ export class HotelOfferService implements Holder {
             this.resultsChanged.next(this.hotelOffers);
             return [];
           }
-        }).toPromise();
+        }).toPromise().then((results:HotelOfferHeader[]) => {
+          this.router.navigate(['home/hotel-offer/result-' + this.getView()]);
+      }).catch((res:HttpErrorResponse) => {
+        this.toastr.error('Ha ocurrido un error. Contacte a un administrador.');
+      });
     }
 
     searchOtherRooms(request:HotelOfferOtherRoomsRequest):Promise<Room[]>{

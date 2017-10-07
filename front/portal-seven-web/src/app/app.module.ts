@@ -20,6 +20,8 @@ import { AutocompleteService } from './shared/services/hotel-autocomplete.servic
 import { MyHttpInterceptor } from './shared/services/my-http-interceptor';
 import { HotelOfferService } from './home/hotel-offer/services/hotel-offer.service';
 import { PackageOfferService } from './home/package-offer/services/package-offer.service';
+import { HotelOfferResultGuard } from './home/hotel-offer/services/hotel-offer-result.guard';
+import { PackageOfferResultGuard } from './home/package-offer/services/package-offer-result.guard';
 
 @NgModule({
   declarations: [
@@ -32,7 +34,7 @@ import { PackageOfferService } from './home/package-offer/services/package-offer
   ],
   providers: [
     AuthGuard, AuthService, UserService, ImageService, AutocompleteService, 
-    HotelOfferService, PackageOfferService,
+    HotelOfferService, PackageOfferService, HotelOfferResultGuard, PackageOfferResultGuard,
     { provide: LOCALE_ID, useValue: 'es-AR' },
     { provide: HTTP_INTERCEPTORS, useClass: MyHttpInterceptor, multi: true }
   ],

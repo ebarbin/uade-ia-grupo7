@@ -40,8 +40,8 @@ export class HotelOfferGridResultComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.dataSource = new CustomDatasource(this.hotelOfferService.hotelOffers);
-    this.resultsChangeSub = this.hotelOfferService.resultsChanged
+    this.dataSource = new CustomDatasource(this.hotelOfferService.getResults());
+    this.resultsChangeSub = this.hotelOfferService.getResultsChanged()
       .subscribe((data:HotelOfferHeader[])=>{
       this.dataSource = new CustomDatasource(data);
     });

@@ -39,8 +39,8 @@ export class PackageOfferGridResultComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.dataSource = new CustomDatasource(this.packageOfferService.packageOffers);
-    this.resultsChangeSub = this.packageOfferService.resultsChanged
+    this.dataSource = new CustomDatasource(this.packageOfferService.getResults());
+    this.resultsChangeSub = this.packageOfferService.getResultsChanged()
     .subscribe((data:PackageOfferHeader[])=>{
       this.dataSource = new CustomDatasource(data);
     });

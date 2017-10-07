@@ -32,7 +32,7 @@ export class HotelOfferDetailComponent {
 
     getOtherRooms(event:MdTabChangeEvent){
       if (event.index == 1 && this.otherRooms.length == 0) {
-        var req:HotelOfferOtherRoomsRequest = new HotelOfferOtherRoomsRequest(this.srv.hotelOffer);
+        var req:HotelOfferOtherRoomsRequest = new HotelOfferOtherRoomsRequest(this.srv.getSelected());
         this.srv.searchOtherRooms(req).then((rooms:Room[])=>{
           this.otherRooms = rooms;
         }).catch((res:HttpErrorResponse)=>{

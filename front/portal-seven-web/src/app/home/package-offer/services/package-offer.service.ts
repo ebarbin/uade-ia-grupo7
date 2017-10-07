@@ -7,20 +7,34 @@ import { PortalResponse } from './../../../shared/models/portal-response.model';
 import { PackageOfferRequest } from './../models/package-offer-request.model';
 import { PackageOfferHeader } from './../models/package-offer-header.model';
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Injectable()
 export class PackageOfferService implements Holder {
 
-  view: string = 'card';
-  packageOffer: PackageOffer;
-  filterRequest: PackageOfferRequest;
+  private view: string = 'card';
+  private packageOffer: PackageOffer;
+  private filterRequest: PackageOfferRequest;
 
-  resultsChanged:Subject<PackageOfferHeader[]> = new Subject;
-  packageOffers:PackageOfferHeader[] = [];
+  private resultsChanged:Subject<PackageOfferHeader[]> = new Subject;
+  private packageOffers:PackageOfferHeader[] = [];
 
   constructor(
-    private httpClient:HttpClient,
+    private router: Router,
+    private httpClient: HttpClient,
     private toastr: ToastrService) { }
+
+  getResults():PackageOfferHeader[]{
+    return this.packageOffers;  
+  }
+
+  getSelected():PackageOffer{
+    return this.packageOffer;
+  }
+
+  getResultsChanged():Subject<PackageOfferHeader[]>{
+    return this.resultsChanged;
+  }
 
   getSortValues():any[]{
     return [
@@ -71,7 +85,7 @@ export class PackageOfferService implements Holder {
     this.resultsChanged.next(this.packageOffers);
   }
 
-  search(request:PackageOfferRequest):Promise<PackageOfferHeader[]>{
+  search(request:PackageOfferRequest){
     this.filterRequest = request;
     return this.httpClient.post('portal-seven-web/api/rest/package-offer/search', request)
       .map((response:PortalResponse)=>{
@@ -85,7 +99,11 @@ export class PackageOfferService implements Holder {
           this.resultsChanged.next(this.packageOffers);
           return [];
         }
-      }).toPromise();
+      }).toPromise().then((results:PackageOfferHeader[]) => {
+          this.router.navigate(['home/package-offer/result-' + this.getView()]);
+      }).catch((res:HttpErrorResponse) => {
+        this.toastr.error('Ha ocurrido un error. Contacte a un administrador.');
+      });
   }
 
   private compare(a, b, isAsc) {

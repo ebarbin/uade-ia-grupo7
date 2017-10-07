@@ -26,12 +26,12 @@ export class HotelOfferConfirmComponent {
   onCancel(){
     this.dialogRef.close();
     this.dialog.open(HotelOfferDetailComponent, {
-      data: this.srv.hotelOffer
+      data: this.srv.getSelected()
     });
   }
 
   onConfirm(){
-    this.srv.authorizeReservation(this.srv.hotelOffer)
+    this.srv.authorizeReservation(this.srv.getSelected())
     .then((authorizeStatus:AuthorizeStatus)=>{
       if (authorizeStatus.status) {
         this.dialogRef.close();

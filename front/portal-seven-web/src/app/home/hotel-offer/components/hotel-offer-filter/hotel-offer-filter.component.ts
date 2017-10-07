@@ -66,18 +66,10 @@ export class HotelOfferFilterComponent implements OnInit {
     }
 
     onSubmit(form:NgForm){
+      //HACK guard reevaluate
+      this.router.navigate(['/home/hotel-offer']);
       this.fixForm(form);
-      this.hotelOfferService.search(<HotelOfferRequest>form.value)
-      .then((results:HotelOfferHeader[]) => {
-        if (results.length > 0)
-          this.router.navigate(['home/hotel-offer/result-' + this.hotelOfferService.getView()]);
-        else {
-          this.toastr.info('No hay resultados.');
-          this.router.navigate(['home/hotel-offer']);
-        }
-      }).catch((res:HttpErrorResponse) => {
-        this.toastr.error('Ha ocurrido un error. Contacte a un administrador.');
-      });
+      this.hotelOfferService.search(<HotelOfferRequest>form.value);
     }
 
     private fixForm(form:NgForm){
