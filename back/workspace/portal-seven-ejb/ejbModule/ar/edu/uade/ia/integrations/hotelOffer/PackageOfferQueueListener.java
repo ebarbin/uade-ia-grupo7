@@ -1,5 +1,10 @@
 package ar.edu.uade.ia.integrations.hotelOffer;
 
+import java.io.BufferedInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.InputStream;
+import java.net.URL;
+
 import javax.ejb.ActivationConfigProperty;
 import javax.ejb.EJB;
 import javax.ejb.MessageDriven;
@@ -51,6 +56,21 @@ public class PackageOfferQueueListener implements MessageListener {
 			this.logging.error(e.getMessage());
 			PackageOfferQueueListener.LOGGER.error(e.getMessage(), e);
 		}
+	}
+	
+	@SuppressWarnings("unused")
+	private void exampleDownloadImage(String urlStr) throws Exception {
+		URL url = new URL(urlStr);
+		InputStream in = new BufferedInputStream(url.openStream());
+		ByteArrayOutputStream out = new ByteArrayOutputStream();
+		byte[] buf = new byte[1024];
+		int n = 0;
+		while (-1!=(n=in.read(buf))) out.write(buf, 0, n);
+		out.close();
+		in.close();
+		
+		//Dato a persitir!
+		byte[] data = out.toByteArray();
 	}
 
 }
