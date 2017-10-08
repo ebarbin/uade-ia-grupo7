@@ -6,7 +6,6 @@ import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
-import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -79,14 +78,13 @@ public class HotelOfferService {
 		}
 	}
 	
-	@PUT
+	@GET
 	@Path("/authorize/{id}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response authorize(@PathParam("id") Integer id) {
 		try {
-			AuthorizeStatusDTO statusDTO = new AuthorizeStatusDTO();
-			statusDTO.setStatus(Boolean.TRUE);
-			return Response.ok(new PortalResponse(statusDTO)).build();
+			AuthorizeStatusDTO statusDTO = this.hotelOfferManager.autorize(id);
+			return Response.ok(statusDTO).build();
 		} catch (Exception e) {
 			HotelOfferService.LOGGER.error(e.getMessage(), e);
 			return Response.ok(new PortalResponse(e.getMessage())).build();

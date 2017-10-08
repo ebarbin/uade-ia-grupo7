@@ -10,6 +10,7 @@ import javax.ejb.Stateless;
 import org.dozer.DozerBeanMapperBuilder;
 import org.dozer.Mapper;
 
+import ar.edu.uade.ia.common.dtos.AuthorizeStatusDTO;
 import ar.edu.uade.ia.common.dtos.HotelOfferDTO;
 import ar.edu.uade.ia.common.dtos.HotelOfferHeaderDTO;
 import ar.edu.uade.ia.common.dtos.HotelOfferOtherRoomsRequestDTO;
@@ -40,9 +41,18 @@ public class HotelOfferManager implements HotelOfferManagerRemote, HotelOfferMan
 	/**
 	 * Default constructor.
 	 */
-	public HotelOfferManager() {
-	}
+	public HotelOfferManager() {}
 
+
+	@Override
+	public AuthorizeStatusDTO autorize(Integer id) throws Exception {
+		
+		//TODO MANDAR A AUTORIZAR AL WEBSERVICE SOAP
+		AuthorizeStatusDTO dto = new AuthorizeStatusDTO();
+		dto.setStatus(Boolean.TRUE);
+		return dto;
+	}
+	
 	@Override
 	public List<HotelOfferHeaderDTO> search(HotelOfferRequestDTO hotelOfferRequest) throws Exception {
 		List<HotelOffer> hotelOffers = this.hotelOfferEJB.search(hotelOfferRequest);

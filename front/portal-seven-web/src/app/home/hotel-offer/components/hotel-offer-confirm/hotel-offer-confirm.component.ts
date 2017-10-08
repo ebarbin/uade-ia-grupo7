@@ -25,9 +25,7 @@ export class HotelOfferConfirmComponent {
 
   onCancel(){
     this.dialogRef.close();
-    this.dialog.open(HotelOfferDetailComponent, {
-      data: this.srv.getSelected()
-    });
+    this.dialog.open(HotelOfferDetailComponent);
   }
 
   onConfirm(){
