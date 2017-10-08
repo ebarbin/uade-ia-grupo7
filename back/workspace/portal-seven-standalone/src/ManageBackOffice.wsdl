@@ -1,0 +1,72 @@
+<?xml version='1.0' encoding='UTF-8'?><wsdl:definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://integrations.ia.uade.edu.ar/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:ns1="http://schemas.xmlsoap.org/soap/http" name="ManageBackOfficeService" targetNamespace="http://integrations.ia.uade.edu.ar/">
+  <wsdl:types>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://integrations.ia.uade.edu.ar/" elementFormDefault="unqualified" targetNamespace="http://integrations.ia.uade.edu.ar/" version="1.0">
+
+  <xs:element name="autorizeHotelOffer" type="tns:autorizeHotelOffer"/>
+
+  <xs:element name="autorizeHotelOfferResponse" type="tns:autorizeHotelOfferResponse"/>
+
+  <xs:complexType name="autorizeHotelOffer">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="arg0" type="tns:backOfficeRequest"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="backOfficeRequest">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="id" type="xs:int"/>
+      <xs:element minOccurs="0" name="state" type="xs:string"/>
+      <xs:element minOccurs="0" name="type" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="autorizeHotelOfferResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="tns:backOfficeResponse"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="backOfficeResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="id" type="xs:int"/>
+      <xs:element minOccurs="0" name="state" type="xs:string"/>
+      <xs:element minOccurs="0" name="type" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+</xs:schema>
+  </wsdl:types>
+  <wsdl:message name="autorizeHotelOfferResponse">
+    <wsdl:part element="tns:autorizeHotelOfferResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="autorizeHotelOffer">
+    <wsdl:part element="tns:autorizeHotelOffer" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="ManageBackOffice">
+    <wsdl:operation name="autorizeHotelOffer">
+      <wsdl:input message="tns:autorizeHotelOffer" name="autorizeHotelOffer">
+    </wsdl:input>
+      <wsdl:output message="tns:autorizeHotelOfferResponse" name="autorizeHotelOfferResponse">
+    </wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="ManageBackOfficeServiceSoapBinding" type="tns:ManageBackOffice">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="autorizeHotelOffer">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="autorizeHotelOffer">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="autorizeHotelOfferResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="ManageBackOfficeService">
+    <wsdl:port binding="tns:ManageBackOfficeServiceSoapBinding" name="ManageBackOfficePort">
+      <soap:address location="http://ebarbin:8080/portal-seven-web/ManageBackOffice"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
