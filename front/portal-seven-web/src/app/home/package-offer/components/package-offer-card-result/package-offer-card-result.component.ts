@@ -30,4 +30,8 @@ export class PackageOfferCardResultComponent {
         this.toastr.error('Ha ocurrido un error. Contacte a un administrador.');
       });
     }
+
+    getTotalPrice(unitaryPrice:number){
+      return unitaryPrice * this.packageOfferService.getFilter().quantityPeople;
+    }
 }

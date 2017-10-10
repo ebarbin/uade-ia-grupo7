@@ -16,15 +16,15 @@ import { PackageOfferHeader } from '../../models/package-offer-header.model';
 })
 export class PackageOfferFilterComponent implements OnInit {
 
+  quantityOptions:any[] = [];
   fromDate:Date = null;
   toDate:Date = null;
-  
+  quantityPeople:number = 1;
+
   constructor(
     private packageOfferService: PackageOfferService,
     private autocompleteService:AutocompleteService, 
     private toastr: ToastrService) { }
-
-  quantityOptions:any[] = [];
 
   restinationResults:AutocompleteResource[];
   
@@ -52,7 +52,6 @@ export class PackageOfferFilterComponent implements OnInit {
     }
 
     ngOnInit() {
-      this.quantityOptions.push({value: -1, viewValue: '- Vacio -'});
       for(let i = 1; i <= 10;i++) {
         this.quantityOptions.push({value: i, viewValue: i});
        }

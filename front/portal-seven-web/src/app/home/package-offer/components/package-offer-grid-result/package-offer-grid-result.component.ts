@@ -21,7 +21,7 @@ export class PackageOfferGridResultComponent implements OnInit {
   private resultsChangeSub:Subscription;
 
   public dataSource: CustomDatasource;
-  public displayedColumns = ['description', 'services', 'price', 'offerStart', 'offerEnd', 'action'];
+  public displayedColumns = ['description', 'services', 'price', 'totalPrice', 'offerStart', 'offerEnd', 'action'];
 
   constructor(
     public packageOfferService: PackageOfferService,
@@ -48,5 +48,9 @@ export class PackageOfferGridResultComponent implements OnInit {
 
   ngOnDestroy(){
     this.resultsChangeSub.unsubscribe();
+  }
+
+  getTotalPrice(unitaryPrice:number){
+    return unitaryPrice * this.packageOfferService.getFilter().quantityPeople;
   }
 }

@@ -36,6 +36,10 @@ export class PackageOfferService implements Holder {
     return this.resultsChanged;
   }
 
+  getFilter():PackageOfferRequest{
+    return this.filterRequest;
+  }
+
   getSortValues():any[]{
     return [
       {value:'', viewValue:'Seleccione...'},

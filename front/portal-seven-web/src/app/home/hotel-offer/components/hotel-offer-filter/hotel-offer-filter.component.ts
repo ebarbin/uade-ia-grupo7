@@ -17,11 +17,14 @@ import { HotelOfferService } from '../../services/hotel-offer.service';
 })
 export class HotelOfferFilterComponent implements OnInit {
 
-  quantityOptions:any[] = [];
+  roomQuantityValues:any[] = [];
+  peopleQuantityValues:any[] = [];
+
   hotelResults:AutocompleteResource[];
   fromDate:Date = null
   toDate:Date = null;
-  
+  roomQuantity:number = 1;
+
   constructor(
     private hotelOfferService: HotelOfferService,
     private toastr: ToastrService,
@@ -51,9 +54,10 @@ export class HotelOfferFilterComponent implements OnInit {
     }
 
     ngOnInit() {
-      this.quantityOptions.push({value: -1, viewValue: '- Vacio -'});
+      this.peopleQuantityValues.push({value: -1, viewValue: '- Vacio -'});
       for(let i = 1; i <= 10;i++) {
-        this.quantityOptions.push({value: i, viewValue: i});
+        this.roomQuantityValues.push({value: i, viewValue: i});
+        this.peopleQuantityValues.push({value: i, viewValue: i});
        }
     }
     

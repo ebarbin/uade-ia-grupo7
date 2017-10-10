@@ -17,10 +17,15 @@
           </ng-container>
 
         <ng-container mdColumnDef="price">
-          <md-header-cell *mdHeaderCellDef md-sort-header>Precio</md-header-cell>
+          <md-header-cell *mdHeaderCellDef md-sort-header>P. Persona</md-header-cell>
           <md-cell *mdCellDef="let packageOffer">{{packageOffer.price | currency:'ARS':true}}</md-cell>
         </ng-container>
     
+        <ng-container mdColumnDef="totalPrice">
+            <md-header-cell *mdHeaderCellDef md-sort-header>Precio Total</md-header-cell>
+            <md-cell *mdCellDef="let packageOffer">{{ getTotalPrice(packageOffer.price) | currency:'ARS':true}}</md-cell>
+          </ng-container>
+          
         <ng-container mdColumnDef="offerStart">
             <md-header-cell *mdHeaderCellDef>Desde</md-header-cell>
           <md-cell *mdCellDef="let packageOffer"> {{packageOffer.offerStart | date:'dd/MM/yyyy'}} </md-cell>
