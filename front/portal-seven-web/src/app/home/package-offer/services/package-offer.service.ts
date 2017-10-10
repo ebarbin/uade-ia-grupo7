@@ -80,7 +80,9 @@ export class PackageOfferService implements Holder {
   }
 
   reset(){
+    this.view = 'card';
     this.filterRequest = null;
+    this.packageOffer = null;
     this.packageOffers = [];
     this.resultsChanged.next(this.packageOffers);
     this.router.navigate(['/home/package-offer']);

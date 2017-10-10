@@ -1,3 +1,23 @@
-<p>
-  hotel-offer-reservation-resume works!
-</p>
+<div class="col-lg-offset-3 col-lg-6 col-lg-offset-3
+   col-md-offset-2 col-md-8 col-md-offset-2
+   col-sm-offset-2 col-sm-8 col-sm-offset-2 
+   col-xs-offset-2 col-xs-8 col-xs-offset-2">
+  <md-card>
+    <md-card-header>
+      <md-card-title>¡Felicitaciones! Has reservado el hotel.</md-card-title>
+    </md-card-header>
+    <md-card-content>
+        <h2>{{hotelOfferService.getSelected().hotel.name}}</h2>
+        <p>Habitación tipo: {{hotelOfferService.getSelected().room.type}}</p>
+        <p>Precio Final: {{hotelOfferService.getSelected().price | currency:'ARS':true}}</p>
+        <p>Medios de Pago: {{hotelOfferService.getSelected().hotel.paymentMethods | join: ' - '}}</p>
+    </md-card-content>
+    <md-card-actions align="center">
+        <button class="accept-resume-btn" 
+          md-raised-button 
+          type="button" color="primary" (click)="back()">
+          Aceptar
+        </button>
+      </md-card-actions>
+  </md-card>
+</div>

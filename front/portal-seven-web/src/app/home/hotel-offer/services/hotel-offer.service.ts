@@ -87,7 +87,9 @@ export class HotelOfferService implements Holder {
     }
 
     reset(){
+      this.view = 'card';
       this.filterRequest = null;
+      this.hotelOffer = null;
       this.hotelOffers = [];
       this.resultsChanged.next(this.hotelOffers);
       this.router.navigate(['/home/hotel-offer']);
@@ -131,8 +133,9 @@ export class HotelOfferService implements Holder {
         }).toPromise();
     }
 
-    authorizeReservation(hotelOffer:HotelOffer):Promise<AuthorizeStatus>{
-      return this.httpClient.get('portal-seven-web/api/rest/hotel-offer/authorize/' + hotelOffer.id)
+    authorizeReservation():Promise<AuthorizeStatus>{
+      return this.httpClient.put('portal-seven-web/api/rest/hotel-offer/authorize/' + 
+        this.hotelOffer.id, this.filterRequest)
         .map((response:PortalResponse)=>{
           if(response.success) {
             return <AuthorizeStatus>response.data;

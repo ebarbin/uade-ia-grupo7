@@ -6,6 +6,7 @@ import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -22,7 +23,7 @@ import ar.edu.uade.ia.common.dtos.HotelOfferRequestDTO;
 import ar.edu.uade.ia.common.dtos.ImageDTO;
 import ar.edu.uade.ia.common.dtos.RoomDTO;
 import ar.edu.uade.ia.integrations.backOffice.logging.LoggingJMS;
-import ar.edu.uade.ia.managers.interfaces.HotelOfferManagerRemote;
+import ar.edu.uade.ia.managers.interfaces.HotelOfferManagerLocal;
 import ar.edu.uade.ia.services.response.PortalResponse;
 
 @Path("/hotel-offer")
@@ -32,7 +33,7 @@ public class HotelOfferService {
 	private static Logger LOGGER = Logger.getLogger(HotelOfferService.class);
 	
 	@EJB
-	private HotelOfferManagerRemote hotelOfferManager;
+	private HotelOfferManagerLocal hotelOfferManager;
 
 	@EJB
 	private LoggingJMS logging;
@@ -78,13 +79,13 @@ public class HotelOfferService {
 		}
 	}
 	
-	@GET
+	@PUT
 	@Path("/authorize/{id}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response authorize(@PathParam("id") Integer id) {
+	public Response authorize(@PathParam("id") Integer id, HotelOfferRequestDTO filter) {
 		try {
-			AuthorizeStatusDTO statusDTO = this.hotelOfferManager.autorize(id);
-			return Response.ok(statusDTO).build();
+			AuthorizeStatusDTO statusDTO = this.hotelOfferManager.autorize(id, filter);
+			return Response.ok(new PortalResponse(statusDTO)).build();
 		} catch (Exception e) {
 			HotelOfferService.LOGGER.error(e.getMessage(), e);
 			return Response.ok(new PortalResponse(e.getMessage())).build();

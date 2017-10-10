@@ -29,7 +29,7 @@ export class HotelOfferConfirmComponent {
   }
 
   onConfirm(){
-    this.srv.authorizeReservation(this.srv.getSelected())
+    this.srv.authorizeReservation()
     .then((authorizeStatus:AuthorizeStatus)=>{
       if (authorizeStatus.status) {
         this.dialogRef.close();

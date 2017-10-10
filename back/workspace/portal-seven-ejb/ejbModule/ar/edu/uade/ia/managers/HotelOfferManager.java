@@ -41,18 +41,24 @@ public class HotelOfferManager implements HotelOfferManagerRemote, HotelOfferMan
 	/**
 	 * Default constructor.
 	 */
-	public HotelOfferManager() {}
-
+	public HotelOfferManager() {
+	}
 
 	@Override
-	public AuthorizeStatusDTO autorize(Integer id) throws Exception {
+	public AuthorizeStatusDTO autorize(Integer id, HotelOfferRequestDTO filter) throws Exception {
+
+		if (this.hotelOfferEJB.hasQuota(id, filter)) {
+			
+		} else {
+			throw new Exception("No hay cupos disponibles.");
+		}
 		
-		//TODO MANDAR A AUTORIZAR AL WEBSERVICE SOAP
+		// TODO MANDAR A AUTORIZAR AL WEBSERVICE SOAP
 		AuthorizeStatusDTO dto = new AuthorizeStatusDTO();
 		dto.setStatus(Boolean.TRUE);
 		return dto;
 	}
-	
+
 	@Override
 	public List<HotelOfferHeaderDTO> search(HotelOfferRequestDTO hotelOfferRequest) throws Exception {
 		List<HotelOffer> hotelOffers = this.hotelOfferEJB.search(hotelOfferRequest);

@@ -20,5 +20,5 @@ public interface HotelOfferManagerRemote {
 
 	List<RoomDTO> searchOtherRooms(HotelOfferOtherRoomsRequestDTO request) throws Exception;
 
-	AuthorizeStatusDTO autorize(Integer id) throws Exception;
+	AuthorizeStatusDTO autorize(Integer id, HotelOfferRequestDTO filter) throws Exception;
 }

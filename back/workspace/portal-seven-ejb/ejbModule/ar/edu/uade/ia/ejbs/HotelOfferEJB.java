@@ -82,6 +82,10 @@ public class HotelOfferEJB {
 		return query.getResultList();
 	}
 
+	public Boolean hasQuota(Integer hotelOfferId, HotelOfferRequestDTO filter) {
+		return Boolean.TRUE;
+	}
+	
 	public HotelOffer getDetail(Integer id) {
 		return this.em.find(HotelOffer.class, id);
 	}

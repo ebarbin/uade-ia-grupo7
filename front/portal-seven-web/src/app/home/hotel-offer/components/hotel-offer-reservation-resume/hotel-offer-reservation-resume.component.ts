@@ -1,15 +1,19 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { HotelOfferService } from '../../services/hotel-offer.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-hotel-offer-reservation-resume',
   templateUrl: './hotel-offer-reservation-resume.component.html',
   styleUrls: ['./hotel-offer-reservation-resume.component.css']
 })
-export class HotelOfferReservationResumeComponent implements OnInit {
+export class HotelOfferReservationResumeComponent {
 
-  constructor() { }
+  constructor(
+    public hotelOfferService:HotelOfferService,
+    private router:Router) { }
 
-  ngOnInit() {
+  back(){
+    this.router.navigate(['home/hotel-offer']);
   }
-
 }
