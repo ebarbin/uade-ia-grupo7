@@ -28,14 +28,14 @@ import ar.edu.uade.ia.entities.business.Service;
 public class PackageOfferManager {
 
 	private static Mapper mapper = DozerBeanMapperBuilder.buildDefault();
-	
+
 	@EJB
 	private PackageOfferEJB packageOfferEJB;
-	
-    /**
-     * Default constructor. 
-     */
-    public PackageOfferManager() {}
+
+	/**
+	 * Default constructor.
+	 */
+	public PackageOfferManager() {}
 
 	public List<PackageOfferHeaderDTO> search(PackageOfferRequestDTO packageOfferRequestDTO) throws Exception {
 		List<PackageOffer> packageOffers = this.packageOfferEJB.search(packageOfferRequestDTO);
@@ -47,13 +47,18 @@ public class PackageOfferManager {
 		return PackageOfferManager.mapper.map(po, PackageOfferDTO.class);
 	}
 
+	public List<PackageOfferHeaderDTO> searchOtherPackages(Integer packageId, PackageOfferRequestDTO request) {
+		List<PackageOffer> packageOffers = this.packageOfferEJB.searchOtherPackages(packageId, request);
+		return this.convertToListOfPackageOfferHeaderDTO(packageOffers);
+	}
+
 	private List<PackageOfferHeaderDTO> convertToListOfPackageOfferHeaderDTO(List<PackageOffer> packageOffers) {
 		List<PackageOfferHeaderDTO> results = new ArrayList<PackageOfferHeaderDTO>();
-		
+
 		PackageOfferHeaderDTO headerDTO;
 		SimpleNamedDTO namedDTO;
 		ImageDTO imageDTO;
-		
+
 		for (PackageOffer packageOffer : packageOffers) {
 			headerDTO = new PackageOfferHeaderDTO();
 
@@ -70,7 +75,7 @@ public class PackageOfferManager {
 			headerDTO.setPrice(packageOffer.getPrice());
 			headerDTO.setOfferStart(packageOffer.getOfferStart());
 			headerDTO.setOfferEnd(packageOffer.getOfferEnd());
-			
+
 			headerDTO.setImages(new ArrayList<ImageDTO>());
 			for (Image img : packageOffer.getImages()) {
 				imageDTO = new ImageDTO();
@@ -79,7 +84,7 @@ public class PackageOfferManager {
 			}
 			results.add(headerDTO);
 		}
-		
+
 		return results;
 	}
 }

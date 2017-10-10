@@ -1,6 +1,5 @@
 import { AuthorizeStatus } from './../../../../shared/models/authorize-status.model';
 import { HttpErrorResponse } from '@angular/common/http';
-import { HotelOfferOtherRoomsRequest } from './../../models/hotel-offer-other-room-request.model';
 import { HotelOfferService } from './../../services/hotel-offer.service';
 import { Room } from './../../models/room.model';
 import { Component, Inject } from '@angular/core';
@@ -32,8 +31,7 @@ export class HotelOfferDetailComponent {
 
     getOtherRooms(event:MdTabChangeEvent){
       if (event.index == 1 && this.otherRooms.length == 0) {
-        var req:HotelOfferOtherRoomsRequest = new HotelOfferOtherRoomsRequest(this.srv.getSelected());
-        this.srv.searchOtherRooms(req).then((rooms:Room[])=>{
+        this.srv.searchOtherRooms().then((rooms:Room[])=>{
           this.otherRooms = rooms;
         }).catch((res:HttpErrorResponse)=>{
           this.toastr.error('Ha ocurrido un error. Contacte a un administrador.');

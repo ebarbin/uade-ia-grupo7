@@ -33,7 +33,9 @@ export class HotelOfferGridResultComponent implements OnInit, OnDestroy {
   onDetail(hotelOfferHeader:HotelOfferHeader){
     this.hotelOfferService.getDetail(hotelOfferHeader).then((hotelOffer:HotelOffer) =>{
       if (hotelOffer)
-        this.dialog.open(HotelOfferDetailComponent);
+        this.dialog.open(HotelOfferDetailComponent,{
+          width: '850px'
+        });
     }).catch((res:HttpErrorResponse)=>{
       this.toastr.error('Ha ocurrido un error. Contacte a un administrador.');
     });

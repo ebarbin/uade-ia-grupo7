@@ -1,6 +1,16 @@
-<h2 md-dialog-title></h2>
+<h2 md-dialog-title>{{srv.getSelected().description}}</h2>
 <hr style="border-color: black;">
 <md-dialog-content>
+    <h3>Politicas de Cancelación</h3>
+    <p>{{srv.getSelected().cancellationPolicy}}</p>
+    <h3>Imagenes del Paquete</h3>
+    <app-img-gallery [images]="srv.getSelected().images"></app-img-gallery>
+    <hr>
+    <h3>Ubicación</h3>
+        <p>{{srv.getSelected().destination.address.street}}</p>
+        <app-map [address]="srv.getSelected().destination.address"></app-map>
+    <hr>
+    <h3>Otros Paquetes</h3>
 </md-dialog-content>
 <md-dialog-actions align="end">
     <button md-raised-button type="button" color="success" (click)="onReserve()">
