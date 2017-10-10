@@ -18,7 +18,7 @@ import ar.edu.uade.ia.common.dtos.PackageOfferDTO;
 import ar.edu.uade.ia.common.dtos.PackageOfferHeaderDTO;
 import ar.edu.uade.ia.common.dtos.PackageOfferRequestDTO;
 import ar.edu.uade.ia.integrations.backOffice.logging.LoggingJMS;
-import ar.edu.uade.ia.managers.interfaces.PackageOfferManagerLocal;
+import ar.edu.uade.ia.managers.PackageOfferManager;
 import ar.edu.uade.ia.services.response.PortalResponse;
 
 /**
@@ -31,7 +31,7 @@ public class PackageOfferService {
 	private static Logger LOGGER = Logger.getLogger(PackageOfferService.class);
 	 
 	@EJB
-	private PackageOfferManagerLocal packageOfferManager;
+	private PackageOfferManager packageOfferManager;
 	
 	@EJB
 	private LoggingJMS logging;

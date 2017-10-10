@@ -23,7 +23,7 @@ import ar.edu.uade.ia.common.dtos.HotelOfferRequestDTO;
 import ar.edu.uade.ia.common.dtos.ImageDTO;
 import ar.edu.uade.ia.common.dtos.RoomDTO;
 import ar.edu.uade.ia.integrations.backOffice.logging.LoggingJMS;
-import ar.edu.uade.ia.managers.interfaces.HotelOfferManagerLocal;
+import ar.edu.uade.ia.managers.HotelOfferManager;
 import ar.edu.uade.ia.services.response.PortalResponse;
 
 @Path("/hotel-offer")
@@ -33,7 +33,7 @@ public class HotelOfferService {
 	private static Logger LOGGER = Logger.getLogger(HotelOfferService.class);
 	
 	@EJB
-	private HotelOfferManagerLocal hotelOfferManager;
+	private HotelOfferManager hotelOfferManager;
 
 	@EJB
 	private LoggingJMS logging;

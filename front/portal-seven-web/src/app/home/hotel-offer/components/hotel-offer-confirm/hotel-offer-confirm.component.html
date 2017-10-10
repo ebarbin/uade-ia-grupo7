@@ -3,7 +3,7 @@
 <md-dialog-content>
   <h2>{{srv.getSelected().hotel.name}}</h2>
   <p>Habitación tipo: {{srv.getSelected().room.type}}</p>
-  <p>Precio Final: {{srv.getSelected().price | currency:'ARS':true}}</p>
+  <p><b>Precio Total: {{srv.getSelected().price | currency:'ARS':true}}</b></p>
   <p>Medios de Pago: {{srv.getSelected().hotel.paymentMethods | join: ' - '}}</p>
 </md-dialog-content>
 <md-dialog-actions align="center">

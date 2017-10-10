@@ -11,25 +11,23 @@ import ar.edu.uade.ia.common.dtos.SimpleNamedDTO;
 import ar.edu.uade.ia.ejbs.common.AutocompleteEJB;
 import ar.edu.uade.ia.entities.business.Destination;
 import ar.edu.uade.ia.entities.business.Hotel;
-import ar.edu.uade.ia.managers.interfaces.common.AutocompleteManagerLocal;
-import ar.edu.uade.ia.managers.interfaces.common.AutocompleteManagerRemote;
 
 /**
  * Session Bean implementation class HotelAutocompleteManager
  */
 @Stateless
 @LocalBean
-public class AutocompleteManager implements AutocompleteManagerRemote, AutocompleteManagerLocal {
+public class AutocompleteManager {
 
 	@EJB
 	private AutocompleteEJB autocompleteEJB;
 
-    /**
-     * Default constructor. 
-     */
-    public AutocompleteManager() {}
+	/**
+	 * Default constructor.
+	 */
+	public AutocompleteManager() {
+	}
 
-	@Override
 	public List<SimpleNamedDTO> queryHotels(String value, Integer limit) throws Exception {
 		List<SimpleNamedDTO> results = new ArrayList<SimpleNamedDTO>();
 		List<Hotel> hotels = this.autocompleteEJB.hotelQuery(value, limit);
@@ -43,7 +41,6 @@ public class AutocompleteManager implements AutocompleteManagerRemote, Autocompl
 		return results;
 	}
 
-	@Override
 	public List<SimpleNamedDTO> queryDestinations(String value, Integer limit) throws Exception {
 		List<SimpleNamedDTO> results = new ArrayList<SimpleNamedDTO>();
 		List<Destination> destinations = this.autocompleteEJB.destinationQuery(value, limit);

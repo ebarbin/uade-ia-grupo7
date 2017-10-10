@@ -14,7 +14,7 @@ import javax.ws.rs.core.Response;
 import org.jboss.logging.Logger;
 
 import ar.edu.uade.ia.common.dtos.PortalUserDTO;
-import ar.edu.uade.ia.managers.interfaces.common.PortalUserManagerLocal;
+import ar.edu.uade.ia.managers.common.PortalUserManager;
 import ar.edu.uade.ia.services.response.PortalResponse;
 
 @Path("/portal-user")
@@ -24,7 +24,7 @@ public class PortalUserService {
 	private static Logger LOGGER = Logger.getLogger(PortalUserService.class);
 	
 	@EJB
-	private PortalUserManagerLocal portalUserManager;
+	private PortalUserManager portalUserManager;
 
 	@GET
 	@Path("/{userName}")

@@ -20,8 +20,8 @@ import org.jboss.resteasy.plugins.providers.multipart.MultipartFormDataInput;
 
 import ar.edu.uade.ia.common.dtos.ImageDTO;
 import ar.edu.uade.ia.common.dtos.PortalUserDTO;
-import ar.edu.uade.ia.managers.interfaces.common.ImageManagerLocal;
-import ar.edu.uade.ia.managers.interfaces.common.PortalUserManagerLocal;
+import ar.edu.uade.ia.managers.common.ImageManager;
+import ar.edu.uade.ia.managers.common.PortalUserManager;
 import ar.edu.uade.ia.services.response.PortalResponse;
 
 @Path("/image")
@@ -31,10 +31,10 @@ public class ImageService {
 	private static Logger LOGGER = Logger.getLogger(ImageService.class);
 	
 	@EJB
-	private ImageManagerLocal imageManager;
+	private ImageManager imageManager;
 
 	@EJB
-	private PortalUserManagerLocal userManager;
+	private PortalUserManager userManager;
 	
 	@GET
 	@Path("/{id}")

@@ -9,7 +9,7 @@
     <md-card-content>
         <h2>{{hotelOfferService.getSelected().hotel.name}}</h2>
         <p>Habitación tipo: {{hotelOfferService.getSelected().room.type}}</p>
-        <p>Precio Final: {{hotelOfferService.getSelected().price | currency:'ARS':true}}</p>
+        <p><b>Precio Total: {{hotelOfferService.getSelected().price | currency:'ARS':true}}</b></p>
         <p>Medios de Pago: {{hotelOfferService.getSelected().hotel.paymentMethods | join: ' - '}}</p>
     </md-card-content>
     <md-card-actions align="center">

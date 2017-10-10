@@ -19,15 +19,13 @@ import ar.edu.uade.ia.ejbs.PackageOfferEJB;
 import ar.edu.uade.ia.entities.business.Image;
 import ar.edu.uade.ia.entities.business.PackageOffer;
 import ar.edu.uade.ia.entities.business.Service;
-import ar.edu.uade.ia.managers.interfaces.PackageOfferManagerLocal;
-import ar.edu.uade.ia.managers.interfaces.PackageOfferManagerRemote;
 
 /**
  * Session Bean implementation class PackageOfferManager
  */
 @Stateless
 @LocalBean
-public class PackageOfferManager implements PackageOfferManagerRemote, PackageOfferManagerLocal {
+public class PackageOfferManager {
 
 	private static Mapper mapper = DozerBeanMapperBuilder.buildDefault();
 	
@@ -39,13 +37,11 @@ public class PackageOfferManager implements PackageOfferManagerRemote, PackageOf
      */
     public PackageOfferManager() {}
 
-	@Override
 	public List<PackageOfferHeaderDTO> search(PackageOfferRequestDTO packageOfferRequestDTO) throws Exception {
 		List<PackageOffer> packageOffers = this.packageOfferEJB.search(packageOfferRequestDTO);
 		return this.convertToListOfPackageOfferHeaderDTO(packageOffers);
 	}
 
-	@Override
 	public PackageOfferDTO getDetail(Integer id) throws Exception {
 		PackageOffer po = this.packageOfferEJB.getDetail(id);
 		return PackageOfferManager.mapper.map(po, PackageOfferDTO.class);

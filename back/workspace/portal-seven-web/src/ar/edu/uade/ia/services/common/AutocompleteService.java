@@ -11,7 +11,7 @@ import javax.ws.rs.core.Response;
 
 import org.jboss.logging.Logger;
 
-import ar.edu.uade.ia.managers.interfaces.common.AutocompleteManagerLocal;
+import ar.edu.uade.ia.managers.common.AutocompleteManager;
 import ar.edu.uade.ia.services.response.PortalResponse;
 
 @Path("/autocomplete")
@@ -21,7 +21,7 @@ public class AutocompleteService {
 	private static Logger LOGGER = Logger.getLogger(AutocompleteService.class);
 	
 	@EJB
-	private AutocompleteManagerLocal autocompleteManager;
+	private AutocompleteManager autocompleteManager;
 	
 	@GET
 	@Path("/hotel/{value}/{limit}")

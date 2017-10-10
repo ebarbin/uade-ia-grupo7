@@ -12,15 +12,13 @@ import ar.edu.uade.ia.ejbs.common.ImageEJB;
 import ar.edu.uade.ia.ejbs.common.PortalUserEJB;
 import ar.edu.uade.ia.entities.business.Image;
 import ar.edu.uade.ia.entities.business.PortalUser;
-import ar.edu.uade.ia.managers.interfaces.common.ImageManagerLocal;
-import ar.edu.uade.ia.managers.interfaces.common.ImageManagerRemote;
 
 /**
  * Session Bean implementation class ImageManager
  */
 @Stateless
 @LocalBean
-public class ImageManager implements ImageManagerRemote, ImageManagerLocal {
+public class ImageManager {
 
 	private static Mapper mapper = DozerBeanMapperBuilder.buildDefault();
 
@@ -36,13 +34,11 @@ public class ImageManager implements ImageManagerRemote, ImageManagerLocal {
 	public ImageManager() {
 	}
 
-	@Override
 	public ImageDTO getById(Integer id) throws Exception {
 		Image image = this.imageEJB.getById(id);
 		return ImageManager.mapper.map(image, ImageDTO.class);
 	}
 
-	@Override
 	public ImageDTO save(Integer userId, byte[] bytes) throws Exception {
 		PortalUser user = this.userEJB.getById(userId);
 		if (user.getImage() != null) {

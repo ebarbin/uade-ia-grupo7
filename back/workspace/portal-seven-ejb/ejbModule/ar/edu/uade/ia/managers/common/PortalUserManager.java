@@ -12,15 +12,13 @@ import ar.edu.uade.ia.ejbs.common.ImageEJB;
 import ar.edu.uade.ia.ejbs.common.PortalUserEJB;
 import ar.edu.uade.ia.entities.business.Image;
 import ar.edu.uade.ia.entities.business.PortalUser;
-import ar.edu.uade.ia.managers.interfaces.common.PortalUserManagerLocal;
-import ar.edu.uade.ia.managers.interfaces.common.PortalUserManagerRemote;
 
 /**
  * Session Bean implementation class UserManager
  */
 @Stateless
 @LocalBean
-public class PortalUserManager implements PortalUserManagerRemote, PortalUserManagerLocal {
+public class PortalUserManager {
 
 	private static Mapper mapper = DozerBeanMapperBuilder.buildDefault();
 
@@ -33,9 +31,9 @@ public class PortalUserManager implements PortalUserManagerRemote, PortalUserMan
 	/**
 	 * Default constructor.
 	 */
-	public PortalUserManager() {}
+	public PortalUserManager() {
+	}
 
-	@Override
 	public PortalUserDTO login(String userName) throws Exception {
 		PortalUser user = this.userEJB.login(userName);
 		PortalUserDTO userDTO = PortalUserManager.mapper.map(user, PortalUserDTO.class);
@@ -44,18 +42,16 @@ public class PortalUserManager implements PortalUserManagerRemote, PortalUserMan
 		return userDTO;
 	}
 
-	@Override
 	public PortalUserDTO update(Integer id, PortalUserDTO portalUserDTO) throws Exception {
 		PortalUser portalUser = this.userEJB.getById(id);
 		portalUser.setEmail(portalUserDTO.getEmail());
 		portalUser.setFirstName(portalUserDTO.getFirstName());
 		portalUser.setSureName(portalUserDTO.getSureName());
 		portalUser = this.userEJB.update(portalUser);
-		
+
 		return PortalUserManager.mapper.map(portalUser, PortalUserDTO.class);
 	}
 
-	@Override
 	public PortalUserDTO addImage(Integer userId, byte[] bytes) throws Exception {
 		PortalUser user = this.userEJB.getById(userId);
 
@@ -68,9 +64,8 @@ public class PortalUserManager implements PortalUserManagerRemote, PortalUserMan
 		return PortalUserManager.mapper.map(user, PortalUserDTO.class);
 	}
 
-	@Override
 	public PortalUserDTO create(PortalUserDTO userDTO) throws Exception {
-		if(this.userEJB.getByUsername(userDTO.getUserName()) == null) {
+		if (this.userEJB.getByUsername(userDTO.getUserName()) == null) {
 			PortalUser portalUser = PortalUserManager.mapper.map(userDTO, PortalUser.class);
 			this.userEJB.create(portalUser);
 			return PortalUserManager.mapper.map(portalUser, PortalUserDTO.class);

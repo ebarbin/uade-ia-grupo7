@@ -23,15 +23,13 @@ import ar.edu.uade.ia.entities.business.HotelOffer;
 import ar.edu.uade.ia.entities.business.Image;
 import ar.edu.uade.ia.entities.business.Room;
 import ar.edu.uade.ia.entities.business.Service;
-import ar.edu.uade.ia.managers.interfaces.HotelOfferManagerLocal;
-import ar.edu.uade.ia.managers.interfaces.HotelOfferManagerRemote;
 
 /**
  * Session Bean implementation class HotelOfferManager
  */
 @Stateless
 @LocalBean
-public class HotelOfferManager implements HotelOfferManagerRemote, HotelOfferManagerLocal {
+public class HotelOfferManager {
 
 	private static Mapper mapper = DozerBeanMapperBuilder.buildDefault();
 
@@ -44,34 +42,30 @@ public class HotelOfferManager implements HotelOfferManagerRemote, HotelOfferMan
 	public HotelOfferManager() {
 	}
 
-	@Override
 	public AuthorizeStatusDTO autorize(Integer id, HotelOfferRequestDTO filter) throws Exception {
 
 		if (this.hotelOfferEJB.hasQuota(id, filter)) {
-			
+
 		} else {
 			throw new Exception("No hay cupos disponibles.");
 		}
-		
+
 		// TODO MANDAR A AUTORIZAR AL WEBSERVICE SOAP
 		AuthorizeStatusDTO dto = new AuthorizeStatusDTO();
 		dto.setStatus(Boolean.TRUE);
 		return dto;
 	}
 
-	@Override
 	public List<HotelOfferHeaderDTO> search(HotelOfferRequestDTO hotelOfferRequest) throws Exception {
 		List<HotelOffer> hotelOffers = this.hotelOfferEJB.search(hotelOfferRequest);
 		return this.convertToListOfHotelOfferHeaderDTO(hotelOffers);
 	}
 
-	@Override
 	public List<RoomDTO> searchOtherRooms(HotelOfferOtherRoomsRequestDTO request) throws Exception {
 		List<HotelOffer> hotelOffers = this.hotelOfferEJB.searchOtherRooms(request);
 		return this.converToRoomDTOList(hotelOffers);
 	}
 
-	@Override
 	public HotelOfferDTO getDetail(Integer id) throws Exception {
 		HotelOffer ho = this.hotelOfferEJB.getDetail(id);
 		return HotelOfferManager.mapper.map(ho, HotelOfferDTO.class);
