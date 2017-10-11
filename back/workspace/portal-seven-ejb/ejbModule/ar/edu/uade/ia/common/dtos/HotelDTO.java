@@ -17,8 +17,6 @@ public class HotelDTO implements Serializable {
 	
 	private AddressDTO address;
 	
-	private List<RoomDTO>rooms;
-	
 	private List<SimpleNamedDTO>services;
 	
 	private List<SimpleNamedDTO>paymentMethods;
@@ -63,14 +61,6 @@ public class HotelDTO implements Serializable {
 
 	public void setDescription(String description) {
 		this.description = description;
-	}
-
-	public List<RoomDTO> getRooms() {
-		return rooms;
-	}
-
-	public void setRooms(List<RoomDTO> rooms) {
-		this.rooms = rooms;
 	}
 
 	public List<SimpleNamedDTO> getServices() {

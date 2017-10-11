@@ -9,7 +9,6 @@
   <app-img-gallery [images]="srv.getSelected().hotel.images"></app-img-gallery>
   <hr>
   <h3>Ubicación</h3>
-      <p>{{srv.getSelected().hotel.address.street}}</p>
       <app-map [address]="srv.getSelected().hotel.address"></app-map>
   <hr>
   <div class="col-md-12 tabs-detail">

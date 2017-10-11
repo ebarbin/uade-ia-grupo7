@@ -11,7 +11,6 @@ export class Hotel {
         public name: string,
         public description: string,
         public address:Address,
-        public rooms: Room[],
         public services: SimpleNamed[],
         public paymentMethods: SimpleNamed[]){}
 }
