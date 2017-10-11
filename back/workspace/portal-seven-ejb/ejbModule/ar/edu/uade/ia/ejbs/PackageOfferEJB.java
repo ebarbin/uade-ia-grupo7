@@ -31,7 +31,7 @@ public class PackageOfferEJB {
 	@SuppressWarnings("unchecked")
 	public List<PackageOffer> search(PackageOfferRequestDTO request) throws Exception {
 		
-		Integer idDestination = request.getDestination() != null ? request.getDestination().getId() : null;
+		Integer destinationId = request.getDestination() != null ? request.getDestination().getId() : null;
 		Date dateFrom = request.getFromDate();
 		Date dateTo = request.getToDate();
 		Integer quantityPeople = request.getQuantityPeople();
@@ -41,8 +41,8 @@ public class PackageOfferEJB {
 		queryBuilder.append(" inner join pkOf.destination as dest");
 		queryBuilder.append(" where 1 = 1");
 		
-		if (idDestination != null)
-			queryBuilder.append(" and dest.id = :idDestination");
+		if (destinationId != null)
+			queryBuilder.append(" and dest.id = :destinationId");
 		if (dateFrom != null && dateTo != null)
 			queryBuilder.append(" and pkOf.offerStart >= :dateFrom and pkOf.offerEnd <= :dateTo");
 		if (dateFrom != null && dateTo == null)
@@ -54,8 +54,8 @@ public class PackageOfferEJB {
 		
 		
 		Query query = this.em.createQuery(queryBuilder.toString());
-		if (idDestination != null)
-			query.setParameter("idDestination", idDestination);
+		if (destinationId != null)
+			query.setParameter("destinationId", destinationId);
 		if (quantityPeople != null)
 			query.setParameter("quantityPeople", quantityPeople);
 		if (dateFrom != null && dateTo != null) {
@@ -72,5 +72,42 @@ public class PackageOfferEJB {
 	
 	public PackageOffer getDetail(Integer id) throws Exception {
 		return this.em.find(PackageOffer.class, id);
+	}
+
+	@SuppressWarnings("unchecked")
+	public List<PackageOffer> searchOtherPackages(Integer packageId, PackageOfferRequestDTO request) {
+		Integer destinationId = request.getDestination().getId();
+		
+		Date dateFrom = request.getFromDate();
+		Date dateTo = request.getToDate();
+		
+		StringBuffer queryBuilder = new StringBuffer("select pkOf");
+		queryBuilder.append(" from PackageOffer as pkOf");
+		queryBuilder.append(" inner join pkOf.destination as dest");
+		queryBuilder.append(" where 1 = 1");
+		queryBuilder.append(" and dest.id = :destinationId");
+		queryBuilder.append(" and pkOf.id <> :packageId");
+		
+		if (dateFrom != null && dateTo != null)
+			queryBuilder.append(" and pkOf.offerStart >= :dateFrom and pkOf.offerEnd <= :dateTo");
+		if (dateFrom != null && dateTo == null)
+			queryBuilder.append(" and pkOf.offerStart >= :dateFrom");
+		if (dateFrom == null && dateTo != null)
+			queryBuilder.append(" and pkOf.offerEnd <= :dateTo");
+		
+		
+		Query query = this.em.createQuery(queryBuilder.toString());
+		query.setParameter("destinationId", destinationId);
+		query.setParameter("packageId", packageId);
+		if (dateFrom != null && dateTo != null) {
+			query.setParameter("dateFrom", dateFrom, TemporalType.DATE);
+			query.setParameter("dateTo", dateTo, TemporalType.DATE);
+		} else if (dateFrom != null && dateTo == null) {
+			query.setParameter("dateFrom", dateFrom, TemporalType.DATE);
+		} else if (dateFrom == null && dateTo != null) {
+			query.setParameter("dateTo", dateTo, TemporalType.DATE);
+		}
+		
+		return query.getResultList();
 	}
 }

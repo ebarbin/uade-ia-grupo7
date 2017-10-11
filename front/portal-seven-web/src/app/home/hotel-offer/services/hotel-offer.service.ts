@@ -1,7 +1,6 @@
 import { Holder } from './../../../shared/models/holder.interface';
 import { AuthorizeStatus } from './../../../shared/models/authorize-status.model';
 import { Room } from './../models/room.model';
-import { HotelOfferOtherRoomsRequest } from './../models/hotel-offer-other-room-request.model';
 import { Subject } from 'rxjs/Subject';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
@@ -14,6 +13,7 @@ import { HotelOfferHeader } from '../models/hotel-offer-header.model';
 import { PortalResponse } from '../../../shared/models/portal-response.model';
 import { HotelOffer } from '../models/hotel-offer.model';
 import { Router } from '@angular/router';
+import { SimpleNamed } from '../../../shared/models/simple-named.model';
 
 @Injectable()
 export class HotelOfferService implements Holder {
@@ -119,18 +119,22 @@ export class HotelOfferService implements Holder {
       });
     }
 
-    searchOtherRooms(request:HotelOfferOtherRoomsRequest):Promise<Room[]>{
-      request.fromDate = this.filterRequest.fromDate;
-      request.toDate = this.filterRequest.toDate;
-      return this.httpClient.post('portal-seven-web/api/rest/hotel-offer/search/other-rooms', request)
-        .map((response:PortalResponse)=>{
-          if(response.success) {
-            return <Room[]>response.data;
-          } else {
-            this.toastr.error(response.errorMessage);
-            return [];
-          }
-        }).toPromise();
+    searchOtherRooms():Promise<Room[]>{
+      if(!this.filterRequest.hotel)
+        this.filterRequest.hotel = new SimpleNamed(this.hotelOffer.hotel.id, '');
+
+      return this.httpClient
+        .put('portal-seven-web/api/rest/hotel-offer/search/other-rooms/'+ 
+          this.hotelOffer.room.id, 
+          this.filterRequest)
+            .map((response:PortalResponse)=>{
+              if(response.success) {
+                return <Room[]>response.data;
+              } else {
+                this.toastr.error(response.errorMessage);
+                return [];
+              }
+            }).toPromise();
     }
 
     authorizeReservation():Promise<AuthorizeStatus>{

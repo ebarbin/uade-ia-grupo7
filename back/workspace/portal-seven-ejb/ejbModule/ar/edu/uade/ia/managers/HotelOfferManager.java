@@ -13,7 +13,6 @@ import org.dozer.Mapper;
 import ar.edu.uade.ia.common.dtos.AuthorizeStatusDTO;
 import ar.edu.uade.ia.common.dtos.HotelOfferDTO;
 import ar.edu.uade.ia.common.dtos.HotelOfferHeaderDTO;
-import ar.edu.uade.ia.common.dtos.HotelOfferOtherRoomsRequestDTO;
 import ar.edu.uade.ia.common.dtos.HotelOfferRequestDTO;
 import ar.edu.uade.ia.common.dtos.ImageDTO;
 import ar.edu.uade.ia.common.dtos.RoomDTO;
@@ -61,8 +60,8 @@ public class HotelOfferManager {
 		return this.convertToListOfHotelOfferHeaderDTO(hotelOffers);
 	}
 
-	public List<RoomDTO> searchOtherRooms(HotelOfferOtherRoomsRequestDTO request) throws Exception {
-		List<HotelOffer> hotelOffers = this.hotelOfferEJB.searchOtherRooms(request);
+	public List<RoomDTO> searchOtherRooms(Integer roomId, HotelOfferRequestDTO request) {
+		List<HotelOffer> hotelOffers = this.hotelOfferEJB.searchOtherRooms(roomId, request);
 		return this.converToRoomDTOList(hotelOffers);
 	}
 
@@ -70,7 +69,7 @@ public class HotelOfferManager {
 		HotelOffer ho = this.hotelOfferEJB.getDetail(id);
 		return HotelOfferManager.mapper.map(ho, HotelOfferDTO.class);
 	}
-
+    
 	private List<RoomDTO> converToRoomDTOList(List<HotelOffer> hotelOffers) {
 
 		List<RoomDTO> results = new ArrayList<RoomDTO>();

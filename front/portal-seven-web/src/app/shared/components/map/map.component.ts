@@ -1,5 +1,6 @@
-import { Address } from './../../../home/hotel-offer/models/address.model';
+
 import { Component, OnInit, Input } from '@angular/core';
+import { Address } from '../../models/address.model';
 
 @Component({
   selector: 'app-map',

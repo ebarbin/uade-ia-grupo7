@@ -25,7 +25,9 @@ export class PackageOfferCardResultComponent {
     onDetail(packageOfferHeader:PackageOfferHeader){
       this.packageOfferService.getDetail(packageOfferHeader).then((packageOffer:PackageOffer)=>{
         if(packageOffer)
-          this.dialog.open(PackageOfferDetailComponent);
+          this.dialog.open(PackageOfferDetailComponent,{
+            width: '850px'
+          });
       }).catch((res:HttpErrorResponse)=>{
         this.toastr.error('Ha ocurrido un error. Contacte a un administrador.');
       });

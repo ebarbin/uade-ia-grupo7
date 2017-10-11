@@ -8,6 +8,7 @@ import { PackageOfferRequest } from './../models/package-offer-request.model';
 import { PackageOfferHeader } from './../models/package-offer-header.model';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+import { SimpleNamed } from '../../../shared/models/simple-named.model';
 
 @Injectable()
 export class PackageOfferService implements Holder {
@@ -112,6 +113,25 @@ export class PackageOfferService implements Holder {
       }).catch((res:HttpErrorResponse) => {
         this.toastr.error('Ha ocurrido un error. Contacte a un administrador.');
       });
+  }
+
+  searchOtherPackages():Promise<PackageOfferHeader[]>{
+
+    if(!this.filterRequest.destination)
+      this.filterRequest.destination = new SimpleNamed(this.packageOffer.destination.id, '');
+
+    return this.httpClient
+      .put('portal-seven-web/api/rest/package-offer/search/other-packages/'+ 
+        this.packageOffer.id, 
+        this.filterRequest)
+          .map((response:PortalResponse)=>{
+            if(response.success) {
+              return <PackageOfferHeader[]>response.data;
+            } else {
+              this.toastr.error(response.errorMessage);
+              return [];
+            }
+          }).toPromise();
   }
 
   private compare(a, b, isAsc) {

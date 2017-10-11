@@ -1,7 +1,7 @@
 import { SimpleNamed } from './../../../shared/models/simple-named.model';
 import { Room } from './room.model';
-import { Address } from './address.model';
 import { Image } from '../../../shared/models/image.model';
+import { Address } from '../../../shared/models/address.model';
 
 export class Hotel {
 

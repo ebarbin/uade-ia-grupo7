@@ -18,7 +18,6 @@ import org.jboss.logging.Logger;
 import ar.edu.uade.ia.common.dtos.AuthorizeStatusDTO;
 import ar.edu.uade.ia.common.dtos.HotelOfferDTO;
 import ar.edu.uade.ia.common.dtos.HotelOfferHeaderDTO;
-import ar.edu.uade.ia.common.dtos.HotelOfferOtherRoomsRequestDTO;
 import ar.edu.uade.ia.common.dtos.HotelOfferRequestDTO;
 import ar.edu.uade.ia.common.dtos.ImageDTO;
 import ar.edu.uade.ia.common.dtos.RoomDTO;
@@ -52,12 +51,12 @@ public class HotelOfferService {
 		}
 	}
 
-	@POST
-	@Path("/search/other-rooms")
+	@PUT
+	@Path("/search/other-rooms/{roomId}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response searchOtherRooms(HotelOfferOtherRoomsRequestDTO request) {
+	public Response searchOtherRooms(@PathParam("roomId") Integer roomId, HotelOfferRequestDTO request) {
 		try {
-			List<RoomDTO> result = this.hotelOfferManager.searchOtherRooms(request);
+			List<RoomDTO> result = this.hotelOfferManager.searchOtherRooms(roomId, request);
 			return Response.ok(new PortalResponse(result)).build();
 		} catch (Exception e) {
 			HotelOfferService.LOGGER.error(e.getMessage(), e);

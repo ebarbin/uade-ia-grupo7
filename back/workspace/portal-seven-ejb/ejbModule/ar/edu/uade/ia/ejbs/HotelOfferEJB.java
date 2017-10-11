@@ -10,7 +10,6 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.persistence.TemporalType;
 
-import ar.edu.uade.ia.common.dtos.HotelOfferOtherRoomsRequestDTO;
 import ar.edu.uade.ia.common.dtos.HotelOfferRequestDTO;
 import ar.edu.uade.ia.entities.business.HotelOffer;
 
@@ -44,7 +43,7 @@ public class HotelOfferEJB {
 		// Quota cuyo cupo diario supere o iguale la cantidad de habitaciones del filtro
 		// Quota cuya capacidad de personas de habitacion de la oferta sea superior o
 		// igual a cantidad de personas del filtro
-		// Debe haber al menos 1 Quota por día en el período del filtro
+		// Debe haber al menos 1 Quota por dï¿½a en el perï¿½odo del filtro
 		
 		StringBuffer queryBuilder = new StringBuffer("select ofe");
 		queryBuilder.append(" from HotelOffer as ofe");
@@ -126,12 +125,10 @@ public class HotelOfferEJB {
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<HotelOffer> searchOtherRooms(HotelOfferOtherRoomsRequestDTO request) throws Exception {
-		
-		Integer idHotel = request.getHotel().getId();
+	public List<HotelOffer> searchOtherRooms(Integer roomId, HotelOfferRequestDTO request) {
+		Integer hotelId = request.getHotel().getId();
 		Date dateFrom = request.getFromDate();
 		Date dateTo = request.getToDate();
-		Integer idRoom = request.getRoom().getId();
 		
 		// Quota cuyo dia este dentro del rango del filtro
 		// Quota cuyo hotel de su oferta coincida con el hotel del filtro
@@ -144,8 +141,8 @@ public class HotelOfferEJB {
 		queryBuilder.append(" inner join ofe.hotel ho");
 		queryBuilder.append(" inner join ofe.room ro");
 		queryBuilder.append(" where 1 = 1");
-		queryBuilder.append(" and ho.id = :idHotel");
-		queryBuilder.append(" and ro.id <> :idRoom");
+		queryBuilder.append(" and ho.id = :hotelId");
+		queryBuilder.append(" and ro.id <> :roomId");
 		
 		if (dateFrom != null && dateTo != null)
 			queryBuilder.append(" and quo.quotaDate between :dateFrom and :dateTo");
@@ -155,10 +152,10 @@ public class HotelOfferEJB {
 			queryBuilder.append(" and quo.quotaDate <= :dateTo");
 
 		Query query = this.em.createQuery(queryBuilder.toString());
-		if (idHotel != null)
-			query.setParameter("idHotel", idHotel);
-		if (idRoom != null)
-			query.setParameter("idRoom", idRoom);
+		if (hotelId != null)
+			query.setParameter("hotelId", hotelId);
+		if (roomId != null)
+			query.setParameter("roomId", roomId);
 		if (dateFrom != null && dateTo != null) {
 			query.setParameter("dateFrom", dateFrom, TemporalType.DATE);
 			query.setParameter("dateTo", dateTo, TemporalType.DATE);
@@ -170,5 +167,4 @@ public class HotelOfferEJB {
 
 		return query.getResultList();
 	}
-
 }
