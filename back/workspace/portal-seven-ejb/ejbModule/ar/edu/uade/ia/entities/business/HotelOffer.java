@@ -2,6 +2,7 @@ package ar.edu.uade.ia.entities.business;
 
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
@@ -13,20 +14,20 @@ public class HotelOffer extends PersistentObject {
 
 	private static final long serialVersionUID = -5955498653697555495L;
 
-	@Column(name="offer_start")
+	@Column(name = "offer_start")
 	private Date offerStart;
-	
-	@Column(name="offer_end")
+
+	@Column(name = "offer_end")
 	private Date offerEnd;
-	
+
 	private Float price;
 
 	private String cancellationPolicy;
 
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.ALL)
 	private Hotel hotel;
 
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.ALL)
 	private Room room;
 
 	public Hotel getHotel() {

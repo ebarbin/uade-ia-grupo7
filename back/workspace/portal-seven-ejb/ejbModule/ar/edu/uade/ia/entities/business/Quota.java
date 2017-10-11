@@ -2,6 +2,7 @@ package ar.edu.uade.ia.entities.business;
 
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -11,13 +12,13 @@ import javax.persistence.Table;
 public class Quota extends PersistentObject {
 
 	private static final long serialVersionUID = 7791774625364655871L;
-	
+
 	private Date quotaDate;
-	
-	@ManyToOne
+
+	@ManyToOne(cascade = CascadeType.ALL)
 	private HotelOffer offer;
-	
-	private Integer  availableQuota;
+
+	private Integer availableQuota;
 
 	public Date getQuotaDate() {
 		return quotaDate;

@@ -19,7 +19,7 @@ import ar.edu.uade.ia.integrations.hotelOffer.producer.interfaces.HotelOfferProd
 @LocalBean
 public class HotelOfferProducer implements HotelOfferProducerRemote, HotelOfferProducerLocal {
 
-	@Resource(lookup = "java:/queue/PackageOfferQueue")
+	@Resource(lookup = "java:/queue/HotelOfferQueue")
 	private Queue queue;
 
 	@Inject

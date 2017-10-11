@@ -2,7 +2,9 @@ package ar.edu.uade.ia.integrations.hotelOffer;
 
 import java.io.BufferedInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.FileNotFoundException;
 import java.io.InputStream;
+import java.net.ConnectException;
 import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -30,7 +32,6 @@ import ar.edu.uade.ia.ejbs.QuotaEJB;
 import ar.edu.uade.ia.ejbs.ServiceEJB;
 import ar.edu.uade.ia.ejbs.common.ImageEJB;
 import ar.edu.uade.ia.entities.business.Address;
-import ar.edu.uade.ia.entities.business.Destination;
 import ar.edu.uade.ia.entities.business.Hotel;
 import ar.edu.uade.ia.entities.business.HotelOffer;
 import ar.edu.uade.ia.entities.business.Image;
@@ -51,7 +52,7 @@ public class HotelOfferQueueListener implements MessageListener {
 
 	private static Logger LOGGER = Logger.getLogger(HotelOfferQueueListener.class);
 
-	private static SimpleDateFormat DateFormatter = new SimpleDateFormat("YYYYMMDD");
+	private static SimpleDateFormat DateFormatter = new SimpleDateFormat("yyyyMMdd");
 
 	@EJB
 	private LoggingJMS logging;
@@ -73,7 +74,7 @@ public class HotelOfferQueueListener implements MessageListener {
 
 	@EJB
 	private PaymentMethodEJB paymentMethodEJB;
-	
+
 	@EJB
 	private QuotaEJB quotaEJB;
 
@@ -105,9 +106,6 @@ public class HotelOfferQueueListener implements MessageListener {
 
 				this.addHotelImage(hotel, hom.getFoto_hotel());
 
-				this.addHotelDestination(hotel, hom.getDestino(), hom.getLatitud(), hom.getLongitud());
-
-				// TODO Verificar pues tenemos la direccion en el destino tambien.
 				this.addHotelAddress(hotel, hom.getLatitud(), hom.getLongitud());
 
 				this.addHotelPaymentMethods(hotel, hom.getMedio_pago_hotel());
@@ -117,16 +115,15 @@ public class HotelOfferQueueListener implements MessageListener {
 
 			Date startDate = HotelOfferQueueListener.DateFormatter.parse(hom.getFecha_desde());
 			Date endDate = HotelOfferQueueListener.DateFormatter.parse(hom.getFecha_hasta());
-			
+
 			HotelOffer hotelOffer = new HotelOffer();
 			hotelOffer.setCancellationPolicy(hom.getPolitica_cancelacion());
 			hotelOffer.setHotel(hotel);
 			hotelOffer.setPrice(hom.getPrecio_habitacion()); // Es Correcto?
 			hotelOffer.setOfferStart(startDate);
 			hotelOffer.setOfferEnd(endDate);
-			
 
-			//TODO Vuelve a crear una habitacion por cada oferta???
+			// TODO Vuelve a crear una habitacion por cada oferta???
 			Room room = new Room();
 			room.setCapacity(hom.getCantidad_personas());
 			room.setDescription(hom.getDescripcion_habitacion());
@@ -139,20 +136,20 @@ public class HotelOfferQueueListener implements MessageListener {
 			hotelOffer.setRoom(room);
 
 			Calendar date = Calendar.getInstance();
-			date.getTime().setTime(startDate.getTime());
-			
+			date.setTime(startDate);
+
 			Quota quota;
-			while (date.getTime().before(endDate)){
+			while (date.getTime().before(endDate) || date.getTime().equals(endDate)) {
 				quota = new Quota();
 				quota.setOffer(hotelOffer);
 				quota.setAvailableQuota(hom.getCupo());
 				quota.setQuotaDate(date.getTime());
 				this.quotaEJB.add(quota);
-				
-		        date.add(Calendar.DATE, 1);
-		    }
-			
-			 //TODO Persiste todo en cascada?
+
+				date.add(Calendar.DATE, 1);
+			}
+
+			// TODO Persiste todo en cascada?
 
 			this.logging.info(LoggingAction.HOTEL_OFFER_REGISTRATION);
 		} catch (Exception e) {
@@ -210,61 +207,57 @@ public class HotelOfferQueueListener implements MessageListener {
 		hotel.setAddress(address);
 	}
 
-	private void addHotelDestination(Hotel hotel, String destinationName, float latitud, float longitud)
-			throws Exception {
-		Destination destination = this.destinationEJB.getByName(destinationName);
-		if (destination == null) {
-			destination = new Destination();
-			destination.setName(destinationName);
-			Address address = this.addressEJB.getByLatAndLng(latitud, longitud);
-			if (address == null) {
-				address = new Address();
-				address.setLat(latitud);
-				address.setLng(longitud);
-			}
-			destination.setAddress(address);
-		}
-		hotel.setDestination(destination);
-	}
-
 	private void addRoomImage(Room room, String url) throws Exception {
 		room.setImages(new ArrayList<Image>());
 		Image image = this.imageEJB.getByUrl(url);
 		if (image == null) {
-			image = new Image();
 			byte[] data = this.downloadImage(url);
-			image.setData(data);
-			image.setUrl(url);
-			image.setDescription("Room");
+			if (data != null) {
+				image = new Image();
+				image.setData(data);
+				image.setUrl(url);
+				image.setDescription("Room");
+				room.getImages().add(image);
+			}
+		} else {
+			room.getImages().add(image);
 		}
-		room.getImages().add(image);
 	}
 
 	private void addHotelImage(Hotel hotel, String url) throws Exception {
 		hotel.setImages(new ArrayList<Image>());
 		Image image = this.imageEJB.getByUrl(url);
 		if (image == null) {
-			image = new Image();
 			byte[] data = this.downloadImage(url);
-			image.setData(data);
-			image.setUrl(url);
-			image.setDescription("Hotel");
+			if (data != null) {
+				image = new Image();
+				image.setData(data);
+				image.setUrl(url);
+				image.setDescription("Hotel");
+				hotel.getImages().add(image);
+			}
+		} else {
+			hotel.getImages().add(image);
 		}
-		hotel.getImages().add(image);
 	}
 
 	private byte[] downloadImage(String urlStr) throws Exception {
-		URL url = new URL(urlStr);
-		InputStream in = new BufferedInputStream(url.openStream());
-		ByteArrayOutputStream out = new ByteArrayOutputStream();
-		byte[] buf = new byte[1024];
-		int n = 0;
-		while (-1 != (n = in.read(buf)))
-			out.write(buf, 0, n);
-		out.close();
-		in.close();
+		try {
+			URL url = new URL(urlStr);
+			InputStream in = new BufferedInputStream(url.openStream());
+			ByteArrayOutputStream out = new ByteArrayOutputStream();
+			byte[] buf = new byte[1024];
+			int n = 0;
+			while (-1 != (n = in.read(buf)))
+				out.write(buf, 0, n);
+			out.close();
+			in.close();
 
-		return out.toByteArray();
+			return out.toByteArray();
+		} catch (ConnectException | FileNotFoundException e) {
+			HotelOfferQueueListener.LOGGER.error("Error al descargar la imagen: " + e.getMessage(), e);
+			return null;
+		}
 	}
 
 }
