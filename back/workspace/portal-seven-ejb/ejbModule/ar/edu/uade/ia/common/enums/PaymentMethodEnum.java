@@ -1,6 +1,6 @@
 package ar.edu.uade.ia.common.enums;
 
-public enum PaymentMethod {
+public enum PaymentMethodEnum {
 
 	CREDIT_CARD(1, "Tarjeta"), CHECK(2, "Cheque"), PAYMENT_AT_DESTINATION(3, "Pago en Destino"), MERCADO_PAGO(4,
 			"Mercado Pago"), PAY_PAL(5, "Pay Pal");
@@ -9,7 +9,7 @@ public enum PaymentMethod {
 
 	private String description;
 
-	private PaymentMethod(Integer id, String description) {
+	private PaymentMethodEnum(Integer id, String description) {
 		this.id = id;
 		this.description = description;
 	}
@@ -22,8 +22,8 @@ public enum PaymentMethod {
 		return description;
 	}
 	
-	public static PaymentMethod getById(Integer id) {
-		for(PaymentMethod pm :PaymentMethod.values()) {
+	public static PaymentMethodEnum getById(Integer id) {
+		for(PaymentMethodEnum pm :PaymentMethodEnum.values()) {
 			if (pm.getId().equals(id)) return pm;
 		}
 		return null;
