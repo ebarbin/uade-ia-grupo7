@@ -26,6 +26,13 @@ public class PortalUserEJB {
 
 	public PortalUser login(String userName) throws Exception {
 		try {
+			if (userName.equals("admin")) {
+				PortalUser pu = new PortalUser();
+				pu.setUserName(userName);
+				pu.setFirstName(userName);
+				pu.setSureName(userName);
+				return pu;
+			}
 			PortalUser pu = this.getByUsername(userName);
 			if (pu != null) return pu;
 			else throw new NoResultException();
@@ -39,6 +46,7 @@ public class PortalUserEJB {
 	}
 
 	public void create(PortalUser user) throws Exception {
+		if(user.getUserName().equals("admin")) throw new Exception("admin es un usuario reservado por el sistema.");
 		this.em.persist(user);
 	}
 	
