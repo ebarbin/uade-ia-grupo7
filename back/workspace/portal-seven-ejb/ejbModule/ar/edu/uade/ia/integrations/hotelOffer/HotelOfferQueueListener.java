@@ -120,6 +120,7 @@ public class HotelOfferQueueListener implements MessageListener {
 			hotelOffer.setOfferEnd(HotelOfferQueueListener.DateFormatter.parse(hom.getFecha_hasta()));
 			hotelOffer.setOfferStart(HotelOfferQueueListener.DateFormatter.parse(hom.getFecha_desde()));
 
+			//TODO Vuelve a crear una habitacion por cada oferta???
 			Room room = new Room();
 			room.setCapacity(hom.getCantidad_personas());
 			room.setDescription(hom.getDescripcion_habitacion());
@@ -139,7 +140,7 @@ public class HotelOfferQueueListener implements MessageListener {
 			// TODO hotel.setRooms(rooms); lo usamos?
 			// TODO hotel.setState(state); lo usamos?
 			
-			this.quotaEJB.add(quota);
+			this.quotaEJB.add(quota); //TODO Persiste todo en cascada?
 
 			this.logging.info(LoggingAction.HOTEL_OFFER_REGISTRATION);
 		} catch (Exception e) {
