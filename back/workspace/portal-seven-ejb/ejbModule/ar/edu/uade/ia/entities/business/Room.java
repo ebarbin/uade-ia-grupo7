@@ -31,7 +31,7 @@ public class Room extends PersistentObject {
 	
 	private Integer capacity;
 	
-	private String type;
+	private Integer type;
 
 	public List<Image> getImages() {
 		return images;
@@ -65,11 +65,11 @@ public class Room extends PersistentObject {
 		this.capacity = capacity;
 	}
 
-	public String getType() {
+	public Integer getType() {
 		return type;
 	}
 
-	public void setType(String type) {
+	public void setType(Integer type) {
 		this.type = type;
 	}
 }

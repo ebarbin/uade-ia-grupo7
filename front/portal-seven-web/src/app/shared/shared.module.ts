@@ -23,6 +23,7 @@ import { MapComponent } from './components/map/map.component';
 import { DropdownDirective } from './directives/dropdown.directive';
 import { SortComponent } from './components/sort/sort.component';
 import { ViewChangeResultComponent } from './components/view-change-result/view-change-result.component';
+import { RoomTypePipe } from './pipes/room-type.pipe';
 
 @NgModule({
   imports: [
@@ -44,10 +45,10 @@ import { ViewChangeResultComponent } from './components/view-change-result/view-
     NgxGalleryModule, AgmCoreModule, ToastrModule, JoinPipe,
     TruncatePipe, FirstPipe, ImageGetterPipe, WhenNullPutBlankPipe,
     ImgGalleryComponent, MapComponent, DropdownDirective, 
-    SortComponent, ViewChangeResultComponent
+    SortComponent, ViewChangeResultComponent, RoomTypePipe
   ],
   declarations: [
-    JoinPipe, TruncatePipe, FirstPipe, ImageGetterPipe,
+    JoinPipe, TruncatePipe, FirstPipe, ImageGetterPipe, RoomTypePipe,
     WhenNullPutBlankPipe, ImgGalleryComponent,
     MapComponent, DropdownDirective, SortComponent, ViewChangeResultComponent,
   ],

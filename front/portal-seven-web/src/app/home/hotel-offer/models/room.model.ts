@@ -9,5 +9,5 @@ export class Room {
             public services: SimpleNamed[],
             public description: string,
             public capacity: number,
-            public type: string){}
+            public type: number){}
     }

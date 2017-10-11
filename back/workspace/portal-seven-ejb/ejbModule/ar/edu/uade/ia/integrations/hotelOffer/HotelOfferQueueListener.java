@@ -6,6 +6,8 @@ import java.io.InputStream;
 import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import javax.ejb.ActivationConfigProperty;
@@ -113,18 +115,22 @@ public class HotelOfferQueueListener implements MessageListener {
 				this.addHotelServices(hotel, hom.getLista_servicios());
 			}
 
+			Date startDate = HotelOfferQueueListener.DateFormatter.parse(hom.getFecha_desde());
+			Date endDate = HotelOfferQueueListener.DateFormatter.parse(hom.getFecha_hasta());
+			
 			HotelOffer hotelOffer = new HotelOffer();
 			hotelOffer.setCancellationPolicy(hom.getPolitica_cancelacion());
 			hotelOffer.setHotel(hotel);
 			hotelOffer.setPrice(hom.getPrecio_habitacion()); // Es Correcto?
-			hotelOffer.setOfferEnd(HotelOfferQueueListener.DateFormatter.parse(hom.getFecha_hasta()));
-			hotelOffer.setOfferStart(HotelOfferQueueListener.DateFormatter.parse(hom.getFecha_desde()));
+			hotelOffer.setOfferStart(startDate);
+			hotelOffer.setOfferEnd(endDate);
+			
 
 			//TODO Vuelve a crear una habitacion por cada oferta???
 			Room room = new Room();
 			room.setCapacity(hom.getCantidad_personas());
 			room.setDescription(hom.getDescripcion_habitacion());
-			room.setType(String.valueOf(hom.getCantidad_personas()));
+			room.setType(hom.getCantidad_personas());
 
 			this.addRoomImage(room, hom.getFoto_habitacion());
 
@@ -132,15 +138,21 @@ public class HotelOfferQueueListener implements MessageListener {
 
 			hotelOffer.setRoom(room);
 
-			Quota quota = new Quota();
-			quota.setOffer(hotelOffer);
-			quota.setAvailableQuota(hom.getCupo());
-			quota.setQuotaDate(null); // TODO que va aca??
-
-			// TODO hotel.setRooms(rooms); lo usamos?
-			// TODO hotel.setState(state); lo usamos?
+			Calendar date = Calendar.getInstance();
+			date.getTime().setTime(startDate.getTime());
 			
-			this.quotaEJB.add(quota); //TODO Persiste todo en cascada?
+			Quota quota;
+			while (date.getTime().before(endDate)){
+				quota = new Quota();
+				quota.setOffer(hotelOffer);
+				quota.setAvailableQuota(hom.getCupo());
+				quota.setQuotaDate(date.getTime());
+				this.quotaEJB.add(quota);
+				
+		        date.add(Calendar.DATE, 1);
+		    }
+			
+			 //TODO Persiste todo en cascada?
 
 			this.logging.info(LoggingAction.HOTEL_OFFER_REGISTRATION);
 		} catch (Exception e) {
