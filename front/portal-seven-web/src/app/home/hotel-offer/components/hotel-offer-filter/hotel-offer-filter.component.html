@@ -20,13 +20,13 @@
           </md-option>
       </md-autocomplete>
       <md-form-field class="col-lg-5 col-md-4 col-sm-4">
-        <input name="fromDate" [(ngModel)]="fromDate"
+        <input name="fromDate" [(ngModel)]="fromDate" required
         [mdDatepicker]="fromPicker" placeholder="Fecha Desde" mdInput>
         <md-datepicker-toggle mdSuffix [for]="fromPicker"></md-datepicker-toggle>
         <md-datepicker #fromPicker></md-datepicker>
       </md-form-field>
       <md-form-field class="col-lg-5 col-md-4 col-sm-4">
-        <input name="toDate" [(ngModel)]="toDate"
+        <input name="toDate" [(ngModel)]="toDate" required
         [mdDatepicker]="toPicker" placeholder="Fecha Hasta" mdInput>
         <md-datepicker-toggle mdSuffix [for]="toPicker"></md-datepicker-toggle>
         <md-datepicker #toPicker></md-datepicker>

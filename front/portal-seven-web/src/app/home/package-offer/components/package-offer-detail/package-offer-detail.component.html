@@ -7,7 +7,6 @@
     <app-img-gallery [images]="srv.getSelected().images"></app-img-gallery>
     <hr>
     <h3>Ubicación</h3>
-        <p>{{srv.getSelected().destination.address.street}}</p>
         <app-map [address]="srv.getSelected().destination.address"></app-map>
     <hr>
     <h3>Otros Paquetes</h3>

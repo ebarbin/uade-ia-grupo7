@@ -21,8 +21,8 @@ export class HotelOfferFilterComponent implements OnInit {
   peopleQuantityValues:any[] = [];
 
   hotelResults:AutocompleteResource[];
-  fromDate:Date = null
-  toDate:Date = null;
+  fromDate:Date = this.getToday();
+  toDate:Date = this.getNextWeek();
   roomQuantity:number = 1;
 
   constructor(
@@ -74,5 +74,15 @@ export class HotelOfferFilterComponent implements OnInit {
       form.value.hotel = form.value.hotel && typeof form.value.hotel == 'object' ? form.value.hotel : null;
       form.value.peoplePerRoom = form.value.peoplePerRoom == -1 || form.value.peoplePerRoom == '' ? null : form.value.peoplePerRoom;
       form.value.roomQuantity = form.value.roomQuantity == -1 || form.value.roomQuantity == '' ? null : form.value.roomQuantity;
+    }
+
+    private getToday(){
+      return new Date();
+    }
+  
+    private getNextWeek(){
+      var d = new Date();
+      d.setDate(d.getDate() + 7);
+      return d;
     }
 }
