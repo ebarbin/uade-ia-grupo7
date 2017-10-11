@@ -8,19 +8,9 @@ public class AddressDTO implements Serializable {
 
 	private Integer id;
 	
-	private String street;
-	
 	private Float lat;
 	
 	private Float lng;
-
-	public String getStreet() {
-		return street;
-	}
-
-	public void setStreet(String street) {
-		this.street = street;
-	}
 
 	public Float getLat() {
 		return lat;

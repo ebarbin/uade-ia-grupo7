@@ -7,10 +7,16 @@
       <md-card-title>¡Felicitaciones! Has reservado el hotel.</md-card-title>
     </md-card-header>
     <md-card-content>
-        <h2>{{hotelOfferService.getSelected().hotel.name}}</h2>
-        <p>Habitación tipo: {{hotelOfferService.getSelected().room.type}}</p>
-        <p><b>Precio Total: {{hotelOfferService.getSelected().price | currency:'ARS':true}}</b></p>
-        <p>Medios de Pago: {{hotelOfferService.getSelected().hotel.paymentMethods | join: ' - '}}</p>
+        <div class="col-lg-6 col-md-6" style="margin-top: -20px;">
+          <h2>{{hotelOfferService.getSelected().hotel.name}}</h2>
+          <p>Habitación tipo: {{hotelOfferService.getSelected().room.type}}</p>
+          <p><b>Precio Total: {{hotelOfferService.getSelected().price | currency:'ARS':true}}</b></p>
+          <p>Medios de Pago: {{hotelOfferService.getSelected().hotel.paymentMethods | join: ' - '}}</p>
+        </div>
+        <div class="col-lg-6 col-md-6">
+          <img class="img-responsive img-resume" 
+            [src]="hotelOfferService.getSelected().hotel.images | first | imageGetter">
+        </div>
     </md-card-content>
     <md-card-actions align="center">
         <button class="accept-resume-btn" 

@@ -17,6 +17,8 @@ public class Image extends PersistentObject {
 
 	private String description;
 	
+	private String url;
+	
 	public byte[] getData() {
 		return data;
 	}
@@ -31,5 +33,13 @@ public class Image extends PersistentObject {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	public String getUrl() {
+		return url;
+	}
+
+	public void setUrl(String url) {
+		this.url = url;
 	}
 }
