@@ -21,4 +21,11 @@ public enum PaymentMethod {
 	public String getDescription() {
 		return description;
 	}
+	
+	public static PaymentMethod getById(Integer id) {
+		for(PaymentMethod pm :PaymentMethod.values()) {
+			if (pm.getId().equals(id)) return pm;
+		}
+		return null;
+	}
 }

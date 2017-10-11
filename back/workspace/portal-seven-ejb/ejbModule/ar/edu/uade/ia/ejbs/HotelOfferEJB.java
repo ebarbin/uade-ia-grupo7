@@ -30,7 +30,7 @@ public class HotelOfferEJB {
 	public HotelOfferEJB() { }
 
 	@SuppressWarnings("unchecked")
-	public List<HotelOffer> search(HotelOfferRequestDTO request) {
+	public List<HotelOffer> search(HotelOfferRequestDTO request) throws Exception {
 
 		Integer idHotel = request.getHotel() != null ? request.getHotel().getId() : null;
 		Date dateFrom = request.getFromDate();
@@ -86,7 +86,7 @@ public class HotelOfferEJB {
 		return query.getResultList();
 	}
 
-	public Boolean hasQuota(Integer hotelOfferId, HotelOfferRequestDTO filter) {
+	public Boolean hasQuota(Integer hotelOfferId, HotelOfferRequestDTO filter) throws Exception {
 		
 
 		Date dateFrom = filter.getFromDate();
@@ -126,7 +126,7 @@ public class HotelOfferEJB {
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<HotelOffer> searchOtherRooms(HotelOfferOtherRoomsRequestDTO request) {
+	public List<HotelOffer> searchOtherRooms(HotelOfferOtherRoomsRequestDTO request) throws Exception {
 		
 		Integer idHotel = request.getHotel().getId();
 		Date dateFrom = request.getFromDate();

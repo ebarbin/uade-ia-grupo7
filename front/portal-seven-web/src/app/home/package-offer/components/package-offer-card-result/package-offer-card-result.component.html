@@ -11,10 +11,8 @@
         <md-card-subtitle>{{packageOffer.services | join:' - ' | truncate:10}}</md-card-subtitle>
       </md-card-header>
       <md-card-content>
-        <div class="pull-left"><p>Desde: {{packageOffer.offerStart | date:'dd/MM/yyyy'}}</p></div>
-        <div class="pull-right"><p>Hasta: {{packageOffer.offerEnd | date:'dd/MM/yyyy'}}</p></div>
-        <div class="pull-right">Precio por Persona: {{packageOffer.price | currency:'ARS':true}}</div>
-        <div class="pull-right"><b>Precio Total: {{ getTotalPrice(packageOffer.price) | currency:'ARS':true}}</b></div>
+        <p>Precio por Persona: {{packageOffer.price | currency:'ARS':true}}</p>
+        <b>Precio Total: {{ getTotalPrice(packageOffer.price) | currency:'ARS':true}}</b>
       </md-card-content>
     </md-card>
   </div>

@@ -5,6 +5,7 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 import ar.edu.uade.ia.entities.business.Image;
 
@@ -34,6 +35,16 @@ public class ImageEJB {
 			}
 		} catch (NoResultException nre) {
 			throw new Exception("Imagen inexistente.");
+		}
+	}
+	
+	public Image getByUrl(String url) throws Exception {
+		try {
+			Query query = this.em.createQuery("FROM Image WHERE url = :url");
+			query.setParameter("url", url);
+			return (Image) query.getSingleResult();
+		} catch (NoResultException nre) {
+			return null;
 		}
 	}
 

@@ -52,6 +52,8 @@ public class Hotel extends PersistentObject {
 
 	private Boolean state;
 	
+	private String code;
+	
 	public String getName() {
 		return name;
 	}
@@ -122,5 +124,13 @@ public class Hotel extends PersistentObject {
 
 	public void setState(Boolean state) {
 		this.state = state;
+	}
+
+	public String getCode() {
+		return code;
+	}
+
+	public void setCode(String code) {
+		this.code = code;
 	}
 }

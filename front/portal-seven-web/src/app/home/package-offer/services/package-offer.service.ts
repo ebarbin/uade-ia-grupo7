@@ -71,7 +71,7 @@ export class PackageOfferService implements Holder {
   }
 
   getDetail(packageOfferHeader:PackageOfferHeader):Promise<PackageOffer>{
-    return this.httpClient.get('portal-seven-web/api/rest/package-offerr/detail/' + packageOfferHeader.id)
+    return this.httpClient.get('portal-seven-web/api/rest/package-offer/detail/' + packageOfferHeader.id)
     .map((response:PortalResponse)=>{
       if(response.success) {
         this.packageOffer = <PackageOffer>response.data;

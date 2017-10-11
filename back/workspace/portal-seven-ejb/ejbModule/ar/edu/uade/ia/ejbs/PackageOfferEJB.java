@@ -29,7 +29,7 @@ public class PackageOfferEJB {
     public PackageOfferEJB() {}
     
 	@SuppressWarnings("unchecked")
-	public List<PackageOffer> search(PackageOfferRequestDTO request) {
+	public List<PackageOffer> search(PackageOfferRequestDTO request) throws Exception {
 		
 		Integer idDestination = request.getDestination() != null ? request.getDestination().getId() : null;
 		Date dateFrom = request.getFromDate();
@@ -70,7 +70,7 @@ public class PackageOfferEJB {
 		return query.getResultList();
 	}
 	
-	public PackageOffer getDetail(Integer id) {
+	public PackageOffer getDetail(Integer id) throws Exception {
 		return this.em.find(PackageOffer.class, id);
 	}
 }

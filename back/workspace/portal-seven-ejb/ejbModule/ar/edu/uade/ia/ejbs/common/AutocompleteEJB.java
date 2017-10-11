@@ -19,7 +19,7 @@ public class AutocompleteEJB {
 	protected EntityManager em;
 	
 	@SuppressWarnings("unchecked")
-	public List<Hotel> hotelQuery(String value, Integer limit) {
+	public List<Hotel> hotelQuery(String value, Integer limit) throws Exception {
 		Query query = this.em.createQuery("FROM Hotel WHERE lower(name) LIKE lower(:value)");
 		query.setParameter("value", '%'+value+'%');
 		//	query.setMaxResults(limit);
@@ -27,7 +27,7 @@ public class AutocompleteEJB {
 	}
 	
 	@SuppressWarnings("unchecked")
-	public List<Destination> destinationQuery(String value, Integer limit) {
+	public List<Destination> destinationQuery(String value, Integer limit) throws Exception {
 		Query query = this.em.createQuery("FROM Destination WHERE lower(name) LIKE lower(:value)");
 		query.setParameter("value", '%'+value+'%');
 		//	query.setMaxResults(limit);
