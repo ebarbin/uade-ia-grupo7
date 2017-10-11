@@ -4,7 +4,7 @@
 <div class="card-result">
     <md-card class="card-row card col-lg-3 col-md-4 col-sm-6 col-xs-12" (click)="onDetail(packageOffer)"
       *ngFor="let packageOffer of packageOfferService.getResults()">
-      <img class="img-responsive" style="margin: auto; max-height: 150px; max-width: 100%;" 
+      <img class="img-responsive img-card"
         [src]="packageOffer.image | imageGetter">
       <md-card-header>
         <md-card-title>{{packageOffer.description}}</md-card-title>

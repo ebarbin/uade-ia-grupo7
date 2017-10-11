@@ -9,3 +9,8 @@
 .mat-card-header {
     margin-top: 10px;
 }
+.img-card {
+    margin: auto; 
+    height: 120px; 
+    width: 200px;
+}
