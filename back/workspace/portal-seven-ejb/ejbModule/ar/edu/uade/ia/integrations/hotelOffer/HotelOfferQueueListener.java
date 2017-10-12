@@ -57,7 +57,7 @@ public class HotelOfferQueueListener implements MessageListener {
 	private static SimpleDateFormat DateFormatter = new SimpleDateFormat("yyyyMMdd");
 
 	@EJB
-	private LoggingJMS logging;
+	private LoggingJMS loggingService;
 
 	@EJB
 	private HotelEJB hotelEJB;
@@ -124,11 +124,10 @@ public class HotelOfferQueueListener implements MessageListener {
 			HotelOffer hotelOffer = new HotelOffer();
 			hotelOffer.setCancellationPolicy(hom.getPolitica_cancelacion());
 			hotelOffer.setHotel(hotel);
-			hotelOffer.setPrice(hom.getPrecio_habitacion()); // Es Correcto? Si es correcto je
+			hotelOffer.setPrice(hom.getPrecio_habitacion());
 			hotelOffer.setOfferStart(startDate);
 			hotelOffer.setOfferEnd(endDate);
 
-			// TODO Vuelve a crear una habitacion por cada oferta??? No hay id de Room que venga informada, por lo tanto es dificil buscar ya existentes  
 			Room room = new Room();
 			room.setCapacity(hom.getCantidad_personas());
 			room.setDescription(hom.getDescripcion_habitacion());
@@ -154,11 +153,9 @@ public class HotelOfferQueueListener implements MessageListener {
 				date.add(Calendar.DATE, 1);
 			}
 
-			// TODO Persiste todo en cascada? Creo que si, al menos es lo que vi en otra cursadas je
-
-			this.logging.info(LoggingAction.HOTEL_OFFER_REGISTRATION);
+			this.loggingService.info(LoggingAction.HOTEL_OFFER_REGISTRATION);
 		} catch (Exception e) {
-			this.logging.error(e.getMessage());
+			this.loggingService.error(e.getMessage());
 			HotelOfferQueueListener.LOGGER.error(e.getMessage(), e);
 		}
 	}
@@ -264,5 +261,4 @@ public class HotelOfferQueueListener implements MessageListener {
 			return null;
 		}
 	}
-
 }
