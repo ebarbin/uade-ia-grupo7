@@ -21,7 +21,8 @@ import ar.edu.uade.ia.ejbs.HotelOfferEJB;
 import ar.edu.uade.ia.entities.business.HotelOffer;
 import ar.edu.uade.ia.entities.business.Image;
 import ar.edu.uade.ia.entities.business.Room;
-import ar.edu.uade.ia.entities.business.Service;
+import ar.edu.uade.ia.entities.business.ServiceHotel;
+import ar.edu.uade.ia.entities.business.ServiceRoom;
 
 /**
  * Session Bean implementation class HotelOfferManager
@@ -88,7 +89,7 @@ public class HotelOfferManager {
 			roomDTO.setType(room.getType());
 
 			roomDTO.setServices(new ArrayList<SimpleNamedDTO>());
-			for (Service service : room.getServices()) {
+			for (ServiceRoom service : room.getServices()) {
 				namedDTO = new SimpleNamedDTO();
 				namedDTO.setId(service.getId());
 				namedDTO.setName(service.getName());
@@ -123,7 +124,7 @@ public class HotelOfferManager {
 			headerDTO.setDescription(hotelOffer.getHotel().getDescription());
 			headerDTO.setServices(new ArrayList<SimpleNamedDTO>());
 
-			for (Service service : hotelOffer.getHotel().getServices()) {
+			for (ServiceHotel service : hotelOffer.getHotel().getServices()) {
 				namedDTO = new SimpleNamedDTO();
 				namedDTO.setId(service.getId());
 				namedDTO.setName(service.getName());

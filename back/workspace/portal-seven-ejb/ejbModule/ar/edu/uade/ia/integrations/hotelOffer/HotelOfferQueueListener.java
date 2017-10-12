@@ -29,7 +29,8 @@ import ar.edu.uade.ia.ejbs.DestinationEJB;
 import ar.edu.uade.ia.ejbs.HotelEJB;
 import ar.edu.uade.ia.ejbs.PaymentMethodEJB;
 import ar.edu.uade.ia.ejbs.QuotaEJB;
-import ar.edu.uade.ia.ejbs.ServiceEJB;
+import ar.edu.uade.ia.ejbs.ServiceHotelEJB;
+import ar.edu.uade.ia.ejbs.ServiceRoomEJB;
 import ar.edu.uade.ia.ejbs.common.ImageEJB;
 import ar.edu.uade.ia.entities.business.Address;
 import ar.edu.uade.ia.entities.business.Hotel;
@@ -38,7 +39,8 @@ import ar.edu.uade.ia.entities.business.Image;
 import ar.edu.uade.ia.entities.business.PaymentMethod;
 import ar.edu.uade.ia.entities.business.Quota;
 import ar.edu.uade.ia.entities.business.Room;
-import ar.edu.uade.ia.entities.business.Service;
+import ar.edu.uade.ia.entities.business.ServiceHotel;
+import ar.edu.uade.ia.entities.business.ServiceRoom;
 import ar.edu.uade.ia.integrations.backOffice.logging.LoggingJMS;
 import ar.edu.uade.ia.integrations.hotelOffer.message.HotelOfferMessage;
 
@@ -70,7 +72,10 @@ public class HotelOfferQueueListener implements MessageListener {
 	private AddressEJB addressEJB;
 
 	@EJB
-	private ServiceEJB serviceEJB;
+	private ServiceHotelEJB serviceHotelEJB;
+	
+	@EJB
+	private ServiceRoomEJB serviceRoomEJB;
 
 	@EJB
 	private PaymentMethodEJB paymentMethodEJB;
@@ -172,12 +177,12 @@ public class HotelOfferQueueListener implements MessageListener {
 	}
 
 	private void addRoomServices(Room room, List<String> services) throws Exception {
-		room.setServices(new ArrayList<Service>());
-		Service service;
+		room.setServices(new ArrayList<ServiceRoom>());
+		ServiceRoom service;
 		for (String name : services) {
-			service = this.serviceEJB.getByName(name);
+			service = this.serviceRoomEJB.getByName(name);
 			if (service == null) {
-				service = new Service();
+				service = new ServiceRoom();
 				service.setName(name);
 			}
 			room.getServices().add(service);
@@ -185,12 +190,12 @@ public class HotelOfferQueueListener implements MessageListener {
 	}
 
 	private void addHotelServices(Hotel hotel, List<String> services) throws Exception {
-		hotel.setServices(new ArrayList<Service>());
-		Service service;
+		hotel.setServices(new ArrayList<ServiceHotel>());
+		ServiceHotel service;
 		for (String name : services) {
-			service = this.serviceEJB.getByName(name);
+			service = this.serviceHotelEJB.getByName(name);
 			if (service == null) {
-				service = new Service();
+				service = new ServiceHotel();
 				service.setName(name);
 			}
 			hotel.getServices().add(service);

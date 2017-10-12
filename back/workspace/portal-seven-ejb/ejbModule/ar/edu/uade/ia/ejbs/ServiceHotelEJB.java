@@ -7,14 +7,14 @@ import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
-import ar.edu.uade.ia.entities.business.Service;
+import ar.edu.uade.ia.entities.business.ServiceHotel;
 
 /**
  * Session Bean implementation class ServiceEJB
  */
 @Stateless
 @LocalBean
-public class ServiceEJB {
+public class ServiceHotelEJB {
 
 	@PersistenceContext(unitName = "mu")
 	protected EntityManager em;
@@ -22,13 +22,13 @@ public class ServiceEJB {
     /**
      * Default constructor. 
      */
-    public ServiceEJB() {}
+    public ServiceHotelEJB() {}
     
-    public Service getByName(String name) throws Exception {
+    public ServiceHotel getByName(String name) throws Exception {
 		try {
-			Query query = this.em.createQuery("FROM Service WHERE name = :name");
+			Query query = this.em.createQuery("FROM ServiceHotel WHERE name = :name");
 			query.setParameter("name", name);
-			return (Service) query.getSingleResult();
+			return (ServiceHotel) query.getSingleResult();
 		} catch (NoResultException nre) {
 			return null;
 		}

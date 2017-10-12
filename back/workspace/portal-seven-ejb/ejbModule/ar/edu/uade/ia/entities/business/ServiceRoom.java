@@ -4,13 +4,13 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "service")
-public class Service extends PersistentObject {
+@Table(name = "service_room")
+public class ServiceRoom extends PersistentObject {
 
-	private static final long serialVersionUID = -1978696476715748487L;
+	private static final long serialVersionUID = 332003756104823522L;
 
 	private String name;
-	
+
 	public String getName() {
 		return name;
 	}

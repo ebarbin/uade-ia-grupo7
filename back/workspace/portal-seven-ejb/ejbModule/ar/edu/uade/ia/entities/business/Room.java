@@ -25,10 +25,10 @@ public class Room extends PersistentObject {
 	private String description;
 
 	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	@JoinTable(name = "room_service", joinColumns = {
+	@JoinTable(name = "room_service_room", joinColumns = {
 			@JoinColumn(name = "room_id", nullable = false, updatable = false) }, inverseJoinColumns = {
-					@JoinColumn(name = "service_id", nullable = false, updatable = false) })
-	private List<Service> services;
+					@JoinColumn(name = "service_room_id", nullable = false, updatable = false) })
+	private List<ServiceRoom> services;
 
 	private Integer capacity;
 
@@ -50,11 +50,11 @@ public class Room extends PersistentObject {
 		this.description = description;
 	}
 
-	public List<Service> getServices() {
+	public List<ServiceRoom> getServices() {
 		return services;
 	}
 
-	public void setServices(List<Service> services) {
+	public void setServices(List<ServiceRoom> services) {
 		this.services = services;
 	}
 

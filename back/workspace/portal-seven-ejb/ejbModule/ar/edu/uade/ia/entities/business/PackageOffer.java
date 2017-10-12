@@ -37,10 +37,10 @@ public class PackageOffer extends PersistentObject {
 	private String description;
 
 	@ManyToMany(fetch = FetchType.LAZY)
-	@JoinTable(name = "package_offer_service", joinColumns = {
+	@JoinTable(name = "package_offer_service_package", joinColumns = {
 			@JoinColumn(name = "package_offer_id", nullable = false, updatable = false) }, inverseJoinColumns = {
-					@JoinColumn(name = "service_id", nullable = false, updatable = false) })
-	private List<Service> services;
+					@JoinColumn(name = "service_package_id", nullable = false, updatable = false) })
+	private List<ServicePackage> services;
 
 	@ManyToOne
 	private Destination destination;
@@ -72,11 +72,11 @@ public class PackageOffer extends PersistentObject {
 		this.description = description;
 	}
 
-	public List<Service> getServices() {
+	public List<ServicePackage> getServices() {
 		return services;
 	}
 
-	public void setServices(List<Service> services) {
+	public void setServices(List<ServicePackage> services) {
 		this.services = services;
 	}
 

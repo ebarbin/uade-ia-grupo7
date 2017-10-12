@@ -1,6 +1,5 @@
 package ar.edu.uade.ia.entities.business;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Lob;
 import javax.persistence.Table;

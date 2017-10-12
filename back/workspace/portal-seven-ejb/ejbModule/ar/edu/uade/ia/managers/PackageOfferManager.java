@@ -18,7 +18,7 @@ import ar.edu.uade.ia.common.dtos.SimpleNamedDTO;
 import ar.edu.uade.ia.ejbs.PackageOfferEJB;
 import ar.edu.uade.ia.entities.business.Image;
 import ar.edu.uade.ia.entities.business.PackageOffer;
-import ar.edu.uade.ia.entities.business.Service;
+import ar.edu.uade.ia.entities.business.ServicePackage;
 
 /**
  * Session Bean implementation class PackageOfferManager
@@ -66,7 +66,7 @@ public class PackageOfferManager {
 			headerDTO.setDescription(packageOffer.getDescription());
 			headerDTO.setServices(new ArrayList<SimpleNamedDTO>());
 
-			for (Service service : packageOffer.getServices()) {
+			for (ServicePackage service : packageOffer.getServices()) {
 				namedDTO = new SimpleNamedDTO();
 				namedDTO.setId(service.getId());
 				namedDTO.setName(service.getName());

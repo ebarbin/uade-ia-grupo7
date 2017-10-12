@@ -28,10 +28,10 @@ public class Hotel extends PersistentObject {
 	private List<Image> images;
 
 	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	@JoinTable(name = "hotel_service", joinColumns = {
+	@JoinTable(name = "hotel_service_hotel", joinColumns = {
 			@JoinColumn(name = "hotel_id", nullable = false, updatable = false) }, inverseJoinColumns = {
-					@JoinColumn(name = "service_id", nullable = false, updatable = false) })
-	private List<Service> services;
+					@JoinColumn(name = "service_hotel_id", nullable = false, updatable = false) })
+	private List<ServiceHotel> services;
 
 	@ManyToOne(cascade = CascadeType.ALL)
 	private Address address;
@@ -70,11 +70,11 @@ public class Hotel extends PersistentObject {
 		this.images = images;
 	}
 
-	public List<Service> getServices() {
+	public List<ServiceHotel> getServices() {
 		return services;
 	}
 
-	public void setServices(List<Service> services) {
+	public void setServices(List<ServiceHotel> services) {
 		this.services = services;
 	}
 
