@@ -15,6 +15,7 @@ import javax.ws.rs.core.Response;
 
 import org.jboss.logging.Logger;
 
+import ar.edu.uade.ia.common.dtos.AuthorizeStatusDTO;
 import ar.edu.uade.ia.common.dtos.ImageDTO;
 import ar.edu.uade.ia.common.dtos.PackageOfferDTO;
 import ar.edu.uade.ia.common.dtos.PackageOfferHeaderDTO;
@@ -78,6 +79,19 @@ public class PackageOfferService {
 		try {
 			List<PackageOfferHeaderDTO> result = this.packageOfferManager.searchOtherPackages(packageId, request);
 			return Response.ok(new PortalResponse(result)).build();
+		} catch (Exception e) {
+			PackageOfferService.LOGGER.error(e.getMessage(), e);
+			return Response.ok(new PortalResponse(e.getMessage())).build();
+		}
+	}
+
+	@PUT
+	@Path("/authorize/{id}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response authorize(@PathParam("id") Integer id, PackageOfferRequestDTO filter) {
+		try {
+			AuthorizeStatusDTO statusDTO = this.packageOfferManager.autorize(id, filter);
+			return Response.ok(new PortalResponse(statusDTO)).build();
 		} catch (Exception e) {
 			PackageOfferService.LOGGER.error(e.getMessage(), e);
 			return Response.ok(new PortalResponse(e.getMessage())).build();

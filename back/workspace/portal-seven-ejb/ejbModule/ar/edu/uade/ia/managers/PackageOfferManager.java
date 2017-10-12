@@ -10,6 +10,7 @@ import javax.ejb.Stateless;
 import org.dozer.DozerBeanMapperBuilder;
 import org.dozer.Mapper;
 
+import ar.edu.uade.ia.common.dtos.AuthorizeStatusDTO;
 import ar.edu.uade.ia.common.dtos.ImageDTO;
 import ar.edu.uade.ia.common.dtos.PackageOfferDTO;
 import ar.edu.uade.ia.common.dtos.PackageOfferHeaderDTO;
@@ -37,6 +38,20 @@ public class PackageOfferManager {
 	 */
 	public PackageOfferManager() {}
 
+	public AuthorizeStatusDTO autorize(Integer id, PackageOfferRequestDTO filter) throws Exception {
+
+		if (this.packageOfferEJB.hasQuota(id, filter)){
+
+		} else {
+			throw new Exception("No hay paquetes disponibles.");
+		}
+
+		// TODO MANDAR A AUTORIZAR AL WEBSERVICE SOAP
+		AuthorizeStatusDTO dto = new AuthorizeStatusDTO();
+		dto.setStatus(Boolean.TRUE);
+		return dto;
+	}
+	
 	public List<PackageOfferHeaderDTO> search(PackageOfferRequestDTO packageOfferRequestDTO) throws Exception {
 		List<PackageOffer> packageOffers = this.packageOfferEJB.search(packageOfferRequestDTO);
 		return this.convertToListOfPackageOfferHeaderDTO(packageOffers);

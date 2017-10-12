@@ -74,6 +74,27 @@ public class PackageOfferEJB {
 		return this.em.find(PackageOffer.class, id);
 	}
 
+	public Boolean hasQuota(Integer packageId, PackageOfferRequestDTO filter) {
+
+		Integer quantityPeople = filter.getQuantityPeople();
+		int value = 0;
+		
+		StringBuffer queryBuilder = new StringBuffer("select pkOf");
+		queryBuilder.append(" from PackageOffer as pkOf");
+		queryBuilder.append(" inner join pkOf.destination as dest");
+		queryBuilder.append(" where 1 = 1");
+		queryBuilder.append(" and pkOf.id <> :packageId");
+		queryBuilder.append(" and pkOf.availableQuota >= :quantityPeople");
+		
+		Query query = this.em.createQuery(queryBuilder.toString());
+		query.setParameter("quantityPeople", quantityPeople);
+		query.setParameter("packageId", packageId);
+		
+		value = query.getFirstResult();
+		
+		return (value ==1);
+	}
+	
 	@SuppressWarnings("unchecked")
 	public List<PackageOffer> searchOtherPackages(Integer packageId, PackageOfferRequestDTO request) {
 		Integer destinationId = request.getDestination().getId();
