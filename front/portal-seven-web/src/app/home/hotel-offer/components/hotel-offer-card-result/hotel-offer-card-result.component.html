@@ -1,19 +1,26 @@
-<app-sort [holder]="hotelOfferService"></app-sort>
-<app-view-change-result [holder]="hotelOfferService"></app-view-change-result>
-
-<div class="card-result">
-  <md-card class="card-row card col-lg-3 col-md-4 col-sm-6 col-xs-6" (click)="onDetail(hotelOfferHeader)"
-  *ngFor="let hotelOfferHeader of hotelOfferService.getResults()">
-    <img class="img-responsive img-card" 
-    [src]="hotelOfferHeader.images | first | imageGetter">
-    <md-card-header>  
-      <md-card-title>{{hotelOfferHeader.name}}</md-card-title>
-      <md-card-subtitle [mdTooltip]="hotelOfferHeader.description">{{hotelOfferHeader.description}}</md-card-subtitle>
-    </md-card-header>
-    <md-card-content>
-      <p>{{hotelOfferHeader.services | join: ' - '}}</p>
-      <p>Capacidad: {{hotelOfferHeader.roomCapacity}} personas</p>
-      <div class="pull-right"><b>Precio Total: {{hotelOfferHeader.price | currency:'ARS':true}}</b></div>
-    </md-card-content>
-  </md-card>
+<div class="row">
+  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+    <app-view-change-result [holder]="hotelOfferService"></app-view-change-result>
+    <app-sort [holder]="hotelOfferService"></app-sort>
+  </div>
+</div>
+<div class="row">
+  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+    <div class="card-result">
+      <md-card class="card-row card col-lg-3 col-md-4 col-sm-6 col-xs-6" (click)="onDetail(hotelOfferHeader)"
+      *ngFor="let hotelOfferHeader of hotelOfferService.getResults()">
+        <img class="img-responsive img-card" 
+        [src]="hotelOfferHeader.images | first | imageGetter">
+        <md-card-header>  
+          <md-card-title>{{hotelOfferHeader.name}}</md-card-title>
+          <md-card-subtitle [mdTooltip]="hotelOfferHeader.description">{{hotelOfferHeader.description}}</md-card-subtitle>
+        </md-card-header>
+        <md-card-content>
+          <p>{{hotelOfferHeader.services | join: ' - '}}</p>
+          <p>Capacidad: {{hotelOfferHeader.roomCapacity}} personas</p>
+          <div class="pull-right"><b>Precio Total: {{hotelOfferHeader.price | currency:'ARS':true}}</b></div>
+        </md-card-content>
+      </md-card>
+    </div>
+  </div>
 </div>

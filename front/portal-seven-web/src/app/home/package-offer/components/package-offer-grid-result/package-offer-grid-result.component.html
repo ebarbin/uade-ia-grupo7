@@ -1,51 +1,50 @@
-<app-sort [holder]="packageOfferService"></app-sort>
-<app-view-change-result [holder]="packageOfferService"></app-view-change-result>
-
-<div class="grid-result">  
-    <md-table #table [dataSource]="dataSource" mdSort> 
-    
-        <ng-container mdColumnDef="description">
-          <md-header-cell *mdHeaderCellDef md-sort-header> Descripción </md-header-cell>
-          <md-cell *mdCellDef="let packageOffer"> {{packageOffer.description}} </md-cell>
-        </ng-container>
-    
-        <ng-container mdColumnDef="services">
+<div class="row">
+  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+    <app-view-change-result [holder]="packageOfferService"></app-view-change-result>
+    <app-sort [holder]="packageOfferService"></app-sort>
+  </div>
+</div>
+<div class="row">
+  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+    <div class="grid-result">  
+      <md-table #table [dataSource]="dataSource" mdSort> 
+          <ng-container mdColumnDef="description">
+            <md-header-cell *mdHeaderCellDef md-sort-header> Descripción </md-header-cell>
+            <md-cell *mdCellDef="let packageOffer"> {{packageOffer.description}} </md-cell>
+          </ng-container>
+          <ng-container mdColumnDef="services">
             <md-header-cell *mdHeaderCellDef>Servicios</md-header-cell>
             <md-cell *mdCellDef="let packageOffer" [mdTooltip]="packageOffer.services | join:' - '"> 
               {{packageOffer.services | join:' - ' | truncate:10}} 
             </md-cell>
           </ng-container>
-
-        <ng-container mdColumnDef="price">
-          <md-header-cell *mdHeaderCellDef md-sort-header>P. Persona</md-header-cell>
-          <md-cell *mdCellDef="let packageOffer">{{packageOffer.price | currency:'ARS':true}}</md-cell>
-        </ng-container>
-    
-        <ng-container mdColumnDef="totalPrice">
-            <md-header-cell *mdHeaderCellDef md-sort-header>Precio Total</md-header-cell>
-            <md-cell *mdCellDef="let packageOffer">{{ getTotalPrice(packageOffer.price) | currency:'ARS':true}}</md-cell>
+          <ng-container mdColumnDef="price">
+            <md-header-cell *mdHeaderCellDef md-sort-header>P. Persona</md-header-cell>
+            <md-cell *mdCellDef="let packageOffer">{{packageOffer.price | currency:'ARS':true}}</md-cell>
           </ng-container>
-          
-        <ng-container mdColumnDef="offerStart">
-            <md-header-cell *mdHeaderCellDef>Desde</md-header-cell>
-          <md-cell *mdCellDef="let packageOffer"> {{packageOffer.offerStart | date:'dd/MM/yyyy'}} </md-cell>
-        </ng-container>
-  
-        <ng-container mdColumnDef="offerEnd">
-            <md-header-cell *mdHeaderCellDef>Hasta</md-header-cell>
-          <md-cell *mdCellDef="let packageOffer"> {{packageOffer.offerEnd | date:'dd/MM/yyyy'}} </md-cell>
-        </ng-container>
-  
-        <ng-container mdColumnDef="action">
-          <md-header-cell *mdHeaderCellDef align="end"></md-header-cell>
-          <md-cell *mdCellDef="let packageOffer" align="end"> 
-            <button (click)="onDetail(packageOffer)" md-raised-button type="button" color="primary">
-                <i class="fa fa-check" aria-hidden="true"></i> Detalle
-            </button>
-          </md-cell>
-        </ng-container>
-        
-        <md-header-row *mdHeaderRowDef="displayedColumns"></md-header-row>
-        <md-row *mdRowDef="let row; columns: displayedColumns;"></md-row>
-    </md-table>
+          <ng-container mdColumnDef="totalPrice">
+              <md-header-cell *mdHeaderCellDef md-sort-header>Precio Total</md-header-cell>
+              <md-cell *mdCellDef="let packageOffer">{{ getTotalPrice(packageOffer.price) | currency:'ARS':true}}</md-cell>
+          </ng-container>
+          <ng-container mdColumnDef="offerStart">
+              <md-header-cell *mdHeaderCellDef>Desde</md-header-cell>
+            <md-cell *mdCellDef="let packageOffer"> {{packageOffer.offerStart | date:'dd/MM/yyyy'}} </md-cell>
+          </ng-container>
+          <ng-container mdColumnDef="offerEnd">
+              <md-header-cell *mdHeaderCellDef>Hasta</md-header-cell>
+            <md-cell *mdCellDef="let packageOffer"> {{packageOffer.offerEnd | date:'dd/MM/yyyy'}} </md-cell>
+          </ng-container>
+          <ng-container mdColumnDef="action">
+            <md-header-cell *mdHeaderCellDef align="end"></md-header-cell>
+            <md-cell *mdCellDef="let packageOffer" align="end"> 
+              <button (click)="onDetail(packageOffer)" md-raised-button type="button" color="primary">
+                  <i class="fa fa-check" aria-hidden="true"></i> Detalle
+              </button>
+            </md-cell>
+          </ng-container>
+          <md-header-row *mdHeaderRowDef="displayedColumns"></md-header-row>
+          <md-row *mdRowDef="let row; columns: displayedColumns;"></md-row>
+      </md-table>
+    </div>
   </div>
+</div>

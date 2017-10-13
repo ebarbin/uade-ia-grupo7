@@ -6,6 +6,7 @@ import java.util.List;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.persistence.TemporalType;
@@ -130,5 +131,15 @@ public class PackageOfferEJB {
 		}
 		
 		return query.getResultList();
+	}
+	
+	public PackageOffer getByCode(String code) throws Exception {
+		try {
+			Query query = this.em.createQuery("FROM PackageOffer WHERE code = :code");
+			query.setParameter("code", code);
+			return (PackageOffer) query.getSingleResult();
+		} catch (NoResultException nre) {
+			return null;
+		}
 	}
 }

@@ -55,6 +55,8 @@ public class PackageOffer extends PersistentObject {
 
 	@ManyToOne
 	private Agency agency;
+	
+	private String code;
 
 	public List<Image> getImages() {
 		return images;
@@ -144,5 +146,13 @@ public class PackageOffer extends PersistentObject {
 
 	public void setCancellationPolicy(String cancellationPolicy) {
 		this.cancellationPolicy = cancellationPolicy;
+	}
+
+	public String getCode() {
+		return code;
+	}
+
+	public void setCode(String code) {
+		this.code = code;
 	}
 }

@@ -24,7 +24,7 @@ public class HotelEJB {
 	 */
 	public HotelEJB() { }
 
-	public Hotel getHotelByCode(String code) throws Exception {
+	public Hotel getByCode(String code) throws Exception {
 		try {
 			Query query = this.em.createQuery("FROM Hotel WHERE code = :code");
 			query.setParameter("code", code);

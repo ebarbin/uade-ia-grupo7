@@ -1,12 +1,5 @@
 package ar.edu.uade.ia.integrations.hotelOffer;
 
-import java.io.BufferedInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.FileNotFoundException;
-import java.io.InputStream;
-import java.net.ConnectException;
-import java.net.URL;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -42,6 +35,7 @@ import ar.edu.uade.ia.entities.business.Room;
 import ar.edu.uade.ia.entities.business.ServiceHotel;
 import ar.edu.uade.ia.entities.business.ServiceRoom;
 import ar.edu.uade.ia.integrations.backOffice.logging.LoggingJMS;
+import ar.edu.uade.ia.integrations.common.AbstractQueueListener;
 import ar.edu.uade.ia.integrations.hotelOffer.message.HotelOfferMessage;
 
 /**
@@ -50,11 +44,9 @@ import ar.edu.uade.ia.integrations.hotelOffer.message.HotelOfferMessage;
 @MessageDriven(activationConfig = {
 		@ActivationConfigProperty(propertyName = "destination", propertyValue = "java:/queue/HotelOfferQueue"),
 		@ActivationConfigProperty(propertyName = "destinationType", propertyValue = "javax.jms.Queue") }, mappedName = "java:/queue/HotelOfferQueue")
-public class HotelOfferQueueListener implements MessageListener {
+public class HotelOfferQueueListener extends AbstractQueueListener implements MessageListener  {
 
 	private static Logger LOGGER = Logger.getLogger(HotelOfferQueueListener.class);
-
-	private static SimpleDateFormat DateFormatter = new SimpleDateFormat("yyyyMMdd");
 
 	@EJB
 	private LoggingJMS loggingService;
@@ -86,8 +78,7 @@ public class HotelOfferQueueListener implements MessageListener {
 	/**
 	 * Default constructor.
 	 */
-	public HotelOfferQueueListener() {
-	}
+	public HotelOfferQueueListener() {}
 
 	/**
 	 * @see MessageListener#onMessage(Message)
@@ -99,9 +90,9 @@ public class HotelOfferQueueListener implements MessageListener {
 					HotelOfferMessage.class);
 
 			// TODO VALIDAR EL MENSAJE COMPLETO!!
-			String code = hom.getCodigo_prestador().split("_")[1] + hom.getCodigo_prestador().split("_")[2];
+			String code = this.getProviderCode(hom.getCodigo_prestador());
 
-			Hotel hotel = this.hotelEJB.getHotelByCode(code);
+			Hotel hotel = this.hotelEJB.getByCode(code);
 			if (hotel == null) {
 
 				hotel = new Hotel();
@@ -240,25 +231,6 @@ public class HotelOfferQueueListener implements MessageListener {
 			}
 		} else {
 			hotel.getImages().add(image);
-		}
-	}
-
-	private byte[] downloadImage(String urlStr) throws Exception {
-		try {
-			URL url = new URL(urlStr);
-			InputStream in = new BufferedInputStream(url.openStream());
-			ByteArrayOutputStream out = new ByteArrayOutputStream();
-			byte[] buf = new byte[1024];
-			int n = 0;
-			while (-1 != (n = in.read(buf)))
-				out.write(buf, 0, n);
-			out.close();
-			in.close();
-
-			return out.toByteArray();
-		} catch (ConnectException | FileNotFoundException e) {
-			HotelOfferQueueListener.LOGGER.error("Error al descargar la imagen: " + e.getMessage(), e);
-			return null;
 		}
 	}
 }
