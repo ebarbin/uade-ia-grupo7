@@ -1,3 +1,4 @@
+import { AuthorizeStatus } from './../../../shared/models/authorize-status.model';
 import { Holder } from './../../../shared/models/holder.interface';
 import { PackageOffer } from './../models/package-offer.model';
 import { Subject } from 'rxjs/Subject';
@@ -91,6 +92,19 @@ export class PackageOfferService implements Holder {
     this.packageOffers = [];
     this.resultsChanged.next(this.packageOffers);
     this.router.navigate(['/home/package-offer']);
+  }
+
+  authorizeReservation():Promise<AuthorizeStatus>{
+    return this.httpClient.put('portal-seven-web/api/rest/package-offer/authorize/' + 
+      this.packageOffer.id, this.filterRequest)
+      .map((response:PortalResponse)=>{
+        if(response.success) {
+          return <AuthorizeStatus>response.data;
+        } else {
+          this.toastr.error(response.errorMessage);
+          return null;
+        }
+      }).toPromise();
   }
 
   search(request:PackageOfferRequest){

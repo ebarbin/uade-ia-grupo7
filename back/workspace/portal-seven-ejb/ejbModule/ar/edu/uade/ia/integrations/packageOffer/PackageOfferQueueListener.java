@@ -86,7 +86,6 @@ public class PackageOfferQueueListener extends AbstractQueueListener implements 
 				agency.setCode(code);
 				agency.setName(null); //No Informado
 				agency.setEmail(pom.getMail_agencia());
-				this.addAgencyAddress(agency, pom.getLatitud(), pom.getLongitud());
 			}
 			
 			PackageOffer po = new PackageOffer();
@@ -103,7 +102,7 @@ public class PackageOfferQueueListener extends AbstractQueueListener implements 
 			this.addPackageServices(po, pom.getServicios_paquete());
 			po.setPrice(pom.getPrecio());
 			
-			this.addPackageDestination(po, pom.getDestino());
+			this.addPackageDestination(po, pom.getDestino(), pom.getLatitud(), pom.getLongitud());
 			
 			this.packageOfferEJB.add(po);
 			
@@ -114,25 +113,22 @@ public class PackageOfferQueueListener extends AbstractQueueListener implements 
 		}
 	}
 
-	private void addPackageDestination(PackageOffer po, String destino) throws Exception {
+	private void addPackageDestination(PackageOffer po, String destino, float latitud, float longitud) throws Exception {
 		Destination destination = this.destinationEJB.getByName(destino);
 		if (destination == null) {
+			Address address = this.addressEJB.getByLatAndLng(latitud, longitud);
+			if (address == null) {
+				address = new Address();
+				address.setLat(latitud);
+				address.setLng(longitud);
+			}
 			destination = new Destination();
 			destination.setName(destino);
+			destination.setAddress(address);
 		}
 		po.setDestination(destination);
 	}
 
-	private void addAgencyAddress(Agency agency, float latitud, float longitud) throws Exception {
-		Address address = this.addressEJB.getByLatAndLng(latitud, longitud);
-		if (address == null) {
-			address = new Address();
-			address.setLat(latitud);
-			address.setLng(longitud);
-		}
-		agency.setAddress(address);
-	}
-	
 	private void addPackagePaymentMethods(PackageOffer packageOffer, List<Integer> paymentMethods) throws Exception {
 		packageOffer.setPaymentMethods(new ArrayList<PaymentMethod>());
 		PaymentMethod pm;

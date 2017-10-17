@@ -1,6 +1,8 @@
 package ar.edu.uade.ia.entities.business;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -11,11 +13,22 @@ public class Destination extends PersistentObject {
 
 	private String name;
 
+	@ManyToOne(cascade = CascadeType.ALL)
+	private Address address;
+	
 	public String getName() {
 		return name;
 	}
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public Address getAddress() {
+		return address;
+	}
+
+	public void setAddress(Address address) {
+		this.address = address;
 	}
 }

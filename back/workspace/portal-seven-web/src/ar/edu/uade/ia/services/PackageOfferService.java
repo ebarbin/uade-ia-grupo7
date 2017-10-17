@@ -84,7 +84,7 @@ public class PackageOfferService {
 			return Response.ok(new PortalResponse(e.getMessage())).build();
 		}
 	}
-
+	
 	@PUT
 	@Path("/authorize/{id}")
 	@Produces(MediaType.APPLICATION_JSON)
