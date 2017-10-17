@@ -1,5 +1,8 @@
 package ar.edu.uade.ia.integrations.packageOffer;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.ejb.ActivationConfigProperty;
 import javax.ejb.EJB;
 import javax.ejb.MessageDriven;
@@ -10,11 +13,23 @@ import javax.jms.TextMessage;
 import org.jboss.logging.Logger;
 
 import ar.edu.uade.ia.common.enums.LoggingAction;
+import ar.edu.uade.ia.common.enums.PaymentMethodEnum;
 import ar.edu.uade.ia.common.jackson.JsonConverter;
+import ar.edu.uade.ia.ejbs.AddressEJB;
+import ar.edu.uade.ia.ejbs.AgencyEJB;
+import ar.edu.uade.ia.ejbs.DestinationEJB;
 import ar.edu.uade.ia.ejbs.PackageOfferEJB;
+import ar.edu.uade.ia.ejbs.PaymentMethodEJB;
+import ar.edu.uade.ia.ejbs.ServicePackageEJB;
+import ar.edu.uade.ia.entities.business.Address;
+import ar.edu.uade.ia.entities.business.Agency;
+import ar.edu.uade.ia.entities.business.Destination;
 import ar.edu.uade.ia.entities.business.PackageOffer;
+import ar.edu.uade.ia.entities.business.PaymentMethod;
+import ar.edu.uade.ia.entities.business.ServicePackage;
 import ar.edu.uade.ia.integrations.backOffice.logging.LoggingJMS;
 import ar.edu.uade.ia.integrations.common.AbstractQueueListener;
+import ar.edu.uade.ia.integrations.hotelOffer.HotelOfferQueueListener;
 import ar.edu.uade.ia.integrations.packageOffer.message.PackageOfferMessage;
 
 /**
@@ -33,12 +48,25 @@ public class PackageOfferQueueListener extends AbstractQueueListener implements 
 	@EJB
 	private PackageOfferEJB packageOfferEJB;
 	
+	@EJB
+	private AgencyEJB agencyEJB;
+	
+	@EJB
+	private AddressEJB addressEJB;
+	
+	@EJB
+	private PaymentMethodEJB paymentMethodEJB;
+	
+	@EJB
+	private ServicePackageEJB servicePackageEJB;
+	
+	@EJB
+	private DestinationEJB destinationEJB;
+	
 	/**
 	 * Default constructor.
 	 */
-	public PackageOfferQueueListener() {
-
-	}
+	public PackageOfferQueueListener() {}
 
 	/**
 	 * @see MessageListener#onMessage(Message)
@@ -52,16 +80,82 @@ public class PackageOfferQueueListener extends AbstractQueueListener implements 
 			// TODO VALIDAR EL MENSAJE COMPLETO!!
 			String code = this.getProviderCode(pom.getCodigo_prestador());
 			
-			PackageOffer po = this.packageOfferEJB.getByCode(code);
-			if (po != null) {
-				//aca tenemos un asunto. porque a diferencia de la oferta de hoteles donde tenemos el hotel y la oferta.
-				//aca tenemos todo junto. Un prestador no puede mandar mas de una oferta de paquetes?
+			Agency agency = this.agencyEJB.getByCode(code);
+			if (agency == null) {
+				agency = new Agency();
+				agency.setCode(code);
+				agency.setName(null); //No Informado
+				agency.setEmail(pom.getMail_agencia());
+				this.addAgencyAddress(agency, pom.getLatitud(), pom.getLongitud());
 			}
+			
+			PackageOffer po = new PackageOffer();
+			po.setAgency(agency);
+			
+			po.setAvailableQuota(pom.getCupo_paquete());
+			po.setCancellationPolicy(pom.getPolitica_cancelacion());
+			po.setDescription(pom.getDescripcion_paquete());
+			
+			po.setOfferStart(HotelOfferQueueListener.DateFormatter.parse(pom.getFecha_desde()));
+			po.setOfferEnd(HotelOfferQueueListener.DateFormatter.parse(pom.getFecha_hasta()));
+			
+			this.addPackagePaymentMethods(po, pom.getMedio_pago_paquete());
+			this.addPackageServices(po, pom.getServicios_paquete());
+			po.setPrice(pom.getPrecio());
+			
+			this.addPackageDestination(po, pom.getDestino());
+			
+			this.packageOfferEJB.add(po);
 			
 			this.loggingService.info(LoggingAction.PACKAGE_OFFER_REGISTRATION);
 		} catch (Exception e) {
 			this.loggingService.error(e.getMessage());
 			PackageOfferQueueListener.LOGGER.error(e.getMessage(), e);
+		}
+	}
+
+	private void addPackageDestination(PackageOffer po, String destino) throws Exception {
+		Destination destination = this.destinationEJB.getByName(destino);
+		if (destination == null) {
+			destination = new Destination();
+			destination.setName(destino);
+		}
+		po.setDestination(destination);
+	}
+
+	private void addAgencyAddress(Agency agency, float latitud, float longitud) throws Exception {
+		Address address = this.addressEJB.getByLatAndLng(latitud, longitud);
+		if (address == null) {
+			address = new Address();
+			address.setLat(latitud);
+			address.setLng(longitud);
+		}
+		agency.setAddress(address);
+	}
+	
+	private void addPackagePaymentMethods(PackageOffer packageOffer, List<Integer> paymentMethods) throws Exception {
+		packageOffer.setPaymentMethods(new ArrayList<PaymentMethod>());
+		PaymentMethod pm;
+		for (Integer pmId : paymentMethods) {
+			pm = this.paymentMethodEJB.getByCode(pmId);
+			if (pm == null) {
+				pm = new PaymentMethod();
+				pm.setName(PaymentMethodEnum.getById(pmId).getDescription());
+			}
+			packageOffer.getPaymentMethods().add(pm);
+		}
+	}
+	
+	private void addPackageServices(PackageOffer packageOffer, List<String> services) throws Exception {
+		packageOffer.setServices(new ArrayList<ServicePackage>());
+		ServicePackage service;
+		for (String name : services) {
+			service = this.servicePackageEJB.getByName(name);
+			if (service == null) {
+				service = new ServicePackage();
+				service.setName(name);
+			}
+			packageOffer.getServices().add(service);
 		}
 	}
 

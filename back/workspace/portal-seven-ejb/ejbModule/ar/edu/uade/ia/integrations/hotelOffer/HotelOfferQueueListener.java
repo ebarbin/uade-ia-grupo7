@@ -18,7 +18,6 @@ import ar.edu.uade.ia.common.enums.LoggingAction;
 import ar.edu.uade.ia.common.enums.PaymentMethodEnum;
 import ar.edu.uade.ia.common.jackson.JsonConverter;
 import ar.edu.uade.ia.ejbs.AddressEJB;
-import ar.edu.uade.ia.ejbs.DestinationEJB;
 import ar.edu.uade.ia.ejbs.HotelEJB;
 import ar.edu.uade.ia.ejbs.PaymentMethodEJB;
 import ar.edu.uade.ia.ejbs.QuotaEJB;
@@ -57,8 +56,6 @@ public class HotelOfferQueueListener extends AbstractQueueListener implements Me
 	@EJB
 	private ImageEJB imageEJB;
 
-	@EJB
-	private DestinationEJB destinationEJB;
 
 	@EJB
 	private AddressEJB addressEJB;
