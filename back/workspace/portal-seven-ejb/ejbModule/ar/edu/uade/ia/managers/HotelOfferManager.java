@@ -45,7 +45,7 @@ public class HotelOfferManager {
 	public AuthorizeStatusDTO autorize(Integer id, HotelOfferRequestDTO filter) throws Exception {
 
 		if (this.hotelOfferEJB.hasQuota(id, filter)) {
-
+				System.out.println("quota OK");
 		} else {
 			throw new Exception("No hay cupos disponibles.");
 		}

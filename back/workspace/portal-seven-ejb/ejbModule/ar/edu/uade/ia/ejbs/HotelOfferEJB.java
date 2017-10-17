@@ -87,37 +87,35 @@ public class HotelOfferEJB {
 
 	public Boolean hasQuota(Integer hotelOfferId, HotelOfferRequestDTO filter) throws Exception {
 		
-
 		Date dateFrom = filter.getFromDate();
 		Date dateTo = filter.getToDate();
 		Integer roomQty = filter.getRoomQuantity();
+		Integer difDates = (int) ((dateTo.getTime()-dateFrom.getTime())/86400000);
+		difDates += 1;
 		int value = 0;
 		
-		// Quota cuyo dia este dentro del rango del filtro
-		// Quota cuyo hotel de su oferta coincida con el hotel del filtro
-		// Quota cuyo cupo diario supere o iguale la cantidad de habitaciones del filtro
-		// Quota cuya capacidad de personas de habitacion de la oferta sea superior o
-		// igual a cantidad de personas del filtro
-		StringBuffer queryBuilder = new StringBuffer("select quo");
-		queryBuilder.append(" from Quota as quo");
-		queryBuilder.append(" where quo.id = :hotelOfferId");
+		StringBuffer queryBuilder = new StringBuffer("select ofe");
+		queryBuilder.append(" from HotelOffer as ofe");
+		queryBuilder.append(" where 1 = 1");
 		queryBuilder.append(" and ( select count(quo)");
 		queryBuilder.append("		from Quota as quo ");
-		queryBuilder.append("		where quo.offer.id = ofe.id");
+		queryBuilder.append("		where quo.offer.id = ofe.id");		
 		queryBuilder.append(" 		and quo.quotaDate between :dateFrom and :dateTo");
 		queryBuilder.append(" 		and quo.availableQuota >= :roomQty");		
 		queryBuilder.append("     ) = :difDates");
-		
+		queryBuilder.append(" and ofe.id = :hotelOfferId"); 
+				
 		Query query = this.em.createQuery(queryBuilder.toString());
-			
-		query.setParameter("dateFrom", dateFrom, TemporalType.DATE);
-		query.setParameter("dateTo", dateTo, TemporalType.DATE);
+		
 		query.setParameter("hotelOfferId", hotelOfferId);
+		query.setParameter("dateFrom", dateFrom, TemporalType.DATE);
+		query.setParameter("dateTo", dateTo, TemporalType.DATE);			
 		query.setParameter("roomQty", roomQty);
+		query.setParameter("difDates", difDates.longValue());
+
+		value = query.getResultList().size();
 		
-		value = query.getFirstResult();
-		
-		return (value ==1);
+		return (value >0);
 	}
 	
 	public HotelOffer getDetail(Integer id) {

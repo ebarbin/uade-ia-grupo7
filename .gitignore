@@ -12,3 +12,4 @@ back/workspace/RemoteSystemsTempFiles/
 
 back/workspace/portal-seven-web/META-INF/
 back/workspace/portal-seven-ejb/ejbModule/META-INF/persistence.xml
+back/workspace/portal-seven-ejb/ejbModule/ar/edu/uade/ia/entities/business/Image.java
