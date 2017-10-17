@@ -9,7 +9,7 @@ public class PackageOfferMessage {
 	private String fecha_desde;
 	private String fecha_hasta;
 	private int cantidad_personas_paquete;
-	private String foto_paauete;
+	private String foto_paquete;
 	private String descripcion_paquete;
 	private List<String> servicios_paquete;
 	private float precio;
@@ -60,12 +60,12 @@ public class PackageOfferMessage {
 		this.cantidad_personas_paquete = cantidad_personas_paquete;
 	}
 
-	public String getFoto_paauete() {
-		return foto_paauete;
+	public String getFoto_paquete() {
+		return foto_paquete;
 	}
 
-	public void setFoto_paauete(String foto_paauete) {
-		this.foto_paauete = foto_paauete;
+	public void setFoto_paquete(String foto_paquete) {
+		this.foto_paquete = foto_paquete;
 	}
 
 	public String getDescripcion_paquete() {

@@ -7,11 +7,11 @@ import java.util.Hashtable;
 import javax.naming.Context;
 import javax.naming.InitialContext;
 
-import ar.edu.uade.ia.integrations.hotelOffer.producer.interfaces.HotelOfferProducerRemote;
 import ar.edu.uade.ia.integrations.packageOffer.producer.interfaces.PackageOfferProducerRemote;
 
 public class PackageOfferQueueProducer {
 
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public static void main(String[] args) throws Exception {
 		final Hashtable jndiProperties = new Hashtable();
 		jndiProperties.put(Context.URL_PKG_PREFIXES, "org.jboss.ejb.client.naming");
@@ -25,7 +25,7 @@ public class PackageOfferQueueProducer {
 		String lookupName = "ejb:" + earName + "/" + ejbModuleName + "/" + distinctName + "/" + ejbClassName + "!"
 				+ fullInterfaceName;
 		System.out.println("Conectando a " + lookupName);
-		HotelOfferProducerRemote remoteProducer = (HotelOfferProducerRemote)
+		PackageOfferProducerRemote remoteProducer = (PackageOfferProducerRemote)
 
 		context.lookup(lookupName);
 		

@@ -3,6 +3,7 @@ package ar.edu.uade.ia.entities.business;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -28,7 +29,7 @@ public class PackageOffer extends PersistentObject {
 	
 	private String cancellationPolicy;
 	
-	@ManyToMany(fetch = FetchType.LAZY)
+	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinTable(name = "package_offer_image", joinColumns = {
 			@JoinColumn(name = "package_offer_id", nullable = false, updatable = false) }, inverseJoinColumns = {
 					@JoinColumn(name = "image_id", nullable = false, updatable = false) })
@@ -36,24 +37,24 @@ public class PackageOffer extends PersistentObject {
 
 	private String description;
 
-	@ManyToMany(fetch = FetchType.LAZY)
+	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinTable(name = "package_offer_service_package", joinColumns = {
 			@JoinColumn(name = "package_offer_id", nullable = false, updatable = false) }, inverseJoinColumns = {
 					@JoinColumn(name = "service_package_id", nullable = false, updatable = false) })
 	private List<ServicePackage> services;
 
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.ALL)
 	private Destination destination;
 
 	private Integer availableQuota;
 
-	@ManyToMany
+	@ManyToMany(cascade = CascadeType.ALL)
 	@JoinTable(name = "package_offer_payment_method", joinColumns = {
 			@JoinColumn(name = "package_offer_id", nullable = false, updatable = false) }, inverseJoinColumns = {
 					@JoinColumn(name = "payment_method_id", nullable = false, updatable = false) })
 	private List<PaymentMethod> paymentMethods;
 
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.ALL)
 	private Agency agency;
 	
 	public List<Image> getImages() {
