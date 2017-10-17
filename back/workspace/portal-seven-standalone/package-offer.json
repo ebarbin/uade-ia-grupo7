@@ -1,0 +1,17 @@
+{
+	"codigo_prestador":"OH_123_ABC",
+	"destino":"Miami",
+	"fecha_desde":20170920,
+	"fecha_hasta":20170920,
+	"cantidad_personas_paquete":4,
+	"foto_paquete":"http://foto_paquete",
+	"descripcion_paquete":"paquete lindo",
+	"servicios_paquete":["WiFi","Sauna"],
+	"precio":250.90,
+	"latitud":-33.867,
+	"longitud":151.1957,
+	"politica_cancelacion":"politicas",
+	"medio_pago_paquete":[1,2,3,4,5],
+	"mail_agencia":"agencia@gmail.com",
+	"cupo_paquete":20
+}

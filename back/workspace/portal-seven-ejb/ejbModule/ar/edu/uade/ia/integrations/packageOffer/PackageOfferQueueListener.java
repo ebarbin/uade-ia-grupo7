@@ -58,7 +58,7 @@ public class PackageOfferQueueListener extends AbstractQueueListener implements 
 				//aca tenemos todo junto. Un prestador no puede mandar mas de una oferta de paquetes?
 			}
 			
-			this.loggingService.info(LoggingAction.HOTEL_OFFER_REGISTRATION);
+			this.loggingService.info(LoggingAction.PACKAGE_OFFER_REGISTRATION);
 		} catch (Exception e) {
 			this.loggingService.error(e.getMessage());
 			PackageOfferQueueListener.LOGGER.error(e.getMessage(), e);
