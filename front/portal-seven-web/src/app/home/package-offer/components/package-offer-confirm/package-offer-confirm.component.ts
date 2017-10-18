@@ -38,7 +38,7 @@ export class PackageOfferConfirmComponent {
         this.dialogRef.close();
         this.router.navigate(['home/package-authorization-resume']);
       } else {
-        this.toastr.error('Prestador no autorizador.');
+        this.toastr.error(authorizeStatus.description);
         this.onCancel();
       }
     }).catch((res:HttpErrorResponse) => {

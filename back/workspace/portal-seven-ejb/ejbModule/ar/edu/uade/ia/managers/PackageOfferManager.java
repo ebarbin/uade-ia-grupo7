@@ -40,15 +40,15 @@ public class PackageOfferManager {
 
 	public AuthorizeStatusDTO autorize(Integer id, PackageOfferRequestDTO filter) throws Exception {
 
+		AuthorizeStatusDTO dto = new AuthorizeStatusDTO();
 		if (this.packageOfferEJB.hasQuota(id, filter)){
-
+			// TODO MANDAR A AUTORIZAR AL WEBSERVICE SOAP
+			dto.setStatus(Boolean.TRUE);
 		} else {
-			throw new Exception("No hay paquetes disponibles.");
+			dto.setStatus(Boolean.FALSE);
+			dto.setDescription("No hay paquetes disponibles.");
 		}
 
-		// TODO MANDAR A AUTORIZAR AL WEBSERVICE SOAP
-		AuthorizeStatusDTO dto = new AuthorizeStatusDTO();
-		dto.setStatus(Boolean.TRUE);
 		return dto;
 	}
 	

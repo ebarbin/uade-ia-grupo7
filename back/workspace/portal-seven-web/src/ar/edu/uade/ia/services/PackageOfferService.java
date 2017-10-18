@@ -68,7 +68,7 @@ public class PackageOfferService {
 			return Response.ok(new PortalResponse(dto)).build();
 		} catch (Exception e) {
 			PackageOfferService.LOGGER.error(e.getMessage(), e);
-			return Response.status(Response.Status.BAD_REQUEST).entity(new PortalResponse(e.getMessage())).build();
+			return Response.ok(new PortalResponse(e.getMessage())).build();
 		}
 	}
 	

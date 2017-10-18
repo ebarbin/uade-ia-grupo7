@@ -35,7 +35,7 @@ export class HotelOfferConfirmComponent {
         this.dialogRef.close();
         this.router.navigate(['home/hotel-authorization-resume']);
       } else {
-        this.toastr.error('Prestador no autorizador.');
+        this.toastr.error(authorizeStatus.description);
         this.onCancel();
       }
     }).catch((res:HttpErrorResponse) => {

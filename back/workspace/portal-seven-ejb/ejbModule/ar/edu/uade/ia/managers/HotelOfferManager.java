@@ -44,15 +44,15 @@ public class HotelOfferManager {
 
 	public AuthorizeStatusDTO autorize(Integer id, HotelOfferRequestDTO filter) throws Exception {
 
-		if (this.hotelOfferEJB.hasQuota(id, filter)) {
-				System.out.println("quota OK");
-		} else {
-			throw new Exception("No hay cupos disponibles.");
-		}
-
-		// TODO MANDAR A AUTORIZAR AL WEBSERVICE SOAP
 		AuthorizeStatusDTO dto = new AuthorizeStatusDTO();
-		dto.setStatus(Boolean.TRUE);
+		if (this.hotelOfferEJB.hasQuota(id, filter)) {
+			// TODO MANDAR A AUTORIZAR AL WEBSERVICE SOAP
+			dto.setStatus(Boolean.TRUE);
+		} else {
+			dto.setStatus(Boolean.FALSE);
+			dto.setDescription("No hay paquetes disponibles.");
+		}
+		
 		return dto;
 	}
 
