@@ -2,9 +2,7 @@ package ar.edu.uade.ia.integrations.common;
 
 import java.io.BufferedInputStream;
 import java.io.ByteArrayOutputStream;
-import java.io.FileNotFoundException;
 import java.io.InputStream;
-import java.net.ConnectException;
 import java.net.URL;
 import java.text.SimpleDateFormat;
 
@@ -33,7 +31,7 @@ public abstract class AbstractQueueListener {
 			in.close();
 
 			return out.toByteArray();
-		} catch (ConnectException | FileNotFoundException e) {
+		} catch (Exception e) {
 			AbstractQueueListener.LOGGER.error("Error al descargar la imagen: " + e.getMessage(), e);
 			return null;
 		}
