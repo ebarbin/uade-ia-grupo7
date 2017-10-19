@@ -33,12 +33,14 @@ public class HotelOfferEJB {
 	public List<HotelOffer> search(HotelOfferRequestDTO request) throws Exception {
 		this.fixDatesForQuery(request);
 		
-		Integer idHotel = request.getHotel() != null ? request.getHotel().getId() : null;
+		Integer hotelId = request.getHotel() != null ? request.getHotel().getId() : null;
 		Date dateFrom = request.getFromDate();
 		Date dateTo = request.getToDate();
 		Integer roomQty = request.getRoomQuantity();
 		Integer peoplePerRoom = request.getPeoplePerRoom();
 		Integer difDates = 0;
+		Float minPrice = request.getMinPrice();
+		Float maxPrice = request.getMaxPrice();
 		
 		// Quota cuyo dia este dentro del rango del filtro
 		// Quota cuyo hotel de su oferta coincida con el hotel del filtro
@@ -52,14 +54,18 @@ public class HotelOfferEJB {
 		queryBuilder.append(" inner join ofe.hotel ho");
 		queryBuilder.append(" inner join ofe.room ro");
 		queryBuilder.append(" where 1 = 1");
+		if (minPrice != null) {
+			queryBuilder.append(" and ofe.price >= :minPrice");
+		}
+		if (maxPrice != null) {
+			queryBuilder.append(" and ofe.price <= :maxPrice");
+		}
 		queryBuilder.append(" and ( select count(quo)");
 		queryBuilder.append("		from Quota as quo ");
 		queryBuilder.append("		where quo.offer.id = ofe.id");
 		
 		if (dateFrom != null && dateTo != null) {
 			queryBuilder.append(" 	and quo.quotaDate between :dateFrom and :dateTo");
-//			queryBuilder.append(" 	and quo.quotaDate >= :dateFrom");
-//			queryBuilder.append(" 	and quo.quotaDate <= :dateTo");
 			difDates = (int) ((dateTo.getTime()-dateFrom.getTime())/86400000);
 			difDates += 1;
 		}
@@ -68,14 +74,18 @@ public class HotelOfferEJB {
 		
 		queryBuilder.append("     ) = :difDates");
 		
-		if (idHotel != null)
-			queryBuilder.append(" and ho.id = :idHotel");
+		if (hotelId != null)
+			queryBuilder.append(" and ho.id = :hotelId");
 		if (peoplePerRoom != null)
 			queryBuilder.append(" and ro.capacity >= :peoplePerRoom");
 			
 		Query query = this.em.createQuery(queryBuilder.toString());
-		if (idHotel != null)
-			query.setParameter("idHotel", idHotel);
+		if (minPrice != null)
+			query.setParameter("minPrice", minPrice);
+		if (maxPrice != null)
+			query.setParameter("maxPrice", maxPrice);
+		if (hotelId != null)
+			query.setParameter("hotelId", hotelId);
 		if (roomQty != null)
 			query.setParameter("roomQty", roomQty);
 		if (peoplePerRoom != null)

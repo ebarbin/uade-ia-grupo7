@@ -1,3 +1,7 @@
 .mat-expansion-panel-header-title {
     font-weight: bold;
 }
+
+.mat-select{
+    margin-top: -8px;
+}

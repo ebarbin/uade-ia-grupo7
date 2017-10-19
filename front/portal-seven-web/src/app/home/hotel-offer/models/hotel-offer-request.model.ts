@@ -7,5 +7,7 @@ export class HotelOfferRequest {
         public fromDate:Date,
         public hotel: AutocompleteResource,
         public peoplePerRoom: number,
-        public roomQuantity: number){}
+        public roomQuantity: number,
+        public minPrice,
+        public maxPrice){}
 }

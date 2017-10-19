@@ -12,7 +12,9 @@ public class HotelOfferRequestDTO implements Serializable {
 	private Date fromDate;
 	private Integer roomQuantity;
 	private Integer peoplePerRoom;
-
+	private Float minPrice;
+	private Float maxPrice;
+	
 	public SimpleNamedDTO getHotel() {
 		return hotel;
 	}
@@ -51,5 +53,21 @@ public class HotelOfferRequestDTO implements Serializable {
 
 	public void setPeoplePerRoom(Integer peoplePerRoom) {
 		this.peoplePerRoom = peoplePerRoom;
+	}
+
+	public Float getMinPrice() {
+		return minPrice;
+	}
+
+	public void setMinPrice(Float minPrice) {
+		this.minPrice = minPrice;
+	}
+
+	public Float getMaxPrice() {
+		return maxPrice;
+	}
+
+	public void setMaxPrice(Float maxPrice) {
+		this.maxPrice = maxPrice;
 	}
 }

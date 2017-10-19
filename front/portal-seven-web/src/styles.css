@@ -51,3 +51,7 @@ body {
 .mat-tab-body-content {
     margin-left:10px !important;
 }
+
+.mat-select-placeholder.mat-floating-placeholder{
+    top: -15px !important;
+}

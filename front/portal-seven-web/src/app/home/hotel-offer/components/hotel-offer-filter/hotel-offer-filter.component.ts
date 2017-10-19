@@ -37,6 +37,11 @@ export class HotelOfferFilterComponent implements OnInit {
         if (form.value.fromDate > form.value.toDate)
           return false;
         
+      //console.log(form.controls.minPrice);
+      
+      if (form.value.minPrice)
+        console.log(parseFloat(form.value.minPrice));
+
       return true;
     }
 
