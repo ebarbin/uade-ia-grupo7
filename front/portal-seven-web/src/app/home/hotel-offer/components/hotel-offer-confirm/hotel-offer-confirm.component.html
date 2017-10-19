@@ -2,9 +2,11 @@
 <hr style="border-color: black;">
 <md-dialog-content>
   <h2>{{srv.getSelected().hotel.name}}</h2>
-  <p>Habitación tipo: {{srv.getSelected().room.type}}</p>
+  <p>Habitación Tipo: {{srv.getSelected().room.type | roomType}}</p>
   <p><b>Precio Total: {{srv.getSelected().price | currency:'ARS':true}}</b></p>
   <p>Medios de Pago: {{srv.getSelected().hotel.paymentMethods | join: ' - '}}</p>
+  <p>Desde: {{srv.getFilterRequest().fromDate | date:'dd/MM/yyyy'}}</p>
+  <p>Hasta: {{srv.getFilterRequest().toDate | date:'dd/MM/yyyy'}}</p>
 </md-dialog-content>
 <md-dialog-actions align="center">
     <button md-raised-button type="button" color="success" (click)="onConfirm()">

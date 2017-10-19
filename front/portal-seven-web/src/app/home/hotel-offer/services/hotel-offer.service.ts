@@ -30,6 +30,10 @@ export class HotelOfferService implements Holder {
     private httpClient: HttpClient,
     private toastr: ToastrService) {}
 
+    getFilterRequest(){
+      return this.filterRequest;
+    }
+
     getResultsChanged(): Subject<HotelOfferHeader[]>{
       return this.resultsChanged;
     }

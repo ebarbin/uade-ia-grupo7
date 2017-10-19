@@ -9,9 +9,11 @@
     <md-card-content>
         <div class="col-lg-6 col-md-6" style="margin-top: -20px;">
           <h2>{{hotelOfferService.getSelected().hotel.name}}</h2>
-          <p>Habitación tipo: {{hotelOfferService.getSelected().room.type}}</p>
+          <p>Habitación Tipo: {{hotelOfferService.getSelected().room.type | roomType}}</p>
           <p><b>Precio Total: {{hotelOfferService.getSelected().price | currency:'ARS':true}}</b></p>
           <p>Medios de Pago: {{hotelOfferService.getSelected().hotel.paymentMethods | join: ' - '}}</p>
+          <p>Desde: {{hotelOfferService.getFilterRequest().fromDate | date:'dd/MM/yyyy'}}</p>
+          <p>Hasta: {{hotelOfferService.getFilterRequest().toDate | date:'dd/MM/yyyy'}}</p>
         </div>
         <div class="col-lg-6 col-md-6">
           <img class="img-responsive img-resume" 
