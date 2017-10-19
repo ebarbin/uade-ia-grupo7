@@ -16,7 +16,10 @@
       <md-tab label="Habitación" >
         <h3>Descripción</h3>
         <p>{{srv.getSelected().room.description}}</p>
+        <h3>Tipo de Habitación</h3>
         <p>Tipo: {{srv.getSelected().room.type | roomType}}</p>
+        <h3>Servicios</h3>
+        <p>{{srv.getSelected().room.services  | join:' - '}}</p>
         <h3>Imagenes de la habitación</h3>
         <app-img-gallery [images]="srv.getSelected().room.images"></app-img-gallery>
       </md-tab>
@@ -24,7 +27,10 @@
         <div *ngFor="let room of otherRooms">
           <h3>Descripción</h3>
           <p>{{room.description}}</p>
+          <h3>Tipo de Habitación</h3>
           <p>Tipo: {{room.type | roomType}}</p>
+          <h3>Servicios</h3>
+          <p>{{room.services | join: '-'}}</p>
           <h3>Imagenes de la habitación</h3>
           <app-img-gallery [images]="room.images"></app-img-gallery>
         </div>

@@ -1,5 +1,6 @@
 package ar.edu.uade.ia.ejbs;
 
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -30,7 +31,8 @@ public class HotelOfferEJB {
 
 	@SuppressWarnings("unchecked")
 	public List<HotelOffer> search(HotelOfferRequestDTO request) throws Exception {
-
+		this.fixDatesForQuery(request);
+		
 		Integer idHotel = request.getHotel() != null ? request.getHotel().getId() : null;
 		Date dateFrom = request.getFromDate();
 		Date dateTo = request.getToDate();
@@ -56,6 +58,8 @@ public class HotelOfferEJB {
 		
 		if (dateFrom != null && dateTo != null) {
 			queryBuilder.append(" 	and quo.quotaDate between :dateFrom and :dateTo");
+//			queryBuilder.append(" 	and quo.quotaDate >= :dateFrom");
+//			queryBuilder.append(" 	and quo.quotaDate <= :dateTo");
 			difDates = (int) ((dateTo.getTime()-dateFrom.getTime())/86400000);
 			difDates += 1;
 		}
@@ -85,6 +89,24 @@ public class HotelOfferEJB {
 		return query.getResultList();
 	}
 
+	private void fixDatesForQuery(HotelOfferRequestDTO hor) {
+		Calendar from = Calendar.getInstance();
+		from.setTime(hor.getFromDate());
+		from.set(Calendar.HOUR_OF_DAY,0);
+		from.set(Calendar.MINUTE,0);
+		from.set(Calendar.SECOND,0);
+		from.set(Calendar.MILLISECOND,0);
+		hor.setFromDate(from.getTime());
+		
+		Calendar to = Calendar.getInstance();
+		to.setTime(hor.getToDate());
+		to.set(Calendar.HOUR_OF_DAY, 23);
+		to.set(Calendar.MINUTE, 59);
+		to.set(Calendar.SECOND, 59);
+		to.set(Calendar.MILLISECOND, 999);
+		hor.setToDate(to.getTime());
+	}
+	
 	public Boolean hasQuota(Integer hotelOfferId, HotelOfferRequestDTO filter) throws Exception {
 		
 		Date dateFrom = filter.getFromDate();

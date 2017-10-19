@@ -50,7 +50,7 @@ public class HotelOfferManager {
 			dto.setStatus(Boolean.TRUE);
 		} else {
 			dto.setStatus(Boolean.FALSE);
-			dto.setDescription("No hay paquetes disponibles.");
+			dto.setDescription("No hay hoteles disponibles.");
 		}
 		
 		return dto;
