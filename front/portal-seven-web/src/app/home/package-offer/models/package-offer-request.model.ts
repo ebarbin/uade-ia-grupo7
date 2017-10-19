@@ -6,5 +6,7 @@ export class PackageOfferRequest {
         public toDate: Date,
         public fromDate:Date,
         public destination: AutocompleteResource,
-        public quantityPeople: number){}
+        public quantityPeople: number,
+        public minPrice:number,
+        public maxPrice:number){}
 }

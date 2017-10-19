@@ -44,6 +44,13 @@ export class PackageOfferFilterComponent implements OnInit {
         if (form.value.fromDate > form.value.toDate)
           return false;
         
+      if (form.value.minPrice && !this.isNumber(form.value.minPrice)) return false;
+      if (form.value.maxPrice && !this.isNumber(form.value.maxPrice)) return false;
+      if (form.value.minPrice && form.value.maxPrice && 
+        parseFloat(form.value.minPrice) > parseFloat(form.value.maxPrice)) {
+        return false; 
+      }
+
       return true;
     }
     
@@ -69,5 +76,9 @@ export class PackageOfferFilterComponent implements OnInit {
     private fixForm(form:NgForm){
       form.value.destination = form.value.destination && typeof form.value.destination == 'object' ? form.value.destination : null;
       form.value.quantityPeople = form.value.quantityPeople == -1 || form.value.quantityPeople == '' ? null : form.value.quantityPeople;
+    }
+
+    private isNumber(n:any) {
+      return !isNaN(parseFloat(n)) && isFinite(n);
     }
 }

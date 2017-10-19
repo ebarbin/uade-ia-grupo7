@@ -11,7 +11,9 @@ public class PackageOfferRequestDTO implements Serializable {
 	private Date toDate;
 	private Date fromDate;
 	private Integer quantityPeople;
-
+	private Float minPrice;
+	private Float maxPrice;
+	
 	public SimpleNamedDTO getDestination() {
 		return destination;
 	}
@@ -42,5 +44,21 @@ public class PackageOfferRequestDTO implements Serializable {
 
 	public void setQuantityPeople(Integer quantityPeople) {
 		this.quantityPeople = quantityPeople;
+	}
+
+	public Float getMinPrice() {
+		return minPrice;
+	}
+
+	public void setMinPrice(Float minPrice) {
+		this.minPrice = minPrice;
+	}
+
+	public Float getMaxPrice() {
+		return maxPrice;
+	}
+
+	public void setMaxPrice(Float maxPrice) {
+		this.maxPrice = maxPrice;
 	}
 }

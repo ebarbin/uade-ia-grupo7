@@ -35,12 +35,19 @@ public class PackageOfferEJB {
 		Date dateFrom = request.getFromDate();
 		Date dateTo = request.getToDate();
 		Integer quantityPeople = request.getQuantityPeople();
+		Float minPrice = request.getMinPrice();
+		Float maxPrice = request.getMaxPrice();
 		
 		StringBuffer queryBuilder = new StringBuffer("select pkOf");
 		queryBuilder.append(" from PackageOffer as pkOf");
 		queryBuilder.append(" inner join pkOf.destination as dest");
 		queryBuilder.append(" where 1 = 1");
-		
+		if (minPrice != null) {
+			queryBuilder.append(" and pkOf.price >= :minPrice");
+		}
+		if (maxPrice != null) {
+			queryBuilder.append(" and pkOf.price <= :maxPrice");
+		}
 		if (destinationId != null)
 			queryBuilder.append(" and dest.id = :destinationId");
 		if (dateFrom != null && dateTo != null)
@@ -52,8 +59,11 @@ public class PackageOfferEJB {
 		if (quantityPeople != null)
 			queryBuilder.append(" and pkOf.availableQuota >= :quantityPeople");
 		
-		
 		Query query = this.em.createQuery(queryBuilder.toString());
+		if (minPrice != null)
+			query.setParameter("minPrice", minPrice);
+		if (maxPrice != null)
+			query.setParameter("maxPrice", maxPrice);
 		if (destinationId != null)
 			query.setParameter("destinationId", destinationId);
 		if (quantityPeople != null)
