@@ -36,12 +36,14 @@ export class HotelOfferFilterComponent implements OnInit {
       if (form.value.fromDate && form.value.toDate)
         if (form.value.fromDate > form.value.toDate)
           return false;
-        
-      //console.log(form.controls.minPrice);
       
-      if (form.value.minPrice)
-        console.log(parseFloat(form.value.minPrice));
-
+      if (form.value.minPrice && !this.isNumber(form.value.minPrice)) return false;
+      if (form.value.maxPrice && !this.isNumber(form.value.maxPrice)) return false;
+      if (form.value.minPrice && form.value.maxPrice && 
+        parseFloat(form.value.minPrice) > parseFloat(form.value.maxPrice)) {
+        return false; 
+      }
+      
       return true;
     }
 
@@ -79,6 +81,10 @@ export class HotelOfferFilterComponent implements OnInit {
       form.value.hotel = form.value.hotel && typeof form.value.hotel == 'object' ? form.value.hotel : null;
       form.value.peoplePerRoom = form.value.peoplePerRoom == -1 || form.value.peoplePerRoom == '' ? null : form.value.peoplePerRoom;
       form.value.roomQuantity = form.value.roomQuantity == -1 || form.value.roomQuantity == '' ? null : form.value.roomQuantity;
+    }
+
+    private isNumber(n:any) {
+      return !isNaN(parseFloat(n)) && isFinite(n);
     }
 
     private getToday(){
