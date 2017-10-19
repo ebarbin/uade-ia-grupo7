@@ -28,7 +28,9 @@ export class PackageOfferConfirmComponent {
 
   onCancel(){
     this.dialogRef.close();
-    this.dialog.open(PackageOfferDetailComponent);
+    this.dialog.open(PackageOfferDetailComponent,{
+      width: '850px'
+    });
   }
 
   onConfirm(){
@@ -39,7 +41,6 @@ export class PackageOfferConfirmComponent {
         this.router.navigate(['home/package-authorization-resume']);
       } else {
         this.toastr.error(authorizeStatus.description);
-        this.onCancel();
       }
     }).catch((res:HttpErrorResponse) => {
       this.toastr.error('Ha ocurrido un error. Contacte a un administrador.');

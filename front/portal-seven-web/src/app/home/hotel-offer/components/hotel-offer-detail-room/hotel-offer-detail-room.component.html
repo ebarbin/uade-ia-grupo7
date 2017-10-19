@@ -1,0 +1,8 @@
+<h3>Descripción</h3>
+<p>{{room.description}}</p>
+<h3>Tipo de Habitación</h3>
+<p>Tipo: {{room.type | roomType}}</p>
+<h3>Servicios</h3>
+<p>{{room.services  | join:' - '}}</p>
+<h3>Imagenes de la habitación</h3>
+<app-img-gallery [images]="room.images"></app-img-gallery>

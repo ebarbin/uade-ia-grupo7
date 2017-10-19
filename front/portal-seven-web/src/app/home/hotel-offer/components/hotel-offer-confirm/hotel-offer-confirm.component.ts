@@ -25,7 +25,9 @@ export class HotelOfferConfirmComponent {
 
   onCancel(){
     this.dialogRef.close();
-    this.dialog.open(HotelOfferDetailComponent);
+    this.dialog.open(HotelOfferDetailComponent,{
+      width: '850px'
+    });
   }
 
   onConfirm(){
@@ -36,7 +38,6 @@ export class HotelOfferConfirmComponent {
         this.router.navigate(['home/hotel-authorization-resume']);
       } else {
         this.toastr.error(authorizeStatus.description);
-        this.onCancel();
       }
     }).catch((res:HttpErrorResponse) => {
       this.toastr.error('Ha ocurrido un error. Contacte a un administrador.');
