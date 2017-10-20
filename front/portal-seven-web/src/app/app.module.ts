@@ -1,3 +1,4 @@
+import { FavoriteHotelOfferService } from './home/hotel-offer/services/favorite-hotel-offer.service';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { LOCALE_ID, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
@@ -35,6 +36,7 @@ import { PackageOfferResultGuard } from './home/package-offer/services/package-o
   providers: [
     AuthGuard, AuthService, UserService, ImageService, AutocompleteService, 
     HotelOfferService, PackageOfferService, HotelOfferResultGuard, PackageOfferResultGuard,
+    FavoriteHotelOfferService,
     { provide: LOCALE_ID, useValue: 'es-AR' },
     { provide: HTTP_INTERCEPTORS, useClass: MyHttpInterceptor, multi: true }
   ],

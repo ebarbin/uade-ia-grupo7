@@ -1,3 +1,4 @@
+import { AuthService } from './../../../auth/services/auth.service';
 import { Holder } from './../../../shared/models/holder.interface';
 import { AuthorizeStatus } from './../../../shared/models/authorize-status.model';
 import { Room } from './../models/room.model';
@@ -26,6 +27,7 @@ export class HotelOfferService implements Holder {
   private resultsChanged: Subject<HotelOfferHeader[]> = new Subject;
   
   constructor(
+    private authService: AuthService,
     private router:Router,
     private httpClient: HttpClient,
     private toastr: ToastrService) {}
@@ -103,9 +105,10 @@ export class HotelOfferService implements Holder {
     search(request:HotelOfferRequest){
       //HACK guard reevaluate
       this.router.navigate(['/home/hotel-offer']);
-
+      
       this.filterRequest = request;
-      return this.httpClient.post('portal-seven-web/api/rest/hotel-offer/search', request)
+      return this.httpClient.post('portal-seven-web/api/rest/hotel-offer/search/' + 
+        this.authService.getUser().id, request)
         .map((response:PortalResponse)=>{
           if(response.success) {
             this.hotelOffers = <HotelOfferHeader[]>response.data;

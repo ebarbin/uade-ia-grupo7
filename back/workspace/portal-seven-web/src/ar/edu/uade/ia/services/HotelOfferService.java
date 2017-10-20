@@ -30,19 +30,19 @@ import ar.edu.uade.ia.services.response.PortalResponse;
 public class HotelOfferService {
 
 	private static Logger LOGGER = Logger.getLogger(HotelOfferService.class);
-	
+
 	@EJB
 	private HotelOfferManager hotelOfferManager;
 
 	@EJB
 	private LoggingJMS logging;
-	
+
 	@POST
-	@Path("/search")
+	@Path("/search/{userId}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response search(HotelOfferRequestDTO request) {
+	public Response search(HotelOfferRequestDTO request, @PathParam("userId") Integer userId) {
 		try {
-			List<HotelOfferHeaderDTO> result = this.hotelOfferManager.search(request);
+			List<HotelOfferHeaderDTO> result = this.hotelOfferManager.search(request, userId);
 			return Response.ok(new PortalResponse(result)).build();
 		} catch (Exception e) {
 			this.logging.error(e.getMessage());
@@ -63,7 +63,7 @@ public class HotelOfferService {
 			return Response.ok(new PortalResponse(e.getMessage())).build();
 		}
 	}
-	
+
 	@GET
 	@Path("/detail/{id}")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -77,7 +77,7 @@ public class HotelOfferService {
 			return Response.ok(new PortalResponse(e.getMessage())).build();
 		}
 	}
-	
+
 	@PUT
 	@Path("/authorize/{id}")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -90,7 +90,7 @@ public class HotelOfferService {
 			return Response.ok(new PortalResponse(e.getMessage())).build();
 		}
 	}
-	
+
 	private void clearImageDataField(HotelOfferDTO ho) {
 		if (ho.getHotel() != null && ho.getHotel().getImages() != null) {
 			for (ImageDTO img : ho.getHotel().getImages()) {

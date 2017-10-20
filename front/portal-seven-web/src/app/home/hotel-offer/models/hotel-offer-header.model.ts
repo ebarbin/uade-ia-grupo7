@@ -12,5 +12,6 @@ export class HotelOfferHeader {
         public roomCapacity: number,
         public offerStart: Date,
         public offerEnd: Date,
-        public services: SimpleNamed[]){}
+        public services: SimpleNamed[],
+        public favorite: boolean){}
 }

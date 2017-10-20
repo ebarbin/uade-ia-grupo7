@@ -13,6 +13,8 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import ar.edu.uade.ia.entities.PortalUser;
+
 @Entity
 @Table(name = "quota_reservation")
 public class QuotaReservation extends PersistentObject {

@@ -9,9 +9,11 @@
     <div class="card-result">
       <md-card class="card-row card col-lg-3 col-md-4 col-sm-6 col-xs-6"
       *ngFor="let hoh of hotelOfferService.getResults()">
-      <button class="ribbon" md-mini-fab color="accent" [ngClass]="{'non-favorite': !isFavorite(hoh), 'favorite': isFavorite(hoh)}">
+      <span class="ribbon" color="accent" 
+        (click)="markFavorite(hoh)" 
+        [ngClass]="{'non-favorite': !hoh.favorite, 'favorite': hoh.favorite}">
           <i class="fa fa-heart" aria-hidden="true"></i>
-      </button>
+      </span>
       <div (click)="onDetail(hoh)">
         <img class="img-responsive img-card" 
           [src]="hoh.images | first | imageGetter">

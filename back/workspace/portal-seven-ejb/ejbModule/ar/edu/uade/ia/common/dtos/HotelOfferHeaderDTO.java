@@ -26,6 +26,8 @@ public class HotelOfferHeaderDTO implements Serializable {
 	
 	private Date offerEnd;
 	
+	private Boolean favorite;
+	
 	public HotelOfferHeaderDTO() {}
 	
 	public Integer getId() {
@@ -98,5 +100,13 @@ public class HotelOfferHeaderDTO implements Serializable {
 
 	public void setOfferEnd(Date offerEnd) {
 		this.offerEnd = offerEnd;
+	}
+
+	public Boolean getFavorite() {
+		return favorite;
+	}
+
+	public void setFavorite(Boolean favorite) {
+		this.favorite = favorite;
 	}
 }

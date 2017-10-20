@@ -7,6 +7,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
 @Table(name = "hotel_offer")
@@ -30,6 +31,9 @@ public class HotelOffer extends PersistentObject {
 	@ManyToOne(cascade = CascadeType.ALL)
 	private Room room;
 
+	@Transient
+	private Boolean favorite;
+	
 	public Hotel getHotel() {
 		return hotel;
 	}
@@ -76,5 +80,13 @@ public class HotelOffer extends PersistentObject {
 
 	public void setOfferEnd(Date offerEnd) {
 		this.offerEnd = offerEnd;
+	}
+
+	public Boolean getFavorite() {
+		return favorite;
+	}
+
+	public void setFavorite(Boolean favorite) {
+		this.favorite = favorite;
 	}
 }

@@ -7,7 +7,7 @@ import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
-import ar.edu.uade.ia.entities.business.PortalUser;
+import ar.edu.uade.ia.entities.PortalUser;
 
 /**
  * Session Bean implementation class UserEJB

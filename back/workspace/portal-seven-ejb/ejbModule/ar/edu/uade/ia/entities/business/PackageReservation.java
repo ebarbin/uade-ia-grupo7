@@ -9,6 +9,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import ar.edu.uade.ia.entities.PortalUser;
+
 @Entity
 @Table(name = "package_reservation")
 public class PackageReservation extends PersistentObject {
