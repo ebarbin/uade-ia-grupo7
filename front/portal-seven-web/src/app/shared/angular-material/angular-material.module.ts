@@ -5,7 +5,7 @@ import { MdButtonModule, MdCheckboxModule, MdDatepickerModule,
   MdNativeDateModule, MdInputModule, MdListModule, MdAutocompleteModule,
   MdSelectModule, MdCardModule, MdChipsModule, MdTableModule,
   MdDialogModule, MdButtonToggleModule, MdPaginatorModule, MdExpansionModule,
-  MdTooltipModule, MdTabsModule, MdSortModule } from '@angular/material';
+  MdTooltipModule, MdTabsModule, MdSortModule, MdIconModule } from '@angular/material';
 
 @NgModule({
   imports: [
@@ -13,13 +13,13 @@ import { MdButtonModule, MdCheckboxModule, MdDatepickerModule,
     MdButtonModule, MdCheckboxModule, MdDatepickerModule, MdNativeDateModule,
     MdListModule, MdInputModule, MdSelectModule, MdCardModule,
     MdChipsModule, MdTableModule, MdDialogModule, MdButtonToggleModule, MdPaginatorModule,
-    MdExpansionModule, MdTooltipModule, MdTabsModule, MdSortModule
+    MdExpansionModule, MdTooltipModule, MdTabsModule, MdSortModule, MdIconModule
   ],
   exports: [
     MdButtonModule, MdCheckboxModule, MdDatepickerModule, MdNativeDateModule,
     MdListModule, MdInputModule, MdAutocompleteModule, MdSelectModule,
     MdCardModule, MdChipsModule, MdTableModule, MdDialogModule, MdButtonToggleModule, MdPaginatorModule,
-    MdExpansionModule, MdTooltipModule, MdTabsModule, MdSortModule
+    MdExpansionModule, MdTooltipModule, MdTabsModule, MdSortModule, MdIconModule
   ],
   declarations: []
 })

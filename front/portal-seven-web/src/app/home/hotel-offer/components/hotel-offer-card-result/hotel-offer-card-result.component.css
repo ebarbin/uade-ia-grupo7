@@ -14,3 +14,17 @@
     height: 120px; 
     width: 200px;
 }
+
+.ribbon {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+}
+.non-favorite {
+    background-color: pink;
+    color:red;
+}
+.favorite {
+    background-color: lightgray;
+    color:rgb(216, 159, 159);
+}

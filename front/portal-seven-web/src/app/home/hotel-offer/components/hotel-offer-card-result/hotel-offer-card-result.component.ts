@@ -31,4 +31,8 @@ export class HotelOfferCardResultComponent {
       this.toastr.error('Ha ocurrido un error. Contacte a un administrador.');
     });
   }
+
+  isFavorite(hotelOfferHeader:HotelOfferHeader){
+    return true;
+  }
 }
