@@ -8,25 +8,40 @@
       </a>
     </div>
     <div>
-      <ul class="nav navbar-nav">
+      <!--<ul class="nav navbar-nav">
           <li class="dropdown" app-dropdown>
             <a style="cursor: pointer;" class="dropdown-toggle" role="button">
-                Ofertas
+                <i class="fa fa-plane" aria-hidden="true"></i> Ofertas
             </a>
             <ul class="dropdown-menu">
-                <li routerLinkActive="active"><a routerLink="hotel-offer">Hotelera</a></li>
+                <li routerLinkActive="active"><a routerLink="hotel-offer">
+                    <i class="fa fa-h-square" aria-hidden="true"></i> Hotelera</a></li>
                 <li routerLinkActive="active"><a routerLink="package-offer">Paquetes</a></li>
             </ul>
+          </li>
+      </ul>-->
+      <ul class="nav navbar-nav">
+          <li routerLinkActive="active">
+            <a routerLink="hotel-offer">
+                <i class="fa fa-bed" aria-hidden="true"></i> Oferta Hotelera</a>
           </li>
       </ul>
       <ul class="nav navbar-nav">
           <li routerLinkActive="active">
-            <a routerLink="configuration">Configuración</a>
+            <a routerLink="package-offer">
+                <i class="fa fa-globe" aria-hidden="true"></i> Oferta Paquetes</a>
+          </li>
+      </ul>
+      <ul class="nav navbar-nav">
+          <li routerLinkActive="active">
+            <a routerLink="configuration">
+                <i class="fa fa-cogs" aria-hidden="true"></i> Configuración</a>
           </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li class="dropdown" app-dropdown>
           <a style="cursor: pointer;" class="dropdown-toggle" role="button">
+            <i class="fa fa-user" aria-hidden="true"></i> 
             {{user.firstName | whenNullPutBlank }}  {{ user.sureName | whenNullPutBlank }} 
             <img class="img-circle" height="30" width="30" 
             [src]="user.image | imageGetter">
