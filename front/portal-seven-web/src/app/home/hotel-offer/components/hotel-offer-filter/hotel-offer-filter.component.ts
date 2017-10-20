@@ -88,12 +88,15 @@ export class HotelOfferFilterComponent implements OnInit {
     }
 
     private getToday(){
-      return new Date();
+      var d = new Date();
+      d.setHours(0,0,0,0);
+      return d;
     }
   
     private getNextWeek(){
       var d = new Date();
       d.setDate(d.getDate() + 7);
+      d.setHours(23,59,59,999);
       return d;
     }
 }
