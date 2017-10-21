@@ -1,5 +1,7 @@
 package ar.edu.uade.ia.ejbs;
 
+import java.util.List;
+
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -27,7 +29,7 @@ public class FavouriteOfferEJB {
      */
     public FavouriteOfferEJB() {}
 
-    public FavouriteHotelOffer getFavouriteHotelOffer(Integer hotelOfferId, Integer userId) {
+    public FavouriteHotelOffer getFavouriteHotelOffer(Integer hotelOfferId, Integer userId) throws Exception {
 		try {
 			Query query = this.em.createQuery("FROM FavouriteHotelOffer WHERE hotelOffer.id = :hoId AND portalUser.id = :userId");
 			query.setParameter("hoId", hotelOfferId);
@@ -38,7 +40,7 @@ public class FavouriteOfferEJB {
 		}
 	}
     
-    public Boolean isFavouriteHotel(Integer hotelOfferId, Integer userId) {
+    public Boolean isFavouriteHotel(Integer hotelOfferId, Integer userId) throws Exception {
     	return this.getFavouriteHotelOffer(hotelOfferId, userId) != null;
     }
 
@@ -53,6 +55,14 @@ public class FavouriteOfferEJB {
 		fho.setRoomQuantity(filter.getRoomQuantity());
 		fho.setHotelOffer(ho);
 		fho.setPortalUser(user);
+		
 		this.em.persist(fho);
+	}
+
+	@SuppressWarnings("unchecked")
+	public List<FavouriteHotelOffer> getFavouriteHotelOffers(Integer portalUserId) throws Exception {
+		Query query = this.em.createQuery("FROM FavouriteHotelOffer WHERE portalUser.id = :portalUserId");
+		query.setParameter("portalUserId", portalUserId);
+		return (List<FavouriteHotelOffer>) query.getResultList();
 	}
 }

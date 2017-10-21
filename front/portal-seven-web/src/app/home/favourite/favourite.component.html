@@ -1,0 +1,40 @@
+<h2>
+  Oferta de Hoteles Favoritos
+</h2>
+
+<div class="row" *ngIf="hotelOfferHeaders.length > 0">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+      <div class="card-result">
+        <md-card class="card-row card col-lg-3 col-md-4 col-sm-6 col-xs-6"
+        *ngFor="let hoh of hotelOfferHeaders">
+        <app-favourite-button 
+          [offer]="hoh" type="hotel"        
+          [roomQuantity]="hoh.roomCapacity"
+          [fromDate]="hoh.offerStart"
+          [toDate]="hoh.offerEnd">
+        </app-favourite-button>
+        <img class="img-responsive img-card" 
+          [src]="hoh.images | first | imageGetter">
+          <md-card-header>  
+            <md-card-title>{{hoh.name}}</md-card-title>
+            <md-card-subtitle [mdTooltip]="hoh.description">{{hoh.description}}</md-card-subtitle>
+          </md-card-header>
+          <md-card-content>
+            <p>{{hoh.services | join: ' - '}}</p>
+            <p>Para: {{hoh.roomCapacity}} personas</p>
+            <div class="pull-right"><b>Precio Total: {{hoh.price | currency:'ARS':true}}</b></div>
+          </md-card-content>
+          <md-card-actions align="center">
+              <button class="accept-resume-btn" 
+                md-raised-button 
+                type="button" color="primary" (click)="onConfirmHotel(hoh)">
+                Reservar
+              </button>
+          </md-card-actions>
+        </md-card>
+      </div>
+    </div>
+  </div>
+  <div class="row" *ngIf="hotelOfferHeaders.length == 0">
+    <p>No hay favoritos.</p>
+  </div>

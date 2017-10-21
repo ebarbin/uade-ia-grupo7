@@ -19,12 +19,12 @@ export class HotelOfferCardResultComponent {
 
   constructor(
     public authService: AuthService,
-    public hotelOfferService: HotelOfferService,
+    public hoService: HotelOfferService,
     private toastr:ToastrService,
     private dialog: MdDialog) { }
 
   onDetail(hotelOfferHeader:HotelOfferHeader){
-    this.hotelOfferService.getDetail(hotelOfferHeader).then((hotelOffer:HotelOffer)=>{
+    this.hoService.getDetail(hotelOfferHeader).then((hotelOffer:HotelOffer)=>{
       if (hotelOffer)
         this.dialog.open(HotelOfferDetailComponent,{
           width: '850px'

@@ -117,7 +117,7 @@ public class HotelOfferManager {
 		return results;
 	}
 
-	private List<HotelOfferHeaderDTO> convertToListOfHotelOfferHeaderDTO(List<HotelOffer> hotelOffers, Integer userId) {
+	private List<HotelOfferHeaderDTO> convertToListOfHotelOfferHeaderDTO(List<HotelOffer> hotelOffers, Integer userId) throws Exception {
 		List<HotelOfferHeaderDTO> results = new ArrayList<HotelOfferHeaderDTO>();
 
 		HotelOfferHeaderDTO headerDTO;

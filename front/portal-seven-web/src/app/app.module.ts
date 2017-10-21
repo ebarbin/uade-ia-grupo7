@@ -24,11 +24,12 @@ import { HotelOfferService } from './home/hotel-offer/services/hotel-offer.servi
 import { PackageOfferService } from './home/package-offer/services/package-offer.service';
 import { HotelOfferResultGuard } from './home/hotel-offer/services/hotel-offer-result.guard';
 import { PackageOfferResultGuard } from './home/package-offer/services/package-offer-result.guard';
+import { FavouriteComponent } from './home/favourite/favourite.component';
 
 @NgModule({
   declarations: [
     AppComponent, SigninComponent, HomeComponent, 
-    HeaderComponent, ConfigurationComponent
+    HeaderComponent, ConfigurationComponent, FavouriteComponent
   ],
   imports: [
     BrowserModule, SharedModule, HotelOfferModule,

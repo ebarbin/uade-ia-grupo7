@@ -32,15 +32,15 @@ export class HotelOfferConfirmComponent {
 
   onConfirm(){
     this.srv.authorizeReservation()
-    .then((authorizeStatus:AuthorizeStatus)=>{
-      if (authorizeStatus.status) {
-        this.dialogRef.close();
-        this.router.navigate(['home/hotel-authorization-resume']);
-      } else {
-        this.toastr.error(authorizeStatus.description);
-      }
-    }).catch((res:HttpErrorResponse) => {
-      this.toastr.error('Ha ocurrido un error. Contacte a un administrador.');
-    });
+      .then((authorizeStatus:AuthorizeStatus)=>{
+        if (authorizeStatus.status) {
+          this.dialogRef.close();
+          this.router.navigate(['home/hotel-authorization-resume']);
+        } else {
+          this.toastr.error(authorizeStatus.description);
+        }
+      }).catch((res:HttpErrorResponse) => {
+        this.toastr.error('Ha ocurrido un error. Contacte a un administrador.');
+      });
   }
 }

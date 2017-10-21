@@ -1,3 +1,5 @@
+import { FavouriteComponent } from './home/favourite/favourite.component';
+
 import { PackageOfferCardResultComponent } from './home/package-offer/components/package-offer-card-result/package-offer-card-result.component';
 import { PackageOfferGridResultComponent } from './home/package-offer/components/package-offer-grid-result/package-offer-grid-result.component';
 import { HotelOfferCardResultComponent } from './home/hotel-offer/components/hotel-offer-card-result/hotel-offer-card-result.component';
@@ -37,7 +39,8 @@ const appRoutes: Routes = [
         ]
       },
       {path: 'user-profile', component: UserProfileComponent, canActivate: [AuthGuard]},
-      {path: 'configuration', component: ConfigurationComponent, canActivate: [AuthGuard]}
+      {path: 'configuration', component: ConfigurationComponent, canActivate: [AuthGuard]},
+      {path: 'favourite', component: FavouriteComponent, canActivate: [AuthGuard]}
     ]},
   { path: 'signin', component: SigninComponent }
 ];
