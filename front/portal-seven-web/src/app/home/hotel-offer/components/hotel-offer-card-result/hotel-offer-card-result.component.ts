@@ -1,4 +1,3 @@
-import { FavoriteHotelOfferService } from './../../services/favorite-hotel-offer.service';
 import { AuthService } from './../../../../auth/services/auth.service';
 import { ToastrService } from 'ngx-toastr';
 import { Component } from '@angular/core';
@@ -19,8 +18,8 @@ import { HttpErrorResponse } from '@angular/common/http';
 export class HotelOfferCardResultComponent {
 
   constructor(
+    public authService: AuthService,
     public hotelOfferService: HotelOfferService,
-    private favoriteHotelOfferService:FavoriteHotelOfferService,
     private toastr:ToastrService,
     private dialog: MdDialog) { }
 
@@ -35,21 +34,7 @@ export class HotelOfferCardResultComponent {
     });
   }
 
-  isFavorite(hotelOfferHeader:HotelOfferHeader){
-    this.favoriteHotelOfferService.isFavorite(hotelOfferHeader)
-    .then((result:boolean)=>{
-      return result;
-    }).catch((res:HttpErrorResponse) => {
-      return false;
-    });
-  }
-
-  markFavorite(hotelOfferHeader:HotelOfferHeader){
-    this.favoriteHotelOfferService.markFavorite(hotelOfferHeader)
-    .then((result:boolean)=>{
-      hotelOfferHeader.favorite = result;
-    }).catch((res:HttpErrorResponse) => {
-      this.toastr.error('Ha ocurrido un error. Contacte a un administrador.');
-    });
+  showFavouriteIcon(){
+    return this.authService.getUser().id != null;
   }
 }

@@ -55,3 +55,11 @@ body {
 .mat-select-placeholder.mat-floating-placeholder{
     top: -15px !important;
 }
+
+.mat-expansion-panel-content {
+    /*background: url('portal-seven-web/assets/images/background_venecita.jpg');*/
+}
+
+.mat-card {
+    /*background: url('portal-seven-web/assets/images/001.jpg');*/
+}

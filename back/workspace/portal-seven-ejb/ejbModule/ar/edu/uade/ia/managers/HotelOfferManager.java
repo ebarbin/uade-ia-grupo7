@@ -17,10 +17,9 @@ import ar.edu.uade.ia.common.dtos.HotelOfferRequestDTO;
 import ar.edu.uade.ia.common.dtos.ImageDTO;
 import ar.edu.uade.ia.common.dtos.RoomDTO;
 import ar.edu.uade.ia.common.dtos.SimpleNamedDTO;
-import ar.edu.uade.ia.ejbs.FavoriteHotelOfferEJB;
+import ar.edu.uade.ia.ejbs.FavouriteOfferEJB;
 import ar.edu.uade.ia.ejbs.HotelOfferEJB;
 import ar.edu.uade.ia.ejbs.common.PortalUserEJB;
-import ar.edu.uade.ia.entities.PortalUser;
 import ar.edu.uade.ia.entities.business.HotelOffer;
 import ar.edu.uade.ia.entities.business.Image;
 import ar.edu.uade.ia.entities.business.Room;
@@ -40,7 +39,7 @@ public class HotelOfferManager {
 	private HotelOfferEJB hotelOfferEJB;
 
 	@EJB
-	private FavoriteHotelOfferEJB favoriteHotelOfferEJB;
+	private FavouriteOfferEJB favouriteOfferEJB;
 	
 	@EJB
 	private PortalUserEJB portalUserEJB;
@@ -65,14 +64,9 @@ public class HotelOfferManager {
 		return dto;
 	}
 
-	public List<HotelOfferHeaderDTO> search(HotelOfferRequestDTO hotelOfferRequest, Integer userId) throws Exception {
-		List<HotelOffer> hotelOffers = this.hotelOfferEJB.search(hotelOfferRequest);
-		PortalUser user = this.portalUserEJB.getById(userId);
-		for (HotelOffer hotelOffer : hotelOffers) {
-			if (this.favoriteHotelOfferEJB.getFavoriteHotelOffer(hotelOffer, user) != null) hotelOffer.setFavorite(true);
-			else hotelOffer.setFavorite(false);
-		}
-		return this.convertToListOfHotelOfferHeaderDTO(hotelOffers);
+	public List<HotelOfferHeaderDTO> search(HotelOfferRequestDTO request) throws Exception {
+		List<HotelOffer> hotelOffers = this.hotelOfferEJB.search(request);
+		return this.convertToListOfHotelOfferHeaderDTO(hotelOffers, request.getUser().getId());
 	}
 
 	public List<RoomDTO> searchOtherRooms(Integer roomId, HotelOfferRequestDTO request) {
@@ -123,7 +117,7 @@ public class HotelOfferManager {
 		return results;
 	}
 
-	private List<HotelOfferHeaderDTO> convertToListOfHotelOfferHeaderDTO(List<HotelOffer> hotelOffers) {
+	private List<HotelOfferHeaderDTO> convertToListOfHotelOfferHeaderDTO(List<HotelOffer> hotelOffers, Integer userId) {
 		List<HotelOfferHeaderDTO> results = new ArrayList<HotelOfferHeaderDTO>();
 
 		HotelOfferHeaderDTO headerDTO;
@@ -137,7 +131,7 @@ public class HotelOfferManager {
 			headerDTO.setName(hotelOffer.getHotel().getName());
 			headerDTO.setDescription(hotelOffer.getHotel().getDescription());
 			headerDTO.setServices(new ArrayList<SimpleNamedDTO>());
-			headerDTO.setFavorite(hotelOffer.getFavorite());
+			headerDTO.setFavourite(this.favouriteOfferEJB.isFavouriteHotel(hotelOffer.getId(), userId));
 			
 			for (ServiceHotel service : hotelOffer.getHotel().getServices()) {
 				namedDTO = new SimpleNamedDTO();

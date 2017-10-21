@@ -1,3 +1,4 @@
+import { PortalUser } from './../../user-profile/models/portal-user.model';
 import { AutocompleteResource } from './../../../shared/models/autocomplete-resource.model';
 
 export class HotelOfferRequest {
@@ -8,6 +9,7 @@ export class HotelOfferRequest {
         public hotel: AutocompleteResource,
         public peoplePerRoom: number,
         public roomQuantity: number,
-        public minPrice,
-        public maxPrice){}
+        public minPrice: number,
+        public maxPrice: number,
+        public user: PortalUser){}
 }

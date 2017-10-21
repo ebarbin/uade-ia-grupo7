@@ -38,11 +38,11 @@ public class HotelOfferService {
 	private LoggingJMS logging;
 
 	@POST
-	@Path("/search/{userId}")
+	@Path("/search")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response search(HotelOfferRequestDTO request, @PathParam("userId") Integer userId) {
+	public Response search(HotelOfferRequestDTO request) {
 		try {
-			List<HotelOfferHeaderDTO> result = this.hotelOfferManager.search(request, userId);
+			List<HotelOfferHeaderDTO> result = this.hotelOfferManager.search(request);
 			return Response.ok(new PortalResponse(result)).build();
 		} catch (Exception e) {
 			this.logging.error(e.getMessage());

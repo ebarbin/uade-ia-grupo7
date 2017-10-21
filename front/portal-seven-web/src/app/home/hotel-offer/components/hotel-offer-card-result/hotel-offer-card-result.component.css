@@ -17,12 +17,7 @@
 
 .ribbon {
     position: absolute;
-    top: 2px;
-    right: 2px;
-}
-.non-favorite {
-    color: rgb(170, 156, 156);
-}
-.favorite {
+    top: 10px;
+    right: 10px;
     color:red;
 }

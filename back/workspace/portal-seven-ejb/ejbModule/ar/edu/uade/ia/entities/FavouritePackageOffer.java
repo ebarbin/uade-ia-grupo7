@@ -8,8 +8,8 @@ import ar.edu.uade.ia.entities.business.PackageOffer;
 import ar.edu.uade.ia.entities.business.PersistentObject;
 
 @Entity
-@Table(name = "favorite_package_offer")
-public class FavoritePackageOffer extends PersistentObject {
+@Table(name = "favourite_package_offer")
+public class FavouritePackageOffer extends PersistentObject {
 
 	private static final long serialVersionUID = 3778726195206481299L;
 
