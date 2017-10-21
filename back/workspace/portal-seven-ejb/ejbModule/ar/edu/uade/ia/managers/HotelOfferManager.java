@@ -64,9 +64,9 @@ public class HotelOfferManager {
 		return dto;
 	}
 
-	public List<HotelOfferHeaderDTO> search(HotelOfferRequestDTO request) throws Exception {
+	public List<HotelOfferHeaderDTO> search(Integer portalUserId, HotelOfferRequestDTO request) throws Exception {
 		List<HotelOffer> hotelOffers = this.hotelOfferEJB.search(request);
-		return this.convertToListOfHotelOfferHeaderDTO(hotelOffers, request.getUser().getId());
+		return this.convertToListOfHotelOfferHeaderDTO(hotelOffers, portalUserId);
 	}
 
 	public List<RoomDTO> searchOtherRooms(Integer roomId, HotelOfferRequestDTO request) {

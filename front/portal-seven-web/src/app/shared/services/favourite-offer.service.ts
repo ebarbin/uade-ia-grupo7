@@ -1,3 +1,4 @@
+import { PackageOfferRequest } from './../../home/package-offer/models/package-offer-request.model';
 import { AuthorizeStatus } from './../models/authorize-status.model';
 import { Subject } from 'rxjs/Subject';
 import { HotelOfferRequest } from './../../home/hotel-offer/models/hotel-offer-request.model';
@@ -34,6 +35,20 @@ export class FavouriteOfferService {
     }).toPromise();
   }
 
+  markFavouritePackage(offer:Offer, request:PackageOfferRequest):Promise<boolean>{
+    return this.httpClient.put('portal-seven-web/api/rest/favourite-offer/package/' + 
+      offer.id + '/' + this.authService.getUser().id, request)
+      .map((response:PortalResponse)=>{
+        if (response.success){
+          this.favouriteHotelChanges.next(offer.id);
+          return <boolean> response.data;
+        } else {
+          this.toastr.error(response.errorMessage);
+          return false;
+        }
+    }).toPromise();
+  }
+
   getFavouriteHotels():Promise<HotelOfferHeader[]>{
     return this.httpClient.get('portal-seven-web/api/rest/favourite-offer/hotel/' + this.authService.getUser().id)
       .map((response:PortalResponse)=>{
@@ -46,7 +61,7 @@ export class FavouriteOfferService {
     }).toPromise();
   }
 
-  authorizeReservation(hotelOfferId:number, request:HotelOfferRequest):Promise<AuthorizeStatus>{
+  authorizeHotelReservation(hotelOfferId:number, request:HotelOfferRequest):Promise<AuthorizeStatus>{
     return this.httpClient.put('portal-seven-web/api/rest/hotel-offer/authorize/' + 
     hotelOfferId, request)
       .map((response:PortalResponse)=>{

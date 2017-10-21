@@ -12,6 +12,12 @@
     height: 120px; 
     width: 200px;
 }
-.accept-resume-btn{
+.confirme-favorite-btn {
     width: 100%;
+}
+
+.offer-type {
+    position: absolute;
+    top: 6px;
+    left: 10px;
 }

@@ -1,3 +1,4 @@
+import { AuthService } from './../../../../auth/services/auth.service';
 import { Subscription } from 'rxjs/Subscription';
 import { ToastrService } from 'ngx-toastr';
 import { HttpErrorResponse } from '@angular/common/http';
@@ -18,12 +19,13 @@ import {
 export class PackageOfferCardResultComponent {
 
     constructor(
-      public packageOfferService: PackageOfferService,
+      public poService: PackageOfferService,
+      private authService: AuthService,
       private toastr: ToastrService,
       private dialog: MdDialog) { }
   
     onDetail(packageOfferHeader:PackageOfferHeader){
-      this.packageOfferService.getDetail(packageOfferHeader).then((packageOffer:PackageOffer)=>{
+      this.poService.getDetail(packageOfferHeader).then((packageOffer:PackageOffer)=>{
         if(packageOffer)
           this.dialog.open(PackageOfferDetailComponent,{
             width: '850px'
@@ -34,6 +36,10 @@ export class PackageOfferCardResultComponent {
     }
 
     getTotalPrice(unitaryPrice:number){
-      return unitaryPrice * this.packageOfferService.getFilter().quantityPeople;
+      return unitaryPrice * this.poService.getFilter().quantityPeople;
+    }
+
+    showFavouriteIcon(){
+      return this.authService.getUser().id != null;
     }
 }

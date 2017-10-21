@@ -39,8 +39,8 @@ export class FavouriteComponent implements OnInit, OnDestroy {
   }
 
   onConfirmHotel(hoh:HotelOfferHeader){
-    var request:HotelOfferRequest = new HotelOfferRequest(hoh.offerEnd, hoh.offerStart, null, null, hoh.roomCapacity, null, null, null);
-    this.service.authorizeReservation(hoh.id, request)
+    var request:HotelOfferRequest = new HotelOfferRequest(hoh.offerEnd, hoh.offerStart, null, null, hoh.roomCapacity, null, null);
+    this.service.authorizeHotelReservation(hoh.id, request)
       .then((authorizeStatus:AuthorizeStatus)=>{
         if (authorizeStatus.status) {
           this.router.navigate(['home']);

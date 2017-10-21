@@ -1,3 +1,4 @@
+import { PackageOfferRequest } from './../../../home/package-offer/models/package-offer-request.model';
 import { HotelOfferRequest } from './../../../home/hotel-offer/models/hotel-offer-request.model';
 import { Offer } from './../../models/offer.interface';
 import { HotelOfferHeader } from './../../../home/hotel-offer/models/hotel-offer-header.model';
@@ -19,6 +20,7 @@ export class FavouriteButtonComponent {
   @Input() roomQuantity: number;
   @Input() fromDate: Date;
   @Input() toDate: Date;
+  @Input() quantityPeople: number;
   
   constructor(
     private favouriteService: FavouriteOfferService,
@@ -26,8 +28,8 @@ export class FavouriteButtonComponent {
   
   markFavourite(offer:Offer){
     if (this.type == 'hotel') {
-      var request:HotelOfferRequest = new HotelOfferRequest(this.toDate, this.fromDate, null, null, this.roomQuantity, null, null, null);
-      this.favouriteService.markFavouriteHotel(offer, request)
+      var hotelRequest:HotelOfferRequest = new HotelOfferRequest(this.toDate, this.fromDate, null, null, this.roomQuantity, null, null);
+      this.favouriteService.markFavouriteHotel(offer, hotelRequest)
         .then((result:boolean)=>{
           offer.favourite = result;
           if (result) this.toastr.success('Has agregado la oferta a favoritos.');
@@ -36,7 +38,15 @@ export class FavouriteButtonComponent {
           this.toastr.error('Ha ocurrido un error. Contacte a un administrador.');
         });
     } else {
-
+      var packageRequest:PackageOfferRequest = new PackageOfferRequest(null, null, null, this.quantityPeople, null, null);
+      this.favouriteService.markFavouritePackage(offer, packageRequest)
+        .then((result:boolean)=>{
+          offer.favourite = result;
+          if (result) this.toastr.success('Has agregado la oferta a favoritos.');
+          else this.toastr.success('Has quitado la oferta de favoritos.');
+        }).catch((res:HttpErrorResponse) => {
+          this.toastr.error('Ha ocurrido un error. Contacte a un administrador.');
+        });
     }
   }
 }

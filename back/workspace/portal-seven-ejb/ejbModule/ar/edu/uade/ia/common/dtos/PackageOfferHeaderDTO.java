@@ -22,6 +22,8 @@ public class PackageOfferHeaderDTO implements Serializable {
 	
 	private Date offerEnd;
 	
+	private Boolean favourite;
+	
 	public Integer getId() {
 		return id;
 	}
@@ -76,5 +78,13 @@ public class PackageOfferHeaderDTO implements Serializable {
 
 	public void setOfferEnd(Date offerEnd) {
 		this.offerEnd = offerEnd;
+	}
+
+	public Boolean getFavourite() {
+		return favourite;
+	}
+
+	public void setFavourite(Boolean favourite) {
+		this.favourite = favourite;
 	}
 }

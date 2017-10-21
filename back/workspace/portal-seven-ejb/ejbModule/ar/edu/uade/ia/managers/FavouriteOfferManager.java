@@ -10,14 +10,18 @@ import javax.ejb.Stateless;
 import ar.edu.uade.ia.common.dtos.HotelOfferHeaderDTO;
 import ar.edu.uade.ia.common.dtos.HotelOfferRequestDTO;
 import ar.edu.uade.ia.common.dtos.ImageDTO;
+import ar.edu.uade.ia.common.dtos.PackageOfferRequestDTO;
 import ar.edu.uade.ia.common.dtos.SimpleNamedDTO;
 import ar.edu.uade.ia.ejbs.FavouriteOfferEJB;
 import ar.edu.uade.ia.ejbs.HotelOfferEJB;
+import ar.edu.uade.ia.ejbs.PackageOfferEJB;
 import ar.edu.uade.ia.ejbs.common.PortalUserEJB;
 import ar.edu.uade.ia.entities.FavouriteHotelOffer;
+import ar.edu.uade.ia.entities.FavouritePackageOffer;
 import ar.edu.uade.ia.entities.PortalUser;
 import ar.edu.uade.ia.entities.business.HotelOffer;
 import ar.edu.uade.ia.entities.business.Image;
+import ar.edu.uade.ia.entities.business.PackageOffer;
 import ar.edu.uade.ia.entities.business.ServiceHotel;
 
 /**
@@ -34,6 +38,9 @@ public class FavouriteOfferManager {
 	private PortalUserEJB portalUserEJB;
 	
 	@EJB
+	private PackageOfferEJB packageOfferEJB;
+	
+	@EJB
 	private FavouriteOfferEJB favoriteOfferEJB;
 	
     /**
@@ -41,7 +48,7 @@ public class FavouriteOfferManager {
      */
     public FavouriteOfferManager() {}
     
-	public Boolean markHotelFavourite(Integer offerHotelId, Integer portalUserId, HotelOfferRequestDTO filter) throws Exception {
+	public Boolean markFavouriteHotel(Integer offerHotelId, Integer portalUserId, HotelOfferRequestDTO filter) throws Exception {
 		FavouriteHotelOffer fho = this.favoriteOfferEJB.getFavouriteHotelOffer(offerHotelId, portalUserId);
 		if (fho != null) {
 			this.favoriteOfferEJB.removeFavouriteHotel(fho);
@@ -50,6 +57,19 @@ public class FavouriteOfferManager {
 			HotelOffer ho = this.hotelOfferEJB.getDetail(offerHotelId);
 			PortalUser user = this.portalUserEJB.getById(portalUserId);
 			this.favoriteOfferEJB.markFavouriteHotel(ho, user, filter);
+			return Boolean.TRUE;
+		}
+	}
+	
+	public Boolean markFavouritePackage(Integer offerPackageId, Integer portalUserId, PackageOfferRequestDTO filter) throws Exception {
+		FavouritePackageOffer pho = this.favoriteOfferEJB.getFavouritePackageOffer(offerPackageId, portalUserId);
+		if (pho != null) {
+			this.favoriteOfferEJB.removeFavouritePackage(pho);
+			return Boolean.FALSE;
+		} else {
+			PackageOffer po = this.packageOfferEJB.getDetail(offerPackageId);
+			PortalUser user = this.portalUserEJB.getById(portalUserId);
+			this.favoriteOfferEJB.markFavouritePackage(po, user, filter);
 			return Boolean.TRUE;
 		}
 	}

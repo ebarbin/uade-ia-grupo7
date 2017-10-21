@@ -105,10 +105,9 @@ export class HotelOfferService implements Holder {
     search(request:HotelOfferRequest){
       //HACK guard reevaluate
       this.router.navigate(['/home/hotel-offer']);
-      request.user = this.authService.getUser();
       this.filterRequest = request;
       
-      return this.httpClient.post('portal-seven-web/api/rest/hotel-offer/search', request)
+      return this.httpClient.post('portal-seven-web/api/rest/hotel-offer/search/' + this.authService.getUser().id, request)
         .map((response:PortalResponse)=>{
           if(response.success) {
             this.hotelOffers = <HotelOfferHeader[]>response.data;

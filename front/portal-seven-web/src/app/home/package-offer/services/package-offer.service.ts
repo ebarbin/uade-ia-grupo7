@@ -1,3 +1,4 @@
+import { AuthService } from './../../../auth/services/auth.service';
 import { AuthorizeStatus } from './../../../shared/models/authorize-status.model';
 import { Holder } from './../../../shared/models/holder.interface';
 import { PackageOffer } from './../models/package-offer.model';
@@ -22,6 +23,7 @@ export class PackageOfferService implements Holder {
   private packageOffers:PackageOfferHeader[] = [];
 
   constructor(
+    private authService: AuthService,
     private router: Router,
     private httpClient: HttpClient,
     private toastr: ToastrService) { }
@@ -109,8 +111,9 @@ export class PackageOfferService implements Holder {
 
   search(request:PackageOfferRequest){
     this.router.navigate(['/home/package-offer']);
+
     this.filterRequest = request;
-    return this.httpClient.post('portal-seven-web/api/rest/package-offer/search', request)
+    return this.httpClient.post('portal-seven-web/api/rest/package-offer/search/' + this.authService.getUser().id, request)
       .map((response:PortalResponse)=>{
         if(response.success) {
           this.packageOffers = <PackageOfferHeader[]>response.data;

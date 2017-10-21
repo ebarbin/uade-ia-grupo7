@@ -19,6 +19,8 @@ public class FavouritePackageOffer extends PersistentObject {
 	@ManyToOne
 	private PackageOffer packageOffer;
 	
+	private Integer quantityPeople;
+	
 	public PortalUser getPortalUser() {
 		return portalUser;
 	}
@@ -33,5 +35,13 @@ public class FavouritePackageOffer extends PersistentObject {
 
 	public void setPackageOffer(PackageOffer packageOffer) {
 		this.packageOffer = packageOffer;
+	}
+
+	public Integer getQuantityPeople() {
+		return quantityPeople;
+	}
+
+	public void setQuantityPeople(Integer quantityPeople) {
+		this.quantityPeople = quantityPeople;
 	}
 }

@@ -45,11 +45,11 @@ public class PackageOfferService {
     public PackageOfferService() {}
     
 	@POST
-	@Path("/search")
+	@Path("/search/{portalUserId}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response search(PackageOfferRequestDTO request) {
+	public Response search(@PathParam("portalUserId") Integer portalUserId, PackageOfferRequestDTO request) {
 		try {
-			List<PackageOfferHeaderDTO> result = this.packageOfferManager.search(request);
+			List<PackageOfferHeaderDTO> result = this.packageOfferManager.search(portalUserId, request);
 			return Response.ok(new PortalResponse(result)).build();
 		} catch (Exception e) {
 			this.logging.error(e.getMessage());
