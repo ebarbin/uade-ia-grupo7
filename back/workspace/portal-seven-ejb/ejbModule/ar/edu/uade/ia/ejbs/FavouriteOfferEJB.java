@@ -96,4 +96,11 @@ public class FavouriteOfferEJB {
 	public Boolean isFavouritePackage(Integer packageOfferId, Integer portalUserId) throws Exception {
 		return this.getFavouritePackageOffer(packageOfferId, portalUserId) != null;
 	}
+
+	@SuppressWarnings("unchecked")
+	public List<FavouritePackageOffer> getFavouritePackageOffers(Integer portalUserId) {
+		Query query = this.em.createQuery("FROM FavouritePackageOffer WHERE portalUser.id = :portalUserId");
+		query.setParameter("portalUserId", portalUserId);
+		return (List<FavouritePackageOffer>) query.getResultList();
+	}
 }

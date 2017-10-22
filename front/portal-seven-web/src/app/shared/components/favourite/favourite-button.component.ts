@@ -1,8 +1,8 @@
+import { FavouriteOfferService } from './../../../home/favourite/services/favourite-offer.service';
 import { PackageOfferRequest } from './../../../home/package-offer/models/package-offer-request.model';
 import { HotelOfferRequest } from './../../../home/hotel-offer/models/hotel-offer-request.model';
 import { Offer } from './../../models/offer.interface';
 import { HotelOfferHeader } from './../../../home/hotel-offer/models/hotel-offer-header.model';
-import { FavouriteOfferService } from './../../services/favourite-offer.service';
 import { ToastrService } from 'ngx-toastr';
 import { HttpErrorResponse } from '@angular/common/http';
 import { AuthService } from './../../../auth/services/auth.service';

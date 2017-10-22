@@ -1,5 +1,4 @@
-import { FavouriteOfferService } from './shared/services/favourite-offer.service';
-
+import { FavouriteOfferService } from './home/favourite/services/favourite-offer.service';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { LOCALE_ID, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
@@ -25,11 +24,12 @@ import { PackageOfferService } from './home/package-offer/services/package-offer
 import { HotelOfferResultGuard } from './home/hotel-offer/services/hotel-offer-result.guard';
 import { PackageOfferResultGuard } from './home/package-offer/services/package-offer-result.guard';
 import { FavouriteComponent } from './home/favourite/favourite.component';
+import { FavouriteHotelReservationResumeComponent } from './home/favourite/components/favourite-hotel-reservation-resume/favourite-hotel-reservation-resume.component';
 
 @NgModule({
   declarations: [
     AppComponent, SigninComponent, HomeComponent, 
-    HeaderComponent, ConfigurationComponent, FavouriteComponent
+    HeaderComponent, ConfigurationComponent, FavouriteComponent, FavouriteHotelReservationResumeComponent
   ],
   imports: [
     BrowserModule, SharedModule, HotelOfferModule,

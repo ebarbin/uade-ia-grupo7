@@ -1,3 +1,6 @@
+import { FavouriteOffer } from './models/favourite-offer.model';
+import { FavouriteOfferService } from './services/favourite-offer.service';
+import { PackageOfferHeader } from './../package-offer/models/package-offer-header.model';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { HotelOfferRequest } from './../hotel-offer/models/hotel-offer-request.model';
@@ -5,7 +8,6 @@ import { AuthorizeStatus } from './../../shared/models/authorize-status.model';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Subscription } from 'rxjs/Subscription';
 import { HotelOfferHeader } from './../hotel-offer/models/hotel-offer-header.model';
-import { FavouriteOfferService } from './../../shared/services/favourite-offer.service';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 
 @Component({
@@ -20,16 +22,16 @@ export class FavouriteComponent implements OnInit, OnDestroy {
     private toastr: ToastrService,
     private router: Router) { }
 
-  hotelOfferHeaders:HotelOfferHeader[] = [];
+  favouriteOffers:FavouriteOffer[] = [];
   subs:Subscription;
 
   ngOnInit() {
-    this.service.getFavouriteHotels().then((hotelOfferHeaders:HotelOfferHeader[])=>{
-      this.hotelOfferHeaders = hotelOfferHeaders;
+    this.service.getFavourites().then((favouriteOffers:FavouriteOffer[])=>{
+      this.favouriteOffers = favouriteOffers;
     });
-    this.subs = this.service.favouriteHotelChanges.subscribe((id:number)=>{
-      this.hotelOfferHeaders = this.hotelOfferHeaders.filter((value:HotelOfferHeader) => {
-        return value.id != id;
+    this.subs = this.service.favouriteChanges.subscribe((change:{id:number, type:string})=>{
+      this.favouriteOffers = this.favouriteOffers.filter((value:FavouriteOffer) => {
+        return  (change.type != value.type) || (change.type == value.type && change.id != value.id);
       });
     });
   }

@@ -14,7 +14,7 @@ import javax.ws.rs.core.Response;
 
 import org.jboss.logging.Logger;
 
-import ar.edu.uade.ia.common.dtos.HotelOfferHeaderDTO;
+import ar.edu.uade.ia.common.dtos.FavoriteOfferDTO;
 import ar.edu.uade.ia.common.dtos.HotelOfferRequestDTO;
 import ar.edu.uade.ia.common.dtos.PackageOfferRequestDTO;
 import ar.edu.uade.ia.managers.FavouriteOfferManager;
@@ -58,11 +58,11 @@ public class FavouriteOfferService {
 	}
 	
 	@GET
-	@Path("/hotel/{portalUserId}")
+	@Path("/{portalUserId}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response getHotelFavourite(@PathParam("portalUserId") Integer portalUserId) {
+	public Response getFavourite(@PathParam("portalUserId") Integer portalUserId) {
 		try {
-			List<HotelOfferHeaderDTO> result = this.favouriteOfferManager.getFavouriteHotelOffers(portalUserId);
+			List<FavoriteOfferDTO> result = this.favouriteOfferManager.getFavouriteOffers(portalUserId);
 			return Response.ok(new PortalResponse(result)).build();
 		} catch (Exception e) {
 			FavouriteOfferService.LOGGER.error(e.getMessage(), e);

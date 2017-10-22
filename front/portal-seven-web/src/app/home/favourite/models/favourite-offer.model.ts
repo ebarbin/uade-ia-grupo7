@@ -1,16 +1,19 @@
 import { Image } from '../../../shared/models/image.model';
 import { SimpleNamed } from '../../../shared/models/simple-named.model';
 
-export class PackageOfferHeader {
+export class FavouriteOffer {
 
     constructor(
         public id: number, 
-        public description: string, 
+        public name: string, 
         public images: Image[], 
+        public description: string,
         public price: number,
+        public quantityCapacity: number,
         public offerStart: Date,
         public offerEnd: Date,
         public services: SimpleNamed[],
-        public favourite:boolean,
-        public quantityPeople:number){}
+        public paymentMethods: SimpleNamed[],
+        public favourite: boolean,
+        public type: string){}
 }

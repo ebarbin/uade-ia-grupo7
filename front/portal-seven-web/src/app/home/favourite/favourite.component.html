@@ -1,41 +1,65 @@
-<h2>Favoritos</h2>
-
-<div class="row" *ngIf="hotelOfferHeaders.length > 0">
-    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-      <div>
-        <md-card class="card-row card col-lg-3 col-md-4 col-sm-6 col-xs-6"
-        *ngFor="let hoh of hotelOfferHeaders">
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+    <md-card class="card-row card col-lg-3 col-md-4 col-sm-6 col-xs-12"
+    *ngFor="let o of favouriteOffers">
+    <div *ngIf="o.type == 'HOTEL'">
+      <span class="offer-type" >
+        <i class="fa fa-bed" aria-hidden="true"></i>
+      </span>
+      <app-favourite-button 
+        [offer]="o" type="hotel"        
+        [roomQuantity]="o.quantityCapacity"
+        [fromDate]="o.offerStart"
+        [toDate]="o.offerEnd">
+      </app-favourite-button>
+      <img class="img-responsive img-card" 
+        [src]="o.images | first | imageGetter">
+        <md-card-header>  
+          <md-card-title>{{o.name}}</md-card-title>
+          <md-card-subtitle [mdTooltip]="o.description">{{o.description}}</md-card-subtitle>
+        </md-card-header>
+        <md-card-content>
+          <p>{{o.services | join: ' - '}}</p>
+          <p>Para: {{o.quantityCapacity}} persona/s</p>
+          <div class="pull-right"><b>Precio Total: {{o.price | currency:'ARS':true}}</b></div>
+        </md-card-content>
+        <md-card-actions align="center">
+            <button class="confirme-favorite-btn" 
+              md-raised-button
+              type="button" color="primary" (click)="onConfirmHotel(o)">
+              Reservar
+            </button>
+        </md-card-actions>
+      </div>
+      <div *ngIf="o.type == 'PACKAGE'">
         <span class="offer-type" >
-          <i class="fa fa-bed" aria-hidden="true"></i>
+          <i class="fa fa-globe" aria-hidden="true"></i>
         </span>
         <app-favourite-button 
-          [offer]="hoh" type="hotel"        
-          [roomQuantity]="hoh.roomCapacity"
-          [fromDate]="hoh.offerStart"
-          [toDate]="hoh.offerEnd">
+          [offer]="o" type="package"        
+          [quantityPeople]="o.quantityCapacity">
         </app-favourite-button>
         <img class="img-responsive img-card" 
-          [src]="hoh.images | first | imageGetter">
-          <md-card-header>  
-            <md-card-title>{{hoh.name}}</md-card-title>
-            <md-card-subtitle [mdTooltip]="hoh.description">{{hoh.description}}</md-card-subtitle>
-          </md-card-header>
-          <md-card-content>
-            <p>{{hoh.services | join: ' - '}}</p>
-            <p>Para: {{hoh.roomCapacity}} personas</p>
-            <div class="pull-right"><b>Precio Total: {{hoh.price | currency:'ARS':true}}</b></div>
-          </md-card-content>
-          <md-card-actions align="center">
-              <button class="confirme-favorite-btn" 
-                md-raised-button 
-                type="button" color="primary" (click)="onConfirmHotel(hoh)">
-                Reservar
-              </button>
-          </md-card-actions>
-        </md-card>
+          [src]="o.images | first | imageGetter">
+        <md-card-header>  
+          <md-card-title>{{o.description}}</md-card-title>
+          <md-card-subtitle>{{o.services | join:' - ' }}</md-card-subtitle>
+        </md-card-header>
+        <md-card-content>
+          <p>Cantidad de personas: {{o.quantityCapacity}}</p>
+          <p>P. Persona: {{o.price | currency:'ARS':true}}</p>
+          <div class="pull-right"><b>Precio Total: {{ o.price * o.quantityCapacity  | currency:'ARS':true}}</b></div>
+        </md-card-content>
+        <md-card-actions align="center">
+            <button class="confirme-favorite-btn" 
+              md-raised-button
+              type="button" color="primary" (click)="onConfirmPackage(o)">
+              Reservar
+            </button>
+        </md-card-actions>
       </div>
-    </div>
-  </div>
-  <div class="row" *ngIf="hotelOfferHeaders.length == 0">
-    <p>No hay favoritos.</p>
-  </div>
+    </md-card>
+</div>
+
+<div *ngIf="favouriteOffers.length == 0">
+  <p>No hay favoritos!</p>
+</div>

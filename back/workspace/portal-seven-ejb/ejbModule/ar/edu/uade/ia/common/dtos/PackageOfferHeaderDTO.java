@@ -22,6 +22,8 @@ public class PackageOfferHeaderDTO implements Serializable {
 	
 	private Date offerEnd;
 	
+	private Integer quantityPeople;
+	
 	private Boolean favourite;
 	
 	public Integer getId() {
@@ -86,5 +88,13 @@ public class PackageOfferHeaderDTO implements Serializable {
 
 	public void setFavourite(Boolean favourite) {
 		this.favourite = favourite;
+	}
+
+	public Integer getQuantityPeople() {
+		return quantityPeople;
+	}
+
+	public void setQuantityPeople(Integer quantityPeople) {
+		this.quantityPeople = quantityPeople;
 	}
 }
