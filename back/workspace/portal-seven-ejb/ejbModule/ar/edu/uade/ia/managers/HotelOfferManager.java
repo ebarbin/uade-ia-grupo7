@@ -11,6 +11,7 @@ import org.dozer.DozerBeanMapperBuilder;
 import org.dozer.Mapper;
 
 import ar.edu.uade.ia.common.dtos.AuthorizeStatusDTO;
+import ar.edu.uade.ia.common.dtos.HotelAuthorizeRequestDTO;
 import ar.edu.uade.ia.common.dtos.HotelOfferDTO;
 import ar.edu.uade.ia.common.dtos.HotelOfferHeaderDTO;
 import ar.edu.uade.ia.common.dtos.HotelOfferRequestDTO;
@@ -50,10 +51,10 @@ public class HotelOfferManager {
 	public HotelOfferManager() {
 	}
 
-	public AuthorizeStatusDTO autorize(Integer id, HotelOfferRequestDTO filter) throws Exception {
+	public AuthorizeStatusDTO autorize(Integer id, HotelAuthorizeRequestDTO req) throws Exception {
 
 		AuthorizeStatusDTO dto = new AuthorizeStatusDTO();
-		if (this.hotelOfferEJB.hasQuota(id, filter)) {
+		if (this.hotelOfferEJB.hasQuota(id, req)) {
 			// TODO MANDAR A AUTORIZAR AL WEBSERVICE SOAP
 			dto.setStatus(Boolean.TRUE);
 		} else {

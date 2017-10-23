@@ -1,3 +1,4 @@
+import { HotelAuthorizeRequest } from './../../../../shared/models/hotel-authorize-request.model';
 import { HotelOfferDetailComponent } from './../hotel-offer-detail/hotel-offer-detail.component';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
@@ -31,7 +32,8 @@ export class HotelOfferConfirmComponent {
   }
 
   onConfirm(){
-    this.srv.authorizeReservation()
+    var req = new HotelAuthorizeRequest(this.srv.getFilterRequest().roomQuantity, this.srv.getFilterRequest().fromDate, this.srv.getFilterRequest().toDate);
+    this.srv.authorizeReservation(req)
       .then((authorizeStatus:AuthorizeStatus)=>{
         if (authorizeStatus.status) {
           this.dialogRef.close();

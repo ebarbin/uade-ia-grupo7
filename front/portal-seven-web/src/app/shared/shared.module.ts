@@ -24,7 +24,7 @@ import { DropdownDirective } from './directives/dropdown.directive';
 import { SortComponent } from './components/sort/sort.component';
 import { ViewChangeResultComponent } from './components/view-change-result/view-change-result.component';
 import { RoomTypePipe } from './pipes/room-type.pipe';
-import { FavouriteButtonComponent } from './components/favourite/favourite-button.component';
+import { FavouriteButtonComponent } from './components/favourite-button/favourite-button.component';
 
 @NgModule({
   imports: [

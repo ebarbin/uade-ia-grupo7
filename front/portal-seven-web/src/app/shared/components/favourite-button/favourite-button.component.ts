@@ -1,7 +1,9 @@
+import { PackageAuthorizeRequest } from './../../models/package-authorize-request.model';
+import { HotelAuthorizeRequest } from './../../models/hotel-authorize-request.model';
+import { Constant } from './../../models/constant';
 import { FavouriteOfferService } from './../../../home/favourite/services/favourite-offer.service';
 import { PackageOfferRequest } from './../../../home/package-offer/models/package-offer-request.model';
 import { HotelOfferRequest } from './../../../home/hotel-offer/models/hotel-offer-request.model';
-import { Offer } from './../../models/offer.interface';
 import { HotelOfferHeader } from './../../../home/hotel-offer/models/hotel-offer-header.model';
 import { ToastrService } from 'ngx-toastr';
 import { HttpErrorResponse } from '@angular/common/http';
@@ -15,21 +17,26 @@ import { Component, Input } from '@angular/core';
 })
 export class FavouriteButtonComponent {
 
-  @Input() offer: Offer;
-  @Input() type: string;
+  @Input() offer: any;
+  
   @Input() roomQuantity: number;
+  @Input() quantityPeople: number;
   @Input() fromDate: Date;
   @Input() toDate: Date;
-  @Input() quantityPeople: number;
-  
+
   constructor(
     private favouriteService: FavouriteOfferService,
     private toastr: ToastrService) { }
   
-  markFavourite(offer:Offer){
-    if (this.type == 'hotel') {
-      var hotelRequest:HotelOfferRequest = new HotelOfferRequest(this.toDate, this.fromDate, null, null, this.roomQuantity, null, null);
-      this.favouriteService.markFavouriteHotel(offer, hotelRequest)
+  markFavourite(offer: any){
+    if (offer.type == Constant.HOTEL) {
+
+      offer.roomQuantity = offer.roomQuantity ? offer.roomQuantity : this.offer.roomQuantity;
+      offer.fromDate = offer.fromDate ? offer.fromDate : this.offer.fromDate;
+      offer.toDate = offer.toDate ? offer.toDate : this.offer.toDate;
+
+      var req = new HotelAuthorizeRequest(offer.roomQuantity, offer.fromDate, offer.toDate);
+      this.favouriteService.markFavouriteHotel(offer, req)
         .then((result:boolean)=>{
           offer.favourite = result;
           if (result) this.toastr.success('Has agregado la oferta a favoritos.');
@@ -38,8 +45,11 @@ export class FavouriteButtonComponent {
           this.toastr.error('Ha ocurrido un error. Contacte a un administrador.');
         });
     } else {
-      var packageRequest:PackageOfferRequest = new PackageOfferRequest(null, null, null, this.quantityPeople, null, null);
-      this.favouriteService.markFavouritePackage(offer, packageRequest)
+
+      offer.quantityPeople = offer.quantityPeople ? offer.quantityPeople : this.offer.quantityPeople;
+      
+      var reqp = new PackageAuthorizeRequest(offer.quantityPeople);
+      this.favouriteService.markFavouritePackage(offer, reqp)
         .then((result:boolean)=>{
           offer.favourite = result;
           if (result) this.toastr.success('Has agregado la oferta a favoritos.');

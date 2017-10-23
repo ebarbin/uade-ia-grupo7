@@ -8,25 +8,23 @@
   <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
     <div class="card-result">
       <md-card class="card-row card col-lg-3 col-md-4 col-sm-6 col-xs-6"
-      *ngFor="let hoh of hoService.getResults()">
-      <app-favourite-button 
-        [offer]="hoh" *ngIf="showFavouriteIcon()" 
-        type="hotel" 
-        [roomQuantity]="hoService.getFilterRequest().roomQuantity"
-        [fromDate]="hoService.getFilterRequest().fromDate"
+      *ngFor="let ho of hoService.getResults()">
+      <app-favourite-button [offer]="ho" *ngIf="showFavouriteIcon()"
+        [roomQuantity]="hoService.getFilterRequest().roomQuantity" 
+        [fromDate]="hoService.getFilterRequest().fromDate" 
         [toDate]="hoService.getFilterRequest().toDate">
       </app-favourite-button>
-      <div (click)="onDetail(hoh)">
+      <div (click)="onDetail(ho)">
         <img class="img-responsive img-card" 
-          [src]="hoh.images | first | imageGetter">
+          [src]="ho.images | first | imageGetter">
           <md-card-header>  
-            <md-card-title>{{hoh.name}}</md-card-title>
-            <md-card-subtitle [mdTooltip]="hoh.description">{{hoh.description}}</md-card-subtitle>
+            <md-card-title>{{ho.name}}</md-card-title>
+            <md-card-subtitle [mdTooltip]="ho.description">{{ho.description}}</md-card-subtitle>
           </md-card-header>
           <md-card-content>
-            <p>{{hoh.services | join: ' - '}}</p>
-            <p>Capacidad: {{hoh.roomCapacity}} personas</p>
-            <div class="pull-right"><b>Precio Total: {{hoh.price | currency:'ARS':true}}</b></div>
+            <p>{{ho.services | join: ' - '}}</p>
+            <p>Capacidad: {{ho.roomCapacity}} personas</p>
+            <div class="pull-right"><b>Precio Total: {{ho.price | currency:'ARS':true}}</b></div>
           </md-card-content>
         </div>
       </md-card>

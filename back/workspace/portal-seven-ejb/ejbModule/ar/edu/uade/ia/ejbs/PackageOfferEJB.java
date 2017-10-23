@@ -10,6 +10,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.persistence.TemporalType;
 
+import ar.edu.uade.ia.common.dtos.PackageAuthorizeRequestDTO;
 import ar.edu.uade.ia.common.dtos.PackageOfferRequestDTO;
 import ar.edu.uade.ia.entities.business.PackageOffer;
 
@@ -84,9 +85,9 @@ public class PackageOfferEJB {
 		return this.em.find(PackageOffer.class, id);
 	}
 
-	public Boolean hasQuota(Integer packageId, PackageOfferRequestDTO filter) {
+	public Boolean hasQuota(Integer packageId, PackageAuthorizeRequestDTO req) {
 
-		Integer quantityPeople = filter.getQuantityPeople();
+		Integer quantityPeople = req.getQuantityPeople();
 		int value = 0;
 		
 		StringBuffer queryBuilder = new StringBuffer("select pkOf");

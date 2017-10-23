@@ -1,3 +1,4 @@
+import { HotelAuthorizeRequest } from './../../../shared/models/hotel-authorize-request.model';
 import { AuthService } from './../../../auth/services/auth.service';
 import { Holder } from './../../../shared/models/holder.interface';
 import { AuthorizeStatus } from './../../../shared/models/authorize-status.model';
@@ -144,9 +145,9 @@ export class HotelOfferService implements Holder {
             }).toPromise();
     }
 
-    authorizeReservation():Promise<AuthorizeStatus>{
+    authorizeReservation(req:HotelAuthorizeRequest):Promise<AuthorizeStatus>{
       return this.httpClient.put('portal-seven-web/api/rest/hotel-offer/authorize/' + 
-        this.hotelOffer.id, this.filterRequest)
+        this.hotelOffer.id, req)
         .map((response:PortalResponse)=>{
           if(response.success) {
             return <AuthorizeStatus>response.data;

@@ -15,8 +15,8 @@ import javax.ws.rs.core.Response;
 import org.jboss.logging.Logger;
 
 import ar.edu.uade.ia.common.dtos.FavoriteOfferDTO;
-import ar.edu.uade.ia.common.dtos.HotelOfferRequestDTO;
-import ar.edu.uade.ia.common.dtos.PackageOfferRequestDTO;
+import ar.edu.uade.ia.common.dtos.HotelAuthorizeRequestDTO;
+import ar.edu.uade.ia.common.dtos.PackageAuthorizeRequestDTO;
 import ar.edu.uade.ia.managers.FavouriteOfferManager;
 import ar.edu.uade.ia.services.response.PortalResponse;
 
@@ -33,9 +33,9 @@ public class FavouriteOfferService {
 	@Path("/hotel/{offerHotelId}/{portalUserId}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response markFavouriteHotel(@PathParam("offerHotelId") Integer offerHotelId,
-			@PathParam("portalUserId") Integer portalUserId, HotelOfferRequestDTO filter) {
+			@PathParam("portalUserId") Integer portalUserId, HotelAuthorizeRequestDTO req) {
 		try {
-			Boolean result = this.favouriteOfferManager.markFavouriteHotel(offerHotelId, portalUserId, filter);
+			Boolean result = this.favouriteOfferManager.markFavouriteHotel(offerHotelId, portalUserId, req);
 			return Response.ok(new PortalResponse(result)).build();
 		} catch (Exception e) {
 			FavouriteOfferService.LOGGER.error(e.getMessage(), e);
@@ -47,9 +47,9 @@ public class FavouriteOfferService {
 	@Path("/package/{offerPackageId}/{portalUserId}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response markFavouritePackage(@PathParam("offerPackageId") Integer offerPackageId,
-			@PathParam("portalUserId") Integer portalUserId, PackageOfferRequestDTO filter) {
+			@PathParam("portalUserId") Integer portalUserId, PackageAuthorizeRequestDTO req) {
 		try {
-			Boolean result = this.favouriteOfferManager.markFavouritePackage(offerPackageId, portalUserId, filter);
+			Boolean result = this.favouriteOfferManager.markFavouritePackage(offerPackageId, portalUserId, req);
 			return Response.ok(new PortalResponse(result)).build();
 		} catch (Exception e) {
 			FavouriteOfferService.LOGGER.error(e.getMessage(), e);

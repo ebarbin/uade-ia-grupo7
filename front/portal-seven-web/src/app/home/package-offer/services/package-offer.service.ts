@@ -1,3 +1,4 @@
+import { PackageAuthorizeRequest } from './../../../shared/models/package-authorize-request.model';
 import { AuthService } from './../../../auth/services/auth.service';
 import { AuthorizeStatus } from './../../../shared/models/authorize-status.model';
 import { Holder } from './../../../shared/models/holder.interface';
@@ -97,8 +98,8 @@ export class PackageOfferService implements Holder {
   }
 
   authorizeReservation():Promise<AuthorizeStatus>{
-    return this.httpClient.put('portal-seven-web/api/rest/package-offer/authorize/' + 
-      this.packageOffer.id, this.filterRequest)
+    var req = new PackageAuthorizeRequest(this.filterRequest.quantityPeople);
+    return this.httpClient.put('portal-seven-web/api/rest/package-offer/authorize/' +  this.packageOffer.id, req)
       .map((response:PortalResponse)=>{
         if(response.success) {
           return <AuthorizeStatus>response.data;

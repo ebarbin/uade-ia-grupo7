@@ -8,10 +8,11 @@ import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 
 import ar.edu.uade.ia.common.dtos.FavoriteOfferDTO;
-import ar.edu.uade.ia.common.dtos.HotelOfferRequestDTO;
+import ar.edu.uade.ia.common.dtos.HotelAuthorizeRequestDTO;
 import ar.edu.uade.ia.common.dtos.ImageDTO;
-import ar.edu.uade.ia.common.dtos.PackageOfferRequestDTO;
+import ar.edu.uade.ia.common.dtos.PackageAuthorizeRequestDTO;
 import ar.edu.uade.ia.common.dtos.SimpleNamedDTO;
+import ar.edu.uade.ia.common.enums.Constant;
 import ar.edu.uade.ia.ejbs.FavouriteOfferEJB;
 import ar.edu.uade.ia.ejbs.HotelOfferEJB;
 import ar.edu.uade.ia.ejbs.PackageOfferEJB;
@@ -51,7 +52,7 @@ public class FavouriteOfferManager {
 	public FavouriteOfferManager() {
 	}
 
-	public Boolean markFavouriteHotel(Integer offerHotelId, Integer portalUserId, HotelOfferRequestDTO filter)
+	public Boolean markFavouriteHotel(Integer offerHotelId, Integer portalUserId, HotelAuthorizeRequestDTO req)
 			throws Exception {
 		FavouriteHotelOffer fho = this.favoriteOfferEJB.getFavouriteHotelOffer(offerHotelId, portalUserId);
 		if (fho != null) {
@@ -60,12 +61,12 @@ public class FavouriteOfferManager {
 		} else {
 			HotelOffer ho = this.hotelOfferEJB.getDetail(offerHotelId);
 			PortalUser user = this.portalUserEJB.getById(portalUserId);
-			this.favoriteOfferEJB.markFavouriteHotel(ho, user, filter);
+			this.favoriteOfferEJB.markFavouriteHotel(ho, user, req);
 			return Boolean.TRUE;
 		}
 	}
 
-	public Boolean markFavouritePackage(Integer offerPackageId, Integer portalUserId, PackageOfferRequestDTO filter)
+	public Boolean markFavouritePackage(Integer offerPackageId, Integer portalUserId, PackageAuthorizeRequestDTO req)
 			throws Exception {
 		FavouritePackageOffer pho = this.favoriteOfferEJB.getFavouritePackageOffer(offerPackageId, portalUserId);
 		if (pho != null) {
@@ -74,7 +75,7 @@ public class FavouriteOfferManager {
 		} else {
 			PackageOffer po = this.packageOfferEJB.getDetail(offerPackageId);
 			PortalUser user = this.portalUserEJB.getById(portalUserId);
-			this.favoriteOfferEJB.markFavouritePackage(po, user, filter);
+			this.favoriteOfferEJB.markFavouritePackage(po, user, req);
 			return Boolean.TRUE;
 		}
 	}
@@ -84,54 +85,25 @@ public class FavouriteOfferManager {
 		List<FavouritePackageOffer> favouritesPackage = this.favoriteOfferEJB.getFavouritePackageOffers(portalUserId);
 
 		List<FavoriteOfferDTO> results = new ArrayList<FavoriteOfferDTO>();
-		FavoriteOfferDTO favouriteOffer;
 
+		this.addFavouritesHotel(results, favouritesHotel);
+		this.addFavouritesPackage(results, favouritesPackage);
+
+		return results;
+	}
+
+	private void addFavouritesPackage(List<FavoriteOfferDTO> results, List<FavouritePackageOffer> favouritesPackage) {
 		SimpleNamedDTO namedDTO;
 		ImageDTO imageDTO;
-		for (FavouriteHotelOffer favouriteHotel : favouritesHotel) {
-			favouriteOffer = new FavoriteOfferDTO();
-			favouriteOffer.setId(favouriteHotel.getHotelOffer().getId());
-			favouriteOffer.setType("HOTEL");
-			favouriteOffer.setName(favouriteHotel.getHotelOffer().getHotel().getName());
-			favouriteOffer.setDescription(favouriteHotel.getHotelOffer().getHotel().getDescription());
-			favouriteOffer.setQuantityCapacity(favouriteHotel.getRoomQuantity());
-			favouriteOffer.setOfferStart(favouriteHotel.getOfferStart());
-			favouriteOffer.setOfferEnd(favouriteHotel.getOfferEnd());
-			favouriteOffer.setPrice(favouriteHotel.getHotelOffer().getPrice());
-			
-			favouriteOffer.setServices(new ArrayList<SimpleNamedDTO>());
-			for (ServiceHotel service : favouriteHotel.getHotelOffer().getHotel().getServices()) {
-				namedDTO = new SimpleNamedDTO();
-				namedDTO.setId(service.getId());
-				namedDTO.setName(service.getName());
-				favouriteOffer.getServices().add(namedDTO);
-			}
-
-			favouriteOffer.setImages(new ArrayList<ImageDTO>());
-			for (Image img : favouriteHotel.getHotelOffer().getHotel().getImages()) {
-				imageDTO = new ImageDTO();
-				imageDTO.setId(img.getId());
-				favouriteOffer.getImages().add(imageDTO);
-			}
-			
-			favouriteOffer.setPaymentMethods(new ArrayList<SimpleNamedDTO>());
-			for (PaymentMethod pm : favouriteHotel.getHotelOffer().getHotel().getPaymentMethods()) {
-				namedDTO = new SimpleNamedDTO();
-				namedDTO.setId(pm.getId());
-				favouriteOffer.getPaymentMethods().add(namedDTO);
-			}
-			
-			results.add(favouriteOffer);
-		}
-		
-		for (FavouritePackageOffer favouritePackage: favouritesPackage) {
+		FavoriteOfferDTO favouriteOffer;
+		for (FavouritePackageOffer favouritePackage : favouritesPackage) {
 			favouriteOffer = new FavoriteOfferDTO();
 			favouriteOffer.setId(favouritePackage.getPackageOffer().getId());
-			favouriteOffer.setType("PACKAGE");
+			favouriteOffer.setType(Constant.PACKAGE.name());
 			favouriteOffer.setDescription(favouritePackage.getPackageOffer().getDescription());
 			favouriteOffer.setQuantityCapacity(favouritePackage.getQuantityPeople());
 			favouriteOffer.setPrice(favouritePackage.getPackageOffer().getPrice());
-			
+
 			favouriteOffer.setServices(new ArrayList<SimpleNamedDTO>());
 			for (ServicePackage service : favouritePackage.getPackageOffer().getServices()) {
 				namedDTO = new SimpleNamedDTO();
@@ -146,10 +118,49 @@ public class FavouriteOfferManager {
 				imageDTO.setId(img.getId());
 				favouriteOffer.getImages().add(imageDTO);
 			}
-			
+
 			results.add(favouriteOffer);
 		}
-		
-		return results;
+	}
+
+	private void addFavouritesHotel(List<FavoriteOfferDTO> results, List<FavouriteHotelOffer> favouritesHotel) {
+		SimpleNamedDTO namedDTO;
+		ImageDTO imageDTO;
+		FavoriteOfferDTO favouriteOffer;
+		for (FavouriteHotelOffer favouriteHotel : favouritesHotel) {
+			favouriteOffer = new FavoriteOfferDTO();
+			favouriteOffer.setId(favouriteHotel.getHotelOffer().getId());
+			favouriteOffer.setType(Constant.HOTEL.name());
+			favouriteOffer.setName(favouriteHotel.getHotelOffer().getHotel().getName());
+			favouriteOffer.setDescription(favouriteHotel.getHotelOffer().getHotel().getDescription());
+			favouriteOffer.setQuantityCapacity(favouriteHotel.getRoomQuantity());
+			favouriteOffer.setOfferStart(favouriteHotel.getOfferStart());
+			favouriteOffer.setOfferEnd(favouriteHotel.getOfferEnd());
+			favouriteOffer.setPrice(favouriteHotel.getHotelOffer().getPrice());
+
+			favouriteOffer.setServices(new ArrayList<SimpleNamedDTO>());
+			for (ServiceHotel service : favouriteHotel.getHotelOffer().getHotel().getServices()) {
+				namedDTO = new SimpleNamedDTO();
+				namedDTO.setId(service.getId());
+				namedDTO.setName(service.getName());
+				favouriteOffer.getServices().add(namedDTO);
+			}
+
+			favouriteOffer.setImages(new ArrayList<ImageDTO>());
+			for (Image img : favouriteHotel.getHotelOffer().getHotel().getImages()) {
+				imageDTO = new ImageDTO();
+				imageDTO.setId(img.getId());
+				favouriteOffer.getImages().add(imageDTO);
+			}
+
+			favouriteOffer.setPaymentMethods(new ArrayList<SimpleNamedDTO>());
+			for (PaymentMethod pm : favouriteHotel.getHotelOffer().getHotel().getPaymentMethods()) {
+				namedDTO = new SimpleNamedDTO();
+				namedDTO.setId(pm.getId());
+				favouriteOffer.getPaymentMethods().add(namedDTO);
+			}
+
+			results.add(favouriteOffer);
+		}
 	}
 }

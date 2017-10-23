@@ -1,3 +1,6 @@
+import { HotelAuthorizeRequest } from './../../shared/models/hotel-authorize-request.model';
+import { HotelOfferService } from './../hotel-offer/services/hotel-offer.service';
+import { Constant } from './../../shared/models/constant';
 import { FavouriteOffer } from './models/favourite-offer.model';
 import { FavouriteOfferService } from './services/favourite-offer.service';
 import { PackageOfferHeader } from './../package-offer/models/package-offer-header.model';
@@ -19,6 +22,7 @@ export class FavouriteComponent implements OnInit, OnDestroy {
 
   constructor(
     private service:FavouriteOfferService,
+    private hoService: HotelOfferService,
     private toastr: ToastrService,
     private router: Router) { }
 
@@ -40,18 +44,36 @@ export class FavouriteComponent implements OnInit, OnDestroy {
     this.subs.unsubscribe();
   }
 
-  onConfirmHotel(hoh:HotelOfferHeader){
-    var request:HotelOfferRequest = new HotelOfferRequest(hoh.offerEnd, hoh.offerStart, null, null, hoh.roomCapacity, null, null);
-    this.service.authorizeHotelReservation(hoh.id, request)
+  onConfirmHotel(fo:FavouriteOffer){
+    var req = new HotelAuthorizeRequest(fo.quantityCapacity, fo.offerStart, fo.offerEnd);
+
+    this.hoService.authorizeReservation(req).then((authorizeStatus:AuthorizeStatus)=>{
+      if (authorizeStatus.status) {
+        this.service.setFavouriteOfferSelected(fo);
+        this.router.navigate(['home']);
+      } else {
+        this.toastr.error(authorizeStatus.description);
+      }
+    }).catch((res:HttpErrorResponse) => {
+      this.toastr.error('Ha ocurrido un error. Contacte a un administrador.');
+    });
+  }
+
+  onConfirmPackage(fo:FavouriteOffer){
+    /*this.service.authorizeHotelReservation(fo.id, new HotelOfferRequest(null, null, null, null, fo.quantityCapacity, null, null))
       .then((authorizeStatus:AuthorizeStatus)=>{
         if (authorizeStatus.status) {
+          this.service.setFavouriteOfferSelected(fo);
           this.router.navigate(['home']);
         } else {
           this.toastr.error(authorizeStatus.description);
         }
       }).catch((res:HttpErrorResponse) => {
         this.toastr.error('Ha ocurrido un error. Contacte a un administrador.');
-      });
+      });*/
   }
 
+  isHotel(type:string){
+    return Constant.HOTEL == type;
+  }
 }

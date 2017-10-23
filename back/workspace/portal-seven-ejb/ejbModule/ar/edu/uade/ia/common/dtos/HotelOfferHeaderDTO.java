@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
+import ar.edu.uade.ia.common.enums.Constant;
+
 public class HotelOfferHeaderDTO implements Serializable {
 
 	private static final long serialVersionUID = -5056225701663864983L;
@@ -27,6 +29,8 @@ public class HotelOfferHeaderDTO implements Serializable {
 	private Date offerEnd;
 	
 	private Boolean favourite;
+	
+	private String type = Constant.HOTEL.name();
 	
 	public HotelOfferHeaderDTO() {}
 	
@@ -108,5 +112,14 @@ public class HotelOfferHeaderDTO implements Serializable {
 
 	public void setFavourite(Boolean favourite) {
 		this.favourite = favourite;
+	}
+
+	public String getType() {
+		return type;
+	}
+
+	@SuppressWarnings("unused")
+	private void setType(String type) {
+		this.type = type;
 	}
 }

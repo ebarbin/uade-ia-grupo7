@@ -11,6 +11,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.persistence.TemporalType;
 
+import ar.edu.uade.ia.common.dtos.HotelAuthorizeRequestDTO;
 import ar.edu.uade.ia.common.dtos.HotelOfferRequestDTO;
 import ar.edu.uade.ia.entities.business.HotelOffer;
 
@@ -117,11 +118,11 @@ public class HotelOfferEJB {
 		hor.setToDate(to.getTime());
 	}
 	
-	public Boolean hasQuota(Integer hotelOfferId, HotelOfferRequestDTO filter) throws Exception {
+	public Boolean hasQuota(Integer hotelOfferId, HotelAuthorizeRequestDTO req) throws Exception {
 		
-		Date dateFrom = filter.getFromDate();
-		Date dateTo = filter.getToDate();
-		Integer roomQty = filter.getRoomQuantity();
+		Date dateFrom = req.getFromDate();
+		Date dateTo = req.getToDate();
+		Integer roomQty = req.getRoomQuantity();
 		Integer difDates = (int) ((dateTo.getTime()-dateFrom.getTime())/86400000);
 		difDates += 1;
 		int value = 0;

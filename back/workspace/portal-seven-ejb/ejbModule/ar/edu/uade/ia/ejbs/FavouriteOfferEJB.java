@@ -9,8 +9,8 @@ import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
-import ar.edu.uade.ia.common.dtos.HotelOfferRequestDTO;
-import ar.edu.uade.ia.common.dtos.PackageOfferRequestDTO;
+import ar.edu.uade.ia.common.dtos.HotelAuthorizeRequestDTO;
+import ar.edu.uade.ia.common.dtos.PackageAuthorizeRequestDTO;
 import ar.edu.uade.ia.entities.FavouriteHotelOffer;
 import ar.edu.uade.ia.entities.FavouritePackageOffer;
 import ar.edu.uade.ia.entities.PortalUser;
@@ -51,11 +51,11 @@ public class FavouriteOfferEJB {
 		this.em.remove(fho);
 	}
 
-	public void markFavouriteHotel(HotelOffer ho, PortalUser user, HotelOfferRequestDTO filter) {
+	public void markFavouriteHotel(HotelOffer ho, PortalUser user, HotelAuthorizeRequestDTO req) {
 		FavouriteHotelOffer fho = new FavouriteHotelOffer();
-		fho.setOfferEnd(filter.getToDate());
-		fho.setOfferStart(filter.getFromDate());
-		fho.setRoomQuantity(filter.getRoomQuantity());
+		fho.setOfferEnd(req.getToDate());
+		fho.setOfferStart(req.getFromDate());
+		fho.setRoomQuantity(req.getRoomQuantity());
 		fho.setHotelOffer(ho);
 		fho.setPortalUser(user);
 		
@@ -84,9 +84,9 @@ public class FavouriteOfferEJB {
 		this.em.remove(pho);
 	}
 
-	public void markFavouritePackage(PackageOffer po, PortalUser user, PackageOfferRequestDTO filter) {
+	public void markFavouritePackage(PackageOffer po, PortalUser user, PackageAuthorizeRequestDTO req) {
 		FavouritePackageOffer fho = new FavouritePackageOffer();
-		fho.setQuantityPeople(filter.getQuantityPeople());
+		fho.setQuantityPeople(req.getQuantityPeople());
 		fho.setPackageOffer(po);
 		fho.setPortalUser(user);
 		

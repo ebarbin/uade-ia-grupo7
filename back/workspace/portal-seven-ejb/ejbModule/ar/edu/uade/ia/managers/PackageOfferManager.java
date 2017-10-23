@@ -12,6 +12,7 @@ import org.dozer.Mapper;
 
 import ar.edu.uade.ia.common.dtos.AuthorizeStatusDTO;
 import ar.edu.uade.ia.common.dtos.ImageDTO;
+import ar.edu.uade.ia.common.dtos.PackageAuthorizeRequestDTO;
 import ar.edu.uade.ia.common.dtos.PackageOfferDTO;
 import ar.edu.uade.ia.common.dtos.PackageOfferHeaderDTO;
 import ar.edu.uade.ia.common.dtos.PackageOfferRequestDTO;
@@ -42,10 +43,10 @@ public class PackageOfferManager {
 	 */
 	public PackageOfferManager() {}
 
-	public AuthorizeStatusDTO autorize(Integer id, PackageOfferRequestDTO filter) throws Exception {
+	public AuthorizeStatusDTO autorize(Integer id, PackageAuthorizeRequestDTO req) throws Exception {
 
 		AuthorizeStatusDTO dto = new AuthorizeStatusDTO();
-		if (this.packageOfferEJB.hasQuota(id, filter)){
+		if (this.packageOfferEJB.hasQuota(id, req)){
 			// TODO MANDAR A AUTORIZAR AL WEBSERVICE SOAP
 			dto.setStatus(Boolean.TRUE);
 		} else {

@@ -16,6 +16,7 @@ import javax.ws.rs.core.Response;
 import org.jboss.logging.Logger;
 
 import ar.edu.uade.ia.common.dtos.AuthorizeStatusDTO;
+import ar.edu.uade.ia.common.dtos.HotelAuthorizeRequestDTO;
 import ar.edu.uade.ia.common.dtos.HotelOfferDTO;
 import ar.edu.uade.ia.common.dtos.HotelOfferHeaderDTO;
 import ar.edu.uade.ia.common.dtos.HotelOfferRequestDTO;
@@ -81,9 +82,9 @@ public class HotelOfferService {
 	@PUT
 	@Path("/authorize/{id}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response authorize(@PathParam("id") Integer id, HotelOfferRequestDTO filter) {
+	public Response authorize(@PathParam("id") Integer id, HotelAuthorizeRequestDTO req) {
 		try {
-			AuthorizeStatusDTO statusDTO = this.hotelOfferManager.autorize(id, filter);
+			AuthorizeStatusDTO statusDTO = this.hotelOfferManager.autorize(id, req);
 			return Response.ok(new PortalResponse(statusDTO)).build();
 		} catch (Exception e) {
 			HotelOfferService.LOGGER.error(e.getMessage(), e);

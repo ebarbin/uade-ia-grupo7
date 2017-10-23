@@ -1,10 +1,11 @@
+import { PackageAuthorizeRequest } from './../../../shared/models/package-authorize-request.model';
+import { HotelAuthorizeRequest } from './../../../shared/models/hotel-authorize-request.model';
 import { FavouriteOffer } from './../models/favourite-offer.model';
 import { AuthorizeStatus } from './../../../shared/models/authorize-status.model';
 import { PackageOfferHeader } from './../../package-offer/models/package-offer-header.model';
 import { HotelOfferHeader } from './../../hotel-offer/models/hotel-offer-header.model';
 import { PackageOfferRequest } from './../../package-offer/models/package-offer-request.model';
 import { PortalResponse } from './../../../shared/models/portal-response.model';
-import { Offer } from './../../../shared/models/offer.interface';
 import { HotelOfferRequest } from './../../hotel-offer/models/hotel-offer-request.model';
 import { HttpClient } from '@angular/common/http';
 import { ToastrService } from 'ngx-toastr';
@@ -31,7 +32,7 @@ export class FavouriteOfferService {
     return this.favouriteOfferSelected;
   }
 
-  markFavouriteHotel(offer:Offer, request:HotelOfferRequest):Promise<boolean>{
+  markFavouriteHotel(offer:any, request:HotelAuthorizeRequest):Promise<boolean>{
     return this.httpClient.put('portal-seven-web/api/rest/favourite-offer/hotel/' + 
       offer.id + '/' + this.authService.getUser().id, request)
       .map((response:PortalResponse)=>{
@@ -45,7 +46,7 @@ export class FavouriteOfferService {
     }).toPromise();
   }
 
-  markFavouritePackage(offer:Offer, request:PackageOfferRequest):Promise<boolean>{
+  markFavouritePackage(offer:any, request:PackageAuthorizeRequest):Promise<boolean>{
     return this.httpClient.put('portal-seven-web/api/rest/favourite-offer/package/' + 
       offer.id + '/' + this.authService.getUser().id, request)
       .map((response:PortalResponse)=>{
@@ -93,18 +94,5 @@ export class FavouriteOfferService {
           return [];
         }
     }).toPromise();
-  }
-
-  authorizeHotelReservation(hotelOfferId:number, request:HotelOfferRequest):Promise<AuthorizeStatus>{
-    return this.httpClient.put('portal-seven-web/api/rest/hotel-offer/authorize/' + 
-    hotelOfferId, request)
-      .map((response:PortalResponse)=>{
-        if(response.success) {
-          return <AuthorizeStatus>response.data;
-        } else {
-          this.toastr.error(response.errorMessage);
-          return null;
-        }
-      }).toPromise();
   }
 }
