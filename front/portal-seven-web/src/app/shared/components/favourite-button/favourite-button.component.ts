@@ -25,10 +25,14 @@ export class FavouriteButtonComponent {
   @Input() toDate: Date;
 
   constructor(
+    private authService: AuthService,
     private favouriteService: FavouriteOfferService,
     private toastr: ToastrService) { }
   
   markFavourite(offer: any){
+
+    if (this.authService.isAdmin()) return;
+    
     if (offer.type == Constant.HOTEL) {
 
       offer.roomQuantity = offer.roomQuantity ? offer.roomQuantity : this.roomQuantity;

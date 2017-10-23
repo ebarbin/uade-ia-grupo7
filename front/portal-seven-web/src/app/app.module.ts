@@ -25,6 +25,7 @@ import { PackageOfferService } from './home/package-offer/services/package-offer
 import { FavouriteOfferService } from './home/favourite/services/favourite-offer.service';
 import { HotelOfferResultGuard } from './home/hotel-offer/services/hotel-offer-result.guard';
 import { PackageOfferResultGuard } from './home/package-offer/services/package-offer-result.guard';
+import { FavouriteGuard } from './home/favourite/services/favourite-guard.service';
 
 @NgModule({
   declarations: [
@@ -39,6 +40,7 @@ import { PackageOfferResultGuard } from './home/package-offer/services/package-o
     AuthGuard, AuthService, UserService, ImageService, 
     AutocompleteService, HotelOfferService, PackageOfferService, 
     HotelOfferResultGuard, PackageOfferResultGuard, FavouriteOfferService,
+    FavouriteGuard,
     { provide: LOCALE_ID, useValue: 'es-AR' },
     { provide: HTTP_INTERCEPTORS, useClass: MyHttpInterceptor, multi: true }
   ],

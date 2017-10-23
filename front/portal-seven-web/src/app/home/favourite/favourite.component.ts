@@ -40,6 +40,7 @@ export class FavouriteComponent implements OnInit, OnDestroy {
       this.favouriteOffers = this.favouriteOffers.filter((value:FavouriteOffer) => {
         return  (change.type != value.type) || (change.type == value.type && change.id != value.id);
       });
+      if (this.favouriteOffers.length == 0) this.router.navigate(['home']);
     });
   }
 

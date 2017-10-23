@@ -31,6 +31,7 @@ public class PortalUserEJB {
 				pu.setUserName(userName);
 				pu.setFirstName(userName);
 				pu.setSureName(userName);
+				pu.setId(-1);
 				return pu;
 			}
 			PortalUser pu = this.getByUsername(userName);

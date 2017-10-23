@@ -59,4 +59,8 @@ export class AuthService implements OnInit {
   isAuthenticated() {
     return this.user != null;
   }
+
+  isAdmin():boolean {
+    return this.getUser().userName == 'admin';
+  }
 }

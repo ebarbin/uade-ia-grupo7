@@ -71,4 +71,19 @@ export class FavouriteOfferService {
         }
     }).toPromise();
   }
+
+  canActivate():Promise<boolean>{
+    return this.httpClient.get('portal-seven-web/api/rest/favourite-offer/can-activate/' 
+    + this.authService.getUser().id)
+      .map((response:PortalResponse)=>{
+        if (response.success){
+          var result = <boolean> response.data;
+          if (!result) this.toastr.info('No hay favoritos.');
+          return result;
+        } else {
+          this.toastr.error(response.errorMessage);
+          return false;
+        }
+    }).toPromise();
+  }
 }

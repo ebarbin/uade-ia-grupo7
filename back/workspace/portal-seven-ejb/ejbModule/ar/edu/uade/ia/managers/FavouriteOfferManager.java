@@ -92,6 +92,12 @@ public class FavouriteOfferManager {
 		return results;
 	}
 
+	public Boolean canActivate(Integer portalUserId) throws Exception {
+		List<FavouriteHotelOffer> favouritesHotel = this.favoriteOfferEJB.getFavouriteHotelOffers(portalUserId);
+		List<FavouritePackageOffer> favouritesPackage = this.favoriteOfferEJB.getFavouritePackageOffers(portalUserId);
+		return !favouritesHotel.isEmpty() || !favouritesPackage.isEmpty();
+	}
+	
 	private void addFavouritesPackage(List<FavoriteOfferDTO> results, List<FavouritePackageOffer> favouritesPackage) {
 		SimpleNamedDTO namedDTO;
 		ImageDTO imageDTO;

@@ -9,7 +9,7 @@
     <div class="card-result">
       <md-card class="card-row card col-lg-4 col-md-4 col-sm-6 col-xs-12" 
         *ngFor="let po of poService.getResults()">
-        <app-favourite-button [offer]="po" *ngIf="showFavouriteIcon()" [quantityPeople]="poService.getFilter().quantityPeople"></app-favourite-button>
+        <app-favourite-button [offer]="po" [quantityPeople]="poService.getFilter().quantityPeople"></app-favourite-button>
         <div (click)="onDetail(po)">
           <img class="img-responsive img-card"
             [src]="po.image | imageGetter">

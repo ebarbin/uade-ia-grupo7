@@ -9,7 +9,7 @@
     <div class="card-result">
       <md-card class="card-row card col-lg-3 col-md-4 col-sm-6 col-xs-6"
       *ngFor="let ho of hoService.getResults()">
-      <app-favourite-button [offer]="ho" *ngIf="showFavouriteIcon()"
+      <app-favourite-button [offer]="ho"
         [roomQuantity]="hoService.getFilterRequest().roomQuantity" 
         [fromDate]="hoService.getFilterRequest().fromDate" 
         [toDate]="hoService.getFilterRequest().toDate">

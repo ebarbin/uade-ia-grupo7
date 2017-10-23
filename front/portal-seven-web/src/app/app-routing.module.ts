@@ -17,6 +17,7 @@ import { PackageOfferComponent } from './home/package-offer/package-offer.compon
 import { UserProfileComponent } from './home/user-profile/user-profile.component';
 import { HotelOfferResultGuard } from './home/hotel-offer/services/hotel-offer-result.guard';
 import { PackageOfferResultGuard } from './home/package-offer/services/package-offer-result.guard';
+import { FavouriteGuard } from './home/favourite/services/favourite-guard.service';
 
 const appRoutes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full'},
@@ -41,8 +42,9 @@ const appRoutes: Routes = [
       },
       {path: 'user-profile', component: UserProfileComponent, canActivate: [AuthGuard]},
       {path: 'configuration', component: ConfigurationComponent, canActivate: [AuthGuard]},
-      {path: 'favourite', component: FavouriteComponent, canActivate: [AuthGuard]},
-      {path: 'favorite-hotel-authorization-resume', component: FavouriteHotelReservationResumeComponent, canActivate: [AuthGuard]},
+      {path: 'favourite', component: FavouriteComponent, canActivate: [AuthGuard, FavouriteGuard]},
+      {path: 'favorite-hotel-authorization-resume', component: FavouriteHotelReservationResumeComponent, 
+        canActivate: [AuthGuard, FavouriteGuard]},
     ]},
   { path: 'signin', component: SigninComponent }
 ];
