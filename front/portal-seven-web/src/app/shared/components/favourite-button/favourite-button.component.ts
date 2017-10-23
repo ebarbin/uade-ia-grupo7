@@ -31,9 +31,9 @@ export class FavouriteButtonComponent {
   markFavourite(offer: any){
     if (offer.type == Constant.HOTEL) {
 
-      offer.roomQuantity = offer.roomQuantity ? offer.roomQuantity : this.offer.roomQuantity;
-      offer.fromDate = offer.fromDate ? offer.fromDate : this.offer.fromDate;
-      offer.toDate = offer.toDate ? offer.toDate : this.offer.toDate;
+      offer.roomQuantity = offer.roomQuantity ? offer.roomQuantity : this.roomQuantity;
+      offer.fromDate = offer.offerStart ? offer.offerStart : this.offer.fromDate;
+      offer.toDate = offer.offerEnd ? offer.offerEnd : this.toDate;
 
       var req = new HotelAuthorizeRequest(offer.roomQuantity, offer.fromDate, offer.toDate);
       this.favouriteService.markFavouriteHotel(offer, req)
@@ -46,7 +46,7 @@ export class FavouriteButtonComponent {
         });
     } else {
 
-      offer.quantityPeople = offer.quantityPeople ? offer.quantityPeople : this.offer.quantityPeople;
+      offer.quantityPeople = offer.quantityPeople ? offer.quantityPeople : this.quantityPeople;
       
       var reqp = new PackageAuthorizeRequest(offer.quantityPeople);
       this.favouriteService.markFavouritePackage(offer, reqp)

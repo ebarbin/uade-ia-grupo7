@@ -1,3 +1,4 @@
+import { FavouriteHotelReservationResumeComponent } from './home/favourite/components/favourite-hotel-reservation-resume/favourite-hotel-reservation-resume.component';
 import { FavouriteComponent } from './home/favourite/favourite.component';
 
 import { PackageOfferCardResultComponent } from './home/package-offer/components/package-offer-card-result/package-offer-card-result.component';
@@ -40,7 +41,8 @@ const appRoutes: Routes = [
       },
       {path: 'user-profile', component: UserProfileComponent, canActivate: [AuthGuard]},
       {path: 'configuration', component: ConfigurationComponent, canActivate: [AuthGuard]},
-      {path: 'favourite', component: FavouriteComponent, canActivate: [AuthGuard]}
+      {path: 'favourite', component: FavouriteComponent, canActivate: [AuthGuard]},
+      {path: 'favorite-hotel-authorization-resume', component: FavouriteHotelReservationResumeComponent, canActivate: [AuthGuard]},
     ]},
   { path: 'signin', component: SigninComponent }
 ];

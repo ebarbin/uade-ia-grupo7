@@ -1,17 +1,20 @@
+import { Router } from '@angular/router';
 import { FavouriteOfferService } from './../../services/favourite-offer.service';
 
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-favourite-hotel-reservation-resume',
   templateUrl: './favourite-hotel-reservation-resume.component.html',
   styleUrls: ['./favourite-hotel-reservation-resume.component.css']
 })
-export class FavouriteHotelReservationResumeComponent implements OnInit {
+export class FavouriteHotelReservationResumeComponent {
 
-  constructor(private service:FavouriteOfferService) { }
+  constructor(
+    private service: FavouriteOfferService,
+    private router: Router) { }
 
-  ngOnInit() {
+  onAccept(){
+    this.router.navigate(['/home/favourite']);
   }
-
 }

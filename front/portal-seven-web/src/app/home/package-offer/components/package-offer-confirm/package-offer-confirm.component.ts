@@ -1,3 +1,4 @@
+import { PackageAuthorizeRequest } from './../../../../shared/models/package-authorize-request.model';
 import { HttpErrorResponse } from '@angular/common/http';
 import { AuthorizeStatus } from './../../../../shared/models/authorize-status.model';
 import { PackageOfferDetailComponent } from './../package-offer-detail/package-offer-detail.component';
@@ -34,7 +35,7 @@ export class PackageOfferConfirmComponent {
   }
 
   onConfirm(){
-    this.srv.authorizeReservation()
+    this.srv.authorizeReservation(this.srv.getSelected().id, new PackageAuthorizeRequest(this.srv.getFilter().quantityPeople))
     .then((authorizeStatus:AuthorizeStatus)=>{
       if (authorizeStatus.status) {
         this.dialogRef.close();

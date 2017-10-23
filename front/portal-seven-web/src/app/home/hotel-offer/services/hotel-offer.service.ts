@@ -145,9 +145,9 @@ export class HotelOfferService implements Holder {
             }).toPromise();
     }
 
-    authorizeReservation(req:HotelAuthorizeRequest):Promise<AuthorizeStatus>{
+    authorizeReservation(offerId:number, req:HotelAuthorizeRequest):Promise<AuthorizeStatus>{
       return this.httpClient.put('portal-seven-web/api/rest/hotel-offer/authorize/' + 
-        this.hotelOffer.id, req)
+        offerId, req)
         .map((response:PortalResponse)=>{
           if(response.success) {
             return <AuthorizeStatus>response.data;

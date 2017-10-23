@@ -97,9 +97,8 @@ export class PackageOfferService implements Holder {
     this.router.navigate(['/home/package-offer']);
   }
 
-  authorizeReservation():Promise<AuthorizeStatus>{
-    var req = new PackageAuthorizeRequest(this.filterRequest.quantityPeople);
-    return this.httpClient.put('portal-seven-web/api/rest/package-offer/authorize/' +  this.packageOffer.id, req)
+  authorizeReservation(offerId:number, req:PackageAuthorizeRequest):Promise<AuthorizeStatus>{
+    return this.httpClient.put('portal-seven-web/api/rest/package-offer/authorize/' +  offerId, req)
       .map((response:PortalResponse)=>{
         if(response.success) {
           return <AuthorizeStatus>response.data;

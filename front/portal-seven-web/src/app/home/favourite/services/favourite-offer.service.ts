@@ -60,30 +60,6 @@ export class FavouriteOfferService {
     }).toPromise();
   }
 
-  getFavouriteHotels():Promise<HotelOfferHeader[]>{
-    return this.httpClient.get('portal-seven-web/api/rest/favourite-offer/hotel/' + this.authService.getUser().id)
-      .map((response:PortalResponse)=>{
-        if (response.success){
-          return <HotelOfferHeader[]> response.data;
-        } else {
-          this.toastr.error(response.errorMessage);
-          return [];
-        }
-    }).toPromise();
-  }
-
-  getFavouritePackages():Promise<PackageOfferHeader[]>{
-    return this.httpClient.get('portal-seven-web/api/rest/favourite-offer/package/' + this.authService.getUser().id)
-      .map((response:PortalResponse)=>{
-        if (response.success){
-          return <PackageOfferHeader[]> response.data;
-        } else {
-          this.toastr.error(response.errorMessage);
-          return [];
-        }
-    }).toPromise();
-  }
-
   getFavourites():Promise<FavouriteOffer[]>{
     return this.httpClient.get('portal-seven-web/api/rest/favourite-offer/' + this.authService.getUser().id)
       .map((response:PortalResponse)=>{

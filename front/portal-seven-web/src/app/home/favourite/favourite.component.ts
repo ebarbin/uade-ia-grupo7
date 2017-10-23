@@ -1,10 +1,12 @@
+import { PackageAuthorizeRequest } from './../../shared/models/package-authorize-request.model';
+import { PackageOfferService } from './../package-offer/services/package-offer.service';
 import { HotelAuthorizeRequest } from './../../shared/models/hotel-authorize-request.model';
 import { HotelOfferService } from './../hotel-offer/services/hotel-offer.service';
 import { Constant } from './../../shared/models/constant';
 import { FavouriteOffer } from './models/favourite-offer.model';
 import { FavouriteOfferService } from './services/favourite-offer.service';
 import { PackageOfferHeader } from './../package-offer/models/package-offer-header.model';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { HotelOfferRequest } from './../hotel-offer/models/hotel-offer-request.model';
 import { AuthorizeStatus } from './../../shared/models/authorize-status.model';
@@ -22,9 +24,10 @@ export class FavouriteComponent implements OnInit, OnDestroy {
 
   constructor(
     private service:FavouriteOfferService,
+    private poService: PackageOfferService,
     private hoService: HotelOfferService,
     private toastr: ToastrService,
-    private router: Router) { }
+    private router: Router, private route: ActivatedRoute ) { }
 
   favouriteOffers:FavouriteOffer[] = [];
   subs:Subscription;
@@ -45,12 +48,11 @@ export class FavouriteComponent implements OnInit, OnDestroy {
   }
 
   onConfirmHotel(fo:FavouriteOffer){
-    var req = new HotelAuthorizeRequest(fo.quantityCapacity, fo.offerStart, fo.offerEnd);
-
-    this.hoService.authorizeReservation(req).then((authorizeStatus:AuthorizeStatus)=>{
+    this.hoService.authorizeReservation(fo.id, new HotelAuthorizeRequest(fo.quantityCapacity, fo.offerStart, fo.offerEnd))
+    .then((authorizeStatus:AuthorizeStatus)=>{
       if (authorizeStatus.status) {
         this.service.setFavouriteOfferSelected(fo);
-        this.router.navigate(['home']);
+        this.router.navigate(['/home/favorite-hotel-authorization-resume']);
       } else {
         this.toastr.error(authorizeStatus.description);
       }
@@ -60,17 +62,17 @@ export class FavouriteComponent implements OnInit, OnDestroy {
   }
 
   onConfirmPackage(fo:FavouriteOffer){
-    /*this.service.authorizeHotelReservation(fo.id, new HotelOfferRequest(null, null, null, null, fo.quantityCapacity, null, null))
-      .then((authorizeStatus:AuthorizeStatus)=>{
-        if (authorizeStatus.status) {
-          this.service.setFavouriteOfferSelected(fo);
-          this.router.navigate(['home']);
-        } else {
-          this.toastr.error(authorizeStatus.description);
-        }
-      }).catch((res:HttpErrorResponse) => {
-        this.toastr.error('Ha ocurrido un error. Contacte a un administrador.');
-      });*/
+    this.poService.authorizeReservation(fo.id, new PackageAuthorizeRequest(fo.quantityCapacity))
+    .then((authorizeStatus:AuthorizeStatus)=>{
+      if (authorizeStatus.status) {
+        this.service.setFavouriteOfferSelected(fo);
+        this.router.navigate(['home']);
+      } else {
+        this.toastr.error(authorizeStatus.description);
+      }
+    }).catch((res:HttpErrorResponse) => {
+      this.toastr.error('Ha ocurrido un error. Contacte a un administrador.');
+    });
   }
 
   isHotel(type:string){
