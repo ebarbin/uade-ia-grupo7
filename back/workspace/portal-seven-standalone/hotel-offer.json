@@ -1,9 +1,9 @@
 {
-	"codigo_prestador": "OH_1_2",
+	"codigo_prestador": "OH_1_5",
 	"nombre": "Dazzler",
 	"destino": "Miami",
-	"fecha_desde": "20171011",
-	"fecha_hasta": "20171015",
+	"fecha_desde": "20171001",
+	"fecha_hasta": "20171031",
 	"cantidad_personas": 2,
 	"foto_hotel": "https://static.hosteltur.lat/web/uploads/2013/11/asdasd.jpg",
 	"descripcion_hotel": "Descripcion Hotel",

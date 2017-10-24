@@ -69,17 +69,4 @@ public class FavouriteOfferService {
 			return Response.ok(new PortalResponse(e.getMessage())).build();
 		}
 	}
-	
-	@GET
-	@Path("/can-activate/{portalUserId}")
-	@Produces(MediaType.APPLICATION_JSON)
-	public Response canActivate(@PathParam("portalUserId") Integer portalUserId) {
-		try {
-			Boolean result = this.favouriteOfferManager.canActivate(portalUserId);
-			return Response.ok(new PortalResponse(result)).build();
-		} catch (Exception e) {
-			FavouriteOfferService.LOGGER.error(e.getMessage(), e);
-			return Response.ok(new PortalResponse(e.getMessage())).build();
-		}
-	}
 }

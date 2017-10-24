@@ -1,3 +1,4 @@
+import { Observable } from 'rxjs/Observable';
 import { PackageAuthorizeRequest } from './../../../shared/models/package-authorize-request.model';
 import { HotelAuthorizeRequest } from './../../../shared/models/hotel-authorize-request.model';
 import { FavouriteOffer } from './../models/favourite-offer.model';
@@ -61,27 +62,21 @@ export class FavouriteOfferService {
   }
 
   getFavourites():Promise<FavouriteOffer[]>{
+    return Observable.of(this.favourites).toPromise();
+  }
+
+  private favourites:FavouriteOffer[] = [];
+
+  canActivate():Promise<boolean>{
     return this.httpClient.get('portal-seven-web/api/rest/favourite-offer/' + this.authService.getUser().id)
       .map((response:PortalResponse)=>{
         if (response.success){
-          return <FavouriteOffer[]> response.data;
+          this.favourites = <FavouriteOffer[]> response.data;
+          if (this.favourites.length == 0) this.toastr.info('No hay favoritos.');
+          return this.favourites.length > 0;
         } else {
           this.toastr.error(response.errorMessage);
-          return [];
-        }
-    }).toPromise();
-  }
-
-  canActivate():Promise<boolean>{
-    return this.httpClient.get('portal-seven-web/api/rest/favourite-offer/can-activate/' 
-    + this.authService.getUser().id)
-      .map((response:PortalResponse)=>{
-        if (response.success){
-          var result = <boolean> response.data;
-          if (!result) this.toastr.info('No hay favoritos.');
-          return result;
-        } else {
-          this.toastr.error(response.errorMessage);
+          this.favourites = [];
           return false;
         }
     }).toPromise();
