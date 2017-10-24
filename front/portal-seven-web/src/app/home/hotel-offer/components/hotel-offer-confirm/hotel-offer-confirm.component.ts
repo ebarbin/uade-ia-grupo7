@@ -1,3 +1,4 @@
+import { AuthService } from './../../../../auth/services/auth.service';
 import { HotelAuthorizeRequest } from './../../../../shared/models/hotel-authorize-request.model';
 import { HotelOfferDetailComponent } from './../hotel-offer-detail/hotel-offer-detail.component';
 import { Router } from '@angular/router';
@@ -18,9 +19,10 @@ export class HotelOfferConfirmComponent {
 
   constructor(
     public srv: HotelOfferService,
+    private toastr: ToastrService,
+    private authService: AuthService,
     private dialog: MdDialog,
     private router: Router,
-    private toastr: ToastrService,
     private dialogRef: MdDialogRef<HotelOfferConfirmComponent>) { 
   }
 
@@ -44,5 +46,9 @@ export class HotelOfferConfirmComponent {
       }).catch((res:HttpErrorResponse) => {
         this.toastr.error('Ha ocurrido un error. Contacte a un administrador.');
       });
+  }
+
+  canConfirm(){
+    return !this.authService.isAdmin();
   }
 }

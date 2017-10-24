@@ -23,7 +23,8 @@ export class HotelOfferGridResultComponent implements OnInit, OnDestroy {
   private resultsChangeSub:Subscription;
 
   public dataSource: CustomDatasource;
-  public displayedColumns = [ 'name', 'description', 'services', 'price', 'roomCapacity', 'offerStart', 'offerEnd', 'action'];
+  public displayedColumns = [ 'name', 'description', 'services', 'price', 'roomCapacity', 
+    'offerStart', 'offerEnd', 'detail'];
 
   constructor(
     public hotelOfferService: HotelOfferService,

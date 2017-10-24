@@ -1,4 +1,4 @@
-
+import { ReserveHistoryGuard } from './home/reserve-history/services/reserve-history-guard.service';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { LOCALE_ID, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
@@ -7,6 +7,7 @@ import { SharedModule } from './shared/shared.module';
 import { PackageOfferModule } from './home/package-offer/package-offer.module';
 import { UserProfileModule } from './home/user-profile/user-profile.module';
 import { FavouriteModule } from './home/favourite/favourite.module';
+import { ReserveHistoryModule } from './home/reserve-history/reserve-history.module';
 
 import { AppComponent } from './app.component';
 import { SigninComponent } from './auth/components/signin/signin.component';
@@ -34,13 +35,13 @@ import { FavouriteGuard } from './home/favourite/services/favourite-guard.servic
   ],
   imports: [
     BrowserModule, SharedModule, HotelOfferModule,
-    PackageOfferModule, UserProfileModule, FavouriteModule
+    PackageOfferModule, UserProfileModule, FavouriteModule, ReserveHistoryModule
   ],
   providers: [
-    AuthGuard, AuthService, UserService, ImageService, 
-    AutocompleteService, HotelOfferService, PackageOfferService, 
-    HotelOfferResultGuard, PackageOfferResultGuard, FavouriteOfferService,
-    FavouriteGuard,
+    AuthService, UserService, ImageService, 
+    AutocompleteService, HotelOfferService, PackageOfferService, FavouriteOfferService,
+    AuthGuard, FavouriteGuard, ReserveHistoryGuard, 
+    PackageOfferResultGuard, HotelOfferResultGuard,
     { provide: LOCALE_ID, useValue: 'es-AR' },
     { provide: HTTP_INTERCEPTORS, useClass: MyHttpInterceptor, multi: true }
   ],

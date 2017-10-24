@@ -1,3 +1,5 @@
+import { ReserveHistoryGuard } from './home/reserve-history/services/reserve-history-guard.service';
+import { ReserveHistoryComponent } from './home/reserve-history/reserve-history.component';
 import { FavouriteHotelReservationResumeComponent } from './home/favourite/components/favourite-hotel-reservation-resume/favourite-hotel-reservation-resume.component';
 import { FavouriteComponent } from './home/favourite/favourite.component';
 
@@ -45,6 +47,7 @@ const appRoutes: Routes = [
       {path: 'favourite', component: FavouriteComponent, canActivate: [AuthGuard, FavouriteGuard]},
       {path: 'favorite-hotel-authorization-resume', component: FavouriteHotelReservationResumeComponent, 
         canActivate: [AuthGuard, FavouriteGuard]},
+      {path: 'reserve-history', component: ReserveHistoryComponent, canActivate: [AuthGuard, ReserveHistoryGuard]},         
     ]},
   { path: 'signin', component: SigninComponent }
 ];
