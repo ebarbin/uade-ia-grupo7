@@ -7,8 +7,11 @@
 <div class="row">
   <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
     <div class="card-result">
-      <md-card class="card-row card col-lg-4 col-md-4 col-sm-6 col-xs-12" 
+      <md-card class="card-row card col-lg-3 col-md-4 col-sm-6 col-xs-6" 
         *ngFor="let po of poService.getResults()">
+        <span class="offer-type" >
+          <i class="fa fa-globe" aria-hidden="true"></i>
+        </span>
         <app-favourite-button [offer]="po" [quantityPeople]="poService.getFilter().quantityPeople"></app-favourite-button>
         <div (click)="onDetail(po)">
           <img class="img-responsive img-card"
