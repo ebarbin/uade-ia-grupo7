@@ -1,0 +1,11 @@
+.non-active {
+    background-color: #fffbef;
+    color:black;
+    border: 1px solid lightgray;
+}
+
+.active {
+    background-color: #ffd740;
+    color:black;
+    border: 1px solid grey;
+}

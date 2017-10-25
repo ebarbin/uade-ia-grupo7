@@ -124,7 +124,15 @@ public class FavouriteOfferManager {
 				imageDTO.setId(img.getId());
 				favouriteOffer.getImages().add(imageDTO);
 			}
-
+			
+			favouriteOffer.setPaymentMethods(new ArrayList<SimpleNamedDTO>());
+			for (PaymentMethod pm : favouritePackage.getPackageOffer().getPaymentMethods()) {
+				namedDTO = new SimpleNamedDTO();
+				namedDTO.setId(pm.getId());
+				namedDTO.setName(pm.getName());
+				favouriteOffer.getPaymentMethods().add(namedDTO);
+			}
+			
 			results.add(favouriteOffer);
 		}
 	}
@@ -163,6 +171,7 @@ public class FavouriteOfferManager {
 			for (PaymentMethod pm : favouriteHotel.getHotelOffer().getHotel().getPaymentMethods()) {
 				namedDTO = new SimpleNamedDTO();
 				namedDTO.setId(pm.getId());
+				namedDTO.setName(pm.getName());
 				favouriteOffer.getPaymentMethods().add(namedDTO);
 			}
 

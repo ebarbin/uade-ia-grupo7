@@ -11,10 +11,10 @@ import { Component } from '@angular/core';
 export class FavouriteHotelReservationResumeComponent {
 
   constructor(
-    private service: FavouriteOfferService,
+    public service: FavouriteOfferService,
     private router: Router) { }
 
   onAccept(){
-    this.router.navigate(['/home/favourite']);
+    this.router.navigate(['/home']);
   }
 }
