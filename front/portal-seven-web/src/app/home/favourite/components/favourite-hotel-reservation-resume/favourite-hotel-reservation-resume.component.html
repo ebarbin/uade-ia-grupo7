@@ -9,7 +9,6 @@ col-xs-offset-2 col-xs-8 col-xs-offset-2">
  <md-card-content>
   <div class="col-lg-6 col-md-6" style="margin-top: -20px;">
     <h2>{{service.getFavouriteOfferSelected().name}}</h2>
-    <p>Habitación Tipo: {{service.getFavouriteOfferSelected().quantityCapacity | roomType}}</p>
     <p><b>Precio Total: {{service.getFavouriteOfferSelected().price | currency:'ARS':true}}</b></p>
     <p>Medios de Pago: {{service.getFavouriteOfferSelected().paymentMethods | join: ' - '}}</p>
     <p>Desde: {{service.getFavouriteOfferSelected().offerStart | date:'dd/MM/yyyy'}}</p>

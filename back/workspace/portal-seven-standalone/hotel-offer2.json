@@ -1,0 +1,21 @@
+{
+	"codigo_prestador": "OH_1_1",
+	"nombre": "Dazzler",
+	"destino": "Montevideo",
+	"fecha_desde": "20171001",
+	"fecha_hasta": "20171031",
+	"cantidad_personas": 2,
+	"foto_hotel": "https://static.hosteltur.lat/web/uploads/2013/11/dazzler_hotel_montevideo_1.jpg",
+	"descripcion_hotel": "Hotel Dazzler Montevideo",
+	"lista_servicios": ["Wifi", "Frigo Bar"],
+	"precio_habitacion": 250,
+	"foto_habitacion": "https://foto.hrsstatic.com/fotos/0/3/694/390/80/000000/https%3A%2F%2Ffoto-origin.hrsstatic.com%2Ffoto%2F7%2F3%2F3%2F5%2F733577%2F733577_z30_10130564.jpg/NQ9TIrvYSmFisFfi%2B0n1pw%3D%3D/1000,662/6/Dazzler_Puerto_Madryn-Puerto_Madryn-Standardzimmer-733577.jpg",
+	"descripcion_habitacion": "Descripcion",
+	"lista_servicios_habitacion": ["Wifi", "Frigo Bar"],
+	"latitud": -34.9179722,
+	"longitud": -56.1593886,
+	"politica_cancelacion": "Para cancelar hay que realizar el aviso con 3 dias de anticipación.",
+	"medio_pago_hotel": [1,2,3],
+	"email_hotel": "",
+	"cupo": 10
+}

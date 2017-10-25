@@ -10,7 +10,7 @@ public class Image extends PersistentObject {
 	
 	private static final long serialVersionUID = -2382376870718857038L;
 	
-	@Column(columnDefinition="image")
+	//@Column(columnDefinition="image")
     private byte[] data;
 
 	private String description;
