@@ -1,3 +1,4 @@
+import { ConfigurationGuard } from './home/configuration/services/configuration-guard.service';
 import { ReserveHistoryGuard } from './home/reserve-history/services/reserve-history-guard.service';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { LOCALE_ID, NgModule } from '@angular/core';
@@ -41,7 +42,7 @@ import { FavouriteGuard } from './home/favourite/services/favourite-guard.servic
     AuthService, UserService, ImageService, 
     AutocompleteService, HotelOfferService, PackageOfferService, FavouriteOfferService,
     AuthGuard, FavouriteGuard, ReserveHistoryGuard, 
-    PackageOfferResultGuard, HotelOfferResultGuard,
+    PackageOfferResultGuard, HotelOfferResultGuard, ConfigurationGuard,
     { provide: LOCALE_ID, useValue: 'es-AR' },
     { provide: HTTP_INTERCEPTORS, useClass: MyHttpInterceptor, multi: true }
   ],

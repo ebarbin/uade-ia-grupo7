@@ -3,7 +3,7 @@ import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angul
 import { Injectable } from '@angular/core';
 
 @Injectable()
-export class ReserveHistoryGuard implements CanActivate {
+export class ConfigurationGuard implements CanActivate {
 
   constructor(private authService:AuthService) { }
 

@@ -1,3 +1,4 @@
+import { ConfigurationGuard } from './home/configuration/services/configuration-guard.service';
 import { ReserveHistoryGuard } from './home/reserve-history/services/reserve-history-guard.service';
 import { ReserveHistoryComponent } from './home/reserve-history/reserve-history.component';
 import { FavouriteHotelReservationResumeComponent } from './home/favourite/components/favourite-hotel-reservation-resume/favourite-hotel-reservation-resume.component';
@@ -43,7 +44,7 @@ const appRoutes: Routes = [
         ]
       },
       {path: 'user-profile', component: UserProfileComponent, canActivate: [AuthGuard]},
-      {path: 'configuration', component: ConfigurationComponent, canActivate: [AuthGuard]},
+      {path: 'configuration', component: ConfigurationComponent, canActivate: [AuthGuard, ConfigurationGuard]},
       {path: 'favourite', component: FavouriteComponent, canActivate: [AuthGuard, FavouriteGuard]},
       {path: 'favorite-hotel-authorization-resume', component: FavouriteHotelReservationResumeComponent, 
         canActivate: [AuthGuard, FavouriteGuard]},
