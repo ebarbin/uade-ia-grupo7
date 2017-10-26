@@ -42,7 +42,7 @@
               <md-header-cell *mdHeaderCellDef>Hasta</md-header-cell>
             <md-cell *mdCellDef="let hotelOfferHeader"> {{hotelOfferHeader.offerEnd | date:'dd/MM/yyyy'}} </md-cell>
           </ng-container>
-          <ng-container mdColumnDef="action">
+          <ng-container mdColumnDef="detail">
             <md-header-cell *mdHeaderCellDef align="end"></md-header-cell>
             <md-cell *mdCellDef="let hotelOfferHeader" align="end"> 
               <button (click)="onDetail(hotelOfferHeader)" md-raised-button type="button" color="primary">

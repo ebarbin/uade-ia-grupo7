@@ -24,4 +24,8 @@ export class ViewChangeResultComponent {
       this.router.navigate(['home/package-offer/result-' + view]);
     }
   }
+
+  isCardView():boolean{
+    return this.holder.getView() == 'card';
+  }
 }

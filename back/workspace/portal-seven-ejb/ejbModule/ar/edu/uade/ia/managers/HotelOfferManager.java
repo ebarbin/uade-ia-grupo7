@@ -11,13 +11,16 @@ import org.dozer.DozerBeanMapperBuilder;
 import org.dozer.Mapper;
 
 import ar.edu.uade.ia.common.dtos.AuthorizeStatusDTO;
+import ar.edu.uade.ia.common.dtos.HotelAuthorizeRequestDTO;
 import ar.edu.uade.ia.common.dtos.HotelOfferDTO;
 import ar.edu.uade.ia.common.dtos.HotelOfferHeaderDTO;
 import ar.edu.uade.ia.common.dtos.HotelOfferRequestDTO;
 import ar.edu.uade.ia.common.dtos.ImageDTO;
 import ar.edu.uade.ia.common.dtos.RoomDTO;
 import ar.edu.uade.ia.common.dtos.SimpleNamedDTO;
+import ar.edu.uade.ia.ejbs.FavouriteOfferEJB;
 import ar.edu.uade.ia.ejbs.HotelOfferEJB;
+import ar.edu.uade.ia.ejbs.common.PortalUserEJB;
 import ar.edu.uade.ia.entities.business.HotelOffer;
 import ar.edu.uade.ia.entities.business.Image;
 import ar.edu.uade.ia.entities.business.Room;
@@ -36,16 +39,22 @@ public class HotelOfferManager {
 	@EJB
 	private HotelOfferEJB hotelOfferEJB;
 
+	@EJB
+	private FavouriteOfferEJB favouriteOfferEJB;
+	
+	@EJB
+	private PortalUserEJB portalUserEJB;
+	
 	/**
 	 * Default constructor.
 	 */
 	public HotelOfferManager() {
 	}
 
-	public AuthorizeStatusDTO autorize(Integer id, HotelOfferRequestDTO filter) throws Exception {
+	public AuthorizeStatusDTO autorize(Integer id, HotelAuthorizeRequestDTO req) throws Exception {
 
 		AuthorizeStatusDTO dto = new AuthorizeStatusDTO();
-		if (this.hotelOfferEJB.hasQuota(id, filter)) {
+		if (this.hotelOfferEJB.hasQuota(id, req)) {
 			// TODO MANDAR A AUTORIZAR AL WEBSERVICE SOAP
 			dto.setStatus(Boolean.TRUE);
 		} else {
@@ -56,9 +65,9 @@ public class HotelOfferManager {
 		return dto;
 	}
 
-	public List<HotelOfferHeaderDTO> search(HotelOfferRequestDTO hotelOfferRequest) throws Exception {
-		List<HotelOffer> hotelOffers = this.hotelOfferEJB.search(hotelOfferRequest);
-		return this.convertToListOfHotelOfferHeaderDTO(hotelOffers);
+	public List<HotelOfferHeaderDTO> search(Integer portalUserId, HotelOfferRequestDTO request) throws Exception {
+		List<HotelOffer> hotelOffers = this.hotelOfferEJB.search(request);
+		return this.convertToListOfHotelOfferHeaderDTO(hotelOffers, portalUserId);
 	}
 
 	public List<RoomDTO> searchOtherRooms(Integer roomId, HotelOfferRequestDTO request) {
@@ -109,7 +118,7 @@ public class HotelOfferManager {
 		return results;
 	}
 
-	private List<HotelOfferHeaderDTO> convertToListOfHotelOfferHeaderDTO(List<HotelOffer> hotelOffers) {
+	private List<HotelOfferHeaderDTO> convertToListOfHotelOfferHeaderDTO(List<HotelOffer> hotelOffers, Integer userId) throws Exception {
 		List<HotelOfferHeaderDTO> results = new ArrayList<HotelOfferHeaderDTO>();
 
 		HotelOfferHeaderDTO headerDTO;
@@ -123,7 +132,8 @@ public class HotelOfferManager {
 			headerDTO.setName(hotelOffer.getHotel().getName());
 			headerDTO.setDescription(hotelOffer.getHotel().getDescription());
 			headerDTO.setServices(new ArrayList<SimpleNamedDTO>());
-
+			headerDTO.setFavourite(this.favouriteOfferEJB.isFavouriteHotel(hotelOffer.getId(), userId));
+			
 			for (ServiceHotel service : hotelOffer.getHotel().getServices()) {
 				namedDTO = new SimpleNamedDTO();
 				namedDTO.setId(service.getId());

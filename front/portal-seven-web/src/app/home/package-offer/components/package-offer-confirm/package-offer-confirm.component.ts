@@ -1,3 +1,5 @@
+import { AuthService } from './../../../../auth/services/auth.service';
+import { PackageAuthorizeRequest } from './../../../../shared/models/package-authorize-request.model';
 import { HttpErrorResponse } from '@angular/common/http';
 import { AuthorizeStatus } from './../../../../shared/models/authorize-status.model';
 import { PackageOfferDetailComponent } from './../package-offer-detail/package-offer-detail.component';
@@ -16,9 +18,10 @@ export class PackageOfferConfirmComponent {
 
   constructor(
     public srv: PackageOfferService,
+    private authService: AuthService,
+    private toastr: ToastrService,
     private dialog: MdDialog,
     private router: Router,
-    private toastr: ToastrService,
     private dialogRef: MdDialogRef<PackageOfferConfirmComponent>) { 
   }
 
@@ -34,7 +37,7 @@ export class PackageOfferConfirmComponent {
   }
 
   onConfirm(){
-    this.srv.authorizeReservation()
+    this.srv.authorizeReservation(this.srv.getSelected().id, new PackageAuthorizeRequest(this.srv.getFilter().quantityPeople))
     .then((authorizeStatus:AuthorizeStatus)=>{
       if (authorizeStatus.status) {
         this.dialogRef.close();
@@ -45,5 +48,9 @@ export class PackageOfferConfirmComponent {
     }).catch((res:HttpErrorResponse) => {
       this.toastr.error('Ha ocurrido un error. Contacte a un administrador.');
     });
+  }
+
+  canConfirm(){
+    return !this.authService.isAdmin();
   }
 }

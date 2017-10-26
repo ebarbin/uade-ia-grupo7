@@ -1,0 +1,21 @@
+{
+	"codigo_prestador": "OH_1_2",
+	"nombre": "Hilton",
+	"destino": "Miami",
+	"fecha_desde": "20171001",
+	"fecha_hasta": "20171031",
+	"cantidad_personas": 4,
+	"foto_hotel": "http://www.hotelroomsearch.net/im/hotels/us/hilton-miami-airport.jpg",
+	"descripcion_hotel": "Hotel Hilton Miami",
+	"lista_servicios": ["Wifi", "Frigo Bar", "Dancing Floor"],
+	"precio_habitacion": 500,
+	"foto_habitacion": "http://www3.hilton.com/resources/media/hi/MIADTHF/en_US/img/shared/full_page_image_gallery/main/HH_steparlor01_14_675x359_FitToBoxSmallDimension_Center.jpg",
+	"descripcion_habitacion": "Descripcion",
+	"lista_servicios_habitacion": ["Wifi", "Frigo Bar"],
+	"latitud": -34.9179722,
+	"longitud": -56.1593886,
+	"politica_cancelacion": "Para cancelar hay que realizar el aviso con 3 dias de anticipación.",
+	"medio_pago_hotel": [1,2,3],
+	"email_hotel": "",
+	"cupo": 10
+}

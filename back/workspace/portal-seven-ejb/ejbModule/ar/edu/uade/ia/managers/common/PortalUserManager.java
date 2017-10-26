@@ -10,8 +10,8 @@ import org.dozer.Mapper;
 import ar.edu.uade.ia.common.dtos.PortalUserDTO;
 import ar.edu.uade.ia.ejbs.common.ImageEJB;
 import ar.edu.uade.ia.ejbs.common.PortalUserEJB;
+import ar.edu.uade.ia.entities.PortalUser;
 import ar.edu.uade.ia.entities.business.Image;
-import ar.edu.uade.ia.entities.business.PortalUser;
 
 /**
  * Session Bean implementation class UserManager

@@ -1,3 +1,5 @@
+import { ConfigurationGuard } from './home/configuration/services/configuration-guard.service';
+import { ReserveHistoryGuard } from './home/reserve-history/services/reserve-history-guard.service';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { LOCALE_ID, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
@@ -5,6 +7,8 @@ import { HotelOfferModule } from './home/hotel-offer/hotel-offer.module';
 import { SharedModule } from './shared/shared.module';
 import { PackageOfferModule } from './home/package-offer/package-offer.module';
 import { UserProfileModule } from './home/user-profile/user-profile.module';
+import { FavouriteModule } from './home/favourite/favourite.module';
+import { ReserveHistoryModule } from './home/reserve-history/reserve-history.module';
 
 import { AppComponent } from './app.component';
 import { SigninComponent } from './auth/components/signin/signin.component';
@@ -20,8 +24,10 @@ import { AutocompleteService } from './shared/services/hotel-autocomplete.servic
 import { MyHttpInterceptor } from './shared/services/my-http-interceptor';
 import { HotelOfferService } from './home/hotel-offer/services/hotel-offer.service';
 import { PackageOfferService } from './home/package-offer/services/package-offer.service';
+import { FavouriteOfferService } from './home/favourite/services/favourite-offer.service';
 import { HotelOfferResultGuard } from './home/hotel-offer/services/hotel-offer-result.guard';
 import { PackageOfferResultGuard } from './home/package-offer/services/package-offer-result.guard';
+import { FavouriteGuard } from './home/favourite/services/favourite-guard.service';
 
 @NgModule({
   declarations: [
@@ -30,11 +36,13 @@ import { PackageOfferResultGuard } from './home/package-offer/services/package-o
   ],
   imports: [
     BrowserModule, SharedModule, HotelOfferModule,
-    PackageOfferModule, UserProfileModule
+    PackageOfferModule, UserProfileModule, FavouriteModule, ReserveHistoryModule
   ],
   providers: [
-    AuthGuard, AuthService, UserService, ImageService, AutocompleteService, 
-    HotelOfferService, PackageOfferService, HotelOfferResultGuard, PackageOfferResultGuard,
+    AuthService, UserService, ImageService, 
+    AutocompleteService, HotelOfferService, PackageOfferService, FavouriteOfferService,
+    AuthGuard, FavouriteGuard, ReserveHistoryGuard, 
+    PackageOfferResultGuard, HotelOfferResultGuard, ConfigurationGuard,
     { provide: LOCALE_ID, useValue: 'es-AR' },
     { provide: HTTP_INTERCEPTORS, useClass: MyHttpInterceptor, multi: true }
   ],

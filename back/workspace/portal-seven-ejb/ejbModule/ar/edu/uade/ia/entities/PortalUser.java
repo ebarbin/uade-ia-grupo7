@@ -1,8 +1,11 @@
-package ar.edu.uade.ia.entities.business;
+package ar.edu.uade.ia.entities;
 
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import ar.edu.uade.ia.entities.business.Image;
+import ar.edu.uade.ia.entities.business.PersistentObject;
 
 @Entity
 @Table(name = "portal_user")

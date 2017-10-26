@@ -1,3 +1,4 @@
+import { AuthService } from './../../../../auth/services/auth.service';
 import { ToastrService } from 'ngx-toastr';
 import { Component } from '@angular/core';
 
@@ -17,12 +18,13 @@ import { HttpErrorResponse } from '@angular/common/http';
 export class HotelOfferCardResultComponent {
 
   constructor(
-    public hotelOfferService: HotelOfferService,
+    public authService: AuthService,
+    public hoService: HotelOfferService,
     private toastr:ToastrService,
     private dialog: MdDialog) { }
 
   onDetail(hotelOfferHeader:HotelOfferHeader){
-    this.hotelOfferService.getDetail(hotelOfferHeader).then((hotelOffer:HotelOffer)=>{
+    this.hoService.getDetail(hotelOfferHeader).then((hotelOffer:HotelOffer)=>{
       if (hotelOffer)
         this.dialog.open(HotelOfferDetailComponent,{
           width: '850px'
@@ -30,5 +32,9 @@ export class HotelOfferCardResultComponent {
     }).catch((res:HttpErrorResponse)=>{
       this.toastr.error('Ha ocurrido un error. Contacte a un administrador.');
     });
+  }
+
+  showFavouriteIcon(){
+    return this.authService.getUser().id != null;
   }
 }

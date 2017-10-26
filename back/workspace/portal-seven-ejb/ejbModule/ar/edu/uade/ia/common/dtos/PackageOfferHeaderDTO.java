@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
+import ar.edu.uade.ia.common.enums.Constant;
+
 public class PackageOfferHeaderDTO implements Serializable {
 	
 	private static final long serialVersionUID = 2287388135848248683L;
@@ -21,6 +23,12 @@ public class PackageOfferHeaderDTO implements Serializable {
 	private Date offerStart;
 	
 	private Date offerEnd;
+	
+	private Integer quantityPeople;
+	
+	private Boolean favourite;
+	
+	private String type = Constant.PACKAGE.name();
 	
 	public Integer getId() {
 		return id;
@@ -76,5 +84,30 @@ public class PackageOfferHeaderDTO implements Serializable {
 
 	public void setOfferEnd(Date offerEnd) {
 		this.offerEnd = offerEnd;
+	}
+
+	public Boolean getFavourite() {
+		return favourite;
+	}
+
+	public void setFavourite(Boolean favourite) {
+		this.favourite = favourite;
+	}
+
+	public Integer getQuantityPeople() {
+		return quantityPeople;
+	}
+
+	public void setQuantityPeople(Integer quantityPeople) {
+		this.quantityPeople = quantityPeople;
+	}
+
+	public String getType() {
+		return type;
+	}
+
+	@SuppressWarnings("unused")
+	private void setType(String type) {
+		this.type = type;
 	}
 }

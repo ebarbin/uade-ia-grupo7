@@ -12,10 +12,12 @@ import org.dozer.Mapper;
 
 import ar.edu.uade.ia.common.dtos.AuthorizeStatusDTO;
 import ar.edu.uade.ia.common.dtos.ImageDTO;
+import ar.edu.uade.ia.common.dtos.PackageAuthorizeRequestDTO;
 import ar.edu.uade.ia.common.dtos.PackageOfferDTO;
 import ar.edu.uade.ia.common.dtos.PackageOfferHeaderDTO;
 import ar.edu.uade.ia.common.dtos.PackageOfferRequestDTO;
 import ar.edu.uade.ia.common.dtos.SimpleNamedDTO;
+import ar.edu.uade.ia.ejbs.FavouriteOfferEJB;
 import ar.edu.uade.ia.ejbs.PackageOfferEJB;
 import ar.edu.uade.ia.entities.business.Image;
 import ar.edu.uade.ia.entities.business.PackageOffer;
@@ -33,15 +35,18 @@ public class PackageOfferManager {
 	@EJB
 	private PackageOfferEJB packageOfferEJB;
 
+	@EJB
+	private FavouriteOfferEJB favouriteOfferEJB;
+	
 	/**
 	 * Default constructor.
 	 */
 	public PackageOfferManager() {}
 
-	public AuthorizeStatusDTO autorize(Integer id, PackageOfferRequestDTO filter) throws Exception {
+	public AuthorizeStatusDTO autorize(Integer id, PackageAuthorizeRequestDTO req) throws Exception {
 
 		AuthorizeStatusDTO dto = new AuthorizeStatusDTO();
-		if (this.packageOfferEJB.hasQuota(id, filter)){
+		if (this.packageOfferEJB.hasQuota(id, req)){
 			// TODO MANDAR A AUTORIZAR AL WEBSERVICE SOAP
 			dto.setStatus(Boolean.TRUE);
 		} else {
@@ -52,9 +57,9 @@ public class PackageOfferManager {
 		return dto;
 	}
 	
-	public List<PackageOfferHeaderDTO> search(PackageOfferRequestDTO packageOfferRequestDTO) throws Exception {
+	public List<PackageOfferHeaderDTO> search(Integer portalUserId, PackageOfferRequestDTO packageOfferRequestDTO) throws Exception {
 		List<PackageOffer> packageOffers = this.packageOfferEJB.search(packageOfferRequestDTO);
-		return this.convertToListOfPackageOfferHeaderDTO(packageOffers);
+		return this.convertToListOfPackageOfferHeaderDTO(packageOffers, portalUserId);
 	}
 
 	public PackageOfferDTO getDetail(Integer id) throws Exception {
@@ -62,12 +67,12 @@ public class PackageOfferManager {
 		return PackageOfferManager.mapper.map(po, PackageOfferDTO.class);
 	}
 
-	public List<PackageOfferHeaderDTO> searchOtherPackages(Integer packageId, PackageOfferRequestDTO request) {
+	public List<PackageOfferHeaderDTO> searchOtherPackages(Integer packageId, PackageOfferRequestDTO request) throws Exception {
 		List<PackageOffer> packageOffers = this.packageOfferEJB.searchOtherPackages(packageId, request);
-		return this.convertToListOfPackageOfferHeaderDTO(packageOffers);
+		return this.convertToListOfPackageOfferHeaderDTO(packageOffers, null);
 	}
 
-	private List<PackageOfferHeaderDTO> convertToListOfPackageOfferHeaderDTO(List<PackageOffer> packageOffers) {
+	private List<PackageOfferHeaderDTO> convertToListOfPackageOfferHeaderDTO(List<PackageOffer> packageOffers, Integer portalUserId) throws Exception {
 		List<PackageOfferHeaderDTO> results = new ArrayList<PackageOfferHeaderDTO>();
 
 		PackageOfferHeaderDTO headerDTO;
@@ -80,7 +85,9 @@ public class PackageOfferManager {
 			headerDTO.setId(packageOffer.getId());
 			headerDTO.setDescription(packageOffer.getDescription());
 			headerDTO.setServices(new ArrayList<SimpleNamedDTO>());
-
+			if (portalUserId != null)
+				headerDTO.setFavourite(this.favouriteOfferEJB.isFavouritePackage(packageOffer.getId(), portalUserId));
+			
 			for (ServicePackage service : packageOffer.getServices()) {
 				namedDTO = new SimpleNamedDTO();
 				namedDTO.setId(service.getId());

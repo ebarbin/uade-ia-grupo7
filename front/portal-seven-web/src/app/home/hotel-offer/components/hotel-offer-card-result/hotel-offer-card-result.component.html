@@ -1,25 +1,35 @@
 <div class="row">
   <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-    <app-view-change-result [holder]="hotelOfferService"></app-view-change-result>
-    <app-sort [holder]="hotelOfferService"></app-sort>
+    <app-view-change-result [holder]="hoService"></app-view-change-result>
+    <app-sort [holder]="hoService"></app-sort>
   </div>
 </div>
 <div class="row">
   <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
     <div class="card-result">
-      <md-card class="card-row card col-lg-3 col-md-4 col-sm-6 col-xs-6" (click)="onDetail(hotelOfferHeader)"
-      *ngFor="let hotelOfferHeader of hotelOfferService.getResults()">
+      <md-card class="card-row card col-lg-3 col-md-4 col-sm-6 col-xs-6"
+      *ngFor="let ho of hoService.getResults()">
+      <span class="offer-type" >
+        <i class="fa fa-bed" aria-hidden="true"></i>
+      </span>
+      <app-favourite-button [offer]="ho"
+        [roomQuantity]="hoService.getFilterRequest().roomQuantity" 
+        [fromDate]="hoService.getFilterRequest().fromDate" 
+        [toDate]="hoService.getFilterRequest().toDate">
+      </app-favourite-button>
+      <div (click)="onDetail(ho)">
         <img class="img-responsive img-card" 
-        [src]="hotelOfferHeader.images | first | imageGetter">
-        <md-card-header>  
-          <md-card-title>{{hotelOfferHeader.name}}</md-card-title>
-          <md-card-subtitle [mdTooltip]="hotelOfferHeader.description">{{hotelOfferHeader.description}}</md-card-subtitle>
-        </md-card-header>
-        <md-card-content>
-          <p>{{hotelOfferHeader.services | join: ' - '}}</p>
-          <p>Capacidad: {{hotelOfferHeader.roomCapacity}} personas</p>
-          <div class="pull-right"><b>Precio Total: {{hotelOfferHeader.price | currency:'ARS':true}}</b></div>
-        </md-card-content>
+          [src]="ho.images | first | imageGetter">
+          <md-card-header>  
+            <md-card-title>{{ho.name}}</md-card-title>
+            <md-card-subtitle [mdTooltip]="ho.description">{{ho.description}}</md-card-subtitle>
+          </md-card-header>
+          <md-card-content>
+            <p>{{ho.services | join: ' - '}}</p>
+            <p>Capacidad: {{ho.roomCapacity}} personas</p>
+            <div class="pull-right"><b>Precio Total: {{ho.price | currency:'ARS':true}}</b></div>
+          </md-card-content>
+        </div>
       </md-card>
     </div>
   </div>

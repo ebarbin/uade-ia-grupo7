@@ -55,3 +55,9 @@ body {
 .mat-select-placeholder.mat-floating-placeholder{
     top: -15px !important;
 }
+
+.offer-type {
+    position: absolute;
+    top: 6px;
+    left: 10px;
+}

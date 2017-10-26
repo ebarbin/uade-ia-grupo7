@@ -1,3 +1,5 @@
+import { AuthService } from './../../../../auth/services/auth.service';
+import { HotelAuthorizeRequest } from './../../../../shared/models/hotel-authorize-request.model';
 import { HotelOfferDetailComponent } from './../hotel-offer-detail/hotel-offer-detail.component';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
@@ -17,9 +19,10 @@ export class HotelOfferConfirmComponent {
 
   constructor(
     public srv: HotelOfferService,
+    private toastr: ToastrService,
+    private authService: AuthService,
     private dialog: MdDialog,
     private router: Router,
-    private toastr: ToastrService,
     private dialogRef: MdDialogRef<HotelOfferConfirmComponent>) { 
   }
 
@@ -31,16 +34,21 @@ export class HotelOfferConfirmComponent {
   }
 
   onConfirm(){
-    this.srv.authorizeReservation()
-    .then((authorizeStatus:AuthorizeStatus)=>{
-      if (authorizeStatus.status) {
-        this.dialogRef.close();
-        this.router.navigate(['home/hotel-authorization-resume']);
-      } else {
-        this.toastr.error(authorizeStatus.description);
-      }
-    }).catch((res:HttpErrorResponse) => {
-      this.toastr.error('Ha ocurrido un error. Contacte a un administrador.');
-    });
+    var req = new HotelAuthorizeRequest(this.srv.getFilterRequest().roomQuantity, this.srv.getFilterRequest().fromDate, this.srv.getFilterRequest().toDate);
+    this.srv.authorizeReservation(this.srv.getSelected().id, req)
+      .then((authorizeStatus:AuthorizeStatus)=>{
+        if (authorizeStatus.status) {
+          this.dialogRef.close();
+          this.router.navigate(['home/hotel-authorization-resume']);
+        } else {
+          this.toastr.error(authorizeStatus.description);
+        }
+      }).catch((res:HttpErrorResponse) => {
+        this.toastr.error('Ha ocurrido un error. Contacte a un administrador.');
+      });
+  }
+
+  canConfirm(){
+    return !this.authService.isAdmin();
   }
 }

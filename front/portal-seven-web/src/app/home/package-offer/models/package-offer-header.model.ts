@@ -10,5 +10,7 @@ export class PackageOfferHeader {
         public price: number,
         public offerStart: Date,
         public offerEnd: Date,
-        public services: SimpleNamed[]){}
+        public services: SimpleNamed[],
+        public favourite:boolean,
+        public quantityPeople:number){}
 }

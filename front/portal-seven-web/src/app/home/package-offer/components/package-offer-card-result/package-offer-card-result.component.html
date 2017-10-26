@@ -1,24 +1,30 @@
 <div class="row">
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-      <app-view-change-result [holder]="packageOfferService"></app-view-change-result>
-      <app-sort [holder]="packageOfferService"></app-sort>
+      <app-view-change-result [holder]="poService"></app-view-change-result>
+      <app-sort [holder]="poService"></app-sort>
     </div>
 </div>
 <div class="row">
   <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
     <div class="card-result">
-      <md-card class="card-row card col-lg-4 col-md-4 col-sm-6 col-xs-12" (click)="onDetail(packageOffer)"
-        *ngFor="let packageOffer of packageOfferService.getResults()">
-        <img class="img-responsive img-card"
-          [src]="packageOffer.image | imageGetter">
-        <md-card-header>
-          <md-card-title>{{packageOffer.description}}</md-card-title>
-          <md-card-subtitle>{{packageOffer.services | join:' - ' }}</md-card-subtitle>
-        </md-card-header>
-        <md-card-content>
-          <p>Precio por Persona: {{packageOffer.price | currency:'ARS':true}}</p>
-          <b>Precio Total: {{ getTotalPrice(packageOffer.price) | currency:'ARS':true}}</b>
-        </md-card-content>
+      <md-card class="card-row card col-lg-3 col-md-4 col-sm-6 col-xs-6" 
+        *ngFor="let po of poService.getResults()">
+        <span class="offer-type" >
+          <i class="fa fa-globe" aria-hidden="true"></i>
+        </span>
+        <app-favourite-button [offer]="po" [quantityPeople]="poService.getFilter().quantityPeople"></app-favourite-button>
+        <div (click)="onDetail(po)">
+          <img class="img-responsive img-card"
+            [src]="po.image | imageGetter">
+          <md-card-header>
+            <md-card-title>{{po.description}}</md-card-title>
+            <md-card-subtitle>{{po.services | join:' - ' }}</md-card-subtitle>
+          </md-card-header>
+          <md-card-content>
+            <p>Precio por Persona: {{po.price | currency:'ARS':true}}</p>
+            <b>Precio Total: {{ getTotalPrice(po.price) | currency:'ARS':true}}</b>
+          </md-card-content>
+        </div>
       </md-card>
     </div>
   </div>

@@ -29,7 +29,7 @@ public class HotelOffer extends PersistentObject {
 
 	@ManyToOne(cascade = CascadeType.ALL)
 	private Room room;
-
+	
 	public Hotel getHotel() {
 		return hotel;
 	}

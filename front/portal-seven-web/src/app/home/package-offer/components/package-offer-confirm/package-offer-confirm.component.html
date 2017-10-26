@@ -7,7 +7,7 @@
   <p>Medios de Pago: {{srv.getSelected().paymentMethods | join: ' - '}}</p>
 </md-dialog-content>
 <md-dialog-actions align="center">
-    <button md-raised-button type="button" color="success" (click)="onConfirm()">
+    <button md-raised-button type="button" color="success" (click)="onConfirm()" [disabled]="!canConfirm()">
         <i class="fa fa-check" aria-hidden="true"></i> Confirmar
     </button>
     <button md-raised-button type="button" color="warn" (click)="onCancel()">

@@ -13,7 +13,7 @@ import { UserService } from '../../home/user-profile/services/user.service';
 export class AuthService implements OnInit {
 
   private user: PortalUser;
-  
+
   constructor(
     private userService:UserService,
     private httpClient:HttpClient, 
@@ -58,5 +58,9 @@ export class AuthService implements OnInit {
 
   isAuthenticated() {
     return this.user != null;
+  }
+
+  isAdmin():boolean {
+    return this.getUser().userName == 'admin';
   }
 }

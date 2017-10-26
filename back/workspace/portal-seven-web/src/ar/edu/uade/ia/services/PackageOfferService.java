@@ -17,6 +17,7 @@ import org.jboss.logging.Logger;
 
 import ar.edu.uade.ia.common.dtos.AuthorizeStatusDTO;
 import ar.edu.uade.ia.common.dtos.ImageDTO;
+import ar.edu.uade.ia.common.dtos.PackageAuthorizeRequestDTO;
 import ar.edu.uade.ia.common.dtos.PackageOfferDTO;
 import ar.edu.uade.ia.common.dtos.PackageOfferHeaderDTO;
 import ar.edu.uade.ia.common.dtos.PackageOfferRequestDTO;
@@ -45,11 +46,11 @@ public class PackageOfferService {
     public PackageOfferService() {}
     
 	@POST
-	@Path("/search")
+	@Path("/search/{portalUserId}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response search(PackageOfferRequestDTO request) {
+	public Response search(@PathParam("portalUserId") Integer portalUserId, PackageOfferRequestDTO request) {
 		try {
-			List<PackageOfferHeaderDTO> result = this.packageOfferManager.search(request);
+			List<PackageOfferHeaderDTO> result = this.packageOfferManager.search(portalUserId, request);
 			return Response.ok(new PortalResponse(result)).build();
 		} catch (Exception e) {
 			this.logging.error(e.getMessage());
@@ -88,9 +89,9 @@ public class PackageOfferService {
 	@PUT
 	@Path("/authorize/{id}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response authorize(@PathParam("id") Integer id, PackageOfferRequestDTO filter) {
+	public Response authorize(@PathParam("id") Integer id, PackageAuthorizeRequestDTO req) {
 		try {
-			AuthorizeStatusDTO statusDTO = this.packageOfferManager.autorize(id, filter);
+			AuthorizeStatusDTO statusDTO = this.packageOfferManager.autorize(id, req);
 			return Response.ok(new PortalResponse(statusDTO)).build();
 		} catch (Exception e) {
 			PackageOfferService.LOGGER.error(e.getMessage(), e);

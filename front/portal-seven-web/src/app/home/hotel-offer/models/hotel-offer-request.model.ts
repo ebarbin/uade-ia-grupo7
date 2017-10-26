@@ -8,6 +8,6 @@ export class HotelOfferRequest {
         public hotel: AutocompleteResource,
         public peoplePerRoom: number,
         public roomQuantity: number,
-        public minPrice,
-        public maxPrice){}
+        public minPrice: number,
+        public maxPrice: number){}
 }
