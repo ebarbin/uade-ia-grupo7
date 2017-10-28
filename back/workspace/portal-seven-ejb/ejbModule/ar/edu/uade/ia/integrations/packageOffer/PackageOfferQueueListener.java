@@ -21,9 +21,11 @@ import ar.edu.uade.ia.ejbs.DestinationEJB;
 import ar.edu.uade.ia.ejbs.PackageOfferEJB;
 import ar.edu.uade.ia.ejbs.PaymentMethodEJB;
 import ar.edu.uade.ia.ejbs.ServicePackageEJB;
+import ar.edu.uade.ia.ejbs.common.ImageEJB;
 import ar.edu.uade.ia.entities.business.Address;
 import ar.edu.uade.ia.entities.business.Agency;
 import ar.edu.uade.ia.entities.business.Destination;
+import ar.edu.uade.ia.entities.business.Image;
 import ar.edu.uade.ia.entities.business.PackageOffer;
 import ar.edu.uade.ia.entities.business.PaymentMethod;
 import ar.edu.uade.ia.entities.business.ServicePackage;
@@ -63,6 +65,9 @@ public class PackageOfferQueueListener extends AbstractQueueListener implements 
 	@EJB
 	private DestinationEJB destinationEJB;
 	
+	@EJB
+	private ImageEJB imageEJB;
+	
 	/**
 	 * Default constructor.
 	 */
@@ -98,6 +103,8 @@ public class PackageOfferQueueListener extends AbstractQueueListener implements 
 			po.setOfferStart(HotelOfferQueueListener.DateFormatter.parse(pom.getFecha_desde()));
 			po.setOfferEnd(HotelOfferQueueListener.DateFormatter.parse(pom.getFecha_hasta()));
 			
+			this.addPackageImage(po, pom.getFoto_paquete());
+			
 			this.addPackagePaymentMethods(po, pom.getMedio_pago_paquete());
 			this.addPackageServices(po, pom.getServicios_paquete());
 			po.setPrice(pom.getPrecio());
@@ -113,6 +120,23 @@ public class PackageOfferQueueListener extends AbstractQueueListener implements 
 		}
 	}
 
+	private void addPackageImage(PackageOffer po, String url) throws Exception {
+		po.setImages(new ArrayList<Image>());
+		Image image = this.imageEJB.getByUrl(url);
+		if (image == null) {
+			byte[] data = this.downloadImage(url);
+			if (data != null) {
+				image = new Image();
+				image.setData(data);
+				image.setUrl(url);
+				image.setDescription("Hotel");
+				po.getImages().add(image);
+			}
+		} else {
+			po.getImages().add(image);
+		}
+	}
+	
 	private void addPackageDestination(PackageOffer po, String destino, float latitud, float longitud) throws Exception {
 		Destination destination = this.destinationEJB.getByName(destino);
 		if (destination == null) {

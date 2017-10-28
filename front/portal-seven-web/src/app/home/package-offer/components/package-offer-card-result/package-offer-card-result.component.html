@@ -15,12 +15,13 @@
         <app-favourite-button [offer]="po" [quantityPeople]="poService.getFilter().quantityPeople"></app-favourite-button>
         <div (click)="onDetail(po)">
           <img class="img-responsive img-card"
-            [src]="po.image | imageGetter">
+            [src]="po.images | first | imageGetter">
           <md-card-header>
             <md-card-title>{{po.description}}</md-card-title>
             <md-card-subtitle>{{po.services | join:' - ' }}</md-card-subtitle>
           </md-card-header>
           <md-card-content>
+            <p>Cupos Disponibles: {{po.quantityPeople}} personas</p>
             <p>Precio por Persona: {{po.price | currency:'ARS':true}}</p>
             <b>Precio Total: {{ getTotalPrice(po.price) | currency:'ARS':true}}</b>
           </md-card-content>

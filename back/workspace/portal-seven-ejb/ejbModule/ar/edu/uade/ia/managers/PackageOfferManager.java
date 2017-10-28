@@ -84,6 +84,8 @@ public class PackageOfferManager {
 
 			headerDTO.setId(packageOffer.getId());
 			headerDTO.setDescription(packageOffer.getDescription());
+			headerDTO.setQuantityPeople(packageOffer.getAvailableQuota());
+			
 			headerDTO.setServices(new ArrayList<SimpleNamedDTO>());
 			if (portalUserId != null)
 				headerDTO.setFavourite(this.favouriteOfferEJB.isFavouritePackage(packageOffer.getId(), portalUserId));
