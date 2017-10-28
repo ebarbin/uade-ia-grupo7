@@ -14,6 +14,7 @@ import javax.persistence.TemporalType;
 import ar.edu.uade.ia.common.dtos.HotelAuthorizeRequestDTO;
 import ar.edu.uade.ia.common.dtos.HotelOfferRequestDTO;
 import ar.edu.uade.ia.entities.business.HotelOffer;
+import ar.edu.uade.ia.entities.business.Quota;
 
 /**
  * Session Bean implementation class HotelOfferEJB
@@ -197,5 +198,28 @@ public class HotelOfferEJB {
 		}
 
 		return query.getResultList();
+	}
+
+	public void reserve(Integer hotelOfferId, HotelAuthorizeRequestDTO req) throws Exception {			
+		Date dateFrom = req.getFromDate();
+		Date dateTo = req.getToDate();
+		Integer roomQty = req.getRoomQuantity();
+		
+		StringBuffer queryBuilder = new StringBuffer("from Quota as quo ");
+		queryBuilder.append(" where quo.offer.id = :hotelOfferId");		
+		queryBuilder.append(" and quo.quotaDate between :dateFrom and :dateTo");
+				
+		Query query = this.em.createQuery(queryBuilder.toString());
+		
+		query.setParameter("hotelOfferId", hotelOfferId);
+		query.setParameter("dateFrom", dateFrom, TemporalType.DATE);
+		query.setParameter("dateTo", dateTo, TemporalType.DATE);			
+
+		List<Quota> lqu = query.getResultList();
+		
+		for (Quota qu: lqu) {
+			qu.setAvailableQuota(qu.getAvailableQuota() - roomQty);
+			em.persist(qu);
+		}
 	}
 }

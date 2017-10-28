@@ -155,4 +155,8 @@ public class HotelOfferManager {
 		}
 		return results;
 	}
+
+	public void reserve(Integer id, HotelAuthorizeRequestDTO req) throws Exception{
+		this.hotelOfferEJB.reserve(id, req);		
+	}
 }
