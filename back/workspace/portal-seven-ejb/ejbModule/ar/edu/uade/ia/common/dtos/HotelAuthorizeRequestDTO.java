@@ -10,7 +10,9 @@ public class HotelAuthorizeRequestDTO implements Serializable {
 	private Integer roomQuantity;
 	private Date fromDate;
 	private Date toDate;
-
+	private Float totalPrice;
+	private PortalUserDTO portalUser;
+	
 	public Integer getRoomQuantity() {
 		return roomQuantity;
 	}
@@ -33,5 +35,21 @@ public class HotelAuthorizeRequestDTO implements Serializable {
 
 	public void setToDate(Date toDate) {
 		this.toDate = toDate;
+	}
+
+	public PortalUserDTO getPortalUser() {
+		return portalUser;
+	}
+
+	public void setPortalUser(PortalUserDTO portalUser) {
+		this.portalUser = portalUser;
+	}
+
+	public Float getTotalPrice() {
+		return totalPrice;
+	}
+
+	public void setTotalPrice(Float totalPrice) {
+		this.totalPrice = totalPrice;
 	}
 }

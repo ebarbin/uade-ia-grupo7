@@ -15,6 +15,7 @@ import ar.edu.uade.ia.common.dtos.HotelAuthorizeRequestDTO;
 import ar.edu.uade.ia.common.dtos.HotelOfferRequestDTO;
 import ar.edu.uade.ia.entities.business.HotelOffer;
 import ar.edu.uade.ia.entities.business.Quota;
+import ar.edu.uade.ia.entities.business.QuotaReservation;
 
 /**
  * Session Bean implementation class HotelOfferEJB
@@ -217,9 +218,20 @@ public class HotelOfferEJB {
 
 		List<Quota> lqu = query.getResultList();
 		
+		// baja la cantidad disponible, en tantas habitaciones como haya seleccionado de la oferta
 		for (Quota qu: lqu) {
 			qu.setAvailableQuota(qu.getAvailableQuota() - roomQty);
 			em.persist(qu);
 		}
+		
+		// crea oferta reserva
+		QuotaReservation qr = new QuotaReservation();
+		qr.setQuotas(lqu);
+		qr.setReservationDate(new Date());
+		qr.setReservationEnd(req.getToDate());
+		qr.setReservationStart(req.getToDate());
+		qr.setTotalPrice(req.getTotalPrice());
+		//qr.setPortalUser(req.getPortalUser()); me falta el constructor de PortalUser desde un PortalUserDTO, no se donde se crea ese metodo
+		em.persist(qr);
 	}
 }
