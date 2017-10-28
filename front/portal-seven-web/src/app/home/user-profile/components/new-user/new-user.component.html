@@ -3,22 +3,30 @@
   <hr style="border-color: black;">
   <md-dialog-content>
     <div class="row">
-        <md-form-field class="col-lg-6 col-md-6">
-            <input mdInput placeholder="Nombre de Usuario" name="userName" 
-            ngModel required>
-        </md-form-field>
-        <md-form-field class="col-lg-6 col-md-6">
-            <input mdInput type="email" placeholder="Email" name="email" 
-            ngModel email required>
-        </md-form-field>
-        <md-form-field class="col-lg-6 col-md-6">
-            <input mdInput placeholder="Nombre" name="firstName" 
-            ngModel required>
-        </md-form-field>
-        <md-form-field class="col-lg-6 col-md-6">
-            <input mdInput placeholder="Apellido" name="sureName" 
-            ngModel required>
-        </md-form-field>
+        <div class="col-lg-6 col-md-6">
+            <md-form-field>
+                <input mdInput placeholder="Nombre de Usuario" name="userName" 
+                ngModel required>
+            </md-form-field>
+        </div>
+        <div class="col-lg-6 col-md-6">
+            <md-form-field>
+                <input mdInput type="email" placeholder="Email" name="email" 
+                ngModel email required>
+            </md-form-field>
+        </div>
+        <div class="col-lg-6 col-md-6">
+            <md-form-field>
+                <input mdInput placeholder="Nombre" name="firstName" 
+                ngModel required>
+            </md-form-field>
+        </div>
+        <div class="col-lg-6 col-md-6">
+            <md-form-field class="col-lg-6 col-md-6">
+                <input mdInput placeholder="Apellido" name="sureName" 
+                ngModel required>
+            </md-form-field>
+        </div>
       </div>
       <div class="form-inline">
           <input type="file" id="uploadFile" placeholder="Imagen de Perfil"

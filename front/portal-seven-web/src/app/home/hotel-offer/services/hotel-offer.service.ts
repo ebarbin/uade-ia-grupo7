@@ -65,10 +65,8 @@ export class HotelOfferService implements Holder {
       return [
         {value:'', viewValue:'Seleccione...'},
         {value:'name', viewValue:'Hotel'},
-        {value:'description', viewValue:'Descripción'},
-        {value:'price', viewValue:'Precio'},
-        {value:'offerStart', viewValue:'Desde'},
-        {value:'offerEnd', viewValue:'Hasta'}
+        {value:'roomCapacity', viewValue:'Capacidad'},
+        {value:'price', viewValue:'Precio'}
       ];
     }
     
