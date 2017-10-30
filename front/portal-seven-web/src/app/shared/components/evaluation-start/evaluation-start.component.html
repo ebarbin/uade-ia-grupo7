@@ -1,0 +1,12 @@
+<div class="pull-right stars">
+    <i class="fa first-star" [ngClass]="{'fa-star-o': valoration < 1, 'fa-star': valoration >= 1}" aria-hidden="true" 
+      (click)="onMarkFirstStar()"></i>
+    <i class="fa second-star" [ngClass]="{'fa-star-o': valoration < 2, 'fa-star': valoration >= 2}" aria-hidden="true" 
+      (click)="onMarkSecondStar()"></i>
+    <i class="fa third-star" [ngClass]="{'fa-star-o': valoration < 3, 'fa-star': valoration >= 3}" aria-hidden="true" 
+      (click)="onMarkThirdStar()"></i>
+    <i class="fa fourth-star" [ngClass]="{'fa-star-o': valoration < 4, 'fa-star': valoration >= 4}" aria-hidden="true" 
+      (click)="onMarkFourthStar()"></i>
+    <i class="fa fifth-star" [ngClass]="{'fa-star-o': valoration < 5, 'fa-star': valoration >= 5}" aria-hidden="true" 
+      (click)="onMarkFifthStar()"></i>
+</div>
