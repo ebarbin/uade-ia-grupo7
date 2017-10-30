@@ -21,6 +21,7 @@ public class FavoriteOfferDTO implements Serializable {
 	private List<ImageDTO> images;
 	private Boolean favourite = Boolean.TRUE;
 	private Float price;
+	private Integer valoration;
 	
 	public Integer getId() {
 		return id;
@@ -124,5 +125,13 @@ public class FavoriteOfferDTO implements Serializable {
 
 	public void setPrice(Float price) {
 		this.price = price;
+	}
+
+	public Integer getValoration() {
+		return valoration;
+	}
+
+	public void setValoration(Integer valoration) {
+		this.valoration = valoration;
 	}
 }

@@ -1,5 +1,8 @@
 import { EvaluationStartService } from './evaluation-start.service';
 import { Component, Input } from '@angular/core';
+import { Constant } from '../../models/constant';
+import { HttpErrorResponse } from '@angular/common/http';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-evaluation-start',
@@ -12,7 +15,9 @@ export class EvaluationStartComponent {
   @Input()type:string;
   @Input()id:number;
 
-  constructor(private evaluationStartService:EvaluationStartService) { }
+  constructor(
+    private toastr:ToastrService,
+    private evaluationStartService:EvaluationStartService) { }
 
   onMarkFirstStar(){
     this.calculate(1);
@@ -35,10 +40,20 @@ export class EvaluationStartComponent {
   }
 
   private calculate(value){
-      if (this.valoration == value) value = 0; 
+    if (this.type == Constant.HOTEL) {
       this.evaluationStartService.hotelValoration(this.id, value).then((result:number)=>{
         this.valoration = result;
+      }).catch((res:HttpErrorResponse) => {
+        this.toastr.error('Ha ocurrido un error. Contacte a un administrador.');
       });
+    } else if (this.type == Constant.PACKAGE){
+      this.evaluationStartService.packageValoration(this.id, value).then((result:number)=>{
+        this.valoration = result;
+      }).catch((res:HttpErrorResponse) => {
+        this.toastr.error('Ha ocurrido un error. Contacte a un administrador.');
+      });
+    }
+
   }
 
 }

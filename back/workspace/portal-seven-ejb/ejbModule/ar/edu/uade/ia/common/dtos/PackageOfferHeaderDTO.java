@@ -30,6 +30,8 @@ public class PackageOfferHeaderDTO implements Serializable {
 	
 	private String type = Constant.PACKAGE.name();
 	
+	private Integer valoration;
+	
 	public Integer getId() {
 		return id;
 	}
@@ -109,5 +111,13 @@ public class PackageOfferHeaderDTO implements Serializable {
 	@SuppressWarnings("unused")
 	private void setType(String type) {
 		this.type = type;
+	}
+
+	public Integer getValoration() {
+		return valoration;
+	}
+
+	public void setValoration(Integer valoration) {
+		this.valoration = valoration;
 	}
 }

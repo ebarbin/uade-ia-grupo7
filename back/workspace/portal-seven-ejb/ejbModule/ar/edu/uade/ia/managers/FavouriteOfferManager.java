@@ -97,7 +97,7 @@ public class FavouriteOfferManager {
 		List<FavouritePackageOffer> favouritesPackage = this.favoriteOfferEJB.getFavouritePackageOffers(portalUserId);
 		return !favouritesHotel.isEmpty() || !favouritesPackage.isEmpty();
 	}
-	
+
 	private void addFavouritesPackage(List<FavoriteOfferDTO> results, List<FavouritePackageOffer> favouritesPackage) {
 		SimpleNamedDTO namedDTO;
 		ImageDTO imageDTO;
@@ -110,6 +110,14 @@ public class FavouriteOfferManager {
 			favouriteOffer.setQuantityCapacity(favouritePackage.getQuantityPeople());
 			favouriteOffer.setPrice(favouritePackage.getPackageOffer().getPrice());
 
+			if (favouritePackage.getPackageOffer().getAgency().getPoints() != null
+					&& !favouritePackage.getPackageOffer().getAgency().equals(0)) {
+				favouriteOffer.setValoration(favouritePackage.getPackageOffer().getAgency().getPoints()
+						/ favouritePackage.getPackageOffer().getAgency().getVotes());
+			} else {
+				favouriteOffer.setValoration(0);
+			}
+			
 			favouriteOffer.setServices(new ArrayList<SimpleNamedDTO>());
 			for (ServicePackage service : favouritePackage.getPackageOffer().getServices()) {
 				namedDTO = new SimpleNamedDTO();
@@ -124,7 +132,7 @@ public class FavouriteOfferManager {
 				imageDTO.setId(img.getId());
 				favouriteOffer.getImages().add(imageDTO);
 			}
-			
+
 			favouriteOffer.setPaymentMethods(new ArrayList<SimpleNamedDTO>());
 			for (PaymentMethod pm : favouritePackage.getPackageOffer().getPaymentMethods()) {
 				namedDTO = new SimpleNamedDTO();
@@ -132,7 +140,7 @@ public class FavouriteOfferManager {
 				namedDTO.setName(pm.getName());
 				favouriteOffer.getPaymentMethods().add(namedDTO);
 			}
-			
+
 			results.add(favouriteOffer);
 		}
 	}
@@ -151,6 +159,14 @@ public class FavouriteOfferManager {
 			favouriteOffer.setOfferStart(favouriteHotel.getOfferStart());
 			favouriteOffer.setOfferEnd(favouriteHotel.getOfferEnd());
 			favouriteOffer.setPrice(favouriteHotel.getHotelOffer().getPrice());
+			
+			if (favouriteHotel.getHotelOffer().getHotel().getPoints() != null
+					&& !favouriteHotel.getHotelOffer().getHotel().equals(0)) {
+				favouriteOffer.setValoration(favouriteHotel.getHotelOffer().getHotel().getPoints()
+						/ favouriteHotel.getHotelOffer().getHotel().getVotes());
+			} else {
+				favouriteOffer.setValoration(0);
+			}
 
 			favouriteOffer.setServices(new ArrayList<SimpleNamedDTO>());
 			for (ServiceHotel service : favouriteHotel.getHotelOffer().getHotel().getServices()) {

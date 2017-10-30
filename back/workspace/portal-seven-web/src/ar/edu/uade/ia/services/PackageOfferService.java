@@ -21,6 +21,7 @@ import ar.edu.uade.ia.common.dtos.PackageAuthorizeRequestDTO;
 import ar.edu.uade.ia.common.dtos.PackageOfferDTO;
 import ar.edu.uade.ia.common.dtos.PackageOfferHeaderDTO;
 import ar.edu.uade.ia.common.dtos.PackageOfferRequestDTO;
+import ar.edu.uade.ia.common.dtos.ValorationDTO;
 import ar.edu.uade.ia.integrations.backOffice.logging.LoggingJMS;
 import ar.edu.uade.ia.managers.PackageOfferManager;
 import ar.edu.uade.ia.services.response.PortalResponse;
@@ -93,6 +94,19 @@ public class PackageOfferService {
 		try {
 			AuthorizeStatusDTO statusDTO = this.packageOfferManager.autorize(id, req);
 			return Response.ok(new PortalResponse(statusDTO)).build();
+		} catch (Exception e) {
+			PackageOfferService.LOGGER.error(e.getMessage(), e);
+			return Response.ok(new PortalResponse(e.getMessage())).build();
+		}
+	}
+	
+	@PUT
+	@Path("/valoration/{id}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response valoration(@PathParam("id") Integer id, ValorationDTO valoration) {
+		try {
+			Integer value = this.packageOfferManager.valoration(id, valoration.getVote());
+			return Response.ok(new PortalResponse(value)).build();
 		} catch (Exception e) {
 			PackageOfferService.LOGGER.error(e.getMessage(), e);
 			return Response.ok(new PortalResponse(e.getMessage())).build();

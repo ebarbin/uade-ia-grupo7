@@ -16,8 +16,22 @@ export class EvaluationStartService {
       if (response.success) {
         return <number>response.data;
       } else {
+        this.toastr.error(response.errorMessage);
         return 0;
       }
       }).toPromise();
   }
+
+  packageValoration(packageOfferId:number, valoration:number):Promise<number>{
+    return this.httpClient.put('portal-seven-web/api/rest/package-offer/valoration/' + packageOfferId, {vote: valoration})
+    .map((response:PortalResponse)=>{
+      if (response.success) {
+        return <number>response.data;
+      } else {
+        this.toastr.error(response.errorMessage);
+        return 0;
+      }
+      }).toPromise();
+  }
+  
 }

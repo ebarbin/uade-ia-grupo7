@@ -86,6 +86,12 @@ public class PackageOfferManager {
 			headerDTO.setDescription(packageOffer.getDescription());
 			headerDTO.setQuantityPeople(packageOffer.getAvailableQuota());
 			
+			if(packageOffer.getAgency().getPoints() != null && !packageOffer.getAgency().getPoints().equals(0)) {
+				headerDTO.setValoration(packageOffer.getAgency().getPoints() / packageOffer.getAgency().getVotes());
+			} else {
+				headerDTO.setValoration(0);
+			}
+			
 			headerDTO.setServices(new ArrayList<SimpleNamedDTO>());
 			if (portalUserId != null)
 				headerDTO.setFavourite(this.favouriteOfferEJB.isFavouritePackage(packageOffer.getId(), portalUserId));
@@ -110,5 +116,15 @@ public class PackageOfferManager {
 		}
 
 		return results;
+	}
+
+	public Integer valoration(Integer id, Integer vote) throws Exception {
+		PackageOffer po = this.packageOfferEJB.getDetail(id);
+		if (po.getAgency().getVotes() == null) po.getAgency().setVotes(0);
+		po.getAgency().setVotes(po.getAgency().getVotes()+1);
+		if (po.getAgency().getPoints() == null) po.getAgency().setPoints(0);
+		po.getAgency().setPoints(po.getAgency().getPoints()+vote);
+		this.packageOfferEJB.update(po);
+		return po.getAgency().getPoints() / po.getAgency().getVotes();
 	}
 }

@@ -13,14 +13,14 @@
           <i class="fa fa-globe" aria-hidden="true"></i>
         </span>
         <app-favourite-button [offer]="po" [quantityPeople]="poService.getFilter().quantityPeople"></app-favourite-button>
-        <div (click)="onDetail(po)">
-          <img class="img-responsive img-card"
+        <div >
+          <img class="img-responsive img-card" (click)="onDetail(po)"
             [src]="po.images | first | imageGetter">
           <md-card-header>
-            <md-card-title>{{po.description}}</md-card-title>
+            <md-card-title>{{po.description}}<app-evaluation-start [id]="po.id" [type]="po.type" [valoration]="po.valoration"></app-evaluation-start></md-card-title>
             <md-card-subtitle>{{po.services | join:' - ' }}</md-card-subtitle>
           </md-card-header>
-          <md-card-content>
+          <md-card-content (click)="onDetail(po)">
             <p>Cupos Disponibles: {{po.quantityPeople}} personas</p>
             <p>Precio por Persona: {{po.price | currency:'ARS':true}}</p>
             <b>Precio Total: {{ getTotalPrice(po.price) | currency:'ARS':true}}</b>

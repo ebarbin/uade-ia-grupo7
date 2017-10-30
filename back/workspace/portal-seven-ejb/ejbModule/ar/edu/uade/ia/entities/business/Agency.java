@@ -17,6 +17,10 @@ public class Agency extends PersistentObject {
 
 	private String code;
 	
+	private Integer points;
+	
+	private Integer votes;
+	
 	public String getName() {
 		return name;
 	}
@@ -47,5 +51,21 @@ public class Agency extends PersistentObject {
 
 	public void setCode(String code) {
 		this.code = code;
+	}
+
+	public Integer getPoints() {
+		return points;
+	}
+
+	public void setPoints(Integer points) {
+		this.points = points;
+	}
+
+	public Integer getVotes() {
+		return votes;
+	}
+
+	public void setVotes(Integer votes) {
+		this.votes = votes;
 	}
 }

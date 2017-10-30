@@ -9,7 +9,7 @@
       <img class="img-responsive img-card" 
         [src]="o.images | first | imageGetter">
         <md-card-header>  
-          <md-card-title>{{o.name}}</md-card-title>
+          <md-card-title>{{o.name}}<app-evaluation-start [id]="o.id" [type]="o.type" [valoration]="o.valoration"></app-evaluation-start></md-card-title>
           <md-card-subtitle [mdTooltip]="o.description">{{o.description}}</md-card-subtitle>
         </md-card-header>
         <md-card-content>
@@ -34,7 +34,7 @@
         <img class="img-responsive img-card" 
           [src]="o.images | first | imageGetter">
         <md-card-header>  
-          <md-card-title>{{o.description}}</md-card-title>
+          <md-card-title>{{o.description}}<app-evaluation-start [id]="o.id" [type]="o.type" [valoration]="o.valoration"></app-evaluation-start></md-card-title>
           <md-card-subtitle>{{o.services | join:' - ' }}</md-card-subtitle>
         </md-card-header>
         <md-card-content>

@@ -205,6 +205,7 @@ public class HotelOfferEJB {
 		return query.getResultList();
 	}
 
+	@SuppressWarnings("unchecked")
 	public void reserve(Integer hotelOfferId, HotelAuthorizeRequestDTO req) throws Exception {			
 		Date dateFrom = req.getFromDate();
 		Date dateTo = req.getToDate();
