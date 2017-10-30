@@ -4,3 +4,23 @@
     background-color: lavender;
     margin-left:5px;
 }
+
+.first-star{
+    color:rgb(255, 174, 0);
+}
+
+.second-star{
+    color:rgb(255, 132, 0);
+}
+
+.third-star{
+    color:rgb(255, 81, 0);
+}
+
+.fourth-star{
+    color:rgb(255, 47, 0);
+}
+
+.fifth-star{
+    color:rgb(255, 0, 0);
+}
