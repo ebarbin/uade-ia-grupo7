@@ -66,7 +66,8 @@ export class HotelOfferService implements Holder {
         {value:'', viewValue:'Seleccione...'},
         {value:'name', viewValue:'Nombre Hotel'},
         {value:'roomCapacity', viewValue:'Capacidad'},
-        {value:'price', viewValue:'Precio'}
+        {value:'price', viewValue:'Precio'},
+        {value:'valoration', viewValue:'Valoración'}
       ];
     }
     

@@ -50,7 +50,8 @@ export class PackageOfferService implements Holder {
       {value:'', viewValue:'Seleccione...'},
       {value:'description', viewValue:'Nombre Paquete'},
       {value:'price', viewValue:'Precio'},
-      {value:'quantityPeople', viewValue:'Cupo Disponible'}
+      {value:'quantityPeople', viewValue:'Cupo Disponible'},
+      {value:'valoration', viewValue:'Valoración'}
     ];
   }
 
