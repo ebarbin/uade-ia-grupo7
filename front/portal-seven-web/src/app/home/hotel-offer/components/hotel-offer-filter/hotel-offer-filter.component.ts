@@ -5,7 +5,7 @@ import { ToastrService } from 'ngx-toastr';
 import { Observable } from 'rxjs/Observable';
 
 import { AutocompleteResource } from '../../../../shared/models/autocomplete-resource.model';
-import { AutocompleteService } from '../../../../shared/services/hotel-autocomplete.service';
+import { AutocompleteService } from '../../../../shared/services/autocomplete.service';
 import { HotelOfferRequest } from '../../models/hotel-offer-request.model';
 import { HotelOfferHeader } from '../../models/hotel-offer-header.model';
 import { HotelOfferService } from '../../services/hotel-offer.service';

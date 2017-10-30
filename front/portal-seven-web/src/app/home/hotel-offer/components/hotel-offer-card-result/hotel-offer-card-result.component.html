@@ -17,18 +17,23 @@
         [fromDate]="hoService.getFilterRequest().fromDate" 
         [toDate]="hoService.getFilterRequest().toDate">
       </app-favourite-button>
-      <div (click)="onDetail(ho)">
-        <img class="img-responsive img-card" 
+      <div>
+        <img class="img-responsive img-card" (click)="onDetail(ho)"
           [src]="ho.images | first | imageGetter">
           <md-card-header>  
-            <md-card-title>{{ho.name}}</md-card-title>
+            <md-card-title>{{ho.name}}<app-evaluation-start [id]="ho.id" [type]="ho.type" [valoration]="ho.valoration"></app-evaluation-start></md-card-title> 
             <md-card-subtitle [mdTooltip]="ho.description">{{ho.description}}</md-card-subtitle>
           </md-card-header>
-          <md-card-content>
+          <md-card-content (click)="onDetail(ho)">
             <p>{{ho.services | join: ' - '}}</p>
             <p>Capacidad: {{ho.roomCapacity}} personas</p>
             <div class="pull-right"><b>Precio Total: {{ho.price | currency:'ARS':true}}</b></div>
           </md-card-content>
+        </div>
+        <div class="pull-right">
+          <p>
+          
+          </p> 
         </div>
       </md-card>
     </div>

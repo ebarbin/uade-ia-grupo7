@@ -153,12 +153,16 @@ public class HotelOfferEJB {
 		return (value >0);
 	}
 	
-	public HotelOffer getDetail(Integer id) {
+	public HotelOffer getDetail(Integer id) throws Exception {
 		return this.em.find(HotelOffer.class, id);
 	}
 
+	public void update(HotelOffer ho) throws Exception {
+		this.em.merge(ho);
+	}
+	
 	@SuppressWarnings("unchecked")
-	public List<HotelOffer> searchOtherRooms(Integer roomId, HotelOfferRequestDTO request) {
+	public List<HotelOffer> searchOtherRooms(Integer roomId, HotelOfferRequestDTO request) throws Exception {
 		Integer hotelId = request.getHotel().getId();
 		Date dateFrom = request.getFromDate();
 		Date dateTo = request.getToDate();

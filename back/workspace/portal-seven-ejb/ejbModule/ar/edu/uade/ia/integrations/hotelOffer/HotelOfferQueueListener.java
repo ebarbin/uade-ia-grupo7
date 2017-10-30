@@ -96,7 +96,9 @@ public class HotelOfferQueueListener extends AbstractQueueListener implements Me
 				hotel.setCode(code);
 				hotel.setName(hom.getNombre());
 				hotel.setDescription(hom.getDescripcion_hotel());
-
+				hotel.setPoints(0);
+				hotel.setVotes(0);
+				
 				this.addHotelImage(hotel, hom.getFoto_hotel());
 
 				this.addHotelAddress(hotel, hom.getLatitud(), hom.getLongitud());

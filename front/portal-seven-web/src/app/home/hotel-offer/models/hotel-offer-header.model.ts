@@ -13,5 +13,6 @@ export class HotelOfferHeader {
         public offerStart: Date,
         public offerEnd: Date,
         public services: SimpleNamed[],
-        public favourite: boolean){}
+        public favourite: boolean,
+        public valoration: number){}
 }

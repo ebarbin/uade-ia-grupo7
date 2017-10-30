@@ -1,3 +1,4 @@
+import { EvaluationStartService } from './shared/components/evaluation-start/evaluation-start.service';
 import { ConfigurationGuard } from './home/configuration/services/configuration-guard.service';
 import { ReserveHistoryGuard } from './home/reserve-history/services/reserve-history-guard.service';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
@@ -20,7 +21,7 @@ import { AuthGuard } from './auth/services/auth-guard.service';
 import { AuthService } from './auth/services/auth.service';
 import { ImageService } from './home/user-profile/services/image.service';
 import { UserService } from './home/user-profile/services/user.service';
-import { AutocompleteService } from './shared/services/hotel-autocomplete.service';
+import { AutocompleteService } from './shared/services/autocomplete.service';
 import { MyHttpInterceptor } from './shared/services/my-http-interceptor';
 import { HotelOfferService } from './home/hotel-offer/services/hotel-offer.service';
 import { PackageOfferService } from './home/package-offer/services/package-offer.service';
@@ -40,7 +41,8 @@ import { FavouriteGuard } from './home/favourite/services/favourite-guard.servic
   ],
   providers: [
     AuthService, UserService, ImageService, 
-    AutocompleteService, HotelOfferService, PackageOfferService, FavouriteOfferService,
+    AutocompleteService, HotelOfferService, PackageOfferService, 
+    FavouriteOfferService, EvaluationStartService,
     AuthGuard, FavouriteGuard, ReserveHistoryGuard, 
     PackageOfferResultGuard, HotelOfferResultGuard, ConfigurationGuard,
     { provide: LOCALE_ID, useValue: 'es-AR' },

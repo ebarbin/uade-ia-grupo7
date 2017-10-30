@@ -22,6 +22,7 @@ import ar.edu.uade.ia.common.dtos.HotelOfferHeaderDTO;
 import ar.edu.uade.ia.common.dtos.HotelOfferRequestDTO;
 import ar.edu.uade.ia.common.dtos.ImageDTO;
 import ar.edu.uade.ia.common.dtos.RoomDTO;
+import ar.edu.uade.ia.common.dtos.ValorationDTO;
 import ar.edu.uade.ia.integrations.backOffice.logging.LoggingJMS;
 import ar.edu.uade.ia.managers.HotelOfferManager;
 import ar.edu.uade.ia.services.response.PortalResponse;
@@ -89,6 +90,19 @@ public class HotelOfferService {
 			this.hotelOfferManager.reserve(id, req);
 			
 			return Response.ok(new PortalResponse(statusDTO)).build();
+		} catch (Exception e) {
+			HotelOfferService.LOGGER.error(e.getMessage(), e);
+			return Response.ok(new PortalResponse(e.getMessage())).build();
+		}
+	}
+	
+	@PUT
+	@Path("/valoration/{id}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response valoration(@PathParam("id") Integer id, ValorationDTO valoration) {
+		try {
+			Integer value = this.hotelOfferManager.valoration(id, valoration.getVote());
+			return Response.ok(new PortalResponse(value)).build();
 		} catch (Exception e) {
 			HotelOfferService.LOGGER.error(e.getMessage(), e);
 			return Response.ok(new PortalResponse(e.getMessage())).build();

@@ -4,7 +4,7 @@ import { NgForm } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 
 import { AutocompleteResource } from '../../../../shared/models/autocomplete-resource.model';
-import { AutocompleteService } from '../../../../shared/services/hotel-autocomplete.service';
+import { AutocompleteService } from '../../../../shared/services/autocomplete.service';
 import { PackageOfferRequest } from '../../models/package-offer-request.model';
 import { PackageOfferService } from '../../services/package-offer.service';
 import { PackageOfferHeader } from '../../models/package-offer-header.model';

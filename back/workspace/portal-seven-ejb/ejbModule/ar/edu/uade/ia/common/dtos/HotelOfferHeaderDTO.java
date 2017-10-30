@@ -32,6 +32,8 @@ public class HotelOfferHeaderDTO implements Serializable {
 	
 	private String type = Constant.HOTEL.name();
 	
+	private Integer valoration;
+	
 	public HotelOfferHeaderDTO() {}
 	
 	public Integer getId() {
@@ -121,5 +123,13 @@ public class HotelOfferHeaderDTO implements Serializable {
 	@SuppressWarnings("unused")
 	private void setType(String type) {
 		this.type = type;
+	}
+
+	public Integer getValoration() {
+		return valoration;
+	}
+
+	public void setValoration(Integer valoration) {
+		this.valoration = valoration;
 	}
 }

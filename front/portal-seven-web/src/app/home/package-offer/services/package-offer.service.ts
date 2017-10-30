@@ -48,10 +48,9 @@ export class PackageOfferService implements Holder {
   getSortValues():any[]{
     return [
       {value:'', viewValue:'Seleccione...'},
-      {value:'description', viewValue:'Descripción'},
+      {value:'description', viewValue:'Nombre Paquete'},
       {value:'price', viewValue:'Precio'},
-      {value:'offerStart', viewValue:'Desde'},
-      {value:'offerEnd', viewValue:'Hasta'}
+      {value:'quantityPeople', viewValue:'Cupo Disponible'}
     ];
   }
 
