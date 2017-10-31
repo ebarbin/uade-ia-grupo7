@@ -70,7 +70,7 @@ public class HotelOfferManager {
 		return this.convertToListOfHotelOfferHeaderDTO(hotelOffers, portalUserId);
 	}
 
-	public List<RoomDTO> searchOtherRooms(Integer roomId, HotelOfferRequestDTO request) {
+	public List<RoomDTO> searchOtherRooms(Integer roomId, HotelOfferRequestDTO request) throws Exception {
 		List<HotelOffer> hotelOffers = this.hotelOfferEJB.searchOtherRooms(roomId, request);
 		return this.converToRoomDTOList(hotelOffers);
 	}
@@ -80,6 +80,16 @@ public class HotelOfferManager {
 		return HotelOfferManager.mapper.map(ho, HotelOfferDTO.class);
 	}
     
+	public Integer valoration(Integer id, Integer valoration) throws Exception {
+		HotelOffer ho = this.hotelOfferEJB.getDetail(id);
+		if (ho.getHotel().getVotes() == null) ho.getHotel().setVotes(0);
+		ho.getHotel().setVotes(ho.getHotel().getVotes()+1);
+		if (ho.getHotel().getPoints() == null) ho.getHotel().setPoints(0);
+		ho.getHotel().setPoints(ho.getHotel().getPoints()+valoration);
+		this.hotelOfferEJB.update(ho);
+		return ho.getHotel().getPoints() / ho.getHotel().getVotes();
+	}
+	
 	private List<RoomDTO> converToRoomDTOList(List<HotelOffer> hotelOffers) {
 
 		List<RoomDTO> results = new ArrayList<RoomDTO>();
@@ -133,6 +143,12 @@ public class HotelOfferManager {
 			headerDTO.setDescription(hotelOffer.getHotel().getDescription());
 			headerDTO.setServices(new ArrayList<SimpleNamedDTO>());
 			headerDTO.setFavourite(this.favouriteOfferEJB.isFavouriteHotel(hotelOffer.getId(), userId));
+
+			if(hotelOffer.getHotel().getPoints() != null && !hotelOffer.getHotel().getPoints().equals(0)) {
+				headerDTO.setValoration(hotelOffer.getHotel().getPoints() / hotelOffer.getHotel().getVotes());
+			} else {
+				headerDTO.setValoration(0);
+			}
 			
 			for (ServiceHotel service : hotelOffer.getHotel().getServices()) {
 				namedDTO = new SimpleNamedDTO();

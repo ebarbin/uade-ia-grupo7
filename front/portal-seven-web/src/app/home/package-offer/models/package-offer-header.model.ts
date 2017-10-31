@@ -12,5 +12,6 @@ export class PackageOfferHeader {
         public offerEnd: Date,
         public services: SimpleNamed[],
         public favourite:boolean,
-        public quantityPeople:number){}
+        public quantityPeople:number,
+        public valoration:number){}
 }

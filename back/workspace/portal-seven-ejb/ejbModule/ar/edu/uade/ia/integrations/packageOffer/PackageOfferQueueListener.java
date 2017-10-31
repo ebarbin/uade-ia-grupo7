@@ -91,6 +91,8 @@ public class PackageOfferQueueListener extends AbstractQueueListener implements 
 				agency.setCode(code);
 				agency.setName(null); //No Informado
 				agency.setEmail(pom.getMail_agencia());
+				agency.setVotes(Integer.valueOf(0));
+				agency.setPoints(Integer.valueOf(0));
 			}
 			
 			PackageOffer po = new PackageOffer();

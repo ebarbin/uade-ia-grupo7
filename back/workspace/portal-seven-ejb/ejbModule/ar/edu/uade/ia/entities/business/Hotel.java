@@ -20,6 +20,10 @@ public class Hotel extends PersistentObject {
 	private String name;
 
 	private String description;
+	
+	private Integer points;
+	
+	private Integer votes;
 
 	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinTable(name = "hotel_image", joinColumns = {
@@ -108,5 +112,21 @@ public class Hotel extends PersistentObject {
 
 	public void setCode(String code) {
 		this.code = code;
+	}
+
+	public Integer getPoints() {
+		return points;
+	}
+
+	public void setPoints(Integer points) {
+		this.points = points;
+	}
+
+	public Integer getVotes() {
+		return votes;
+	}
+
+	public void setVotes(Integer votes) {
+		this.votes = votes;
 	}
 }

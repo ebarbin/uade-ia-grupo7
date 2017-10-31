@@ -64,9 +64,10 @@ export class HotelOfferService implements Holder {
     getSortValues():any[]{
       return [
         {value:'', viewValue:'Seleccione...'},
-        {value:'name', viewValue:'Hotel'},
+        {value:'name', viewValue:'Nombre Hotel'},
         {value:'roomCapacity', viewValue:'Capacidad'},
-        {value:'price', viewValue:'Precio'}
+        {value:'price', viewValue:'Precio'},
+        {value:'valoration', viewValue:'Valoración'}
       ];
     }
     

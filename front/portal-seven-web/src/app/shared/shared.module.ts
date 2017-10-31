@@ -25,6 +25,7 @@ import { SortComponent } from './components/sort/sort.component';
 import { ViewChangeResultComponent } from './components/view-change-result/view-change-result.component';
 import { RoomTypePipe } from './pipes/room-type.pipe';
 import { FavouriteButtonComponent } from './components/favourite-button/favourite-button.component';
+import { EvaluationStartComponent } from './components/evaluation-start/evaluation-start.component';
 
 @NgModule({
   imports: [
@@ -46,12 +47,13 @@ import { FavouriteButtonComponent } from './components/favourite-button/favourit
     NgxGalleryModule, AgmCoreModule, ToastrModule, JoinPipe,
     TruncatePipe, FirstPipe, ImageGetterPipe, WhenNullPutBlankPipe,
     ImgGalleryComponent, MapComponent, DropdownDirective, 
-    SortComponent, ViewChangeResultComponent, RoomTypePipe, FavouriteButtonComponent
+    SortComponent, ViewChangeResultComponent, RoomTypePipe, FavouriteButtonComponent,
+    EvaluationStartComponent
   ],
   declarations: [
     JoinPipe, TruncatePipe, FirstPipe, ImageGetterPipe, RoomTypePipe,
     WhenNullPutBlankPipe, ImgGalleryComponent,
-    MapComponent, DropdownDirective, SortComponent, ViewChangeResultComponent, FavouriteButtonComponent,
+    MapComponent, DropdownDirective, SortComponent, ViewChangeResultComponent, FavouriteButtonComponent, EvaluationStartComponent,
   ],
   entryComponents: []
 })

@@ -146,4 +146,8 @@ public class PackageOfferEJB {
     public void add(PackageOffer packageOffer) throws Exception {
     	this.em.persist(packageOffer);
     }
+
+	public void update(PackageOffer po) throws Exception {
+		this.em.merge(po);
+	}
 }

@@ -15,5 +15,6 @@ export class FavouriteOffer {
         public services: SimpleNamed[],
         public paymentMethods: SimpleNamed[],
         public favourite: boolean,
-        public type: string){}
+        public type: string,
+        public valoration:number){}
 }
