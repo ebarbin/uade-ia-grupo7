@@ -23,7 +23,10 @@
           </div>
           <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6">
             <md-form-field>
-              <input name="fromDate" [(ngModel)]="fromDate"
+              <input name="fromDate" [(ngModel)]="fromDate" 
+              onkeydown="return false;" 
+              (paste)="false"
+              autocomplete="off"
               [mdDatepicker]="fromPicker" placeholder="Fecha Desde" mdInput>
               <md-datepicker-toggle mdSuffix [for]="fromPicker"></md-datepicker-toggle>
               <md-datepicker #fromPicker></md-datepicker>
@@ -31,7 +34,10 @@
           </div>
           <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6">
             <md-form-field>
-              <input name="toDate" [(ngModel)]="toDate"
+              <input name="toDate" [(ngModel)]="toDate" 
+              onkeydown="return false;" 
+              (paste)="false"
+              autocomplete="off"
               [mdDatepicker]="toPicker" placeholder="Fecha Hasta" mdInput>
               <md-datepicker-toggle mdSuffix [for]="toPicker"></md-datepicker-toggle>
               <md-datepicker #toPicker></md-datepicker>
