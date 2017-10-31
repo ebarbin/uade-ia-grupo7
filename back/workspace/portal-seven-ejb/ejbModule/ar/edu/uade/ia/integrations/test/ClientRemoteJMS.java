@@ -16,11 +16,14 @@ import javax.jms.TextMessage;
 @LocalBean
 public class ClientRemoteJMS implements ClientRemoteJMSRemote, ClientRemoteJMSLocal {
 
-	@Resource(lookup = "java:/queue/PackageOfferQueue")
-	private Queue queue;
+	@Resource(lookup = "java:jboss/exported/jms/queue/OfertaHotelera")
+	private Queue queueOfertaHotelera;
 
+	@Resource(lookup = "java:jboss/exported/jms/queue/OfertaPaquete")
+	private Queue queueOfertaPaquete;
+	
 	@Inject
-	@JMSConnectionFactory("java:/ConnectionFactory")
+	@JMSConnectionFactory("java:/jms/ra-pw1")
 	JMSContext context;
 	
     /**
@@ -31,7 +34,8 @@ public class ClientRemoteJMS implements ClientRemoteJMSRemote, ClientRemoteJMSLo
 	@Override
 	public void execute() {
 		TextMessage message = this.context.createTextMessage("bla bla bla bla blaaaaaaa");
-		this.context.createProducer().send(this.queue, message);
+		this.context.createProducer().send(this.queueOfertaHotelera, message);
+		this.context.createProducer().send(this.queueOfertaPaquete, message);
 	}
 
 }
