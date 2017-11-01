@@ -23,7 +23,7 @@ import { PackageOfferResultGuard } from './home/package-offer/services/package-o
 import { FavouriteGuard } from './home/favourite/services/favourite-guard.service';
 
 const appRoutes: Routes = [
-  { path: '', redirectTo: '/home', pathMatch: 'full'},
+  { path: '', redirectTo: '/home/hotel-offer', pathMatch: 'full'},
   { path: 'home', component: HomeComponent, 
     canActivate: [AuthGuard], children:[
       {path: 'hotel-offer', component: HotelOfferComponent, canActivate: [AuthGuard],
