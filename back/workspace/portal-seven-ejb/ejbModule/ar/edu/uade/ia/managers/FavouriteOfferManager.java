@@ -111,7 +111,7 @@ public class FavouriteOfferManager {
 			favouriteOffer.setPrice(favouritePackage.getPackageOffer().getPrice());
 
 			if (favouritePackage.getPackageOffer().getAgency().getPoints() != null
-					&& !favouritePackage.getPackageOffer().getAgency().equals(0)) {
+					&& !favouritePackage.getPackageOffer().getAgency().getVotes().equals(0)) {
 				favouriteOffer.setValoration(favouritePackage.getPackageOffer().getAgency().getPoints()
 						/ favouritePackage.getPackageOffer().getAgency().getVotes());
 			} else {
@@ -161,7 +161,7 @@ public class FavouriteOfferManager {
 			favouriteOffer.setPrice(favouriteHotel.getHotelOffer().getPrice());
 			
 			if (favouriteHotel.getHotelOffer().getHotel().getPoints() != null
-					&& !favouriteHotel.getHotelOffer().getHotel().equals(0)) {
+					&& !favouriteHotel.getHotelOffer().getHotel().getVotes().equals(0)) {
 				favouriteOffer.setValoration(favouriteHotel.getHotelOffer().getHotel().getPoints()
 						/ favouriteHotel.getHotelOffer().getHotel().getVotes());
 			} else {

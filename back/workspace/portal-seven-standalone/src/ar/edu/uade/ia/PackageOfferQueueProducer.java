@@ -30,7 +30,8 @@ public class PackageOfferQueueProducer {
 		context.lookup(lookupName);
 		
 		String hotelOffers = new String(Files.readAllBytes(Paths.get("package-offer.json")));
-        
+		remoteProducer.sendTextMessage(hotelOffers);
+		hotelOffers = new String(Files.readAllBytes(Paths.get("package-offer2.json")));
 		remoteProducer.sendTextMessage(hotelOffers);
 	}
 
