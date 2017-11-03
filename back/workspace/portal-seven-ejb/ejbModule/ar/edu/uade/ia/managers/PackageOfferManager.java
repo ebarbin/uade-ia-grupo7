@@ -127,4 +127,8 @@ public class PackageOfferManager {
 		this.packageOfferEJB.update(po);
 		return po.getAgency().getPoints() / po.getAgency().getVotes();
 	}
+
+	public void reserve(Integer id, PackageAuthorizeRequestDTO req) throws Exception{
+		this.packageOfferEJB.reserve(id, req);		
+	}
 }

@@ -13,6 +13,7 @@ import javax.persistence.TemporalType;
 import ar.edu.uade.ia.common.dtos.PackageAuthorizeRequestDTO;
 import ar.edu.uade.ia.common.dtos.PackageOfferRequestDTO;
 import ar.edu.uade.ia.entities.business.PackageOffer;
+import ar.edu.uade.ia.entities.business.PackageReservation;
 
 /**
  * Session Bean implementation class PackageOfferEJB
@@ -92,17 +93,16 @@ public class PackageOfferEJB {
 		
 		StringBuffer queryBuilder = new StringBuffer("select pkOf");
 		queryBuilder.append(" from PackageOffer as pkOf");
-		queryBuilder.append(" inner join pkOf.destination as dest");
 		queryBuilder.append(" where 1 = 1");
-		queryBuilder.append(" and pkOf.id <> :packageId");
+		queryBuilder.append(" and pkOf.id = :packageId");
 		queryBuilder.append(" and pkOf.availableQuota >= :quantityPeople");
 		
 		Query query = this.em.createQuery(queryBuilder.toString());
 		query.setParameter("quantityPeople", quantityPeople);
 		query.setParameter("packageId", packageId);
 		
-		value = query.getFirstResult();
-		
+		value = query.getResultList().size();
+
 		return (value ==1);
 	}
 	
@@ -150,4 +150,24 @@ public class PackageOfferEJB {
 	public void update(PackageOffer po) throws Exception {
 		this.em.merge(po);
 	}
+	
+	public void reserve(Integer packageId, PackageAuthorizeRequestDTO req) throws Exception {
+		
+		PackageOffer po = em.find(PackageOffer.class, packageId);
+		
+		// actualiza disponibilidad de paquete oferta
+		po.setAvailableQuota(po.getAvailableQuota() - req.getQuantityPeople());
+		em.persist(po);
+		
+		// crea paquete reserva
+		PackageReservation pr = new PackageReservation();
+		pr.setPckage(po);
+		//pr.setPortalUser(req.getPortalUser()); me falta el constructor de PortalUser desde un PortalUserDTO, no se donde se crea ese metodo 
+		pr.setTotalPrice(req.getTotalPrice());
+		pr.setReservationDate(new Date());
+		pr.setQuotaQuantity(req.getQuantityPeople());
+		
+		em.persist(pr);
+	}
+	
 }
