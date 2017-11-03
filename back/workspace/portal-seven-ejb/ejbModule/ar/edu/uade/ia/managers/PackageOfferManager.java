@@ -48,6 +48,8 @@ public class PackageOfferManager {
 		AuthorizeStatusDTO dto = new AuthorizeStatusDTO();
 		if (this.packageOfferEJB.hasQuota(id, req)){
 			// TODO MANDAR A AUTORIZAR AL WEBSERVICE SOAP
+			this.packageOfferEJB.reserve(id, req);	
+			
 			dto.setStatus(Boolean.TRUE);
 		} else {
 			dto.setStatus(Boolean.FALSE);
@@ -126,9 +128,5 @@ public class PackageOfferManager {
 		po.getAgency().setPoints(po.getAgency().getPoints()+vote);
 		this.packageOfferEJB.update(po);
 		return po.getAgency().getPoints() / po.getAgency().getVotes();
-	}
-
-	public void reserve(Integer id, PackageAuthorizeRequestDTO req) throws Exception{
-		this.packageOfferEJB.reserve(id, req);		
 	}
 }

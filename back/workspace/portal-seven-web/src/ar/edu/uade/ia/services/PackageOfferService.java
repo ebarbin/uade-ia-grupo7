@@ -93,9 +93,6 @@ public class PackageOfferService {
 	public Response authorize(@PathParam("id") Integer id, PackageAuthorizeRequestDTO req) {
 		try {
 			AuthorizeStatusDTO statusDTO = this.packageOfferManager.autorize(id, req);
-			
-			this.packageOfferManager.reserve(id, req);
-			
 			return Response.ok(new PortalResponse(statusDTO)).build();
 		} catch (Exception e) {
 			PackageOfferService.LOGGER.error(e.getMessage(), e);

@@ -86,9 +86,6 @@ public class HotelOfferService {
 	public Response authorize(@PathParam("id") Integer id, HotelAuthorizeRequestDTO req) {
 		try {
 			AuthorizeStatusDTO statusDTO = this.hotelOfferManager.autorize(id, req);
-			
-			this.hotelOfferManager.reserve(id, req);
-			
 			return Response.ok(new PortalResponse(statusDTO)).build();
 		} catch (Exception e) {
 			HotelOfferService.LOGGER.error(e.getMessage(), e);
