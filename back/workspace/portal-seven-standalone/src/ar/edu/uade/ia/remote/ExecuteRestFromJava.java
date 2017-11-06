@@ -1,41 +1,27 @@
 package ar.edu.uade.ia.remote;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.HttpClientBuilder;
+
 
 public class ExecuteRestFromJava {
 
 	public static void main(String[] args) throws Exception {
 
 		HttpClient httpClient = HttpClientBuilder.create().build();
-		HttpGet getRequest = new HttpGet("http://localhost:8080/portal-seven-web/api/rest/favourite-offer/1");
-		getRequest.addHeader("accept", "application/json");
 
-		HttpResponse response = httpClient.execute(getRequest);
-
-		if (response.getStatusLine().getStatusCode() != 200) {
-			throw new RuntimeException("Failed : HTTP error code : " + response.getStatusLine().getStatusCode());
-		}
-
-		BufferedReader br = new BufferedReader(new InputStreamReader((response.getEntity().getContent())));
-		String output;
-		// Simply iterate through XML response and show on console.
-		while ((output = br.readLine()) != null) {
-			System.out.println(output);
-		}
-
-		HttpPost postRequest = new HttpPost("url");
+		HttpPost postRequest = new HttpPost("http://192.168.0.108:8080/TPO_BO_WEB/rest/ServiciosBO/RegistrarLog");
 		postRequest.addHeader("Content-Type", "application/json");
-		StringEntity entity = new StringEntity("{\"key\":\"value\"}");
+		StringEntity entity = new StringEntity("{\"plataformaEnvia\":\"PW\", \"plataformaRecibe\":\"OH\", \"servicio\":\"Crear oferta hotelera\", \"observacion\":\"SUCCESS\"}");
 		postRequest.setEntity(entity);
-		response = httpClient.execute(postRequest);
+		HttpResponse response = httpClient.execute(postRequest);
+		
+		if(response.getStatusLine().getStatusCode() == 200) {
+			
+		}
 		
 		/*
 		 * URL url = new

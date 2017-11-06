@@ -41,7 +41,7 @@ import ar.edu.uade.ia.integrations.hotelOffer.message.HotelOfferMessage;
  * Message-Driven Bean implementation class for: HotelOfferQueueListener
  */
 @MessageDriven(activationConfig = {
-		@ActivationConfigProperty(propertyName = "destination", propertyValue = "java:/queue/HotelOfferQueue"),
+		@ActivationConfigProperty(propertyName = "destination", propertyValue = "java:jboss/exported/jms/queue/ofertahotelera"),
 		@ActivationConfigProperty(propertyName = "destinationType", propertyValue = "javax.jms.Queue") }, mappedName = "java:/queue/HotelOfferQueue")
 public class HotelOfferQueueListener extends AbstractQueueListener implements MessageListener  {
 

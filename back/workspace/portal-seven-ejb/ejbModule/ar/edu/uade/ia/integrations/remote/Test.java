@@ -17,7 +17,7 @@ public class Test {
         try {
             final Properties env = new Properties();
             env.put(Context.INITIAL_CONTEXT_FACTORY, "org.jboss.naming.remote.client.InitialContextFactory");
-            env.put(Context.PROVIDER_URL, "http-remoting://192.168.1.16:8080"); // Cambiar por IP remota aca
+            env.put(Context.PROVIDER_URL, "http-remoting://192.168.0.100:8080"); // Cambiar por IP remota aca
             env.put(Context.SECURITY_PRINCIPAL, "user");
             env.put(Context.SECURITY_CREDENTIALS, "user");
             namingContext = new InitialContext(env);
