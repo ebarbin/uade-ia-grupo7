@@ -55,7 +55,10 @@ public class HotelOfferManager {
 
 		AuthorizeStatusDTO dto = new AuthorizeStatusDTO();
 		if (this.hotelOfferEJB.hasQuota(id, req)) {
-			// TODO MANDAR A AUTORIZAR AL WEBSERVICE SOAP
+			// TODO MANDAR A AUTORIZAR AL WEBSERVICE SOAP, si da OK
+			//if (SOAP DA OK)
+			this.hotelOfferEJB.reserve(id, req);
+			
 			dto.setStatus(Boolean.TRUE);
 		} else {
 			dto.setStatus(Boolean.FALSE);
@@ -170,9 +173,5 @@ public class HotelOfferManager {
 			results.add(headerDTO);
 		}
 		return results;
-	}
-
-	public void reserve(Integer id, HotelAuthorizeRequestDTO req) throws Exception{
-		this.hotelOfferEJB.reserve(id, req);		
 	}
 }

@@ -48,6 +48,8 @@ public class PackageOfferManager {
 		AuthorizeStatusDTO dto = new AuthorizeStatusDTO();
 		if (this.packageOfferEJB.hasQuota(id, req)){
 			// TODO MANDAR A AUTORIZAR AL WEBSERVICE SOAP
+			this.packageOfferEJB.reserve(id, req);	
+			
 			dto.setStatus(Boolean.TRUE);
 		} else {
 			dto.setStatus(Boolean.FALSE);
