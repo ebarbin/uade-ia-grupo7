@@ -12,29 +12,32 @@ export class ConfigurationService {
 
   constructor(private toastr: ToastrService, private httpClient: HttpClient) { }
 
+  isConfigured():Promise<boolean>{
+    return this.getConfiguration().then((conf:Configuration)=>{
+      var value = conf != null &&  conf.loggingSource != null && conf.authorizeSource != null;
+      if(!value) this.toastr.info('Esta opción requiere completar la configuración.');
+      return Observable.of(value).toPromise();
+    })
+    
+  }
+
   getConfiguration():Promise<Configuration>{
-    if (this.configuration != null) {
-      return Observable.of(this.configuration).toPromise();
-    } else {
       return this.httpClient.get('portal-seven-web/api/rest/configuration/')
       .map((response:PortalResponse)=>{
         if(response.success) {
-          this.configuration = <Configuration>response.data;
-          return this.configuration;
+          return <Configuration>response.data;
         } else {
           this.toastr.error(response.errorMessage);
-          this.configuration = null;
           return null;
         }
       }).toPromise();
-    }
+    
   }
 
   saveConfiguration(config:Configuration){
     return this.httpClient.post('portal-seven-web/api/rest/configuration/', config)
       .map((response:PortalResponse)=>{
         if(response.success) {
-          this.configuration = config;
           return null;
         } else {
           this.toastr.error(response.errorMessage);
