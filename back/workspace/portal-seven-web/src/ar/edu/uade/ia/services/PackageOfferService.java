@@ -54,7 +54,7 @@ public class PackageOfferService {
 			List<PackageOfferHeaderDTO> result = this.packageOfferManager.search(portalUserId, request);
 			return Response.ok(new PortalResponse(result)).build();
 		} catch (Exception e) {
-			this.logging.error(e.getMessage());
+			this.logging.error("Error to search package: " + e.getMessage());
 			PackageOfferService.LOGGER.error(e.getMessage(), e);
 			return Response.ok(new PortalResponse(e.getMessage())).build();
 		}
@@ -69,6 +69,7 @@ public class PackageOfferService {
 			this.clearImageDataField(dto);
 			return Response.ok(new PortalResponse(dto)).build();
 		} catch (Exception e) {
+			this.logging.error("Error to get detail from package: " + e.getMessage());
 			PackageOfferService.LOGGER.error(e.getMessage(), e);
 			return Response.ok(new PortalResponse(e.getMessage())).build();
 		}
@@ -82,6 +83,7 @@ public class PackageOfferService {
 			List<PackageOfferHeaderDTO> result = this.packageOfferManager.searchOtherPackages(packageId, request);
 			return Response.ok(new PortalResponse(result)).build();
 		} catch (Exception e) {
+			this.logging.error("Error to search other package: " + e.getMessage());
 			PackageOfferService.LOGGER.error(e.getMessage(), e);
 			return Response.ok(new PortalResponse(e.getMessage())).build();
 		}
@@ -95,6 +97,7 @@ public class PackageOfferService {
 			AuthorizeStatusDTO statusDTO = this.packageOfferManager.autorize(id, req);
 			return Response.ok(new PortalResponse(statusDTO)).build();
 		} catch (Exception e) {
+			this.logging.error("Error to authorize package: " + e.getMessage());
 			PackageOfferService.LOGGER.error(e.getMessage(), e);
 			return Response.ok(new PortalResponse(e.getMessage())).build();
 		}
@@ -108,6 +111,7 @@ public class PackageOfferService {
 			Integer value = this.packageOfferManager.valoration(id, valoration.getVote());
 			return Response.ok(new PortalResponse(value)).build();
 		} catch (Exception e) {
+			this.logging.error("Error to valorate package: " + e.getMessage());
 			PackageOfferService.LOGGER.error(e.getMessage(), e);
 			return Response.ok(new PortalResponse(e.getMessage())).build();
 		}

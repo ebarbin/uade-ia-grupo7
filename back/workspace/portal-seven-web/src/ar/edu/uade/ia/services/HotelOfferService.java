@@ -47,7 +47,7 @@ public class HotelOfferService {
 			List<HotelOfferHeaderDTO> result = this.hotelOfferManager.search(portalUserId, request);
 			return Response.ok(new PortalResponse(result)).build();
 		} catch (Exception e) {
-			this.logging.error(e.getMessage());
+			this.logging.error("Error to search hotel: " + e.getMessage());
 			HotelOfferService.LOGGER.error(e.getMessage(), e);
 			return Response.ok(new PortalResponse(e.getMessage())).build();
 		}
@@ -61,6 +61,7 @@ public class HotelOfferService {
 			List<RoomDTO> result = this.hotelOfferManager.searchOtherRooms(roomId, request);
 			return Response.ok(new PortalResponse(result)).build();
 		} catch (Exception e) {
+			this.logging.error("Error to search other rooms from hotel: " + e.getMessage());
 			HotelOfferService.LOGGER.error(e.getMessage(), e);
 			return Response.ok(new PortalResponse(e.getMessage())).build();
 		}
@@ -75,6 +76,7 @@ public class HotelOfferService {
 			this.clearImageDataField(dto);
 			return Response.ok(new PortalResponse(dto)).build();
 		} catch (Exception e) {
+			this.logging.error("Error to get detail from hotel: " + e.getMessage());
 			HotelOfferService.LOGGER.error(e.getMessage(), e);
 			return Response.ok(new PortalResponse(e.getMessage())).build();
 		}
@@ -88,6 +90,7 @@ public class HotelOfferService {
 			AuthorizeStatusDTO statusDTO = this.hotelOfferManager.autorize(id, req);
 			return Response.ok(new PortalResponse(statusDTO)).build();
 		} catch (Exception e) {
+			this.logging.error("Error to authorize hotel: " + e.getMessage());
 			HotelOfferService.LOGGER.error(e.getMessage(), e);
 			return Response.ok(new PortalResponse(e.getMessage())).build();
 		}
@@ -101,6 +104,7 @@ public class HotelOfferService {
 			Integer value = this.hotelOfferManager.valoration(id, valoration.getVote());
 			return Response.ok(new PortalResponse(value)).build();
 		} catch (Exception e) {
+			this.logging.error("Error to valorize hotel: " + e.getMessage());
 			HotelOfferService.LOGGER.error(e.getMessage(), e);
 			return Response.ok(new PortalResponse(e.getMessage())).build();
 		}

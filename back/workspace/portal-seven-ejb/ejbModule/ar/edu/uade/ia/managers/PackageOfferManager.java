@@ -17,11 +17,13 @@ import ar.edu.uade.ia.common.dtos.PackageOfferDTO;
 import ar.edu.uade.ia.common.dtos.PackageOfferHeaderDTO;
 import ar.edu.uade.ia.common.dtos.PackageOfferRequestDTO;
 import ar.edu.uade.ia.common.dtos.SimpleNamedDTO;
+import ar.edu.uade.ia.common.enums.LoggingAction;
 import ar.edu.uade.ia.ejbs.FavouriteOfferEJB;
 import ar.edu.uade.ia.ejbs.PackageOfferEJB;
 import ar.edu.uade.ia.entities.business.Image;
 import ar.edu.uade.ia.entities.business.PackageOffer;
 import ar.edu.uade.ia.entities.business.ServicePackage;
+import ar.edu.uade.ia.integrations.backOffice.logging.LoggingJMS;
 
 /**
  * Session Bean implementation class PackageOfferManager
@@ -32,6 +34,9 @@ public class PackageOfferManager {
 
 	private static Mapper mapper = DozerBeanMapperBuilder.buildDefault();
 
+	@EJB
+	private LoggingJMS loggingService;
+	
 	@EJB
 	private PackageOfferEJB packageOfferEJB;
 
@@ -51,6 +56,8 @@ public class PackageOfferManager {
 			this.packageOfferEJB.reserve(id, req);	
 			
 			dto.setStatus(Boolean.TRUE);
+			this.loggingService.info(LoggingAction.HOTEL_RESERVATION);
+			
 		} else {
 			dto.setStatus(Boolean.FALSE);
 			dto.setDescription("No hay paquetes disponibles.");

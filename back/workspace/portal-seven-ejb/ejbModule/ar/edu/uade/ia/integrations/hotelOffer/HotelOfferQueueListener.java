@@ -56,7 +56,6 @@ public class HotelOfferQueueListener extends AbstractQueueListener implements Me
 	@EJB
 	private ImageEJB imageEJB;
 
-
 	@EJB
 	private AddressEJB addressEJB;
 
@@ -144,8 +143,9 @@ public class HotelOfferQueueListener extends AbstractQueueListener implements Me
 			}
 
 			this.loggingService.info(LoggingAction.HOTEL_OFFER_REGISTRATION);
+			
 		} catch (Exception e) {
-			this.loggingService.error(e.getMessage());
+			this.loggingService.error("Error to recive hotel: " + e.getMessage());
 			HotelOfferQueueListener.LOGGER.error(e.getMessage(), e);
 		}
 	}

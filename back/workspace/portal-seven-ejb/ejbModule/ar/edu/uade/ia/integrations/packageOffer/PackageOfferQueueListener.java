@@ -116,8 +116,9 @@ public class PackageOfferQueueListener extends AbstractQueueListener implements 
 			this.packageOfferEJB.add(po);
 			
 			this.loggingService.info(LoggingAction.PACKAGE_OFFER_REGISTRATION);
+			
 		} catch (Exception e) {
-			this.loggingService.error(e.getMessage());
+			this.loggingService.error("Error to recive package: " + e.getMessage());
 			PackageOfferQueueListener.LOGGER.error(e.getMessage(), e);
 		}
 	}
