@@ -13,20 +13,17 @@ export class ConfigurationComponent implements OnInit {
 
   constructor(private configurationService: ConfigurationService, private router:Router) { }
 
-  backOffice:string;
+  config:Configuration = new Configuration(null, null);
 
   ngOnInit() {
     this.configurationService.getConfiguration().then((conf:Configuration)=>{
-      console.log(conf);
-      this.backOffice = conf.backOffice;
+      this.config = conf;
     })
   }
 
   formValid(form:NgForm){
     if (!form.valid) return false;
-
-    console.log(form);
-
+    //console.log(form);
     return true;
   }
 

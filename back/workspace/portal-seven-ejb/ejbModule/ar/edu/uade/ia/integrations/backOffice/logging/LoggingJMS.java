@@ -40,7 +40,7 @@ public class LoggingJMS {
 	
 	private void sendMessage(LoggingMessage message) {
 		try {
-			Configuration conf = this.configurationEJB.getByKeyType(ConfigurationType.BACK_OFFICE_SRC);
+			Configuration conf = this.configurationEJB.getByKeyType(ConfigurationType.LOGGING);
 			if (conf != null) {
 				LoggingRunneable myRunnable = new LoggingRunneable(message, conf.getValue()); 
 				Thread myThread = new Thread(myRunnable);

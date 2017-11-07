@@ -30,23 +30,37 @@ public class ConfigurationManager {
     	List<Configuration> configs = this.configurationEJB.getAll();
     	ConfigurationDTO configurationDTO = new ConfigurationDTO();
     	for (Configuration conf : configs) {
-			if (ConfigurationType.BACK_OFFICE_SRC.name().equals(conf.getType())){
-				configurationDTO.setBackOffice(conf.getValue());
+			if (ConfigurationType.LOGGING.name().equals(conf.getType())){
+				configurationDTO.setLoggingSource(conf.getValue());
+			} else if(ConfigurationType.AUTHORIZE.name().equals(conf.getType())) {
+				configurationDTO.setAuthorizeSource(conf.getValue());
 			}
 		}
     	return configurationDTO;
     }
     
 	public void saveConfiguration(ConfigurationDTO conf) throws Exception {
-    	Configuration config = this.configurationEJB.getByKeyType(ConfigurationType.BACK_OFFICE_SRC);
-    	if (config != null) {
-    		config.setValue(conf.getBackOffice());
-    		this.configurationEJB.update(config);
+    	Configuration loggingConfig = this.configurationEJB.getByKeyType(ConfigurationType.LOGGING);
+    	if (loggingConfig != null) {
+    		loggingConfig.setValue(conf.getLoggingSource());
+    		this.configurationEJB.update(loggingConfig);
     	} else {
-    		config = new Configuration();
-    		config.setType(ConfigurationType.BACK_OFFICE_SRC.name());
-    		config.setValue(conf.getBackOffice());
-    		this.configurationEJB.save(config);
+    		loggingConfig = new Configuration();
+    		loggingConfig.setType(ConfigurationType.LOGGING.name());
+    		loggingConfig.setValue(conf.getLoggingSource());
+    		this.configurationEJB.save(loggingConfig);
     	}
+    	
+    	Configuration authorizeConfig = this.configurationEJB.getByKeyType(ConfigurationType.AUTHORIZE);
+    	if (authorizeConfig != null) {
+    		authorizeConfig.setValue(conf.getAuthorizeSource());
+    		this.configurationEJB.update(authorizeConfig);
+    	} else {
+    		authorizeConfig = new Configuration();
+    		authorizeConfig.setType(ConfigurationType.AUTHORIZE.name());
+    		authorizeConfig.setValue(conf.getAuthorizeSource());
+    		this.configurationEJB.save(authorizeConfig);
+    	}
+    	
 	}
 }

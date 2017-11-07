@@ -1,4 +1,4 @@
 export class Configuration {
 
-    constructor(public backOffice: string){}
+    constructor(public loggingSource: string, public authorizeSource: string){}
 }
