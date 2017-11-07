@@ -29,6 +29,7 @@ import { FavouriteOfferService } from './home/favourite/services/favourite-offer
 import { HotelOfferResultGuard } from './home/hotel-offer/services/hotel-offer-result.guard';
 import { PackageOfferResultGuard } from './home/package-offer/services/package-offer-result.guard';
 import { FavouriteGuard } from './home/favourite/services/favourite-guard.service';
+import { ConfigurationService } from './home/configuration/services/configuration.service';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,7 @@ import { FavouriteGuard } from './home/favourite/services/favourite-guard.servic
   providers: [
     AuthService, UserService, ImageService, 
     AutocompleteService, HotelOfferService, PackageOfferService, 
-    FavouriteOfferService, EvaluationStartService,
+    FavouriteOfferService, EvaluationStartService, ConfigurationService,
     AuthGuard, FavouriteGuard, ReserveHistoryGuard, 
     PackageOfferResultGuard, HotelOfferResultGuard, ConfigurationGuard,
     { provide: LOCALE_ID, useValue: 'es-AR' },
