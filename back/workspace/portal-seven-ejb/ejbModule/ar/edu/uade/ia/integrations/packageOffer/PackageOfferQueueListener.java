@@ -38,8 +38,8 @@ import ar.edu.uade.ia.integrations.packageOffer.message.PackageOfferMessage;
  * Message-Driven Bean implementation class for: PackageOfferQueueListener
  */
 @MessageDriven(activationConfig = {
-		@ActivationConfigProperty(propertyName = "destination", propertyValue = "java:/queue/PackageOfferQueue"),
-		@ActivationConfigProperty(propertyName = "destinationType", propertyValue = "javax.jms.Queue") }, mappedName = "java:/queue/PackageOfferQueue")
+		@ActivationConfigProperty(propertyName = "destination", propertyValue = "java:jboss/exported/jms/queue/ofertapaquete"),
+		@ActivationConfigProperty(propertyName = "destinationType", propertyValue = "javax.jms.Queue") }, mappedName = "java:jboss/exported/jms/queue/ofertapaquete")
 public class PackageOfferQueueListener extends AbstractQueueListener implements MessageListener {
 
 	private static Logger LOGGER = Logger.getLogger(PackageOfferQueueListener.class);

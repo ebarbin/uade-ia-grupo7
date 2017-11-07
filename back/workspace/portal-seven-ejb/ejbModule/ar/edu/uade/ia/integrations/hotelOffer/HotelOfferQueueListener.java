@@ -42,7 +42,7 @@ import ar.edu.uade.ia.integrations.hotelOffer.message.HotelOfferMessage;
  */
 @MessageDriven(activationConfig = {
 		@ActivationConfigProperty(propertyName = "destination", propertyValue = "java:jboss/exported/jms/queue/ofertahotelera"),
-		@ActivationConfigProperty(propertyName = "destinationType", propertyValue = "javax.jms.Queue") }, mappedName = "java:/queue/HotelOfferQueue")
+		@ActivationConfigProperty(propertyName = "destinationType", propertyValue = "javax.jms.Queue") }, mappedName = "java:jboss/exported/jms/queue/ofertahotelera")
 public class HotelOfferQueueListener extends AbstractQueueListener implements MessageListener  {
 
 	private static Logger LOGGER = Logger.getLogger(HotelOfferQueueListener.class);
