@@ -1,3 +1,5 @@
+import { PackageOfferGuard } from './home/package-offer/services/package-offer-guard.service';
+import { HotelOfferGuard } from './home/hotel-offer/services/hotel-offer-guard.service';
 import { SystemConfigurationGuard } from './shared/services/system-configuration-guard.service';
 import { EvaluationStartService } from './shared/components/evaluation-start/evaluation-start.service';
 import { ConfigurationGuard } from './home/configuration/services/configuration-guard.service';
@@ -47,7 +49,7 @@ import { ConfigurationService } from './home/configuration/services/configuratio
     FavouriteOfferService, EvaluationStartService, ConfigurationService,
     AuthGuard, FavouriteGuard, ReserveHistoryGuard, 
     PackageOfferResultGuard, HotelOfferResultGuard, ConfigurationGuard,
-    SystemConfigurationGuard,
+    SystemConfigurationGuard, HotelOfferGuard, PackageOfferGuard,
     { provide: LOCALE_ID, useValue: 'es-AR' },
     { provide: HTTP_INTERCEPTORS, useClass: MyHttpInterceptor, multi: true }
   ],

@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Configuration } from '../models/configuration.model';
@@ -10,12 +11,15 @@ export class ConfigurationService {
 
   configuration:Configuration = null;
 
-  constructor(private toastr: ToastrService, private httpClient: HttpClient) { }
+  constructor(private router:Router, private toastr: ToastrService, private httpClient: HttpClient) { }
 
   isConfigured():Promise<boolean>{
     return this.getConfiguration().then((conf:Configuration)=>{
       var value = conf != null &&  conf.loggingSource != null && conf.authorizeSource != null;
-      if(!value) this.toastr.info('Esta opción requiere completar la configuración.');
+      if(!value) {
+        this.toastr.info('Esta opción requiere completar la configuración.');
+        this.router.navigate(['/home/configuration']); 
+      }
       return Observable.of(value).toPromise();
     })
     
