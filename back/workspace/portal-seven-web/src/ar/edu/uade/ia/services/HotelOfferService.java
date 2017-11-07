@@ -23,6 +23,7 @@ import ar.edu.uade.ia.common.dtos.HotelOfferRequestDTO;
 import ar.edu.uade.ia.common.dtos.ImageDTO;
 import ar.edu.uade.ia.common.dtos.RoomDTO;
 import ar.edu.uade.ia.common.dtos.ValorationDTO;
+import ar.edu.uade.ia.common.enums.LoggingAction;
 import ar.edu.uade.ia.integrations.backOffice.logging.LoggingJMS;
 import ar.edu.uade.ia.managers.HotelOfferManager;
 import ar.edu.uade.ia.services.response.PortalResponse;
@@ -45,6 +46,7 @@ public class HotelOfferService {
 	public Response search(@PathParam("portalUserId") Integer portalUserId, HotelOfferRequestDTO request) {
 		try {
 			List<HotelOfferHeaderDTO> result = this.hotelOfferManager.search(portalUserId, request);
+			this.logging.info(LoggingAction.HOTEL_OFFER_SEARCH);
 			return Response.ok(new PortalResponse(result)).build();
 		} catch (Exception e) {
 			this.logging.error("Error to search hotel: " + e.getMessage());

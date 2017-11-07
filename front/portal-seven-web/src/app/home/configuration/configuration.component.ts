@@ -1,5 +1,8 @@
 import { NgForm } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { ConfigurationService } from './services/configuration.service';
+import { Configuration } from './models/configuration.model';
 
 @Component({
   selector: 'app-configuration',
@@ -8,9 +11,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ConfigurationComponent implements OnInit {
 
-  constructor() { }
+  constructor(private configurationService: ConfigurationService, private router:Router) { }
+
+  backOffice:string;
 
   ngOnInit() {
+    this.configurationService.getConfiguration().then((conf:Configuration)=>{
+      console.log(conf);
+      this.backOffice = conf.backOffice;
+    })
   }
 
   formValid(form:NgForm){
@@ -22,10 +31,10 @@ export class ConfigurationComponent implements OnInit {
   }
 
   onSubmit(form:NgForm){
-    console.log(form);
+    this.configurationService.saveConfiguration(<Configuration>form.value);
   }
 
   onCancel(){
-
+    this.router.navigate(['home/hotel-offer']);
   }
 }

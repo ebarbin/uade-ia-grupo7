@@ -1,12 +1,12 @@
 <form (ngSubmit)="onSubmit(form)" #form="ngForm">
   <md-card>
     <md-card-header>
-      <md-card-title>CONFIGURACION</md-card-title>
+      <md-card-title>CONFIGURACION DEL SISTEMA</md-card-title>
     </md-card-header>
     <md-card-content>
       <div class="row">
-        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-            <md-form-field>
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <md-form-field style="width:100%;">
                 <input mdInput placeholder="Back Office Internet Protocol" name="backOffice" 
                 [(ngModel)]="backOffice" required>
             </md-form-field>

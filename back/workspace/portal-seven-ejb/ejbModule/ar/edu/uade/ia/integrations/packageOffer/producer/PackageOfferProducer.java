@@ -19,7 +19,7 @@ import ar.edu.uade.ia.integrations.packageOffer.producer.interfaces.PackageOffer
 @LocalBean
 public class PackageOfferProducer implements PackageOfferProducerRemote, PackageOfferProducerLocal {
 
-	@Resource(lookup = "java:/queue/PackageOfferQueue")
+	@Resource(lookup = "java:jboss/exported/jms/queue/ofertapaquete")
 	private Queue queue;
 
 	@Inject

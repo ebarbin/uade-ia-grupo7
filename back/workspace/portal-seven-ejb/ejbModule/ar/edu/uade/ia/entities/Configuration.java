@@ -11,16 +11,16 @@ public class Configuration extends PersistentObject {
 
 	private static final long serialVersionUID = 4978177979592976951L;
 
-	private String key;
+	private String type;
 	
 	private String value;
 
-	public String getKey() {
-		return key;
+	public String getType() {
+		return type;
 	}
 
-	public void setKey(String key) {
-		this.key = key;
+	public void setType(String type) {
+		this.type = type;
 	}
 
 	public String getValue() {
