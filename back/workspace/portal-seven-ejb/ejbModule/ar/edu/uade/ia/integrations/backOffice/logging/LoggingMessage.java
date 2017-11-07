@@ -1,42 +1,45 @@
 package ar.edu.uade.ia.integrations.backOffice.logging;
 
 import java.io.Serializable;
-import java.util.Date;
 
 public class LoggingMessage implements Serializable {
 
 	private static final long serialVersionUID = -590807841527676286L;
 
-	private String modulo = "PW_7";
-	private Integer accion;
-	private Date fecha = new Date();
-	private String descripcion;
+	private String plataformaEnvia = "PW_7";
+	private String plataformaRecibe = "BO_1";
+	private String observacion;
+	private String servicio;
 
-	public String getModulo() {
-		return modulo;
+	public String getPlataformaEnvia() {
+		return plataformaEnvia;
 	}
 
-	public Integer getAccion() {
-		return accion;
+	public void setPlataformaEnvia(String plataformaEnvia) {
+		this.plataformaEnvia = plataformaEnvia;
 	}
 
-	public void setAccion(Integer accion) {
-		this.accion = accion;
+	public String getPlataformaRecibe() {
+		return plataformaRecibe;
 	}
 
-	public Date getFecha() {
-		return fecha;
+	public void setPlataformaRecibe(String plataformaRecibe) {
+		this.plataformaRecibe = plataformaRecibe;
 	}
 
-	public void setDescripcion(String descripcion) {
-		this.descripcion = descripcion;
+	public String getObservacion() {
+		return observacion;
 	}
 
-	public static long getSerialversionuid() {
-		return serialVersionUID;
+	public void setObservacion(String observacion) {
+		this.observacion = observacion;
 	}
 
-	public String getDescripcion() {
-		return descripcion;
+	public String getServicio() {
+		return servicio;
+	}
+
+	public void setServicio(String servicio) {
+		this.servicio = servicio;
 	}
 }

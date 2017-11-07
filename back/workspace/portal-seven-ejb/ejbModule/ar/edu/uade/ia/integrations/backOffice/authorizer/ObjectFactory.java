@@ -1,5 +1,5 @@
 
-package ar.edu.uade.ia.integrations.backOffice.authorization;
+package ar.edu.uade.ia.integrations.backOffice.authorizer;
 
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.annotation.XmlElementDecl;

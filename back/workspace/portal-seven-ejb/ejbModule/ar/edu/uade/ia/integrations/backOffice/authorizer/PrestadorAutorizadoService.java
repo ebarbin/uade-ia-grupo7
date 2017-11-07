@@ -1,4 +1,4 @@
-package ar.edu.uade.ia.integrations.backOffice.authorization;
+package ar.edu.uade.ia.integrations.backOffice.authorizer;
 
 import java.net.MalformedURLException;
 import java.net.URL;
