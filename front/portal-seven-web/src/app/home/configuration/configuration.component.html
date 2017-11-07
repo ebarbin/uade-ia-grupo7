@@ -1,3 +1,25 @@
-<p>
-  configuration works!
-</p>
+<form (ngSubmit)="onSubmit(form)" #form="ngForm">
+  <md-card>
+    <md-card-header>
+      <md-card-title>CONFIGURACION</md-card-title>
+    </md-card-header>
+    <md-card-content>
+      <div class="row">
+        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+            <md-form-field>
+                <input mdInput placeholder="Back Office Internet Protocol" name="backOffice" 
+                [(ngModel)]="backOffice" required>
+            </md-form-field>
+        </div>
+      </div>
+    </md-card-content>
+    <md-card-actions align="end">
+      <button md-raised-button type="submit" color="success" [disabled]="!formValid(form)">
+          <i class="fa fa-pencil" aria-hidden="true"></i> Actualizar
+      </button>
+      <button md-raised-button type="button" color="warn" (click)="onCancel()">
+        <i class="fa fa-times" aria-hidden="true"></i> Cancelar
+      </button>
+    </md-card-actions>
+  </md-card>
+</form>

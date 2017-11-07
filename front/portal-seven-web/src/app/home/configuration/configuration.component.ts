@@ -1,3 +1,4 @@
+import { NgForm } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -12,4 +13,19 @@ export class ConfigurationComponent implements OnInit {
   ngOnInit() {
   }
 
+  formValid(form:NgForm){
+    if (!form.valid) return false;
+
+    console.log(form);
+
+    return true;
+  }
+
+  onSubmit(form:NgForm){
+    console.log(form);
+  }
+
+  onCancel(){
+
+  }
 }

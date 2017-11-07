@@ -8,8 +8,7 @@ export class ConfigurationGuard implements CanActivate {
   constructor(private authService:AuthService) { }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-    ////if (this.authService.isAdmin()) return false;
-    //else return true;
-    return false;
+    if (this.authService.isAdmin()) return false;
+    else return true;
   }
 }
