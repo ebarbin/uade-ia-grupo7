@@ -85,14 +85,11 @@ public class HotelOfferQueueListener extends AbstractQueueListener implements Me
 			HotelOfferMessage hom = (HotelOfferMessage) JsonConverter.convertToObject(jsonString,
 					HotelOfferMessage.class);
 
-			// TODO VALIDAR EL MENSAJE COMPLETO!!
-			String code = this.getProviderCode(hom.getCodigo_prestador());
-
-			Hotel hotel = this.hotelEJB.getByCode(code);
+			Hotel hotel = this.hotelEJB.getByProviderCode(hom.getCodigo_prestador());
 			if (hotel == null) {
 
 				hotel = new Hotel();
-				hotel.setCode(code);
+				hotel.setProviderCode(hom.getCodigo_prestador());
 				hotel.setName(hom.getNombre());
 				hotel.setDescription(hom.getDescripcion_hotel());
 				hotel.setPoints(0);

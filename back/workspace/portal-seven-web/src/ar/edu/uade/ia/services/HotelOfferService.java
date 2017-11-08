@@ -92,7 +92,7 @@ public class HotelOfferService {
 			AuthorizeStatusDTO statusDTO = this.hotelOfferManager.autorize(id, req);
 			return Response.ok(new PortalResponse(statusDTO)).build();
 		} catch (Exception e) {
-			this.logging.error("Error to authorize hotel: " + e.getMessage());
+			//this.logging.error("Error to authorize hotel: " + e.getMessage());
 			HotelOfferService.LOGGER.error(e.getMessage(), e);
 			return Response.ok(new PortalResponse(e.getMessage())).build();
 		}

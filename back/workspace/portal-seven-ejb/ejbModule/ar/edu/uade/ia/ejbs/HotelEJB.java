@@ -24,10 +24,10 @@ public class HotelEJB {
 	 */
 	public HotelEJB() { }
 
-	public Hotel getByCode(String code) throws Exception {
+	public Hotel getByProviderCode(Integer providerCode) throws Exception {
 		try {
-			Query query = this.em.createQuery("FROM Hotel WHERE code = :code");
-			query.setParameter("code", code);
+			Query query = this.em.createQuery("FROM Hotel WHERE providerCode = :providerCode");
+			query.setParameter("providerCode", providerCode);
 			return (Hotel) query.getSingleResult();
 		} catch (NoResultException nre) {
 			return null;

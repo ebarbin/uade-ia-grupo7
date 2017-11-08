@@ -15,11 +15,11 @@ public class Agency extends PersistentObject {
 	
 	private Boolean state;
 
-	private String code;
-	
 	private Integer points;
 	
 	private Integer votes;
+	
+	private Integer providerCode;
 	
 	public String getName() {
 		return name;
@@ -45,14 +45,6 @@ public class Agency extends PersistentObject {
 		this.state = state;
 	}
 
-	public String getCode() {
-		return code;
-	}
-
-	public void setCode(String code) {
-		this.code = code;
-	}
-
 	public Integer getPoints() {
 		return points;
 	}
@@ -67,5 +59,13 @@ public class Agency extends PersistentObject {
 
 	public void setVotes(Integer votes) {
 		this.votes = votes;
+	}
+
+	public Integer getProviderCode() {
+		return providerCode;
+	}
+
+	public void setProviderCode(Integer providerCode) {
+		this.providerCode = providerCode;
 	}
 }

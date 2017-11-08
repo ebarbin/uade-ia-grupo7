@@ -4,7 +4,7 @@ import java.util.List;
 
 public class PackageOfferMessage {
 
-	private String codigo_prestador;
+	private Integer codigo_prestador;
 	private String destino;
 	private String fecha_desde;
 	private String fecha_hasta;
@@ -20,11 +20,11 @@ public class PackageOfferMessage {
 	private String mail_agencia;
 	private int cupo_paquete;
 
-	public String getCodigo_prestador() {
+	public Integer getCodigo_prestador() {
 		return codigo_prestador;
 	}
 
-	public void setCodigo_prestador(String codigo_prestador) {
+	public void setCodigo_prestador(Integer codigo_prestador) {
 		this.codigo_prestador = codigo_prestador;
 	}
 

@@ -4,7 +4,7 @@ import java.util.List;
 
 public class HotelOfferMessage {
 
-	private String codigo_prestador;
+	private Integer codigo_prestador;
 
 	private String nombre;
 
@@ -42,11 +42,11 @@ public class HotelOfferMessage {
 
 	private int cupo;
 
-	public String getCodigo_prestador() {
+	public Integer getCodigo_prestador() {
 		return codigo_prestador;
 	}
 
-	public void setCodigo_prestador(String codigo_prestador) {
+	public void setCodigo_prestador(Integer codigo_prestador) {
 		this.codigo_prestador = codigo_prestador;
 	}
 

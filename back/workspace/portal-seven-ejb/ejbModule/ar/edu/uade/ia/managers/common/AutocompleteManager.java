@@ -35,7 +35,7 @@ public class AutocompleteManager {
 		for (Hotel hotel : hotels) {
 			simpleNamedDTO = new SimpleNamedDTO();
 			simpleNamedDTO.setId(hotel.getId());
-			simpleNamedDTO.setName(hotel.getName() + " - (" + hotel.getCode() + ")");
+			simpleNamedDTO.setName(hotel.getName() + " - (" + hotel.getProviderCode() + ")");
 			results.add(simpleNamedDTO);
 		}
 		return results;

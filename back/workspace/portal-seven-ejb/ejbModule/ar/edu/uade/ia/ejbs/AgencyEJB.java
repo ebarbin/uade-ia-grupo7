@@ -24,10 +24,10 @@ public class AgencyEJB {
      */
     public AgencyEJB() { }
 
-    public Agency getByCode(String code) throws Exception {
+    public Agency getByProviderCode(Integer providerCode) throws Exception {
 		try {
-			Query query = this.em.createQuery("FROM Agency WHERE code = :code");
-			query.setParameter("code", code);
+			Query query = this.em.createQuery("FROM Agency WHERE providerCode = :providerCode");
+			query.setParameter("providerCode", providerCode);
 			return (Agency) query.getSingleResult();
 		} catch (NoResultException nre) {
 			return null;

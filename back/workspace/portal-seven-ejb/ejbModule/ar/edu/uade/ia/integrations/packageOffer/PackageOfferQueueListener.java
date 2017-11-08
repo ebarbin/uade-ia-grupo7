@@ -82,13 +82,11 @@ public class PackageOfferQueueListener extends AbstractQueueListener implements 
 			PackageOfferMessage pom = (PackageOfferMessage) JsonConverter.convertToObject(jsonString,
 					PackageOfferMessage.class);
 			
-			// TODO VALIDAR EL MENSAJE COMPLETO!!
-			String code = this.getProviderCode(pom.getCodigo_prestador());
 			
-			Agency agency = this.agencyEJB.getByCode(code);
+			Agency agency = this.agencyEJB.getByProviderCode(pom.getCodigo_prestador());
 			if (agency == null) {
 				agency = new Agency();
-				agency.setCode(code);
+				agency.setProviderCode(pom.getCodigo_prestador());
 				agency.setName(null); //No Informado
 				agency.setEmail(pom.getMail_agencia());
 				agency.setVotes(Integer.valueOf(0));

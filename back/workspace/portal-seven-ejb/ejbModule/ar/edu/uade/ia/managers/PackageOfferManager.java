@@ -1,5 +1,6 @@
 package ar.edu.uade.ia.managers;
 
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,14 +18,20 @@ import ar.edu.uade.ia.common.dtos.PackageOfferDTO;
 import ar.edu.uade.ia.common.dtos.PackageOfferHeaderDTO;
 import ar.edu.uade.ia.common.dtos.PackageOfferRequestDTO;
 import ar.edu.uade.ia.common.dtos.SimpleNamedDTO;
+import ar.edu.uade.ia.common.enums.ConfigurationType;
 import ar.edu.uade.ia.common.enums.LoggingAction;
+import ar.edu.uade.ia.ejbs.ConfigurationEJB;
 import ar.edu.uade.ia.ejbs.FavouriteOfferEJB;
 import ar.edu.uade.ia.ejbs.PackageOfferEJB;
 import ar.edu.uade.ia.ejbs.common.PortalUserEJB;
+import ar.edu.uade.ia.entities.Configuration;
 import ar.edu.uade.ia.entities.PortalUser;
 import ar.edu.uade.ia.entities.business.Image;
 import ar.edu.uade.ia.entities.business.PackageOffer;
 import ar.edu.uade.ia.entities.business.ServicePackage;
+import ar.edu.uade.ia.integrations.backOffice.authorizer.PrestadorAutorizadoService;
+import ar.edu.uade.ia.integrations.backOffice.authorizer.ProviderAuthorizationStatus;
+import ar.edu.uade.ia.integrations.backOffice.authorizer.SolicitudDTO;
 import ar.edu.uade.ia.integrations.backOffice.logging.LoggingJMS;
 
 /**
@@ -48,6 +55,9 @@ public class PackageOfferManager {
 	@EJB
 	private PortalUserEJB portalUserEJB;
 	
+	@EJB
+	private ConfigurationEJB configurationEJB;
+	
 	/**
 	 * Default constructor.
 	 */
@@ -57,13 +67,25 @@ public class PackageOfferManager {
 
 		AuthorizeStatusDTO dto = new AuthorizeStatusDTO();
 		if (this.packageOfferEJB.hasQuota(offerId, req)){
-			// TODO MANDAR A AUTORIZAR AL WEBSERVICE SOAP
 			
-			PortalUser user = this.portalUserEJB.getById(req.getPortalUser().getId());
-			this.packageOfferEJB.reserve(offerId, req, user);	
+			ProviderAuthorizationStatus status = this.sendAuthorization(offerId); 
 			
-			dto.setStatus(Boolean.TRUE);
-			this.loggingService.info(LoggingAction.HOTEL_RESERVATION);
+			if (ProviderAuthorizationStatus.APPROVED == status){
+				PortalUser user = this.portalUserEJB.getById(req.getPortalUser().getId());
+				this.packageOfferEJB.reserve(offerId, req, user);	
+				
+				dto.setStatus(Boolean.TRUE);
+				this.loggingService.info(LoggingAction.PACKAGE_RESERVATION);
+				
+			} else {
+				dto.setStatus(Boolean.FALSE);
+				
+				if (ProviderAuthorizationStatus.PENDING == status) {
+					dto.setDescription("El prestador esta pendiente de aprobación. No es posible realizar la reserva.");
+				} else {
+					dto.setDescription("El prestador no está habilitado para ofreser reservas. No es posible realidar la reserva.");
+				}
+			}
 			
 		} else {
 			dto.setStatus(Boolean.FALSE);
@@ -73,6 +95,23 @@ public class PackageOfferManager {
 		return dto;
 	}
 	
+	private ProviderAuthorizationStatus sendAuthorization(Integer offerId) throws Exception {
+		PackageOffer po = this.packageOfferEJB.getDetail(offerId);
+		Configuration configuration = this.configurationEJB.getByKeyType(ConfigurationType.AUTHORIZE);
+		
+		URL wsdlUrl = new URL(configuration.getValue());
+		PrestadorAutorizadoService backOfficeService = new PrestadorAutorizadoService(wsdlUrl);
+		
+		SolicitudDTO dto = backOfficeService.getServiciosBO_002fPrestadorAutorizadoPort().getPrestadorAutorizado(po.getAgency().getProviderCode());
+		if (ProviderAuthorizationStatus.APPROVED.getCode().equals(dto.getEstado())) {
+			return ProviderAuthorizationStatus.APPROVED;
+		} else if (ProviderAuthorizationStatus.PENDING.getCode().equals(dto.getEstado())) {
+			return ProviderAuthorizationStatus.PENDING;
+		} else {
+			return ProviderAuthorizationStatus.REJECTED;
+		}
+	}
+
 	public List<PackageOfferHeaderDTO> search(Integer portalUserId, PackageOfferRequestDTO packageOfferRequestDTO) throws Exception {
 		List<PackageOffer> packageOffers = this.packageOfferEJB.search(packageOfferRequestDTO);
 		return this.convertToListOfPackageOfferHeaderDTO(packageOffers, portalUserId);
