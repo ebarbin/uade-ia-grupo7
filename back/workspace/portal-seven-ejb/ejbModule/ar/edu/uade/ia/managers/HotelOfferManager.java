@@ -21,6 +21,7 @@ import ar.edu.uade.ia.common.dtos.RoomDTO;
 import ar.edu.uade.ia.common.dtos.SimpleNamedDTO;
 import ar.edu.uade.ia.common.enums.ConfigurationType;
 import ar.edu.uade.ia.common.enums.LoggingAction;
+import ar.edu.uade.ia.common.mail.MailServiceHelper;
 import ar.edu.uade.ia.ejbs.ConfigurationEJB;
 import ar.edu.uade.ia.ejbs.FavouriteOfferEJB;
 import ar.edu.uade.ia.ejbs.HotelOfferEJB;
@@ -73,7 +74,9 @@ public class HotelOfferManager {
 		AuthorizeStatusDTO dto = new AuthorizeStatusDTO();
 		if (this.hotelOfferEJB.hasQuota(offerId, req)) {
 
-			ProviderAuthorizationStatus status = this.sendAuthorization(offerId); 
+			HotelOffer ho = this.hotelOfferEJB.getDetail(offerId);
+			
+			ProviderAuthorizationStatus status = this.sendAuthorization(ho); 
 			
 			if (ProviderAuthorizationStatus.APPROVED == status){
 				PortalUser user = this.portalUserEJB.getById(req.getPortalUser().getId());
@@ -81,6 +84,9 @@ public class HotelOfferManager {
 				
 				dto.setStatus(Boolean.TRUE);
 				this.loggingService.info(LoggingAction.PACKAGE_RESERVATION);
+				
+				MailServiceHelper.sendMail(user.getEmail(), "Reserva Hotelera Confirmada", "Reserva Hotelera Confirmada");
+				MailServiceHelper.sendMail(ho.getHotel().getEmail(), "Reserva Hotelera Confirmada", "Reserva Hotelera Confirmada");
 				
 			} else {
 				dto.setStatus(Boolean.FALSE);
@@ -100,8 +106,7 @@ public class HotelOfferManager {
 		return dto;
 	}
 
-	private ProviderAuthorizationStatus sendAuthorization(Integer offerId) throws Exception {
-		HotelOffer ho = this.hotelOfferEJB.getDetail(offerId);
+	private ProviderAuthorizationStatus sendAuthorization(HotelOffer ho) throws Exception {
 		Configuration configuration = this.configurationEJB.getByKeyType(ConfigurationType.AUTHORIZE);
 		
 		URL wsdlUrl = new URL(configuration.getValue());

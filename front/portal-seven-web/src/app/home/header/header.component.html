@@ -8,31 +8,31 @@
       </a>
     </div>
     <div>
-      <ul class="nav navbar-nav">
+      <ul class="nav navbar-nav" *ngIf="!authService.isAdmin()">
           <li routerLinkActive="active">
             <a routerLink="hotel-offer">
                 <i class="fa fa-bed" aria-hidden="true"></i> Oferta Hotelera</a>
           </li>
       </ul>
-      <ul class="nav navbar-nav">
+      <ul class="nav navbar-nav" *ngIf="!authService.isAdmin()">
           <li routerLinkActive="active">
             <a routerLink="package-offer">
                 <i class="fa fa-globe" aria-hidden="true"></i> Oferta Paquetes</a>
           </li>
       </ul>
-      <ul class="nav navbar-nav">
+      <ul class="nav navbar-nav" *ngIf="!authService.isAdmin()">
           <li routerLinkActive="active">
             <a routerLink="reserve-history">
                 <i class="fa fa-history" aria-hidden="true"></i> Historial de Reservas</a>
           </li>
       </ul>
-      <ul class="nav navbar-nav">
+      <ul class="nav navbar-nav" *ngIf="!authService.isAdmin()">
           <li routerLinkActive="active">
             <a routerLink="favourite">
                 <i class="fa fa-heart" aria-hidden="true"></i> Favoritos</a>
           </li>
       </ul>
-      <ul class="nav navbar-nav">
+      <ul class="nav navbar-nav" *ngIf="authService.isAdmin()"> 
           <li routerLinkActive="active">
             <a routerLink="configuration">
                 <i class="fa fa-cogs" aria-hidden="true"></i> Configuración</a>

@@ -10,7 +10,7 @@ export class MyHttpInterceptor implements HttpInterceptor {
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     this.blockUI.start('Cargando...');
-    return next.handle(req).finally(()=>{
+    return next.handle(req).timeout(10000).finally(()=>{
       this.blockUI.stop();
     });
   }

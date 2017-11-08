@@ -16,7 +16,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   userSubs:Subscription;
 
-  constructor(private userService:UserService, private authService:AuthService) { }
+  constructor(private userService:UserService, public authService:AuthService) { }
 
   user: PortalUser;
   isCollapsedContent:boolean = false;

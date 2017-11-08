@@ -24,6 +24,8 @@ public class Hotel extends PersistentObject {
 	private Integer points;
 	
 	private Integer votes;
+	
+	private String email;
 
 	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinTable(name = "hotel_image", joinColumns = {
@@ -128,5 +130,13 @@ public class Hotel extends PersistentObject {
 
 	public void setVotes(Integer votes) {
 		this.votes = votes;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
 }
