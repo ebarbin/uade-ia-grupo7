@@ -16,6 +16,6 @@
 	"longitud": -56.1593886,
 	"politica_cancelacion": "Para cancelar hay que realizar el aviso con 3 dias de anticipación.",
 	"medio_pago_hotel": [1,2,3],
-	"email_hotel": "",
+	"email_hotel": "email@hotel.com",
 	"cupo": 100
 }
