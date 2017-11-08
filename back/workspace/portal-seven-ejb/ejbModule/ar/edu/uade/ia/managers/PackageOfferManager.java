@@ -20,6 +20,8 @@ import ar.edu.uade.ia.common.dtos.SimpleNamedDTO;
 import ar.edu.uade.ia.common.enums.LoggingAction;
 import ar.edu.uade.ia.ejbs.FavouriteOfferEJB;
 import ar.edu.uade.ia.ejbs.PackageOfferEJB;
+import ar.edu.uade.ia.ejbs.common.PortalUserEJB;
+import ar.edu.uade.ia.entities.PortalUser;
 import ar.edu.uade.ia.entities.business.Image;
 import ar.edu.uade.ia.entities.business.PackageOffer;
 import ar.edu.uade.ia.entities.business.ServicePackage;
@@ -43,17 +45,22 @@ public class PackageOfferManager {
 	@EJB
 	private FavouriteOfferEJB favouriteOfferEJB;
 	
+	@EJB
+	private PortalUserEJB portalUserEJB;
+	
 	/**
 	 * Default constructor.
 	 */
 	public PackageOfferManager() {}
 
-	public AuthorizeStatusDTO autorize(Integer id, PackageAuthorizeRequestDTO req) throws Exception {
+	public AuthorizeStatusDTO autorize(Integer offerId, PackageAuthorizeRequestDTO req) throws Exception {
 
 		AuthorizeStatusDTO dto = new AuthorizeStatusDTO();
-		if (this.packageOfferEJB.hasQuota(id, req)){
+		if (this.packageOfferEJB.hasQuota(offerId, req)){
 			// TODO MANDAR A AUTORIZAR AL WEBSERVICE SOAP
-			this.packageOfferEJB.reserve(id, req);	
+			
+			PortalUser user = this.portalUserEJB.getById(req.getPortalUser().getId());
+			this.packageOfferEJB.reserve(offerId, req, user);	
 			
 			dto.setStatus(Boolean.TRUE);
 			this.loggingService.info(LoggingAction.HOTEL_RESERVATION);

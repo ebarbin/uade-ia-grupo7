@@ -21,6 +21,7 @@ import ar.edu.uade.ia.common.dtos.SimpleNamedDTO;
 import ar.edu.uade.ia.ejbs.FavouriteOfferEJB;
 import ar.edu.uade.ia.ejbs.HotelOfferEJB;
 import ar.edu.uade.ia.ejbs.common.PortalUserEJB;
+import ar.edu.uade.ia.entities.PortalUser;
 import ar.edu.uade.ia.entities.business.HotelOffer;
 import ar.edu.uade.ia.entities.business.Image;
 import ar.edu.uade.ia.entities.business.Room;
@@ -51,13 +52,15 @@ public class HotelOfferManager {
 	public HotelOfferManager() {
 	}
 
-	public AuthorizeStatusDTO autorize(Integer id, HotelAuthorizeRequestDTO req) throws Exception {
+	public AuthorizeStatusDTO autorize(Integer offerId, HotelAuthorizeRequestDTO authorizationRequest) throws Exception {
 
 		AuthorizeStatusDTO dto = new AuthorizeStatusDTO();
-		if (this.hotelOfferEJB.hasQuota(id, req)) {
+		if (this.hotelOfferEJB.hasQuota(offerId, authorizationRequest)) {
 			// TODO MANDAR A AUTORIZAR AL WEBSERVICE SOAP, si da OK
 			//if (SOAP DA OK)
-			this.hotelOfferEJB.reserve(id, req);
+			
+			PortalUser user = this.portalUserEJB.getById(authorizationRequest.getPortalUser().getId());
+			this.hotelOfferEJB.reserve(offerId, authorizationRequest, user);
 			
 			dto.setStatus(Boolean.TRUE);
 		} else {

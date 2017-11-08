@@ -37,7 +37,10 @@ export class PackageOfferConfirmComponent {
   }
 
   onConfirm(){
-    this.srv.authorizeReservation(this.srv.getSelected().id, new PackageAuthorizeRequest(this.srv.getFilter().quantityPeople))
+    var authoReq:PackageAuthorizeRequest = new PackageAuthorizeRequest();
+    authoReq.quantityPeople = this.srv.getFilter().quantityPeople;
+    authoReq.portalUser = this.authService.getUser();
+    this.srv.authorizeReservation(this.srv.getSelected().id, authoReq)
     .then((authorizeStatus:AuthorizeStatus)=>{
       if (authorizeStatus.status) {
         this.dialogRef.close();

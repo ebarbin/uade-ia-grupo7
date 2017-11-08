@@ -12,6 +12,7 @@ import javax.persistence.TemporalType;
 
 import ar.edu.uade.ia.common.dtos.PackageAuthorizeRequestDTO;
 import ar.edu.uade.ia.common.dtos.PackageOfferRequestDTO;
+import ar.edu.uade.ia.entities.PortalUser;
 import ar.edu.uade.ia.entities.business.PackageOffer;
 import ar.edu.uade.ia.entities.business.PackageReservation;
 
@@ -151,23 +152,21 @@ public class PackageOfferEJB {
 		this.em.merge(po);
 	}
 	
-	public void reserve(Integer packageId, PackageAuthorizeRequestDTO req) throws Exception {
+	public void reserve(Integer packageId, PackageAuthorizeRequestDTO req, PortalUser user) throws Exception {
 		
-		PackageOffer po = em.find(PackageOffer.class, packageId);
+		PackageOffer po = this.em.find(PackageOffer.class, packageId);
 		
-		// actualiza disponibilidad de paquete oferta
 		po.setAvailableQuota(po.getAvailableQuota() - req.getQuantityPeople());
-		em.persist(po);
+		this.em.merge(po);
 		
-		// crea paquete reserva
 		PackageReservation pr = new PackageReservation();
 		pr.setPckage(po);
-		//pr.setPortalUser(req.getPortalUser()); me falta el constructor de PortalUser desde un PortalUserDTO, no se donde se crea ese metodo 
+		pr.setPortalUser(user);
 		pr.setTotalPrice(req.getTotalPrice());
 		pr.setReservationDate(new Date());
 		pr.setQuotaQuantity(req.getQuantityPeople());
 		
-		em.persist(pr);
+		this.em.persist(pr);
 	}
 	
 }

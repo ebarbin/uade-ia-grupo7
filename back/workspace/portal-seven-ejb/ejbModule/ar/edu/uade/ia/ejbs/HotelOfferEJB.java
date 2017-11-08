@@ -13,6 +13,7 @@ import javax.persistence.TemporalType;
 
 import ar.edu.uade.ia.common.dtos.HotelAuthorizeRequestDTO;
 import ar.edu.uade.ia.common.dtos.HotelOfferRequestDTO;
+import ar.edu.uade.ia.entities.PortalUser;
 import ar.edu.uade.ia.entities.business.HotelOffer;
 import ar.edu.uade.ia.entities.business.Quota;
 import ar.edu.uade.ia.entities.business.QuotaReservation;
@@ -206,27 +207,26 @@ public class HotelOfferEJB {
 	}
 
 	@SuppressWarnings("unchecked")
-	public void reserve(Integer hotelOfferId, HotelAuthorizeRequestDTO req) throws Exception {			
+	public void reserve(Integer offerId, HotelAuthorizeRequestDTO req, PortalUser user) throws Exception {			
 		Date dateFrom = req.getFromDate();
 		Date dateTo = req.getToDate();
 		Integer roomQty = req.getRoomQuantity();
 		
 		StringBuffer queryBuilder = new StringBuffer("from Quota as quo ");
-		queryBuilder.append(" where quo.offer.id = :hotelOfferId");		
+		queryBuilder.append(" where quo.offer.id = :offerId");		
 		queryBuilder.append(" and quo.quotaDate between :dateFrom and :dateTo");
 				
 		Query query = this.em.createQuery(queryBuilder.toString());
 		
-		query.setParameter("hotelOfferId", hotelOfferId);
+		query.setParameter("offerId", offerId);
 		query.setParameter("dateFrom", dateFrom, TemporalType.DATE);
 		query.setParameter("dateTo", dateTo, TemporalType.DATE);			
 
 		List<Quota> lqu = query.getResultList();
 		
-		// baja la cantidad disponible, en tantas habitaciones como haya seleccionado de la oferta
 		for (Quota qu: lqu) {
 			qu.setAvailableQuota(qu.getAvailableQuota() - roomQty);
-			em.persist(qu);
+			this.em.merge(qu);
 		}
 		
 		// crea oferta reserva
@@ -236,7 +236,8 @@ public class HotelOfferEJB {
 		qr.setReservationEnd(req.getToDate());
 		qr.setReservationStart(req.getToDate());
 		qr.setTotalPrice(req.getTotalPrice());
-		//qr.setPortalUser(req.getPortalUser()); me falta el constructor de PortalUser desde un PortalUserDTO, no se donde se crea ese metodo
-		em.persist(qr);
+		qr.setPortalUser(user);
+		
+		this.em.persist(qr);
 	}
 }

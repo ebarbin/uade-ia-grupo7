@@ -1,4 +1,8 @@
+import { PortalUser } from './../../home/user-profile/models/portal-user.model';
 export class PackageAuthorizeRequest {
-    constructor(
-        public quantityPeople: number){}
+
+    public quantityPeople: number;
+    public portalUser: PortalUser;
+    
+    constructor(){}
 }

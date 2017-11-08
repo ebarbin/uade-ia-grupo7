@@ -34,7 +34,12 @@ export class HotelOfferConfirmComponent {
   }
 
   onConfirm(){
-    var req = new HotelAuthorizeRequest(this.srv.getFilterRequest().roomQuantity, this.srv.getFilterRequest().fromDate, this.srv.getFilterRequest().toDate);
+    var req = new HotelAuthorizeRequest();
+    req.fromDate = this.srv.getFilterRequest().fromDate;
+    req.toDate = this.srv.getFilterRequest().toDate;
+    req.roomQuantity = this.srv.getFilterRequest().roomQuantity;
+    req.portalUser = this.authService.getUser();
+
     this.srv.authorizeReservation(this.srv.getSelected().id, req)
       .then((authorizeStatus:AuthorizeStatus)=>{
         if (authorizeStatus.status) {

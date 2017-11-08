@@ -1,3 +1,4 @@
+import { AuthService } from './../../auth/services/auth.service';
 import { PackageAuthorizeRequest } from './../../shared/models/package-authorize-request.model';
 import { PackageOfferService } from './../package-offer/services/package-offer.service';
 import { HotelAuthorizeRequest } from './../../shared/models/hotel-authorize-request.model';
@@ -23,6 +24,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 export class FavouriteComponent implements OnInit, OnDestroy {
 
   constructor(
+    private authService: AuthService,
     private service:FavouriteOfferService,
     private poService: PackageOfferService,
     private hoService: HotelOfferService,
@@ -49,7 +51,14 @@ export class FavouriteComponent implements OnInit, OnDestroy {
   }
 
   onConfirmHotel(fo:FavouriteOffer){
-    this.hoService.authorizeReservation(fo.id, new HotelAuthorizeRequest(fo.quantityCapacity, fo.offerStart, fo.offerEnd))
+    
+    var authoReq = new HotelAuthorizeRequest();
+    authoReq.fromDate = fo.offerStart;
+    authoReq.toDate = fo.offerEnd;
+    authoReq.roomQuantity = fo.quantityCapacity;
+    authoReq.portalUser = this.authService.getUser();
+
+    this.hoService.authorizeReservation(fo.id, authoReq)
     .then((authorizeStatus:AuthorizeStatus)=>{
       if (authorizeStatus.status) {
         this.service.setFavouriteOfferSelected(fo);
@@ -63,7 +72,12 @@ export class FavouriteComponent implements OnInit, OnDestroy {
   }
 
   onConfirmPackage(fo:FavouriteOffer){
-    this.poService.authorizeReservation(fo.id, new PackageAuthorizeRequest(fo.quantityCapacity))
+
+    var authoReq:PackageAuthorizeRequest = new PackageAuthorizeRequest();
+    authoReq.quantityPeople = fo.quantityCapacity;
+    authoReq.portalUser = this.authService.getUser();
+
+    this.poService.authorizeReservation(fo.id, authoReq)
     .then((authorizeStatus:AuthorizeStatus)=>{
       if (authorizeStatus.status) {
         this.service.setFavouriteOfferSelected(fo);

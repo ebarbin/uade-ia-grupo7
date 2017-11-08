@@ -8,6 +8,7 @@ import { PackageOfferCardResultComponent } from './components/package-offer-card
 import { PackageOfferGridResultComponent } from './components/package-offer-grid-result/package-offer-grid-result.component';
 import { PackageOfferDetailComponent } from './components/package-offer-detail/package-offer-detail.component';
 import { PackageOfferConfirmComponent } from './components/package-offer-confirm/package-offer-confirm.component';
+import { PackageOfferReservationResumeComponent } from './components/package-offer-reservation-resume/package-offer-reservation-resume.component';
 
 @NgModule({
   imports: [
@@ -20,7 +21,8 @@ import { PackageOfferConfirmComponent } from './components/package-offer-confirm
     PackageOfferCardResultComponent,
     PackageOfferGridResultComponent,
     PackageOfferDetailComponent,
-    PackageOfferConfirmComponent
+    PackageOfferConfirmComponent,
+    PackageOfferReservationResumeComponent
   ],
   entryComponents:[PackageOfferDetailComponent, PackageOfferConfirmComponent]
 })

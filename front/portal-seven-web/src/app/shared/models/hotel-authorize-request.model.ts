@@ -1,6 +1,11 @@
+import { PortalUser } from './../../home/user-profile/models/portal-user.model';
 export class HotelAuthorizeRequest {
-    constructor(
-        public roomQuantity: number,
-        public fromDate: Date,
-        public toDate: Date){}
+
+    
+    public roomQuantity: number;
+    public fromDate: Date;
+    public toDate: Date;
+    public portalUser: PortalUser;
+
+    constructor(){}
 }

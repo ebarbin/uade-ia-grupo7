@@ -30,8 +30,6 @@ export class FavouriteButtonComponent {
     private toastr: ToastrService) { }
   
   markFavourite(offer: any){
-
-    if (this.authService.isAdmin()) return;
     
     if (offer.type == Constant.HOTEL) {
 
@@ -39,7 +37,12 @@ export class FavouriteButtonComponent {
       offer.fromDate = offer.offerStart ? offer.offerStart : this.offer.fromDate;
       offer.toDate = offer.offerEnd ? offer.offerEnd : this.toDate;
 
-      var req = new HotelAuthorizeRequest(offer.roomQuantity, offer.fromDate, offer.toDate);
+      var req = new HotelAuthorizeRequest();
+      req.roomQuantity = offer.roomQuantity;
+      req.fromDate = offer.fromDate;
+      req.toDate = offer.toDate
+      req.portalUser = this.authService.getUser();
+
       this.favouriteService.markFavouriteHotel(offer, req)
         .then((result:boolean)=>{
           offer.favourite = result;
@@ -52,7 +55,10 @@ export class FavouriteButtonComponent {
 
       offer.quantityPeople = offer.quantityPeople ? offer.quantityPeople : this.quantityPeople;
       
-      var reqp = new PackageAuthorizeRequest(offer.quantityPeople);
+      var reqp = new PackageAuthorizeRequest();
+      reqp.quantityPeople = offer.quantityPeople;
+      reqp.portalUser = this.authService.getUser();
+
       this.favouriteService.markFavouritePackage(offer, reqp)
         .then((result:boolean)=>{
           offer.favourite = result;

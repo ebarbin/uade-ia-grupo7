@@ -1,3 +1,4 @@
+import { PackageOfferReservationResumeComponent } from './home/package-offer/components/package-offer-reservation-resume/package-offer-reservation-resume.component';
 import { PackageOfferGuard } from './home/package-offer/services/package-offer-guard.service';
 import { HotelOfferGuard } from './home/hotel-offer/services/hotel-offer-guard.service';
 import { SystemConfigurationGuard } from './shared/services/system-configuration-guard.service';
@@ -46,6 +47,7 @@ const appRoutes: Routes = [
             canActivate: [AuthGuard, PackageOfferResultGuard]},
         ]
       },
+      {path: 'package-authorization-resume', component: PackageOfferReservationResumeComponent, canActivate: [AuthGuard]},
       {path: 'user-profile', component: UserProfileComponent, canActivate: [AuthGuard]},
       {path: 'configuration', component: ConfigurationComponent, canActivate: [AuthGuard]},
       {path: 'favourite', component: FavouriteComponent, canActivate: [AuthGuard, FavouriteGuard, SystemConfigurationGuard]},
