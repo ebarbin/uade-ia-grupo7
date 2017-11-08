@@ -2,6 +2,7 @@ package ar.edu.uade.ia.entities.business;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Lob;
 import javax.persistence.Table;
 
 @Entity
@@ -10,11 +11,12 @@ public class Image extends PersistentObject {
 	
 	private static final long serialVersionUID = -2382376870718857038L;
 	
-	//@Column(columnDefinition="image")
+	@Lob
     private byte[] data;
 
 	private String description;
 	
+	@Column(length = 500)
 	private String url;
 	
 	public byte[] getData() {
