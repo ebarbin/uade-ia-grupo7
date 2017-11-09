@@ -14,7 +14,8 @@ export class EvaluationStartComponent {
   @Input()valoration:number;
   @Input()type:string;
   @Input()id:number;
-
+  @Input()disabled:boolean;
+  
   constructor(
     private toastr:ToastrService,
     private evaluationStartService:EvaluationStartService) { }

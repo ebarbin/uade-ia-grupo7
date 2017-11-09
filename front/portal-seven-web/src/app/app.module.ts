@@ -1,3 +1,4 @@
+import { ReservationService } from './home/reserve-history/services/reservation.service';
 import { PackageOfferGuard } from './home/package-offer/services/package-offer-guard.service';
 import { HotelOfferGuard } from './home/hotel-offer/services/hotel-offer-guard.service';
 import { SystemConfigurationGuard } from './shared/services/system-configuration-guard.service';
@@ -47,6 +48,7 @@ import { ConfigurationService } from './home/configuration/services/configuratio
     AuthService, UserService, ImageService, 
     AutocompleteService, HotelOfferService, PackageOfferService, 
     FavouriteOfferService, EvaluationStartService, ConfigurationService,
+    ReservationService,
     AuthGuard, FavouriteGuard, ReserveHistoryGuard, 
     PackageOfferResultGuard, HotelOfferResultGuard, ConfigurationGuard,
     SystemConfigurationGuard, HotelOfferGuard, PackageOfferGuard,

@@ -1,3 +1,5 @@
+import { ReservationService } from './services/reservation.service';
+import { Reservation } from './models/reservation.model';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,9 +9,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ReserveHistoryComponent implements OnInit {
 
-  constructor() { }
+  constructor(private reservationService: ReservationService) { }
+
+  reservations:Reservation[] = [];
 
   ngOnInit() {
+    this.reservationService.getReservations().then((reservations:Reservation[])=>{
+      this.reservations = reservations;
+    })
   }
 
 }

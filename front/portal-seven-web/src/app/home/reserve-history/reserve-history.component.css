@@ -1,0 +1,16 @@
+.card-row {
+    border-radius:5px;
+    height: 340px;
+    margin-bottom: 2px;
+}
+
+.mat-card-header {
+    margin-top: 10px;
+}
+
+.img-card {
+    border-radius: 5px;
+    margin: auto; 
+    height: 120px; 
+    width: 200px;
+}
