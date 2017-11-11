@@ -1,133 +1,197 @@
+/**
+ * SolicitudDTO.java
+ *
+ * This file was auto-generated from WSDL
+ * by the Apache Axis 1.4 Apr 22, 2006 (06:55:48 PDT) WSDL2Java emitter.
+ */
 
 package ar.edu.uade.ia.integrations.backOffice.authorizer;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlType;
+public class SolicitudDTO  extends ar.edu.uade.ia.integrations.backOffice.authorizer.BaseDTO  implements java.io.Serializable {
+    private java.lang.String detalle;
 
+    private ar.edu.uade.ia.integrations.backOffice.authorizer.EstadoSolicitudEnum estado;
 
-/**
- * <p>Clase Java para solicitudDTO complex type.
- * 
- * <p>El siguiente fragmento de esquema especifica el contenido que se espera que haya en esta clase.
- * 
- * <pre>
- * &lt;complexType name="solicitudDTO"&gt;
- *   &lt;complexContent&gt;
- *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
- *       &lt;sequence&gt;
- *         &lt;element name="detalle" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/&gt;
- *         &lt;element name="estado" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/&gt;
- *         &lt;element name="id" type="{http://www.w3.org/2001/XMLSchema}int"/&gt;
- *         &lt;element name="tipo" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/&gt;
- *       &lt;/sequence&gt;
- *     &lt;/restriction&gt;
- *   &lt;/complexContent&gt;
- * &lt;/complexType&gt;
- * </pre>
- * 
- * 
- */
-@XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "solicitudDTO", propOrder = {
-    "detalle",
-    "estado",
-    "id",
-    "tipo"
-})
-public class SolicitudDTO {
+    private ar.edu.uade.ia.integrations.backOffice.authorizer.TipoSolicitudEnum tipo;
 
-    protected String detalle;
-    protected String estado;
-    protected int id;
-    protected String tipo;
+    public SolicitudDTO() {
+    }
+
+    public SolicitudDTO(
+           java.lang.Long id,
+           java.lang.String detalle,
+           ar.edu.uade.ia.integrations.backOffice.authorizer.EstadoSolicitudEnum estado,
+           ar.edu.uade.ia.integrations.backOffice.authorizer.TipoSolicitudEnum tipo) {
+        super(
+            id);
+        this.detalle = detalle;
+        this.estado = estado;
+        this.tipo = tipo;
+    }
+
 
     /**
-     * Obtiene el valor de la propiedad detalle.
+     * Gets the detalle value for this SolicitudDTO.
      * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     * @return detalle
      */
-    public String getDetalle() {
+    public java.lang.String getDetalle() {
         return detalle;
     }
 
-    /**
-     * Define el valor de la propiedad detalle.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setDetalle(String value) {
-        this.detalle = value;
-    }
 
     /**
-     * Obtiene el valor de la propiedad estado.
+     * Sets the detalle value for this SolicitudDTO.
      * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     * @param detalle
      */
-    public String getEstado() {
+    public void setDetalle(java.lang.String detalle) {
+        this.detalle = detalle;
+    }
+
+
+    /**
+     * Gets the estado value for this SolicitudDTO.
+     * 
+     * @return estado
+     */
+    public ar.edu.uade.ia.integrations.backOffice.authorizer.EstadoSolicitudEnum getEstado() {
         return estado;
     }
 
-    /**
-     * Define el valor de la propiedad estado.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setEstado(String value) {
-        this.estado = value;
-    }
 
     /**
-     * Obtiene el valor de la propiedad id.
+     * Sets the estado value for this SolicitudDTO.
      * 
+     * @param estado
      */
-    public int getId() {
-        return id;
+    public void setEstado(ar.edu.uade.ia.integrations.backOffice.authorizer.EstadoSolicitudEnum estado) {
+        this.estado = estado;
     }
 
-    /**
-     * Define el valor de la propiedad id.
-     * 
-     */
-    public void setId(int value) {
-        this.id = value;
-    }
 
     /**
-     * Obtiene el valor de la propiedad tipo.
+     * Gets the tipo value for this SolicitudDTO.
      * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     * @return tipo
      */
-    public String getTipo() {
+    public ar.edu.uade.ia.integrations.backOffice.authorizer.TipoSolicitudEnum getTipo() {
         return tipo;
     }
 
+
     /**
-     * Define el valor de la propiedad tipo.
+     * Sets the tipo value for this SolicitudDTO.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     * @param tipo
      */
-    public void setTipo(String value) {
-        this.tipo = value;
+    public void setTipo(ar.edu.uade.ia.integrations.backOffice.authorizer.TipoSolicitudEnum tipo) {
+        this.tipo = tipo;
+    }
+
+    private java.lang.Object __equalsCalc = null;
+    public synchronized boolean equals(java.lang.Object obj) {
+        if (!(obj instanceof SolicitudDTO)) return false;
+        SolicitudDTO other = (SolicitudDTO) obj;
+        if (obj == null) return false;
+        if (this == obj) return true;
+        if (__equalsCalc != null) {
+            return (__equalsCalc == obj);
+        }
+        __equalsCalc = obj;
+        boolean _equals;
+        _equals = super.equals(obj) && 
+            ((this.detalle==null && other.getDetalle()==null) || 
+             (this.detalle!=null &&
+              this.detalle.equals(other.getDetalle()))) &&
+            ((this.estado==null && other.getEstado()==null) || 
+             (this.estado!=null &&
+              this.estado.equals(other.getEstado()))) &&
+            ((this.tipo==null && other.getTipo()==null) || 
+             (this.tipo!=null &&
+              this.tipo.equals(other.getTipo())));
+        __equalsCalc = null;
+        return _equals;
+    }
+
+    private boolean __hashCodeCalc = false;
+    public synchronized int hashCode() {
+        if (__hashCodeCalc) {
+            return 0;
+        }
+        __hashCodeCalc = true;
+        int _hashCode = super.hashCode();
+        if (getDetalle() != null) {
+            _hashCode += getDetalle().hashCode();
+        }
+        if (getEstado() != null) {
+            _hashCode += getEstado().hashCode();
+        }
+        if (getTipo() != null) {
+            _hashCode += getTipo().hashCode();
+        }
+        __hashCodeCalc = false;
+        return _hashCode;
+    }
+
+    // Type metadata
+    private static org.apache.axis.description.TypeDesc typeDesc =
+        new org.apache.axis.description.TypeDesc(SolicitudDTO.class, true);
+
+    static {
+        typeDesc.setXmlType(new javax.xml.namespace.QName("http://soap.webservice.integracion.uade.edu/", "solicitudDTO"));
+        org.apache.axis.description.ElementDesc elemField = new org.apache.axis.description.ElementDesc();
+        elemField.setFieldName("detalle");
+        elemField.setXmlName(new javax.xml.namespace.QName("", "detalle"));
+        elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "string"));
+        elemField.setMinOccurs(0);
+        elemField.setNillable(false);
+        typeDesc.addFieldDesc(elemField);
+        elemField = new org.apache.axis.description.ElementDesc();
+        elemField.setFieldName("estado");
+        elemField.setXmlName(new javax.xml.namespace.QName("", "estado"));
+        elemField.setXmlType(new javax.xml.namespace.QName("http://soap.webservice.integracion.uade.edu/", "estadoSolicitudEnum"));
+        elemField.setMinOccurs(0);
+        elemField.setNillable(false);
+        typeDesc.addFieldDesc(elemField);
+        elemField = new org.apache.axis.description.ElementDesc();
+        elemField.setFieldName("tipo");
+        elemField.setXmlName(new javax.xml.namespace.QName("", "tipo"));
+        elemField.setXmlType(new javax.xml.namespace.QName("http://soap.webservice.integracion.uade.edu/", "tipoSolicitudEnum"));
+        elemField.setMinOccurs(0);
+        elemField.setNillable(false);
+        typeDesc.addFieldDesc(elemField);
+    }
+
+    /**
+     * Return type metadata object
+     */
+    public static org.apache.axis.description.TypeDesc getTypeDesc() {
+        return typeDesc;
+    }
+
+    /**
+     * Get Custom Serializer
+     */
+    public static org.apache.axis.encoding.Serializer getSerializer(
+           java.lang.String mechType, 
+           java.lang.Class _javaType,  
+           javax.xml.namespace.QName _xmlType) {
+        return 
+          new  org.apache.axis.encoding.ser.BeanSerializer(
+            _javaType, _xmlType, typeDesc);
+    }
+
+    /**
+     * Get Custom Deserializer
+     */
+    public static org.apache.axis.encoding.Deserializer getDeserializer(
+           java.lang.String mechType, 
+           java.lang.Class _javaType,  
+           javax.xml.namespace.QName _xmlType) {
+        return 
+          new  org.apache.axis.encoding.ser.BeanDeserializer(
+            _javaType, _xmlType, typeDesc);
     }
 
 }

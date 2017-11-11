@@ -1,6 +1,5 @@
 package ar.edu.uade.ia.managers;
 
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,21 +17,19 @@ import ar.edu.uade.ia.common.dtos.PackageOfferDTO;
 import ar.edu.uade.ia.common.dtos.PackageOfferHeaderDTO;
 import ar.edu.uade.ia.common.dtos.PackageOfferRequestDTO;
 import ar.edu.uade.ia.common.dtos.SimpleNamedDTO;
-import ar.edu.uade.ia.common.enums.ConfigurationType;
 import ar.edu.uade.ia.common.enums.LoggingAction;
 import ar.edu.uade.ia.common.mail.MailServiceHelper;
 import ar.edu.uade.ia.ejbs.ConfigurationEJB;
 import ar.edu.uade.ia.ejbs.FavouriteOfferEJB;
 import ar.edu.uade.ia.ejbs.PackageOfferEJB;
 import ar.edu.uade.ia.ejbs.common.PortalUserEJB;
-import ar.edu.uade.ia.entities.Configuration;
 import ar.edu.uade.ia.entities.PortalUser;
 import ar.edu.uade.ia.entities.business.Image;
 import ar.edu.uade.ia.entities.business.PackageOffer;
 import ar.edu.uade.ia.entities.business.ServicePackage;
-import ar.edu.uade.ia.integrations.backOffice.authorizer.PrestadorAutorizadoService;
-import ar.edu.uade.ia.integrations.backOffice.authorizer.ProviderAuthorizationStatus;
+import ar.edu.uade.ia.integrations.backOffice.authorizer.EstadoSolicitudEnum;
 import ar.edu.uade.ia.integrations.backOffice.authorizer.SolicitudDTO;
+import ar.edu.uade.ia.integrations.backOffice.authorizer.SolicitudSOAPResourceServiceLocator;
 import ar.edu.uade.ia.integrations.backOffice.logging.LoggingJMS;
 
 /**
@@ -71,9 +68,9 @@ public class PackageOfferManager {
 			
 			PackageOffer po = this.packageOfferEJB.getDetail(offerId);
 			
-			ProviderAuthorizationStatus status = this.sendAuthorization(po); 
+			EstadoSolicitudEnum status = this.sendAuthorization(po); 
 			
-			if (ProviderAuthorizationStatus.APPROVED == status){
+			if (EstadoSolicitudEnum.APROBADO == status){
 				PortalUser user = this.portalUserEJB.getById(req.getPortalUser().getId());
 				this.packageOfferEJB.reserve(offerId, req, user);	
 				
@@ -86,7 +83,7 @@ public class PackageOfferManager {
 			} else {
 				dto.setStatus(Boolean.FALSE);
 				
-				if (ProviderAuthorizationStatus.PENDING == status) {
+				if (EstadoSolicitudEnum.PENDIENTE == status) {
 					dto.setDescription("El prestador esta pendiente de aprobación. No es posible realizar la reserva.");
 				} else {
 					dto.setDescription("El prestador no está habilitado para ofreser reservas. No es posible realidar la reserva.");
@@ -101,21 +98,10 @@ public class PackageOfferManager {
 		return dto;
 	}
 	
-	private ProviderAuthorizationStatus sendAuthorization(PackageOffer po) throws Exception {
-		
-		Configuration configuration = this.configurationEJB.getByKeyType(ConfigurationType.AUTHORIZE);
-		
-		//URL wsdlUrl = new URL(configuration.getValue());
-		PrestadorAutorizadoService backOfficeService = new PrestadorAutorizadoService();
-		
-		SolicitudDTO dto = backOfficeService.getServiciosBO_002fPrestadorAutorizadoPort().getPrestadorAutorizado(po.getAgency().getProviderCode());
-		if (ProviderAuthorizationStatus.APPROVED.getCode().equals(dto.getEstado())) {
-			return ProviderAuthorizationStatus.APPROVED;
-		} else if (ProviderAuthorizationStatus.PENDING.getCode().equals(dto.getEstado())) {
-			return ProviderAuthorizationStatus.PENDING;
-		} else {
-			return ProviderAuthorizationStatus.REJECTED;
-		}
+	private EstadoSolicitudEnum sendAuthorization(PackageOffer po) throws Exception {
+		SolicitudSOAPResourceServiceLocator backOfficeService = new SolicitudSOAPResourceServiceLocator();
+		SolicitudDTO dto = backOfficeService.getSolicitudPort().getPrestadorAutorizado(po.getAgency().getProviderCode().longValue());
+		return dto.getEstado();
 	}
 
 	public List<PackageOfferHeaderDTO> search(Integer portalUserId, PackageOfferRequestDTO packageOfferRequestDTO) throws Exception {

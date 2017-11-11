@@ -5,6 +5,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.net.URL;
 import java.text.SimpleDateFormat;
+import java.util.Base64;
 
 import org.jboss.logging.Logger;
 
@@ -29,8 +30,8 @@ public abstract class AbstractQueueListener {
 				out.write(buf, 0, n);
 			out.close();
 			in.close();
-
-			return out.toByteArray();
+			
+			return out.toByteArray();//Base64.getDecoder().decode(out.toByteArray());
 		} catch (Exception e) {
 			AbstractQueueListener.LOGGER.error("Error al descargar la imagen: " + e.getMessage(), e);
 			return null;
