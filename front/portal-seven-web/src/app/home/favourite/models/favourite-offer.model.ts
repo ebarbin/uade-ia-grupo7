@@ -1,3 +1,4 @@
+import { Destination } from './../../../shared/models/destination.model';
 import { Image } from '../../../shared/models/image.model';
 import { SimpleNamed } from '../../../shared/models/simple-named.model';
 
@@ -16,5 +17,6 @@ export class FavouriteOffer {
         public paymentMethods: SimpleNamed[],
         public favourite: boolean,
         public type: string,
-        public valoration:number){}
+        public valoration:number,
+        public destination:Destination){}
 }

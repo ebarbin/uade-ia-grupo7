@@ -1,3 +1,4 @@
+import { Destination } from './../../../shared/models/destination.model';
 import { Image } from '../../../shared/models/image.model';
 import { SimpleNamed } from '../../../shared/models/simple-named.model';
 
@@ -13,5 +14,6 @@ export class PackageOfferHeader {
         public services: SimpleNamed[],
         public favourite:boolean,
         public quantityPeople:number,
-        public valoration:number){}
+        public valoration:number,
+        public destination:Destination){}
 }

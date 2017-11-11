@@ -22,6 +22,7 @@ public class FavoriteOfferDTO implements Serializable {
 	private Boolean favourite = Boolean.TRUE;
 	private Float price;
 	private Integer valoration;
+	private DestinationDTO destination;
 	
 	public Integer getId() {
 		return id;
@@ -133,5 +134,13 @@ public class FavoriteOfferDTO implements Serializable {
 
 	public void setValoration(Integer valoration) {
 		this.valoration = valoration;
+	}
+
+	public DestinationDTO getDestination() {
+		return destination;
+	}
+
+	public void setDestination(DestinationDTO destination) {
+		this.destination = destination;
 	}
 }

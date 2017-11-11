@@ -1,6 +1,8 @@
 <h2 md-dialog-title>{{srv.getSelected().description}}</h2>
 <hr style="border-color: black;">
 <md-dialog-content>
+    <h3>Destino</h3>
+    <p>{{srv.getSelected().destination.name}}</p>
     <h3>Politicas de Cancelación</h3>
     <p>{{srv.getSelected().cancellationPolicy}}</p>
     <h3>Imagenes del Paquete</h3>
@@ -9,12 +11,14 @@
     <h3>Ubicación</h3>
         <app-map [address]="srv.getSelected().destination.address"></app-map>
     <hr>
-    <h3>Otros Paquetes</h3>
-    <div *ngFor="let pck of otherPackages">
-        <h2>pck.description</h2>
-        <p>Precio por Persona: {{pck.price | currency:'ARS':true}}</p>
-        <app-img-gallery [images]="pck.images"></app-img-gallery>
-        <hr>
+    <div *ngIf="otherPackages.length > 0">
+        <h3>Otros Paquetes</h3>
+        <div *ngFor="let pck of otherPackages">
+            <b>{{pck.description}}</b>
+            <p>Precio por Persona: {{pck.price | currency:'ARS':true}}</p>
+            <app-img-gallery [images]="pck.images"></app-img-gallery>
+            <hr>
+        </div>
     </div>
 </md-dialog-content>
 <md-dialog-actions align="end">

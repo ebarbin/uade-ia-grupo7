@@ -7,6 +7,7 @@ import javax.ejb.EJB;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 
+import ar.edu.uade.ia.common.dtos.DestinationDTO;
 import ar.edu.uade.ia.common.dtos.FavoriteOfferDTO;
 import ar.edu.uade.ia.common.dtos.HotelAuthorizeRequestDTO;
 import ar.edu.uade.ia.common.dtos.ImageDTO;
@@ -109,7 +110,9 @@ public class FavouriteOfferManager {
 			favouriteOffer.setDescription(favouritePackage.getPackageOffer().getDescription());
 			favouriteOffer.setQuantityCapacity(favouritePackage.getQuantityPeople());
 			favouriteOffer.setPrice(favouritePackage.getPackageOffer().getPrice());
-
+			favouriteOffer.setDestination(new DestinationDTO());
+			favouriteOffer.getDestination().setName(favouritePackage.getPackageOffer().getDestination().getName());
+			
 			if (favouritePackage.getPackageOffer().getAgency().getPoints() != null
 					&& !favouritePackage.getPackageOffer().getAgency().getVotes().equals(0)) {
 				favouriteOffer.setValoration(favouritePackage.getPackageOffer().getAgency().getPoints()

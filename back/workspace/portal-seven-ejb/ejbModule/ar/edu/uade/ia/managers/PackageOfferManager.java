@@ -11,6 +11,7 @@ import org.dozer.DozerBeanMapperBuilder;
 import org.dozer.Mapper;
 
 import ar.edu.uade.ia.common.dtos.AuthorizeStatusDTO;
+import ar.edu.uade.ia.common.dtos.DestinationDTO;
 import ar.edu.uade.ia.common.dtos.ImageDTO;
 import ar.edu.uade.ia.common.dtos.PackageAuthorizeRequestDTO;
 import ar.edu.uade.ia.common.dtos.PackageOfferDTO;
@@ -132,6 +133,8 @@ public class PackageOfferManager {
 			headerDTO.setId(packageOffer.getId());
 			headerDTO.setDescription(packageOffer.getDescription());
 			headerDTO.setQuantityPeople(packageOffer.getAvailableQuota());
+			headerDTO.setDestination(new DestinationDTO());
+			headerDTO.getDestination().setName(packageOffer.getDestination().getName());
 			
 			if(packageOffer.getAgency().getPoints() != null && !packageOffer.getAgency().getPoints().equals(0)) {
 				headerDTO.setValoration(packageOffer.getAgency().getPoints() / packageOffer.getAgency().getVotes());
