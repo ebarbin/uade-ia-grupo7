@@ -105,8 +105,8 @@ public class PackageOfferManager {
 		
 		Configuration configuration = this.configurationEJB.getByKeyType(ConfigurationType.AUTHORIZE);
 		
-		URL wsdlUrl = new URL(configuration.getValue());
-		PrestadorAutorizadoService backOfficeService = new PrestadorAutorizadoService(wsdlUrl);
+		//URL wsdlUrl = new URL(configuration.getValue());
+		PrestadorAutorizadoService backOfficeService = new PrestadorAutorizadoService();
 		
 		SolicitudDTO dto = backOfficeService.getServiciosBO_002fPrestadorAutorizadoPort().getPrestadorAutorizado(po.getAgency().getProviderCode());
 		if (ProviderAuthorizationStatus.APPROVED.getCode().equals(dto.getEstado())) {

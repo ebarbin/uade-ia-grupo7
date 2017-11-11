@@ -79,6 +79,9 @@ public class PackageOfferQueueListener extends AbstractQueueListener implements 
 	public void onMessage(Message message) {
 		try {
 			String jsonString = ((TextMessage) message).getText();
+			
+			PackageOfferQueueListener.LOGGER.info(jsonString);
+			
 			PackageOfferMessage pom = (PackageOfferMessage) JsonConverter.convertToObject(jsonString,
 					PackageOfferMessage.class);
 			

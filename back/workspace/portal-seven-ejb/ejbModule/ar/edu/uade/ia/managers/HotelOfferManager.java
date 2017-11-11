@@ -109,8 +109,8 @@ public class HotelOfferManager {
 	private ProviderAuthorizationStatus sendAuthorization(HotelOffer ho) throws Exception {
 		Configuration configuration = this.configurationEJB.getByKeyType(ConfigurationType.AUTHORIZE);
 		
-		URL wsdlUrl = new URL(configuration.getValue());
-		PrestadorAutorizadoService backOfficeService = new PrestadorAutorizadoService(wsdlUrl);
+		//URL wsdlUrl = new URL(configuration.getValue());
+		PrestadorAutorizadoService backOfficeService = new PrestadorAutorizadoService();
 		
 		SolicitudDTO dto = backOfficeService.getServiciosBO_002fPrestadorAutorizadoPort().getPrestadorAutorizado(ho.getHotel().getProviderCode());
 		if (ProviderAuthorizationStatus.APPROVED.getCode().equals(dto.getEstado())) {

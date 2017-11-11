@@ -82,6 +82,9 @@ public class HotelOfferQueueListener extends AbstractQueueListener implements Me
 	public void onMessage(Message message) {
 		try {
 			String jsonString = ((TextMessage) message).getText();
+			
+			HotelOfferQueueListener.LOGGER.info(jsonString);
+			
 			HotelOfferMessage hom = (HotelOfferMessage) JsonConverter.convertToObject(jsonString,
 					HotelOfferMessage.class);
 
