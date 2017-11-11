@@ -15,7 +15,7 @@ export class ConfigurationService {
 
   isConfigured():Promise<boolean>{
     return this.getConfiguration().then((conf:Configuration)=>{
-      var value = conf != null &&  conf.loggingSource != null && conf.authorizeSource != null;
+      var value = conf != null &&  conf.loggingSource != null;
       if(!value) {
         this.toastr.info('Esta opción requiere completar la configuración.');
        // this.router.navigate(['/home/configuration']); 
