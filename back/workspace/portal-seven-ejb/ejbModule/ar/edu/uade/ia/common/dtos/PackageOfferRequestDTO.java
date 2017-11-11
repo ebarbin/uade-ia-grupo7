@@ -13,7 +13,6 @@ public class PackageOfferRequestDTO implements Serializable {
 	private Integer quantityPeople;
 	private Float minPrice;
 	private Float maxPrice;
-	private SimpleNamedDTO agencia;
 	
 	public SimpleNamedDTO getDestination() {
 		return destination;
@@ -61,13 +60,5 @@ public class PackageOfferRequestDTO implements Serializable {
 
 	public void setMaxPrice(Float maxPrice) {
 		this.maxPrice = maxPrice;
-	}
-
-	public SimpleNamedDTO getAgencia() {
-		return agencia;
-	}
-
-	public void setAgencia(SimpleNamedDTO agencia) {
-		this.agencia = agencia;
 	}
 }

@@ -113,14 +113,18 @@ public class PackageOfferEJB {
 		
 		Date dateFrom = request.getFromDate();
 		Date dateTo = request.getToDate();
-		Integer agencyId = request.getAgencia().getId();
 		
+		// busca ofertas mismo destino misma agencia
 		StringBuffer queryBuilder = new StringBuffer("select pkOf");
 		queryBuilder.append(" from PackageOffer as pkOf");
 		queryBuilder.append(" inner join pkOf.destination as dest");
 		queryBuilder.append(" inner join pkOf.agency ag");
 		queryBuilder.append(" where 1 = 1");
-		queryBuilder.append(" and ag.id = :agencyId");
+		queryBuilder.append(" and ag.id in (");
+		queryBuilder.append(" 				select ag2.id");
+		queryBuilder.append("				from PackageOffer pkOf2 ");
+		queryBuilder.append("				join pkOf2.agency ag2 ");
+		queryBuilder.append("				where pkOf2.id = :packageId )");
 		queryBuilder.append(" and dest.id = :destinationId");
 		queryBuilder.append(" and pkOf.id <> :packageId");
 		
@@ -134,7 +138,6 @@ public class PackageOfferEJB {
 		
 		Query query = this.em.createQuery(queryBuilder.toString());
 		query.setParameter("destinationId", destinationId);
-		query.setParameter("agencyId", agencyId);
 		query.setParameter("packageId", packageId);
 		if (dateFrom != null && dateTo != null) {
 			query.setParameter("dateFrom", dateFrom, TemporalType.DATE);
