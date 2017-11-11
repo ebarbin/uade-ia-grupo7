@@ -5,7 +5,6 @@ import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.net.URL;
 import java.text.SimpleDateFormat;
-import java.util.Base64;
 
 import org.jboss.logging.Logger;
 
