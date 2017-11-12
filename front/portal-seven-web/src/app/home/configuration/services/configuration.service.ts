@@ -9,21 +9,7 @@ import { Observable } from 'rxjs/Observable';
 @Injectable()
 export class ConfigurationService {
 
-  configuration:Configuration = null;
-
   constructor(private router:Router, private toastr: ToastrService, private httpClient: HttpClient) { }
-
-  isConfigured():Promise<boolean>{
-    return this.getConfiguration().then((conf:Configuration)=>{
-      var value = conf != null &&  conf.loggingSource != null;
-      if(!value) {
-        this.toastr.info('Esta opción requiere completar la configuración.');
-       // this.router.navigate(['/home/configuration']); 
-      }
-      return Observable.of(value).toPromise();
-    })
-    
-  }
 
   getConfiguration():Promise<Configuration>{
       return this.httpClient.get('portal-seven-web/api/rest/configuration/')

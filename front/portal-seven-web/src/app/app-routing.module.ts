@@ -1,7 +1,6 @@
 import { PackageOfferReservationResumeComponent } from './home/package-offer/components/package-offer-reservation-resume/package-offer-reservation-resume.component';
 import { PackageOfferGuard } from './home/package-offer/services/package-offer-guard.service';
 import { HotelOfferGuard } from './home/hotel-offer/services/hotel-offer-guard.service';
-import { SystemConfigurationGuard } from './shared/services/system-configuration-guard.service';
 import { ConfigurationGuard } from './home/configuration/services/configuration-guard.service';
 import { ReserveHistoryGuard } from './home/reserve-history/services/reserve-history-guard.service';
 import { ReserveHistoryComponent } from './home/reserve-history/reserve-history.component';
@@ -30,7 +29,7 @@ const appRoutes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full'},
   { path: 'home', component: HomeComponent, 
     canActivate: [AuthGuard], children:[
-      {path: 'hotel-offer', component: HotelOfferComponent, canActivate: [AuthGuard, HotelOfferGuard, SystemConfigurationGuard],
+      {path: 'hotel-offer', component: HotelOfferComponent, canActivate: [AuthGuard, HotelOfferGuard],
         children:[
           {path: 'result-grid', component: HotelOfferGridResultComponent, 
             canActivate: [AuthGuard, HotelOfferResultGuard]},
@@ -39,7 +38,7 @@ const appRoutes: Routes = [
         ]
       },
       {path: 'hotel-authorization-resume', component: HotelOfferReservationResumeComponent, canActivate: [AuthGuard]},
-      {path: 'package-offer', component: PackageOfferComponent, canActivate: [AuthGuard, PackageOfferGuard, SystemConfigurationGuard],
+      {path: 'package-offer', component: PackageOfferComponent, canActivate: [AuthGuard, PackageOfferGuard],
         children:[
           {path: 'result-grid', component: PackageOfferGridResultComponent, 
             canActivate: [AuthGuard, PackageOfferResultGuard]},
@@ -50,7 +49,7 @@ const appRoutes: Routes = [
       {path: 'package-authorization-resume', component: PackageOfferReservationResumeComponent, canActivate: [AuthGuard]},
       {path: 'user-profile', component: UserProfileComponent, canActivate: [AuthGuard]},
       {path: 'configuration', component: ConfigurationComponent, canActivate: [AuthGuard]},
-      {path: 'favourite', component: FavouriteComponent, canActivate: [AuthGuard, FavouriteGuard, SystemConfigurationGuard]},
+      {path: 'favourite', component: FavouriteComponent, canActivate: [AuthGuard, FavouriteGuard]},
       {path: 'favorite-hotel-authorization-resume', component: FavouriteHotelReservationResumeComponent, 
         canActivate: [AuthGuard, FavouriteGuard]},
       {path: 'reserve-history', component: ReserveHistoryComponent, canActivate: [AuthGuard, ReserveHistoryGuard]},         
