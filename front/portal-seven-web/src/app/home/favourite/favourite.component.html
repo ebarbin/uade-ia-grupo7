@@ -8,9 +8,7 @@
       <app-favourite-button [offer]="o"></app-favourite-button>
       <img class="img-responsive img-card" 
         [src]="o.images | first | imageGetter">
-        <div class="fav-stars" style="right: -4px;">
-          <app-evaluation-start [id]="o.id" [type]="o.type" [valoration]="o.valoration"></app-evaluation-start>
-        </div>
+        <app-evaluation-start [id]="o.id" [type]="o.type" [valoration]="o.valoration"></app-evaluation-start>
         <md-card-header>  
           <md-card-title>{{o.name}}</md-card-title>
           <md-card-subtitle [mdTooltip]="o.description">{{o.description}}</md-card-subtitle>
@@ -36,9 +34,7 @@
         </app-favourite-button>
         <img class="img-responsive img-card" 
           [src]="o.images | first | imageGetter">
-        <div class="fav-stars" style="right: -3px;">
-          <app-evaluation-start [id]="o.id" [type]="o.type" [valoration]="o.valoration"></app-evaluation-start>
-        </div>    
+        <app-evaluation-start [id]="o.id" [type]="o.type" [valoration]="o.valoration"></app-evaluation-start>
         <md-card-header>  
           <md-card-title>{{o.description}}</md-card-title>
           <md-card-subtitle>{{o.services | join:' - ' }}</md-card-subtitle>

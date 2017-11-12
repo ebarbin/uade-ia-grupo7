@@ -7,9 +7,9 @@
     border-bottom-right-radius: 5px;
     border:1px solid black;
     padding: 3px 3px 3px 3px;
-    position:relative;
-    top:-28px;
-    right:13px;
+    position: absolute;
+    top:291px;
+    right:-1px;
 }
 
 .first-star{
