@@ -16,8 +16,9 @@
         <div >
           <img class="img-responsive img-card" (click)="onDetail(po)"
             [src]="po.images | first | imageGetter">
+            <app-evaluation-start [id]="po.id" [type]="po.type" [valoration]="po.valoration"></app-evaluation-start>
           <md-card-header>
-            <md-card-title [mdTooltip]="po.description">{{po.description | truncate:10}}<app-evaluation-start [id]="po.id" [type]="po.type" [valoration]="po.valoration"></app-evaluation-start></md-card-title>
+            <md-card-title [mdTooltip]="po.description">{{po.description | truncate:10}}</md-card-title>
             <md-card-subtitle>{{po.services | join:' - ' }}</md-card-subtitle>
           </md-card-header>
           <md-card-content (click)="onDetail(po)">

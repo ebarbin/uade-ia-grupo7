@@ -111,3 +111,11 @@ body {
     height: 100%;
     overflow: hidden;
 }
+
+.mat-card-header-text {
+    width: 100%;
+}
+
+.mat-card {
+    white-space: nowrap;
+}

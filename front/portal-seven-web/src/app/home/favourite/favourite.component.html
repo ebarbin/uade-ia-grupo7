@@ -8,8 +8,11 @@
       <app-favourite-button [offer]="o"></app-favourite-button>
       <img class="img-responsive img-card" 
         [src]="o.images | first | imageGetter">
+        <div class="fav-stars" style="right: -4px;">
+          <app-evaluation-start [id]="o.id" [type]="o.type" [valoration]="o.valoration"></app-evaluation-start>
+        </div>
         <md-card-header>  
-          <md-card-title>{{o.name}}<app-evaluation-start [id]="o.id" [type]="o.type" [valoration]="o.valoration"></app-evaluation-start></md-card-title>
+          <md-card-title>{{o.name}}</md-card-title>
           <md-card-subtitle [mdTooltip]="o.description">{{o.description}}</md-card-subtitle>
         </md-card-header>
         <md-card-content>
@@ -33,14 +36,17 @@
         </app-favourite-button>
         <img class="img-responsive img-card" 
           [src]="o.images | first | imageGetter">
+        <div class="fav-stars" style="right: -3px;">
+          <app-evaluation-start [id]="o.id" [type]="o.type" [valoration]="o.valoration"></app-evaluation-start>
+        </div>    
         <md-card-header>  
-          <md-card-title>{{o.description}}<app-evaluation-start [id]="o.id" [type]="o.type" [valoration]="o.valoration"></app-evaluation-start></md-card-title>
+          <md-card-title>{{o.description}}</md-card-title>
           <md-card-subtitle>{{o.services | join:' - ' }}</md-card-subtitle>
         </md-card-header>
         <md-card-content>
           <p>Destino: {{o.destination.name}}</p>
           <p>Cantidad de personas: {{o.quantityCapacity}}</p>
-          <p>P. Persona: {{o.price | currency:'ARS':true}}</p>
+          <p><b>Precio Persona: {{o.price | currency:'ARS':true}}</b></p>
         </md-card-content>
         <md-card-actions align="center">
             <button class="confirme-favorite-btn" 

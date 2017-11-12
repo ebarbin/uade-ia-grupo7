@@ -12,6 +12,7 @@
 }
 .img-card {
     border-radius: 5px;
+    border:1px solid black;
     margin: auto; 
     height: 120px; 
     width: 200px;

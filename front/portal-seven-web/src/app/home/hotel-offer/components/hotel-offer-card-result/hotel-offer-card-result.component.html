@@ -19,17 +19,18 @@
       </app-favourite-button>
       <div>
         <img class="img-responsive img-card" (click)="onDetail(ho)"
-          [src]="ho.images | first | imageGetter">
-          <md-card-header>  
-            <md-card-title [mdTooltip]="ho.name">{{ho.name | truncate:10}}<app-evaluation-start [id]="ho.id" [type]="ho.type" [valoration]="ho.valoration"></app-evaluation-start></md-card-title> 
-            <md-card-subtitle [mdTooltip]="ho.description">{{ho.description}}</md-card-subtitle>
-          </md-card-header>
-          <md-card-content (click)="onDetail(ho)">
-            <p>{{ho.services | join: ' - '}}</p>
-            <p>Capacidad: {{ho.roomCapacity}} personas</p>
-            <div class="pull-right"><b>Precio Total: {{ho.price | currency:'ARS':true}}</b></div>
-          </md-card-content>
-        </div>
+        [src]="ho.images | first | imageGetter">
+        <app-evaluation-start [id]="ho.id" [type]="ho.type" [valoration]="ho.valoration"></app-evaluation-start>
+        <md-card-header>  
+          <md-card-title [mdTooltip]="ho.name">{{ho.name | truncate:20}}</md-card-title> 
+          <md-card-subtitle [mdTooltip]="ho.description">{{ho.description}}</md-card-subtitle>
+        </md-card-header>
+        <md-card-content (click)="onDetail(ho)">
+          <p>{{ho.services | join: ' - '}}</p>
+          <p>Capacidad: {{ho.roomCapacity}} personas</p>
+          <div class="pull-right"><b>Precio Total: {{ho.price | currency:'ARS':true}}</b></div>
+        </md-card-content>
+      </div>
       </md-card>
     </div>
   </div>
