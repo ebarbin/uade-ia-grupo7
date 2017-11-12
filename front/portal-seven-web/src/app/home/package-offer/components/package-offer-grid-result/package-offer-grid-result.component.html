@@ -10,7 +10,13 @@
       <md-table #table [dataSource]="dataSource" mdSort> 
           <ng-container mdColumnDef="description">
             <md-header-cell *mdHeaderCellDef md-sort-header> Descripción </md-header-cell>
-            <md-cell *mdCellDef="let packageOffer"> {{packageOffer.description}} </md-cell>
+            <md-cell *mdCellDef="let packageOffer" [mdTooltip]="packageOffer.description"> {{packageOffer.description | truncate:10}} </md-cell>
+          </ng-container>
+          <ng-container mdColumnDef="destination">
+            <md-header-cell *mdHeaderCellDef>Destino</md-header-cell>
+            <md-cell *mdCellDef="let packageOffer" [mdTooltip]="packageOffer.destination.name"> 
+              {{packageOffer.destination.name | truncate:10}} 
+            </md-cell>
           </ng-container>
           <ng-container mdColumnDef="services">
             <md-header-cell *mdHeaderCellDef>Servicios</md-header-cell>

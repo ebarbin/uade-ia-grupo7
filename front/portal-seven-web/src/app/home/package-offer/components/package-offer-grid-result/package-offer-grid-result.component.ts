@@ -21,7 +21,7 @@ export class PackageOfferGridResultComponent implements OnInit {
   private resultsChangeSub:Subscription;
 
   public dataSource: CustomDatasource;
-  public displayedColumns = ['description', 'services', 'price', 'totalPrice', 'offerStart', 'offerEnd', 'action'];
+  public displayedColumns = ['description', 'destination', 'services', 'price', 'totalPrice', 'offerStart', 'offerEnd', 'action'];
 
   constructor(
     public packageOfferService: PackageOfferService,

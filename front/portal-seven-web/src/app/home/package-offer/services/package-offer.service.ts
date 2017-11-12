@@ -49,6 +49,7 @@ export class PackageOfferService implements Holder {
     return [
       {value:'', viewValue:'Seleccione...'},
       {value:'description', viewValue:'Nombre Paquete'},
+      {value:'destination.name', viewValue:'Destino'},
       {value:'price', viewValue:'Precio'},
       {value:'quantityPeople', viewValue:'Cupo Disponible'},
       {value:'valoration', viewValue:'Valoración'}

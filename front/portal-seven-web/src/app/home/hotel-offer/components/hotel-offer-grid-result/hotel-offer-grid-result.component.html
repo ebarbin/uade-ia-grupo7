@@ -10,13 +10,13 @@
       <md-table #table [dataSource]="dataSource">
           <ng-container mdColumnDef="name">
             <md-header-cell *mdHeaderCellDef>Hotel</md-header-cell>
-            <md-cell *mdCellDef="let hotelOfferHeader"> 
-              {{hotelOfferHeader.name}} 
+            <md-cell *mdCellDef="let hotelOfferHeader" [mdTooltip]="hotelOfferHeader.name"> 
+              {{hotelOfferHeader.name | truncate:10}} 
             </md-cell>
           </ng-container>
           <ng-container mdColumnDef="description">
             <md-header-cell *mdHeaderCellDef>Descripción</md-header-cell>
-            <md-cell *mdCellDef="let hotelOfferHeader"[mdTooltip]="hotelOfferHeader.description">
+            <md-cell *mdCellDef="let hotelOfferHeader" [mdTooltip]="hotelOfferHeader.description">
               {{hotelOfferHeader.description | truncate:10}}
             </md-cell>
           </ng-container>
