@@ -21,11 +21,11 @@
           <img class="img-responsive img-card" (click)="onDetail(ho)"
           [src]="ho.images | first | imageGetter">
           <md-card-header>  
-            <md-card-title [mdTooltip]="ho.name">{{ho.name | truncate:20}}</md-card-title> 
-            <md-card-subtitle [mdTooltip]="ho.description">{{ho.description}}</md-card-subtitle>
+            <md-card-title [mdTooltip]="ho.name">{{ho.name | truncate:30}}</md-card-title> 
+            <md-card-subtitle [mdTooltip]="ho.description">{{ho.description | truncate:30 }}</md-card-subtitle>
           </md-card-header>
           <md-card-content (click)="onDetail(ho)">
-            <p>{{ho.services | join: ' - '}}</p>
+            <p [mdTooltip]="ho.services | join: ' - '">{{ho.services | join: ' - ' | truncate:30}}</p>
             <p>Capacidad: {{ho.roomCapacity}} personas</p>
             <b>Precio Total: {{ho.price | currency:'ARS':true}}</b>
           </md-card-content>

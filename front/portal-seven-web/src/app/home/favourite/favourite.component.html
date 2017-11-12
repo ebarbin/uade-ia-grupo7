@@ -8,13 +8,12 @@
       <app-favourite-button [offer]="o"></app-favourite-button>
       <img class="img-responsive img-card" 
         [src]="o.images | first | imageGetter">
-        <app-evaluation-start [id]="o.id" [type]="o.type" [valoration]="o.valoration"></app-evaluation-start>
         <md-card-header>  
-          <md-card-title>{{o.name}}</md-card-title>
-          <md-card-subtitle [mdTooltip]="o.description">{{o.description}}</md-card-subtitle>
+          <md-card-title [mdTooltip]="o.name">{{o.name | truncate:30 }}</md-card-title>
+          <md-card-subtitle [mdTooltip]="o.description">{{o.description | truncate:30}}</md-card-subtitle>
         </md-card-header>
         <md-card-content>
-          <p>{{o.services | join: ' - '}}</p>
+          <p [mdTooltip]="o.services | join: ' - '">{{o.services | join: ' - ' | truncate:30}}</p>
           <p>Para: {{o.quantityCapacity}} persona/s</p>
           <div><b>Precio Total: {{o.price | currency:'ARS':true}}</b></div>
         </md-card-content>
@@ -34,13 +33,12 @@
         </app-favourite-button>
         <img class="img-responsive img-card" 
           [src]="o.images | first | imageGetter">
-        <app-evaluation-start [id]="o.id" [type]="o.type" [valoration]="o.valoration"></app-evaluation-start>
         <md-card-header>  
-          <md-card-title>{{o.description}}</md-card-title>
-          <md-card-subtitle>{{o.services | join:' - ' }}</md-card-subtitle>
+          <md-card-title [mdTooltip]="o.description">{{o.description | truncate:30}}</md-card-title>
+          <md-card-subtitle [mdTooltip]="o.services | join:' - '">{{o.services | join:' - ' }}</md-card-subtitle>
         </md-card-header>
         <md-card-content>
-          <p>Destino: {{o.destination.name}}</p>
+          <p [mdTooltip]="o.destination.name">Destino: {{o.destination.name | truncate:30}}</p>
           <p>Cantidad de personas: {{o.quantityCapacity}}</p>
           <p><b>Precio Persona: {{o.price | currency:'ARS':true}}</b></p>
         </md-card-content>

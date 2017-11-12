@@ -17,11 +17,11 @@
           <img class="img-responsive img-card" (click)="onDetail(po)"
             [src]="po.images | first | imageGetter">
           <md-card-header>
-            <md-card-title [mdTooltip]="po.description">{{po.description | truncate:10}}</md-card-title>
-            <md-card-subtitle>{{po.services | join:' - ' }}</md-card-subtitle>
+            <md-card-title [mdTooltip]="po.description">{{po.description | truncate:30}}</md-card-title>
+            <md-card-subtitle [mdTooltip]="po.services | join:' - '">{{po.services | join:' - ' | truncate:30}}</md-card-subtitle>
           </md-card-header>
           <md-card-content (click)="onDetail(po)">
-            <p>Destino: {{po.destination.name}}</p>
+            <p [mdTooltip]="po.destination.name | truncate:30">Destino: {{po.destination.name | truncate:30}}</p>
             <p>Precio por Persona: {{po.price | currency:'ARS':true}}</p>
             <b>Precio Total: {{ getTotalPrice(po.price) | currency:'ARS':true}}</b>
           </md-card-content>
