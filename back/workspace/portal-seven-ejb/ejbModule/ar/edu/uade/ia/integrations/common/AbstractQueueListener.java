@@ -3,6 +3,7 @@ package ar.edu.uade.ia.integrations.common;
 import java.io.BufferedInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.text.SimpleDateFormat;
 
@@ -35,5 +36,17 @@ public abstract class AbstractQueueListener {
 			AbstractQueueListener.LOGGER.error("Error al descargar la imagen: " + e.getMessage(), e);
 			return null;
 		}
+	}
+	
+	public static void main(String [] args) throws Exception {
+		URL url = new URL("http://192.168.1.43:8080/OPaqWeb/GRUPO3-3145482458292503292-buzios.jpg");
+		InputStream in = new BufferedInputStream(url.openStream());
+		ByteArrayOutputStream out = new ByteArrayOutputStream();
+		byte[] buf = new byte[1024];
+		int n = 0;
+		while (-1 != (n = in.read(buf)))
+			out.write(buf, 0, n);
+		out.close();
+		in.close();
 	}
 }
