@@ -6,8 +6,8 @@ public class LoggingMessage implements Serializable {
 
 	private static final long serialVersionUID = -590807841527676286L;
 
-	private String plataformaEnvia = "PW_7";
-	private String plataformaRecibe = "BO_1";
+	private String plataformaEnvia = "Portal Web 7";
+	private String plataformaRecibe = "Back Office 1";
 	private String observacion;
 	private String servicio;
 

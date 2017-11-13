@@ -173,7 +173,7 @@ public class HotelOfferEJB {
 		// Quota cuyo cupo diario supere o iguale la cantidad de habitaciones del filtro
 		// Quota cuya capacidad de personas de habitacion de la oferta sea superior o
 		// igual a cantidad de personas del filtro
-		StringBuffer queryBuilder = new StringBuffer("select ofe");
+		StringBuffer queryBuilder = new StringBuffer("select distinct ofe");
 		queryBuilder.append(" from Quota as quo");
 		queryBuilder.append(" inner join quo.offer as ofe");
 		queryBuilder.append(" inner join ofe.hotel ho");

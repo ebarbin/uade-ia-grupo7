@@ -87,7 +87,7 @@ public class PackageOfferManager {
 				if (EstadoSolicitudEnum.PENDIENTE == status) {
 					dto.setDescription("El prestador esta pendiente de aprobación. No es posible realizar la reserva.");
 				} else {
-					dto.setDescription("El prestador no está habilitado para ofreser reservas. No es posible realidar la reserva.");
+					dto.setDescription("El prestador no está habilitado para ofrecer reservas. No es posible realidar la reserva.");
 				}
 			}
 			

@@ -133,7 +133,7 @@ public class PackageOfferQueueListener extends AbstractQueueListener implements 
 				image = new Image();
 				image.setData(data);
 				image.setUrl(url);
-				image.setDescription("Hotel");
+				image.setDescription("Package");
 				po.getImages().add(image);
 			}
 		} else {

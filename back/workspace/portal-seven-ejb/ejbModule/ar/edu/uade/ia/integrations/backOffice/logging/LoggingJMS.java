@@ -35,6 +35,7 @@ public class LoggingJMS {
 		
 		LoggingMessage logginMessage = new LoggingMessage();
 		logginMessage.setServicio(action.getDescription());
+		logginMessage.setObservacion("Success");
 		this.sendMessage(logginMessage);
 	}
 	
