@@ -30,7 +30,7 @@
             <b>Precio Total: {{ho.price | currency:'ARS':true}}</b>
           </md-card-content>
         </div>
-        <app-evaluation-start [id]="ho.id" [type]="ho.type" [valoration]="ho.valoration"></app-evaluation-start>
+        <app-evaluation-start [offer]="ho"></app-evaluation-start>
       </md-card>
     </div>
   </div>

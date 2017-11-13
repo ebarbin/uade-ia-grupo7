@@ -26,7 +26,7 @@
             <b>Precio Total: {{ getTotalPrice(po.price) | currency:'ARS':true}}</b>
           </md-card-content>
         </div>
-        <app-evaluation-start [id]="po.id" [type]="po.type" [valoration]="po.valoration"></app-evaluation-start>
+        <app-evaluation-start [offer]="po"></app-evaluation-start>
       </md-card>
     </div>
   </div>

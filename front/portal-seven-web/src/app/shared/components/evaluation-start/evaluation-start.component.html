@@ -1,25 +1,25 @@
 <div class="pull-right stars">
     <i class="fa first-star" 
-        [ngClass]="{'fa-star-o': valoration < 1, 'fa-star': valoration >= 1}" 
+        [ngClass]="{'fa-star-o': offer.valoration < 1, 'fa-star': offer.valoration >= 1}" 
         [mdTooltip]="'¡Una estrella!'" aria-hidden="true" 
       (click)="onMarkFirstStar()"></i>
     <i class="fa second-star" 
-        [ngClass]="{'fa-star-o': valoration < 2, 'fa-star': valoration >= 2}" 
+        [ngClass]="{'fa-star-o': offer.valoration < 2, 'fa-star': offer.valoration >= 2}" 
         [mdTooltip]="'¡Dos estrellas!'"
         aria-hidden="true" 
       (click)="onMarkSecondStar()"></i>
     <i class="fa third-star" 
-        [ngClass]="{'fa-star-o': valoration < 3, 'fa-star': valoration >= 3}" 
+        [ngClass]="{'fa-star-o': offer.valoration < 3, 'fa-star': offer.valoration >= 3}" 
         [mdTooltip]="'¡Tres estrellas!'"
         aria-hidden="true" 
       (click)="onMarkThirdStar()"></i>
     <i class="fa fourth-star" 
-        [ngClass]="{'fa-star-o': valoration < 4, 'fa-star': valoration >= 4}" 
+        [ngClass]="{'fa-star-o': offer.valoration < 4, 'fa-star': offer.valoration >= 4}" 
         [mdTooltip]="'¡Cuatro estrellas!'"
         aria-hidden="true" 
       (click)="onMarkFourthStar()"></i>
     <i class="fa fifth-star" 
-        [ngClass]="{'fa-star-o': valoration < 5, 'fa-star': valoration >= 5}" 
+        [ngClass]="{'fa-star-o': offer.valoration < 5, 'fa-star': offer.valoration >= 5}" 
         [mdTooltip]="'¡Cinco estrellas!'"
         aria-hidden="true" 
       (click)="onMarkFifthStar()"></i>

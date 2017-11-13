@@ -11,9 +11,7 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class EvaluationStartComponent {
 
-  @Input()valoration:number;
-  @Input()type:string;
-  @Input()id:number;
+  @Input()offer:any;
 
   constructor(
     private toastr:ToastrService,
@@ -40,15 +38,15 @@ export class EvaluationStartComponent {
   }
 
   private calculate(value){
-    if (this.type == Constant.HOTEL) {
-      this.evaluationStartService.hotelValoration(this.id, value).then((result:number)=>{
-        this.valoration = result;
+    if (this.offer.type == Constant.HOTEL) {
+      this.evaluationStartService.hotelValoration(this.offer.id, value).then((result:number)=>{
+        this.offer.valoration = result;
       }).catch((res:HttpErrorResponse) => {
         this.toastr.error('Ha ocurrido un error. Contacte a un administrador.');
       });
-    } else if (this.type == Constant.PACKAGE){
-      this.evaluationStartService.packageValoration(this.id, value).then((result:number)=>{
-        this.valoration = result;
+    } else if (this.offer.type == Constant.PACKAGE){
+      this.evaluationStartService.packageValoration(this.offer.id, value).then((result:number)=>{
+        this.offer.valoration = result;
       }).catch((res:HttpErrorResponse) => {
         this.toastr.error('Ha ocurrido un error. Contacte a un administrador.');
       });
