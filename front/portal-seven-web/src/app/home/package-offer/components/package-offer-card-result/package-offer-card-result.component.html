@@ -17,7 +17,7 @@
           <img class="img-responsive img-card" (click)="onDetail(po)"
             [src]="po.images | first | imageGetter">
           <md-card-header>
-            <md-card-title [mdTooltip]="po.description">{{po.description | truncate:30}}</md-card-title>
+            <md-card-title [mdTooltip]="po.description">{{po.description | truncate:20}}</md-card-title>
             <md-card-subtitle [mdTooltip]="po.services | join:' - '">{{po.services | join:' - ' | truncate:30}}</md-card-subtitle>
           </md-card-header>
           <md-card-content (click)="onDetail(po)">
