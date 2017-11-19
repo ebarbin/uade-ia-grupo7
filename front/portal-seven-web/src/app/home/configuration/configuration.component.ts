@@ -30,8 +30,4 @@ export class ConfigurationComponent implements OnInit {
   onSubmit(form:NgForm){
     this.configurationService.saveConfiguration(<Configuration>form.value);
   }
-
-  onCancel(){
-    this.router.navigate(['home/hotel-offer']);
-  }
 }

@@ -18,12 +18,14 @@ import ar.edu.uade.ia.common.dtos.PackageOfferDTO;
 import ar.edu.uade.ia.common.dtos.PackageOfferHeaderDTO;
 import ar.edu.uade.ia.common.dtos.PackageOfferRequestDTO;
 import ar.edu.uade.ia.common.dtos.SimpleNamedDTO;
+import ar.edu.uade.ia.common.enums.ConfigurationType;
 import ar.edu.uade.ia.common.enums.LoggingAction;
 import ar.edu.uade.ia.common.mail.MailServiceHelper;
 import ar.edu.uade.ia.ejbs.ConfigurationEJB;
 import ar.edu.uade.ia.ejbs.FavouriteOfferEJB;
 import ar.edu.uade.ia.ejbs.PackageOfferEJB;
 import ar.edu.uade.ia.ejbs.common.PortalUserEJB;
+import ar.edu.uade.ia.entities.Configuration;
 import ar.edu.uade.ia.entities.PortalUser;
 import ar.edu.uade.ia.entities.business.Image;
 import ar.edu.uade.ia.entities.business.PackageOffer;
@@ -85,9 +87,9 @@ public class PackageOfferManager {
 				dto.setStatus(Boolean.FALSE);
 				
 				if (EstadoSolicitudEnum.PENDIENTE == status) {
-					dto.setDescription("El prestador esta pendiente de aprobaci�n. No es posible realizar la reserva.");
+					dto.setDescription("El prestador esta pendiente de aprobación. No es posible realizar la reserva.");
 				} else {
-					dto.setDescription("El prestador no est� habilitado para ofrecer reservas. No es posible realidar la reserva.");
+					dto.setDescription("El prestador no está habilitado para ofrecer reservas. No es posible realidar la reserva.");
 				}
 			}
 			
@@ -97,12 +99,6 @@ public class PackageOfferManager {
 		}
 
 		return dto;
-	}
-	
-	private EstadoSolicitudEnum sendAuthorization(PackageOffer po) throws Exception {
-		SolicitudSOAPResourceServiceLocator backOfficeService = new SolicitudSOAPResourceServiceLocator();
-		SolicitudDTO dto = backOfficeService.getSolicitudPort().getPrestadorAutorizado(po.getAgency().getProviderCode().longValue());
-		return dto.getEstado();
 	}
 
 	public List<PackageOfferHeaderDTO> search(Integer portalUserId, PackageOfferRequestDTO packageOfferRequestDTO) throws Exception {
@@ -120,6 +116,16 @@ public class PackageOfferManager {
 		return this.convertToListOfPackageOfferHeaderDTO(packageOffers, null);
 	}
 
+	public Integer valoration(Integer id, Integer vote) throws Exception {
+		PackageOffer po = this.packageOfferEJB.getDetail(id);
+		if (po.getAgency().getVotes() == null) po.getAgency().setVotes(0);
+		po.getAgency().setVotes(po.getAgency().getVotes()+1);
+		if (po.getAgency().getPoints() == null) po.getAgency().setPoints(0);
+		po.getAgency().setPoints(po.getAgency().getPoints()+vote);
+		this.packageOfferEJB.update(po);
+		return po.getAgency().getPoints() / po.getAgency().getVotes();
+	}
+	
 	private List<PackageOfferHeaderDTO> convertToListOfPackageOfferHeaderDTO(List<PackageOffer> packageOffers, Integer portalUserId) throws Exception {
 		List<PackageOfferHeaderDTO> results = new ArrayList<PackageOfferHeaderDTO>();
 
@@ -167,14 +173,17 @@ public class PackageOfferManager {
 
 		return results;
 	}
-
-	public Integer valoration(Integer id, Integer vote) throws Exception {
-		PackageOffer po = this.packageOfferEJB.getDetail(id);
-		if (po.getAgency().getVotes() == null) po.getAgency().setVotes(0);
-		po.getAgency().setVotes(po.getAgency().getVotes()+1);
-		if (po.getAgency().getPoints() == null) po.getAgency().setPoints(0);
-		po.getAgency().setPoints(po.getAgency().getPoints()+vote);
-		this.packageOfferEJB.update(po);
-		return po.getAgency().getPoints() / po.getAgency().getVotes();
+	
+	private EstadoSolicitudEnum sendAuthorization(PackageOffer po) throws Exception {
+		Configuration conf = this.configurationEJB.getByKeyType(ConfigurationType.AUTHORIZE);
+		if (conf != null) {
+			SolicitudSOAPResourceServiceLocator backOfficeService = new SolicitudSOAPResourceServiceLocator();
+			backOfficeService.setSolicitudPortEndpointAddress(conf.getValue());
+			SolicitudDTO dto = backOfficeService.getSolicitudPort()
+					.getPrestadorAutorizado(po.getAgency().getProviderCode().longValue());
+			return dto.getEstado();
+		} else {
+			throw new Exception("No se ha encontrado la configuración del servicio de autorización.");
+		}
 	}
 }

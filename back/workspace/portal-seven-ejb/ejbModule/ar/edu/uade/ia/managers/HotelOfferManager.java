@@ -18,12 +18,14 @@ import ar.edu.uade.ia.common.dtos.HotelOfferRequestDTO;
 import ar.edu.uade.ia.common.dtos.ImageDTO;
 import ar.edu.uade.ia.common.dtos.RoomDTO;
 import ar.edu.uade.ia.common.dtos.SimpleNamedDTO;
+import ar.edu.uade.ia.common.enums.ConfigurationType;
 import ar.edu.uade.ia.common.enums.LoggingAction;
 import ar.edu.uade.ia.common.mail.MailServiceHelper;
 import ar.edu.uade.ia.ejbs.ConfigurationEJB;
 import ar.edu.uade.ia.ejbs.FavouriteOfferEJB;
 import ar.edu.uade.ia.ejbs.HotelOfferEJB;
 import ar.edu.uade.ia.ejbs.common.PortalUserEJB;
+import ar.edu.uade.ia.entities.Configuration;
 import ar.edu.uade.ia.entities.PortalUser;
 import ar.edu.uade.ia.entities.business.HotelOffer;
 import ar.edu.uade.ia.entities.business.Image;
@@ -55,7 +57,7 @@ public class HotelOfferManager {
 
 	@EJB
 	private PortalUserEJB portalUserEJB;
-	
+
 	@EJB
 	private ConfigurationEJB configurationEJB;
 
@@ -65,33 +67,35 @@ public class HotelOfferManager {
 	public HotelOfferManager() {
 	}
 
-	public AuthorizeStatusDTO autorize(Integer offerId, HotelAuthorizeRequestDTO req)
-			throws Exception {
+	public AuthorizeStatusDTO autorize(Integer offerId, HotelAuthorizeRequestDTO req) throws Exception {
 
 		AuthorizeStatusDTO dto = new AuthorizeStatusDTO();
 		if (this.hotelOfferEJB.hasQuota(offerId, req)) {
 
 			HotelOffer ho = this.hotelOfferEJB.getDetail(offerId);
-			
-			EstadoSolicitudEnum status = this.sendAuthorization(ho); 
-			
-			if (EstadoSolicitudEnum.APROBADO == status){
+
+			EstadoSolicitudEnum status = this.sendAuthorization(ho);
+
+			if (EstadoSolicitudEnum.APROBADO == status) {
 				PortalUser user = this.portalUserEJB.getById(req.getPortalUser().getId());
-				this.hotelOfferEJB.reserve(offerId, req, user);	
-				
+				this.hotelOfferEJB.reserve(offerId, req, user);
+
 				dto.setStatus(Boolean.TRUE);
 				this.loggingService.info(LoggingAction.PACKAGE_RESERVATION);
-				
-				MailServiceHelper.sendMail(user.getEmail(), "Reserva Hotelera Confirmada", "Reserva Hotelera Confirmada");
-				MailServiceHelper.sendMail(ho.getHotel().getEmail(), "Reserva Hotelera Confirmada", "Reserva Hotelera Confirmada");
-				
+
+				MailServiceHelper.sendMail(user.getEmail(), "Reserva Hotelera Confirmada",
+						"Reserva Hotelera Confirmada");
+				MailServiceHelper.sendMail(ho.getHotel().getEmail(), "Reserva Hotelera Confirmada",
+						"Reserva Hotelera Confirmada");
+
 			} else {
 				dto.setStatus(Boolean.FALSE);
-				
+
 				if (EstadoSolicitudEnum.PENDIENTE == status) {
-					dto.setDescription("El prestador esta pendiente de aprobaci�n. No es posible realizar la reserva.");
+					dto.setDescription("El prestador esta pendiente de aprobación. No es posible realizar la reserva.");
 				} else {
-					dto.setDescription("El prestador no est� habilitado para ofreser reservas. No es posible realidar la reserva.");
+					dto.setDescription(
+							"El prestador no está habilitado para ofreser reservas. No es posible realidar la reserva.");
 				}
 			}
 
@@ -103,12 +107,6 @@ public class HotelOfferManager {
 		return dto;
 	}
 
-	private EstadoSolicitudEnum sendAuthorization(HotelOffer ho) throws Exception {
-		SolicitudSOAPResourceServiceLocator backOfficeService = new SolicitudSOAPResourceServiceLocator();
-		SolicitudDTO dto = backOfficeService.getSolicitudPort().getPrestadorAutorizado(ho.getHotel().getProviderCode().longValue());
-		return dto.getEstado();
-	}
-	
 	public List<HotelOfferHeaderDTO> search(Integer portalUserId, HotelOfferRequestDTO request) throws Exception {
 		List<HotelOffer> hotelOffers = this.hotelOfferEJB.search(request);
 		return this.convertToListOfHotelOfferHeaderDTO(hotelOffers, portalUserId);
@@ -217,5 +215,18 @@ public class HotelOfferManager {
 			results.add(headerDTO);
 		}
 		return results;
+	}
+	
+	private EstadoSolicitudEnum sendAuthorization(HotelOffer ho) throws Exception {
+		Configuration conf = this.configurationEJB.getByKeyType(ConfigurationType.AUTHORIZE);
+		if (conf != null) {
+			SolicitudSOAPResourceServiceLocator backOfficeService = new SolicitudSOAPResourceServiceLocator();
+			backOfficeService.setSolicitudPortEndpointAddress(conf.getValue());
+			SolicitudDTO dto = backOfficeService.getSolicitudPort()
+					.getPrestadorAutorizado(ho.getHotel().getProviderCode().longValue());
+			return dto.getEstado();
+		} else {
+			throw new Exception("No se ha encontrado la configuración del servicio de autorización.");
+		}
 	}
 }
