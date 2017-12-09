@@ -81,7 +81,7 @@ public class HotelOfferManager {
 				this.hotelOfferEJB.reserve(offerId, req, user);
 
 				dto.setStatus(Boolean.TRUE);
-				this.loggingService.info(LoggingAction.PACKAGE_RESERVATION);
+				this.loggingService.info(LoggingAction.HOTEL_RESERVATION);
 
 				MailServiceHelper.sendMail(user.getEmail(), "Reserva Hotelera Confirmada",
 						"Reserva Hotelera Confirmada");

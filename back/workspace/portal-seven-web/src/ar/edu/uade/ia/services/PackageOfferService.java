@@ -22,6 +22,7 @@ import ar.edu.uade.ia.common.dtos.PackageOfferDTO;
 import ar.edu.uade.ia.common.dtos.PackageOfferHeaderDTO;
 import ar.edu.uade.ia.common.dtos.PackageOfferRequestDTO;
 import ar.edu.uade.ia.common.dtos.ValorationDTO;
+import ar.edu.uade.ia.common.enums.LoggingAction;
 import ar.edu.uade.ia.integrations.backOffice.logging.LoggingJMS;
 import ar.edu.uade.ia.managers.PackageOfferManager;
 import ar.edu.uade.ia.services.response.PortalResponse;
@@ -52,6 +53,7 @@ public class PackageOfferService {
 	public Response search(@PathParam("portalUserId") Integer portalUserId, PackageOfferRequestDTO request) {
 		try {
 			List<PackageOfferHeaderDTO> result = this.packageOfferManager.search(portalUserId, request);
+			this.logging.info(LoggingAction.PACKAGE_OFFER_SEARCH);
 			return Response.ok(new PortalResponse(result)).build();
 		} catch (Exception e) {
 			this.logging.error("Error to search package: " + e.getMessage());

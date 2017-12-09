@@ -80,8 +80,8 @@ public class PackageOfferManager {
 				dto.setStatus(Boolean.TRUE);
 				this.loggingService.info(LoggingAction.PACKAGE_RESERVATION);
 				
-				MailServiceHelper.sendMail(user.getEmail(), "Reserva Hotelera Confirmada", "Reserva Hotelera Confirmada");
-				MailServiceHelper.sendMail(po.getAgency().getEmail(), "Reserva Hotelera Confirmada", "Reserva Hotelera Confirmada");
+				MailServiceHelper.sendMail(user.getEmail(), "Reserva Paquete Confirmada", "Reserva Paquete Confirmada");
+				MailServiceHelper.sendMail(po.getAgency().getEmail(), "Reserva Paquete Confirmada", "Reserva Paquete Confirmada");
 				
 			} else {
 				dto.setStatus(Boolean.FALSE);
